@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+	<graph defaultedgetype="directed" mode="dynamic" timeformat="date">
+		<attributes class="node"/>
+		<nodes>
+			<node id="convert-neopixel__codacy-badger"/>
+			<node id="tkinter_matplotlib_sample__scls19fr"/>
+			<node id="pypy__MichaelBlume"/>
+			<node id="pycon2017__fariza"/>
+			<node id="scikit-image__scikit-image"/>
+			<node id="scripts__JIghtuse"/>
+			<node id="fast-news__nate-parrott"/>
+			<node id="margffoy-tuay-server__andfoy"/>
+			<node id="python-ast__banga"/>
+			<node id="waveform_analysis__endolith"/>
+			<node id="wakemeupextreme__devkral"/>
+			<node id="pillow-simd__peterhj"/>
+			<node id="nltk__nltk"/>
+			<node id="image-subregion-detector__whitews"/>
+			<node id="pypy__aljosa"/>
+			<node id="ipython__ipython"/>
+			<node id="dotfiles__berdario"/>
+			<node id="ammonite-feedstock__abhi18av"/>
+			<node id="pentagrid__mdickinson"/>
+			<node id="python-1.4__tpn"/>
+			<node id="conda__conda"/>
+			<node id="tifffile__blink1073"/>
+			<node id="cookiecutter-pythonTK__gjcooper"/>
+			<node id="pillow__peterhj"/>
+			<node id="prettychart__bdyetton"/>
+			<node id="imageFunctions-python__15Dkatz"/>
+			<node id="practice__mhchia"/>
+			<node id="biopython__biopython"/>
+			<node id="Key-BNC__dougalg"/>
+			<node id="Legofy__JuanPotato"/>
+			<node id="mplddocs__jenshnielsen"/>
+			<node id="skan__jni"/>
+			<node id="steganos__amoibos"/>
+			<node id="py2exe-3__lambacck"/>
+			<node id="PyDev.Debugger__fabioz"/>
+			<node id="Arduino-Python-Serial-Demo__piti118"/>
+			<node id="snpator__xbello"/>
+			<node id="python__orestis"/>
+			<node id="debian-astroid__mwhudson"/>
+			<node id="smash__mattvonrocketstein"/>
+			<node id="robots__pfmoore"/>
+			<node id="polyglot__aboSamoor"/>
+			<node id="python_showcase__krother"/>
+			<node id="python-patterns__brandon-rhodes"/>
+			<node id="infinity__pirave"/>
+			<node id="pyrobot__dsblank"/>
+			<node id="tktest__matthew-brett"/>
+			<node id="boltons__mahmoud"/>
+			<node id="matplotlib__matplotlib"/>
+			<node id="imagej-tiff-meta__csachs"/>
+			<node id="biopython-2__saketkc"/>
+			<node id="scikit-learn__scikit-learn"/>
+		</nodes>
+		<edges>
+			<edge id="0" source="python-ast__banga" start="2011-10-11" target="pypy__MichaelBlume"/>
+			<edge id="1" source="infinity__pirave" start="2015-03-26" target="ipython__ipython"/>
+			<edge id="2" source="biopython-2__saketkc" start="2016-06-15" target="biopython__biopython"/>
+			<edge id="3" source="biopython-2__saketkc" start="2015-06-07" target="margffoy-tuay-server__andfoy"/>
+			<edge id="4" source="nltk__nltk" start="2014-05-19" target="Key-BNC__dougalg"/>
+			<edge id="5" source="ipython__ipython" start="2016-05-01" target="scripts__JIghtuse"/>
+			<edge id="6" source="matplotlib__matplotlib" start="2017-11-16" target="pycon2017__fariza"/>
+			<edge id="7" source="python-ast__banga" start="2013-09-18" target="python-1.4__tpn"/>
+			<edge id="8" source="infinity__pirave" start="2017-11-16" target="pycon2017__fariza"/>
+			<edge id="9" source="infinity__pirave" start="2018-02-15" target="Arduino-Python-Serial-Demo__piti118"/>
+			<edge id="10" source="pillow-simd__peterhj" start="2017-12-27" target="pillow__peterhj"/>
+			<edge id="11" source="pypy__aljosa" start="2013-09-12" target="dotfiles__berdario"/>
+			<edge id="12" source="infinity__pirave" start="2016-05-20" target="tktest__matthew-brett"/>
+			<edge id="13" source="infinity__pirave" start="2015-11-29" target="debian-astroid__mwhudson"/>
+			<edge id="14" source="ipython__ipython" start="2016-05-20" target="tktest__matthew-brett"/>
+			<edge id="15" source="conda__conda" start="2016-12-14" target="skan__jni"/>
+			<edge id="16" source="pypy__MichaelBlume" start="2017-04-02" target="convert-neopixel__codacy-badger"/>
+			<edge id="17" source="scikit-learn__scikit-learn" start="2016-04-15" target="ammonite-feedstock__abhi18av"/>
+			<edge id="18" source="pillow-simd__peterhj" start="2015-06-21" target="steganos__amoibos"/>
+			<edge id="19" source="scikit-image__scikit-image" start="2016-12-14" target="skan__jni"/>
+			<edge id="20" source="nltk__nltk" start="2014-07-16" target="polyglot__aboSamoor"/>
+			<edge id="21" source="pillow-simd__peterhj" start="2015-06-07" target="margffoy-tuay-server__andfoy"/>
+			<edge id="22" source="infinity__pirave" start="2014-12-04" target="mplddocs__jenshnielsen"/>
+			<edge id="23" source="prettychart__bdyetton" start="2015-06-07" target="margffoy-tuay-server__andfoy"/>
+			<edge id="24" source="ipython__ipython" start="2017-09-12" target="robots__pfmoore"/>
+			<edge id="25" source="biopython-2__saketkc" start="2017-10-15" target="python_showcase__krother"/>
+			<edge id="26" source="ipython__ipython" start="2015-08-24" target="tifffile__blink1073"/>
+			<edge id="27" source="ipython__ipython" start="2016-06-05" target="practice__mhchia"/>
+			<edge id="28" source="pypy__MichaelBlume" start="2013-09-12" target="dotfiles__berdario"/>
+			<edge id="29" source="python-ast__banga" start="2014-09-24" target="py2exe-3__lambacck"/>
+			<edge id="30" source="scikit-image__scikit-image" start="2017-01-27" target="imagej-tiff-meta__csachs"/>
+			<edge id="31" source="ipython__ipython" start="2017-07-04" target="cookiecutter-pythonTK__gjcooper"/>
+			<edge id="32" source="PyDev.Debugger__fabioz" start="2015-03-26" target="ipython__ipython"/>
+			<edge id="33" source="biopython-2__saketkc" start="2015-06-25" target="snpator__xbello"/>
+			<edge id="34" source="Legofy__JuanPotato" start="2016-05-01" target="scripts__JIghtuse"/>
+			<edge id="35" source="nltk__nltk" start="2018-02-21" target="python-patterns__brandon-rhodes"/>
+			<edge id="36" source="biopython-2__saketkc" start="2016-02-03" target="fast-news__nate-parrott"/>
+			<edge id="37" source="matplotlib__matplotlib" start="2017-07-05" target="waveform_analysis__endolith"/>
+			<edge id="38" source="ipython__ipython" start="2015-06-09" target="smash__mattvonrocketstein"/>
+			<edge id="39" source="ipython__ipython" start="2015-09-25" target="imageFunctions-python__15Dkatz"/>
+			<edge id="40" source="biopython__biopython" start="2017-10-15" target="python_showcase__krother"/>
+			<edge id="41" source="nltk__nltk" start="2015-06-07" target="margffoy-tuay-server__andfoy"/>
+			<edge id="42" source="ipython__ipython" start="2018-02-15" target="Arduino-Python-Serial-Demo__piti118"/>
+			<edge id="43" source="infinity__pirave" start="2017-07-05" target="waveform_analysis__endolith"/>
+			<edge id="44" source="python-ast__banga" start="2015-04-14" target="pentagrid__mdickinson"/>
+			<edge id="45" source="boltons__mahmoud" start="2016-07-12" target="conda__conda"/>
+			<edge id="46" source="pillow-simd__peterhj" start="2017-04-02" target="convert-neopixel__codacy-badger"/>
+			<edge id="47" source="scikit-learn__scikit-learn" start="2016-05-20" target="tktest__matthew-brett"/>
+			<edge id="48" source="pypy__aljosa" start="2017-04-02" target="convert-neopixel__codacy-badger"/>
+			<edge id="49" source="ipython__ipython" start="2017-06-19" target="pyrobot__dsblank"/>
+			<edge id="50" source="scikit-learn__scikit-learn" start="2016-09-22" target="image-subregion-detector__whitews"/>
+			<edge id="51" source="pillow-simd__peterhj" start="2016-05-20" target="tktest__matthew-brett"/>
+			<edge id="52" source="python__orestis" start="2015-04-14" target="pentagrid__mdickinson"/>
+			<edge id="53" source="scikit-learn__scikit-learn" start="2017-02-01" target="tkinter_matplotlib_sample__scls19fr"/>
+			<edge id="54" source="scikit-image__scikit-image" start="2016-05-20" target="tktest__matthew-brett"/>
+			<edge id="55" source="nltk__nltk" start="2017-04-02" target="convert-neopixel__codacy-badger"/>
+			<edge id="56" source="scikit-learn__scikit-learn" start="2017-01-22" target="wakemeupextreme__devkral"/>
+			<edge id="57" source="matplotlib__matplotlib" start="2018-02-15" target="Arduino-Python-Serial-Demo__piti118"/>
+			<edge id="58" source="scikit-image__scikit-image" start="2017-07-05" target="waveform_analysis__endolith"/>
+			<edge id="59" source="pypy__MichaelBlume" start="2012-04-14" target="pypy__aljosa"/>
+		</edges>
+	</graph>
+</gexf>

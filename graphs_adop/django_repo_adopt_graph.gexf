@@ -1,0 +1,2413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+	<graph defaultedgetype="directed" mode="dynamic" timeformat="date">
+		<attributes class="node"/>
+		<nodes>
+			<node id="basicproject__johnthedebs"/>
+			<node id="django-mobile-app-distribution__Proper-Job"/>
+			<node id="isitup_slack__pirave"/>
+			<node id="django-polymorphic-ng__WhyNotHugo"/>
+			<node id="django-braces__brack3t"/>
+			<node id="gypsy__sibsibsib"/>
+			<node id="experimento_sapl_2014__marciomazza"/>
+			<node id="pied-wagtail__helenwarren"/>
+			<node id="sphinx-contrib__stephenfin"/>
+			<node id="tus_django_test__kenial"/>
+			<node id="repomirror__javiplx"/>
+			<node id="django-errorlog__yjmade"/>
+			<node id="django-qsstats-magic__smspillaz"/>
+			<node id="django-admin-steroids__chrisspen"/>
+			<node id="django-compress__pelme"/>
+			<node id="typogrify__mintchaos"/>
+			<node id="inventory-service__bpowers"/>
+			<node id="django-contact-verification__enoch2110"/>
+			<node id="cookiecutter-django-rest__agconti"/>
+			<node id="inlineformset-example__epicserve"/>
+			<node id="django-users__AdrianRibao"/>
+			<node id="pydantic__samuelcolvin"/>
+			<node id="dymo_label_prep__monkut"/>
+			<node id="kaleo__john2x"/>
+			<node id="satchmo__dokterbob"/>
+			<node id="Civilizer__ChrisCooper"/>
+			<node id="gemnasium-dashboard__jbarciauskas"/>
+			<node id="asx__shultz"/>
+			<node id="bookmark-archiver__pirate"/>
+			<node id="django-simple-skel__therg"/>
+			<node id="awx__ansible"/>
+			<node id="vanhackathon-mastermind__Madalosso"/>
+			<node id="django-templatesadmin__bartTC"/>
+			<node id="django-rest-framework-docs__manosim"/>
+			<node id="edx-buaa__louyihua"/>
+			<node id="radar_django__abrookins"/>
+			<node id="sentry_fork__tbarbugli"/>
+			<node id="django-newrpx__twidi"/>
+			<node id="django_compressor_celery__jarus"/>
+			<node id="django-admin-json-editor__abogushov"/>
+			<node id="idesk__bsn"/>
+			<node id="Stream-Framework__tschellenbach"/>
+			<node id="theming-edx-platform__pdehaye"/>
+			<node id="treeio__treeio"/>
+			<node id="ADF-XML-format-example__manuganji"/>
+			<node id="django-annoying__skorokithakis"/>
+			<node id="django-dynamic-choices__charettes"/>
+			<node id="django-addendum__bennylope"/>
+			<node id="34c3ctf-sols__niklasb"/>
+			<node id="django-spurl__j4mie"/>
+			<node id="scrapy__scrapy"/>
+			<node id="django-chronograph__oppianmatt"/>
+			<node id="django__skevy"/>
+			<node id="arrr__kviktor"/>
+			<node id="Projects__ParthMahawar"/>
+			<node id="dpaste__bartTC"/>
+			<node id="odoo-extra__mga-odoo"/>
+			<node id="django-nonrel-app-engine-blog__bee-keeper"/>
+			<node id="cobbler__icomfort"/>
+			<node id="chartartar__BenjiLee"/>
+			<node id="django-riak-sessions__flashingpumpkin"/>
+			<node id="pandachaika__pandabuilder"/>
+			<node id="Example-Django-App__AlanCoding"/>
+			<node id="nobot__EnTeQuAk"/>
+			<node id="django-project-template__paulfurley"/>
+			<node id="drp-lifecycle-api__Fak3"/>
+			<node id="drf-test__alukach"/>
+			<node id="django-trolley__gregplaysguitar"/>
+			<node id="djangocms-geoplaceholder__TheDeadOne"/>
+			<node id="cmsplugin-googleplus__itbabu"/>
+			<node id="gistlog__craigkerstiens"/>
+			<node id="graphene__graphql-python"/>
+			<node id="apm-python__ruflin"/>
+			<node id="sentry-apps-openid-auth__bremac"/>
+			<node id="pygotham__djds23"/>
+			<node id="django-plus-falcon-pypy__rhcarvalho"/>
+			<node id="djlimiter__alisaifee"/>
+			<node id="steemprojects.com__noisy"/>
+			<node id="my-first-blog__mulka"/>
+			<node id="django-debug-toolbar-request-history__djsutho"/>
+			<node id="twilio-django-part-1__phalt"/>
+			<node id="patchwork__stephenfin"/>
+			<node id="django-template__copitux"/>
+			<node id="cartridge__stephenmcd"/>
+			<node id="django-celery__bclermont"/>
+			<node id="django-cacheback__codeinthehole"/>
+			<node id="cmsplugin-video-youtube__jbazik"/>
+			<node id="db-utils__symbolist"/>
+			<node id="django-weathertracking__adamfast"/>
+			<node id="clamopener__proycon"/>
+			<node id="django-statictemplate__ojii"/>
+			<node id="cmsplugin-plaintext__russmo"/>
+			<node id="django-app-namespace-template-loader__Fantomas42"/>
+			<node id="django-redshift-backend__shimizukawa"/>
+			<node id="map-matching-demo__ezheidtmann"/>
+			<node id="django-url-filter__miki725"/>
+			<node id="django-tinymce__aljosa"/>
+			<node id="appBuilds__ggendre"/>
+			<node id="django-basicauth__hirokiky"/>
+			<node id="django-xadmin-react__frmdstryr"/>
+			<node id="django-addview__yakxxx"/>
+			<node id="GuerrillaGraftersMap__tachang"/>
+			<node id="Wimap__refeed"/>
+			<node id="django-fsm__kmmbvnr"/>
+			<node id="django-guardian__django-guardian"/>
+			<node id="slimbb__hsoft"/>
+			<node id="django-simple-multitenant__pombredanne"/>
+			<node id="django-weibo-app-example__sunliwen"/>
+			<node id="django-json-rpc__samuraisam"/>
+			<node id="pyrix-site__indexofire"/>
+			<node id="lti_inspector__cmurtaugh"/>
+			<node id="tweetstream__offbyone"/>
+			<node id="fulroster.se__wieslander"/>
+			<node id="talon__amezhenin"/>
+			<node id="urgentgramme__rjwebb"/>
+			<node id="django-countries__SmileyChris"/>
+			<node id="django-admin-easy__ebertti"/>
+			<node id="feedjack__squarepegsys"/>
+			<node id="connect__nlhkabu"/>
+			<node id="django-admin-tools__noxan"/>
+			<node id="scratch__wimglenn"/>
+			<node id="django-appointments__airtonix"/>
+			<node id="django-basic-apps__ctrochalakis"/>
+			<node id="django-test-utils__ericholscher"/>
+			<node id="django-model-subclass-delete-problem__qris"/>
+			<node id="python_zipcodes__fcurella"/>
+			<node id="django-rest-framework-tutorial__chrislea"/>
+			<node id="cs373-idb__sandan"/>
+			<node id="woodytron__yro"/>
+			<node id="ammo__filias"/>
+			<node id="tor-weather__meejah"/>
+			<node id="django-monocle__shaunduncan"/>
+			<node id="SD-django__onyekaa"/>
+			<node id="bookshare__jeyraof"/>
+			<node id="meetingguide__marcelometal"/>
+			<node id="TNC-admin-server__ovangle"/>
+			<node id="blog__Beatris"/>
+			<node id="gtfs-data-exchange__jehiah"/>
+			<node id="aemanager__fgaudin"/>
+			<node id="my_patched_photologue__MathieuDuponchelle"/>
+			<node id="django-tdd-tutorial-code__OmarIthawi"/>
+			<node id="django-skypehub__tokibito"/>
+			<node id="django-spillway__bkg"/>
+			<node id="logilab-common__pombredanne"/>
+			<node id="django-javascript-features__kajic"/>
+			<node id="documentstore__davea"/>
+			<node id="pubhub_example__scuml"/>
+			<node id="django-dbdump__vitaliyf"/>
+			<node id="mystore__cjltsod"/>
+			<node id="hotwire__zsx"/>
+			<node id="evserver__brosner"/>
+			<node id="testDinamicModel__merlex"/>
+			<node id="superlists__clint74"/>
+			<node id="django-piston__EmilStenstrom"/>
+			<node id="django-spambayes__waylan"/>
+			<node id="my-first-blog__papisz"/>
+			<node id="django-postal__mthornhill"/>
+			<node id="django-profiles__rh0dium"/>
+			<node id="days__rlucioni"/>
+			<node id="autotest__ColinIanKing"/>
+			<node id="djutils__pikeas"/>
+			<node id="hd-test__onrik"/>
+			<node id="snippets__SimonSapin"/>
+			<node id="django-debreach__lpomfrey"/>
+			<node id="deseb2__buriy"/>
+			<node id="openstack-dashboard__termie"/>
+			<node id="django-diazomiddleware__kroman0"/>
+			<node id="django-jsonvalidator__malderete"/>
+			<node id="angular-d3-tests__valsteen"/>
+			<node id="itcv__askoretskiy"/>
+			<node id="hostfilter__niran"/>
+			<node id="django-hitcount__thornomad"/>
+			<node id="dj-rit-auditlog__audiolion"/>
+			<node id="tools__lsblakk"/>
+			<node id="django-channels-chat__narrowfail"/>
+			<node id="django-content-editor__matthiask"/>
+			<node id="sf-base-election-data__cjerdonek"/>
+			<node id="djangogr__glezos"/>
+			<node id="djangocms-bs4forcascade__haricot"/>
+			<node id="random-project-random-utils__fredrik"/>
+			<node id="craw__davidthewatson"/>
+			<node id="mezzanine-modeltranslation-backport__dekomote"/>
+			<node id="taiga-back__taigaio"/>
+			<node id="django-admin-book__originalankur"/>
+			<node id="django-generic-aggregation__coleifer"/>
+			<node id="django-ordered-model__bfirsh"/>
+			<node id="BoggleGame__aparij"/>
+			<node id="drf_openapi__limdauto"/>
+			<node id="conference__ijstokes"/>
+			<node id="solango__brosner"/>
+			<node id="django-smart-selects__digi604"/>
+			<node id="django-rest-framework__encode"/>
+			<node id="django-dbtemplates__svetlyak40wt"/>
+			<node id="dju-comm__Kjwon15"/>
+			<node id="django-template__ameistad"/>
+			<node id="djangogirls-2018__brondsem"/>
+			<node id="rest_condition__caxap"/>
+			<node id="django-paypal__spookylukey"/>
+			<node id="agilito__httpdss"/>
+			<node id="postorius-docker__simonsmiley"/>
+			<node id="mongodb_cache__antonyc"/>
+			<node id="django-oscar__django-oscar"/>
+			<node id="django-redis__niwinz"/>
+			<node id="https-pombredanne-bitbucket.org-schinckel-django-jsonfield__pombredanne"/>
+			<node id="hc_book_swap__joyhchen"/>
+			<node id="django-ldapdb__chronossc"/>
+			<node id="django-admin-views__frankwiles"/>
+			<node id="django-jsonfield-compat__kbussell"/>
+			<node id="waterboy__averagehuman"/>
+			<node id="django-inlinetrans__WoLpH"/>
+			<node id="pycharm_debugger__yunti"/>
+			<node id="pyjade__syrusakbary"/>
+			<node id="workshop__nmundar"/>
+			<node id="demorest__Fak3"/>
+			<node id="django-postgresql-netfields__jimfunk"/>
+			<node id="django-prefetch__ionelmc"/>
+			<node id="tcr-crossings__terrycojones"/>
+			<node id="django-model-values__coady"/>
+			<node id="django-sqlalchemy__brosner"/>
+			<node id="picture_of_the_day_aggregation_site_2__qubitstream"/>
+			<node id="filebrowser-safe-mixin-qiniu__leoleozhu"/>
+			<node id="django-cas__mcoconnor"/>
+			<node id="django-typogrify__chrisdrackett"/>
+			<node id="lettuce__gabrielfalcao"/>
+			<node id="channels-examples__andrewgodwin"/>
+			<node id="django-silk__jazzband"/>
+			<node id="odsreg__ttx"/>
+			<node id="django-sms-2__grahamu"/>
+			<node id="curs_estiu_2015_uib__aaloy"/>
+			<node id="e-store__Croolis"/>
+			<node id="django-project-template__sjkingo"/>
+			<node id="beginners-guide-to-django-rest-framework__commadelimited"/>
+			<node id="django-imagekit__matthewwithanm"/>
+			<node id="django-podcasting__rizumu"/>
+			<node id="kchart__pmrowla"/>
+			<node id="django-postmark-mailer__jemerick"/>
+			<node id="e-commerce__oosthuizenb"/>
+			<node id="django-tagging__brosner"/>
+			<node id="django-multiple-domains__Qlio"/>
+			<node id="Web-4D-QSAR__rougeth"/>
+			<node id="tdd-with-python__dragonjun"/>
+			<node id="django-project-template__muattiyah"/>
+			<node id="sorl-watermark__originell"/>
+			<node id="ddoi__blurrcat"/>
+			<node id="django-multilingual-ng__ojii"/>
+			<node id="django-course__raulcd"/>
+			<node id="drf-nested-routers__alanjds"/>
+			<node id="python-meetup-django__nonotest"/>
+			<node id="django-chroniker__chrisspen"/>
+			<node id="django-storages__adamzap"/>
+			<node id="django-waffle-session__mwaaas"/>
+			<node id="django-csvtojson__njamaleddine"/>
+			<node id="gae-twittertimes__dergraf"/>
+			<node id="debian-packaging-for-django__marcaurele"/>
+			<node id="sentry-cfml__jmacul2"/>
+			<node id="dashline__chronossc"/>
+			<node id="ansible-tasker__mskarbek"/>
+			<node id="django-form-utils__carljm"/>
+			<node id="django-chunks__clintecker"/>
+			<node id="Mobile-Security-Framework-MobSF__MobSF"/>
+			<node id="sfbulkuploader__lambacck"/>
+			<node id="django-pagination__ericflo"/>
+			<node id="techtalk-parsedatetime__eternicode"/>
+			<node id="django-nav-tree__ikresoft"/>
+			<node id="TPO__mfrlin"/>
+			<node id="TwoSpaces__pizzapanther"/>
+			<node id="JMJ-PANAMA__ridiaz"/>
+			<node id="django-sheets__georgewhewell"/>
+			<node id="wagtailmarkdownblock__FlipperPA"/>
+			<node id="web-pcap-reader__mohsenSy"/>
+			<node id="calixos-poll__retailify"/>
+			<node id="dc17.dc.o__lamby"/>
+			<node id="django-model-utils-bug-142__therefromhere"/>
+			<node id="django-multidb-bug__silviogutierrez"/>
+			<node id="django-orm-extender__bashmish"/>
+			<node id="comics__jodal"/>
+			<node id="django-track-link__sv0"/>
+			<node id="soapbase__FelixSchwarz"/>
+			<node id="wagtail-salesforce-demo__kaedroho"/>
+			<node id="django-debug-toolbar__jazzband"/>
+			<node id="django-easy-reports__saxix"/>
+			<node id="django-rulez__chrisglass"/>
+			<node id="sortedm2m-filter-horizontal-widget__svleeuwen"/>
+			<node id="fabfile__chrisforrette"/>
+			<node id="django-udf__delgiudices"/>
+			<node id="django-model-utils__jazzband"/>
+			<node id="django-controlcenter__byashimov"/>
+			<node id="youdown__wuilliam321"/>
+			<node id="spacetime__irrelative"/>
+			<node id="django_xsolla__hades"/>
+			<node id="django-mathfield__danidee10"/>
+			<node id="curso_django__esauro"/>
+			<node id="my_info__nostalgiaz"/>
+			<node id="django-tastypie__django-tastypie"/>
+			<node id="hypothesis-python__HypothesisWorks"/>
+			<node id="Django-facebook__tschellenbach"/>
+			<node id="portalettere__inve1"/>
+			<node id="django-counter-field__kajic"/>
+			<node id="django-fobi__barseghyanartur"/>
+			<node id="algorithms__suhassatish"/>
+			<node id="django-mailbox__coddingtonbear"/>
+			<node id="blog-example__awwester"/>
+			<node id="freebase-python__yuvadm"/>
+			<node id="django-md-cms__FlipperPA"/>
+			<node id="fabric__fabric"/>
+			<node id="pysolper__aleaxit"/>
+			<node id="mcfinance__lardissone"/>
+			<node id="motonomad__emorozov"/>
+			<node id="pgs__westurner"/>
+			<node id="youid-server__bianchimro"/>
+			<node id="tenacious__vzvenyach"/>
+			<node id="django-timestampable__achedeuzot"/>
+			<node id="django-crispy-forms__django-crispy-forms"/>
+			<node id="djangoskeleton__vzvenyach"/>
+			<node id="horizon-congress__aaronorosen"/>
+			<node id="wagtail_table_block__alexgleason"/>
+			<node id="satchmo__bclermont"/>
+			<node id="nested-formset__nyergler"/>
+			<node id="django-simon__dirn"/>
+			<node id="mozilla-django-oidc__karambir"/>
+			<node id="provinciasapp__elpargo"/>
+			<node id="django-geo__obeattie"/>
+			<node id="eighthbit-website__relrod"/>
+			<node id="fusilier__joedborg"/>
+			<node id="django-dash__barseghyanartur"/>
+			<node id="django-readonly-onetoone__damycra"/>
+			<node id="django_mediatoolset__syabro"/>
+			<node id="cardwatcher__dlutxx"/>
+			<node id="feedjack__mk-fg"/>
+			<node id="yowlayer-django-store__jlmadurga"/>
+			<node id="hackerpulse__swanson"/>
+			<node id="sentry__getsentry"/>
+			<node id="yawn__aclowes"/>
+			<node id="django-efficient__danielroseman"/>
+			<node id="django-algolia__Kmaschta"/>
+			<node id="torretta__flaper87"/>
+			<node id="celeryexample__kenzic"/>
+			<node id="django-page-cms__akaihola"/>
+			<node id="genoomy__jiivan"/>
+			<node id="distro-tracker__rhertzog"/>
+			<node id="modulestore__bmedx"/>
+			<node id="django_test__leekchan"/>
+			<node id="django-treemenus__chronossc"/>
+			<node id="hazinses__vargi"/>
+			<node id="django-excel-response__7wonders"/>
+			<node id="serverthrallapi__NullSoldier"/>
+			<node id="text-adventure__paolopaolopaolo"/>
+			<node id="django-nested-inline-test-django-1.11__jasonm"/>
+			<node id="pinax-ldap-project__lukeman"/>
+			<node id="django-preventconcurrentlogins__pcraston"/>
+			<node id="django-urls-introspect__davidszotten"/>
+			<node id="django-oracle-drcp__JohnPapps"/>
+			<node id="blexplor-web__marzig76"/>
+			<node id="django-auth-ldap__scari"/>
+			<node id="btb__yourcelf"/>
+			<node id="UrbanTrails__jsousa1919"/>
+			<node id="MySQL-safe-django-openid-auth__kdazzle"/>
+			<node id="spectator__kennydude"/>
+			<node id="telapi-python__kevinburke"/>
+			<node id="goladder__puremourning"/>
+			<node id="hd-events__progrium"/>
+			<node id="django-base-template__avillavi"/>
+			<node id="superlists__gotoplanb"/>
+			<node id="django-oscar-fancypages__fmr"/>
+			<node id="lido-2014__hugorodgerbrown"/>
+			<node id="be.groovie__bbangert"/>
+			<node id="django-blogdor__jcarbaugh"/>
+			<node id="gittip-calculator__ddbeck"/>
+			<node id="graphite-instalation-on-debian__radoslawc"/>
+			<node id="message-board__fmarco"/>
+			<node id="django-in-request-cache__mojeto"/>
+			<node id="minecloud__toffer"/>
+			<node id="django-real-content__mislavcimpersak"/>
+			<node id="airman__shemigon"/>
+			<node id="django-cors-headers__ottoyiu"/>
+			<node id="thegoat__bronsen"/>
+			<node id="djangoapp__ryan-blunden"/>
+			<node id="django-import-seeker__romgar"/>
+			<node id="django-auth-fogbugz__dougn"/>
+			<node id="mw4068-packaging__MatthewWilkes"/>
+			<node id="django-messages__arneb"/>
+			<node id="django_amqp_example__mispy"/>
+			<node id="django-tabs__davidar"/>
+			<node id="Sudoku-Solver__ayush1997"/>
+			<node id="djvasa__cgallemore"/>
+			<node id="private-readthedocs.org__johncosta"/>
+			<node id="python-social-auth__omab"/>
+			<node id="django-sql-explorer__groveco"/>
+			<node id="VIT-IEEE2018__digi0ps"/>
+			<node id="django-pystache__dmfrancisco"/>
+			<node id="WoodieLMS__0xVK"/>
+			<node id="django-crowd__gbezyuk"/>
+			<node id="django-openid__cwebber"/>
+			<node id="django-oauth-toolkit__BenjaminHCCarr"/>
+			<node id="falcon__falconry"/>
+			<node id="model_mommy__vandersonmota"/>
+			<node id="netflix-notify__mikeengland"/>
+			<node id="django-adminactions__saxix"/>
+			<node id="django-request-logger__eht16"/>
+			<node id="django-fullurl__Flimm"/>
+			<node id="wounds-and-dressings__Ogreman"/>
+			<node id="ConMan__herlo"/>
+			<node id="django-federated-login__Bouke"/>
+			<node id="dj-livesettings__pjrobertson"/>
+			<node id="SmartSecurity__domandinho"/>
+			<node id="animals-drf__EvgeneOskin"/>
+			<node id="django-reversion-compare__jedie"/>
+			<node id="fuel-check__AlexeyKasatkin"/>
+			<node id="quiz__laurivosandi"/>
+			<node id="django_coverage_plugin__nedbat"/>
+			<node id="urlkey__Bahus"/>
+			<node id="django-ratelimit__jsocol"/>
+			<node id="djoscarshop__aldarund"/>
+			<node id="konradhalas.pl__konradhalas"/>
+			<node id="geodevbase__W7PEA"/>
+			<node id="jogger-demo__brettatoms"/>
+			<node id="blog_example__sibblegp"/>
+			<node id="dogslow__alexander-akhmetov"/>
+			<node id="django-hvad__KristianOellegaard"/>
+			<node id="django-multilingual-model__dokterbob"/>
+			<node id="django-rest-assured__ydaniv"/>
+			<node id="gett_blog__Kulikovpavel"/>
+			<node id="django-learning__abloch"/>
+			<node id="effective-django__nyergler"/>
+			<node id="consensu__mikalstill"/>
+			<node id="togatest__glasnt"/>
+			<node id="django-matome__keitaoouchi"/>
+			<node id="python-voluum__mateusz-sikora"/>
+			<node id="django-watson__etianen"/>
+			<node id="construirwebqueue__bneijt"/>
+			<node id="coala_community__jayvdb"/>
+			<node id="django-social-auth-norel__antoviaque"/>
+			<node id="django-friendship-network__aladagemre"/>
+			<node id="ansible-container__ansible"/>
+			<node id="docutils__brechtm"/>
+			<node id="django-jsonfield__chrismeyersfsu"/>
+			<node id="djangogirls-blog__daaray"/>
+			<node id="esphealth__jmcvetta"/>
+			<node id="dj-twilio-sms__mastizada"/>
+			<node id="django-form-manager__sankroh"/>
+			<node id="ponycheckup__kevgathuku"/>
+			<node id="django-mailserver__telenieko"/>
+			<node id="cookiecutter-saas__jayfk"/>
+			<node id="django-cacheops__Suor"/>
+			<node id="green__CleanCut"/>
+			<node id="nsize-web__tapple"/>
+			<node id="reek__bpeschier"/>
+			<node id="elasticstack__bennylope"/>
+			<node id="meow-manage__QuantumGhost"/>
+			<node id="horizon-billing__aababilov"/>
+			<node id="mezzanine__stephenmcd"/>
+			<node id="django-plans__cypreess"/>
+			<node id="prodsys2__haakenlid"/>
+			<node id="cmsplugin-feedlist__beniwohli"/>
+			<node id="web-payments-connector__devkral"/>
+			<node id="django-asana__sbywater"/>
+			<node id="django-tagging__JordanReiter"/>
+			<node id="celery_tests__Jc2k"/>
+			<node id="django-nonrel__flaper87"/>
+			<node id="zulip__zulip"/>
+			<node id="wagtail-translation__skirsdeda"/>
+			<node id="facebook-sdk__kitsunde"/>
+			<node id="genshi__hodgestar"/>
+			<node id="xhtml2pdf__xhtml2pdf"/>
+			<node id="django-yandex-kassa__DrMartiner"/>
+			<node id="django-reversion__etianen"/>
+			<node id="azure-test__aventurella"/>
+			<node id="todo__dbarden"/>
+			<node id="django-openstack-auth-kerberos__jamielennox"/>
+			<node id="django-cachalot__BertrandBordage"/>
+			<node id="django-simple-history__treyhunner"/>
+			<node id="django-blog-zinnia__Fantomas42"/>
+			<node id="django-priority-test-runner__ramn"/>
+			<node id="pymtbcal__slashk"/>
+			<node id="junk__qn7o"/>
+			<node id="wagtail__wagtail"/>
+			<node id="conduit__nzjrs"/>
+			<node id="HealthNet__snoozan"/>
+			<node id="django-oauth-plus__lukegb"/>
+			<node id="Croquis__kk6"/>
+			<node id="webassets__miracle2k"/>
+			<node id="django-querche__systemsoverload"/>
+			<node id="django-payline-dotir__Bornazadeh"/>
+			<node id="django-markitup__zsiciarz"/>
+			<node id="django-sitegate__idlesign"/>
+			<node id="django-syncr__copelco"/>
+			<node id="YellowIdServer__COCOLMAN"/>
+			<node id="playlistdc__CorneliusIV"/>
+			<node id="django-ios-notifications__stephenmuss"/>
+			<node id="django-ajax-forms__timsavage"/>
+			<node id="nupic.son__rhyolight"/>
+			<node id="flowgram.com__reverie"/>
+			<node id="django-redmineauth__tomviner"/>
+			<node id="mezzanine-shortcodes__ryneeverett"/>
+			<node id="catest__wsantos"/>
+			<node id="cssjanus__subosito"/>
+			<node id="django-mcfa__alej0varas"/>
+			<node id="django-date-paginator__JordanReiter"/>
+			<node id="django-petrify__kmichel"/>
+			<node id="django-jenkins__kmmbvnr"/>
+			<node id="django-iban__benkonrath"/>
+			<node id="ibm-db__digglife"/>
+			<node id="django-autoslug__neithere"/>
+			<node id="wagtailplus__MechanisM"/>
+			<node id="django-dbbackup__vfigueiro"/>
+			<node id="project302__daniellawrence"/>
+			<node id="xadmin__sshwsfc"/>
+			<node id="kubeship__joway"/>
+			<node id="bottle__bottlepy"/>
+			<node id="vegantx.org-wagtail__alexgleason"/>
+			<node id="Twilio-Python-quickstarts__kevinburke"/>
+			<node id="djall-djtest__rick446"/>
+			<node id="meltdown-pl__karoldvl"/>
+			<node id="django-photologue__jdriscoll"/>
+			<node id="django-third-party-extension-tutorial__SteinRobert"/>
+			<node id="DjangoProjects__amanharitsh123"/>
+			<node id="devops_workshop__cihann"/>
+			<node id="translate-toolit__scrool"/>
+			<node id="django-split-settings__sobolevn"/>
+			<node id="django-template__motiteux"/>
+			<node id="bitbake__kscherer"/>
+			<node id="zulip-cloud9__cPhost"/>
+			<node id="aikidocardiff__evildmp"/>
+			<node id="mezzanine_instagram__shurik"/>
+			<node id="django-csv-export__ojii"/>
+			<node id="Primer-Thumber__jamesmfriedman"/>
+			<node id="sentry-django-rest-demo__ndmanvar"/>
+			<node id="fullstack-challenge-backend__michaelgodshall"/>
+			<node id="PyPump__xray7224"/>
+			<node id="django-automation__myaser"/>
+			<node id="django-paymaster__scailer"/>
+			<node id="ITSY__yetkinozturk"/>
+			<node id="django-sortedm2m__gregmuellegger"/>
+			<node id="home-control-RPC__itamaro"/>
+			<node id="pg-django__lisael"/>
+			<node id="paranoiabot__saschalalala"/>
+			<node id="django-cloud-tasks__GeorgeLubaretsi"/>
+			<node id="django-cities__coderholic"/>
+			<node id="awx-mod__scottp-dpaw"/>
+			<node id="fantacalcio-asta-helper__swmerko"/>
+			<node id="djfeedback__mpyatishev"/>
+			<node id="xappy__miracle2k"/>
+			<node id="celerytraining__kpavlovsky"/>
+			<node id="21challenges__Beatris"/>
+			<node id="tranquil__g2p"/>
+			<node id="django-notify-x__v1k45"/>
+			<node id="django-activity-stream__justquick"/>
+			<node id="django-mailfriend__tmc"/>
+			<node id="psihook__sibson"/>
+			<node id="easy-thumbnails__SmileyChris"/>
+			<node id="billreminder__omaciel"/>
+			<node id="gtg-services__pqrth"/>
+			<node id="debian-nm__mhall119"/>
+			<node id="cmsplugin_gallery__centralniak"/>
+			<node id="django-drf-template__Keats"/>
+			<node id="django-imagecrop__aaronrenner"/>
+			<node id="django-progressbarupload__ouhouhsami"/>
+			<node id="husky__mktums"/>
+			<node id="django-urltree-field__ralfzen"/>
+			<node id="sakura__keiko713"/>
+			<node id="django-taggit__alex"/>
+			<node id="django-tools__jedie"/>
+			<node id="django-textmate.tmbundle__bryanveloso"/>
+			<node id="django-hammer__hodgesds"/>
+			<node id="django-newsletter__dokterbob"/>
+			<node id="fintest__kumanna"/>
+			<node id="django-mailchimp2__akjohnson"/>
+			<node id="nexmo-django-2fa__tommorris"/>
+			<node id="django-ajax__joestump"/>
+			<node id="djangocms-forms__mishbahr"/>
+			<node id="django-lifefeed__skabber"/>
+			<node id="ulm__dupuy"/>
+			<node id="django-rest-registration__szopu"/>
+			<node id="django-course__mauricioabreu"/>
+			<node id="django-s3-stream__jonatron"/>
+			<node id="django-easycrud__dekkers"/>
+			<node id="ocpolls__nonZero"/>
+			<node id="hackedio_2013__MatMoore"/>
+			<node id="augmented-traffic-control__facebook"/>
+			<node id="django-metaphore__dokterbob"/>
+			<node id="Theatricalia__dracos"/>
+			<node id="idm-core__alexsdutton"/>
+			<node id="Russian-4-Kids__alexanderad"/>
+			<node id="django-eve-db__gtaylor"/>
+			<node id="pyfacebook__sciyoshi"/>
+			<node id="helloapp__nicolas-van"/>
+			<node id="rietveld__robfig"/>
+			<node id="airavata__fdemmer"/>
+			<node id="django-google-analytics__clintecker"/>
+			<node id="django-test-example__cgcgbcbc"/>
+			<node id="django-socketio__stephenmcd"/>
+			<node id="django-poligon__car3oon"/>
+			<node id="django_tickets__barraponto"/>
+			<node id="django-registration__dinie"/>
+			<node id="poker_analyzer__Ankhbayar"/>
+			<node id="sqlmap__sqlmapproject"/>
+			<node id="owlbot__payamnj"/>
+			<node id="djangoTutorialv1.5__elbaulp"/>
+			<node id="gae-safesearch__mdorn"/>
+			<node id="openstack_horizon_mydashboard__piousbox"/>
+			<node id="django-paging__dcramer"/>
+			<node id="django-mobile__gregmuellegger"/>
+			<node id="jeikkaus__jtiai"/>
+			<node id="linkmanager__lowks"/>
+			<node id="django-form-designer__samluescher"/>
+			<node id="saleor__mirumee"/>
+			<node id="djang0byte__nvbn"/>
+			<node id="django-timedelta-field-1.10__tuky"/>
+			<node id="memorizza__paoloromolini"/>
+			<node id="django-rating__ericholscher"/>
+			<node id="sorl-thumbnail__brosner"/>
+			<node id="mongoengine__MongoEngine"/>
+			<node id="django-stripe-payments__grue"/>
+			<node id="dynaconf__rochacbruno"/>
+			<node id="cvconnect_backend__mattjegan"/>
+			<node id="apache-config__skorokithakis"/>
+			<node id="pyconde-website-mirror__zerok"/>
+			<node id="django-rest-skeleton__sebastibe"/>
+			<node id="ghettoq__ask"/>
+			<node id="django-todo__shacker"/>
+			<node id="flask__pallets"/>
+			<node id="lrmh_base__cirotix"/>
+			<node id="django-secure-mail__blag"/>
+			<node id="django-polyfield__suutari"/>
+			<node id="eighty-seven__moggers87"/>
+			<node id="rules-testapp__highpost"/>
+			<node id="hello_django__postrational"/>
+			<node id="SI2-Semovientes__ebar0n"/>
+			<node id="django-tables2__jieter"/>
+			<node id="openpose__classner"/>
+			<node id="django-jinja__niwinz"/>
+			<node id="mixpanel-celery__cahlan"/>
+			<node id="django-validajax__professorplumb"/>
+			<node id="django-haystack__django-haystack"/>
+			<node id="django_test_client_bugreport__xavfernandez"/>
+			<node id="django-transmeta__twidi"/>
+			<node id="getajobservice__jslang"/>
+			<node id="my-first-blog__thibaudcolas"/>
+			<node id="django-registration__macropin"/>
+			<node id="django-admin-tools__artscoop"/>
+			<node id="cat-quotes__levivm"/>
+			<node id="django_atomic_signals__adamchainz"/>
+			<node id="mydjango101__florisdenhengst"/>
+			<node id="django-rest-framework-jwt__GetBlimp"/>
+			<node id="savanna__rnirmal"/>
+			<node id="persist__fmoor"/>
+			<node id="atmt__conrado"/>
+			<node id="jinja__pallets"/>
+			<node id="flatsearch__simonpanay"/>
+			<node id="knotcrafters__althalus"/>
+			<node id="channels__django"/>
+			<node id="django-pdfviewer__oz123"/>
+			<node id="tweepy__tweepy"/>
+			<node id="dotcloud-sample-app__novel"/>
+			<node id="deploy__alibozorgkhan"/>
+			<node id="pinax__pinax"/>
+			<node id="djangogcal__metzlar"/>
+			<node id="nodeshot-citysdk-synchronizers__nemesisdesign"/>
+			<node id="django-phpbb__olethanh"/>
+			<node id="django-activitystreams__nowells"/>
+			<node id="pinax__ingenieroariel"/>
+			<node id="django-pure__tony"/>
+			<node id="simple-review__RamezIssac"/>
+			<node id="nm2__lamby"/>
+			<node id="typhoonae__sprymak"/>
+			<node id="gsi__bobzz-zone"/>
+			<node id="django-moderation-issue112__SamTShaw"/>
+			<node id="django-jquery__aljosa"/>
+			<node id="suckless__starenka"/>
+			<node id="django-pieguard__rcmachado"/>
+			<node id="milo_django_task__grubberr"/>
+			<node id="cookiecutter-django__pydanny"/>
+			<node id="deploy__hevok"/>
+			<node id="django-bootstrap3__dyve"/>
+			<node id="djangorestframework-queryfields__wimglenn"/>
+			<node id="django-jeopardy__Tavistock"/>
+			<node id="django-socialregistration__flashingpumpkin"/>
+			<node id="django-social-auth__omab"/>
+			<node id="bandit-ss__zeroSteiner"/>
+			<node id="agendadulibre__mlhamel"/>
+			<node id="django-astoria__diego-plan9"/>
+			<node id="smyt-test-task__dizpers"/>
+			<node id="eho-horizon__Frostman"/>
+			<node id="todo__yuriiz"/>
+			<node id="django-filer-travis-testing__stefanfoulis"/>
+			<node id="django-mptt__django-mptt"/>
+			<node id="ceilometer-horizon__suyan"/>
+			<node id="django-adminplus__jsocol"/>
+			<node id="timestrap__overshard"/>
+			<node id="Blog-Sample-Django__andyxhadji"/>
+			<node id="django-representations__dokterbob"/>
+			<node id="django-custom-user__jcugat"/>
+			<node id="django-storages__ovnicraft"/>
+			<node id="dnd-pdf-gen-service__rrader"/>
+			<node id="djangoCMS-Template__genti94"/>
+			<node id="django-cassandra-sessions__matclayton"/>
+			<node id="publicmeetings__ghing"/>
+			<node id="BusinessYiave__SnailJie"/>
+			<node id="guestbook__rvl"/>
+			<node id="django-book__mariuz"/>
+			<node id="django-storages__jschneier"/>
+			<node id="pyramid__Pylons"/>
+			<node id="sorl-thumbnail-async__chhantyal"/>
+			<node id="django-autofixture__gregmuellegger"/>
+			<node id="cloudy-release__flupke"/>
+			<node id="flex__pipermerriam"/>
+			<node id="delorean-specs__derekhiggins"/>
+			<node id="django-tint__jespino"/>
+			<node id="superlists__dudepare"/>
+			<node id="django-health-check__KristianOellegaard"/>
+			<node id="django-model-deploy__juanpex"/>
+			<node id="django-fields__svetlyak40wt"/>
+			<node id="django-pressroom__mthornhill"/>
+			<node id="django1-11__mukul09"/>
+			<node id="gbd__aflaxman"/>
+			<node id="readthedocs-docker-compose__qqbuby"/>
+			<node id="django-test-project__amadornimbis"/>
+			<node id="django_sample_app__naiquevin"/>
+			<node id="Probes__winsmith"/>
+			<node id="splinter__cobrateam"/>
+			<node id="opencult.com__sirodoht"/>
+			<node id="django-custard__kunitoki"/>
+			<node id="liitokala__metamatik"/>
+			<node id="django-simple-captcha__mbi"/>
+			<node id="django-assets__miracle2k"/>
+			<node id="django-mongo-auth__mitar"/>
+			<node id="safecast-api__dhackner"/>
+			<node id="lootgame__honestbleeps"/>
+			<node id="django_girls_blog__lgh2"/>
+			<node id="sentry-whatsapp__ecarreras"/>
+			<node id="celery_source_kombu__strawposter"/>
+			<node id="minimal-django__marios-zindilis"/>
+			<node id="catcurator__momamene"/>
+			<node id="django-geojson_serializer__pglotov"/>
+			<node id="public-contracts__jorgecarleitao"/>
+			<node id="Misago__rafalp"/>
+			<node id="django-google-cloud-storage__ckopanos"/>
+			<node id="django_project_manager__timmartin"/>
+			<node id="django-transmeta__ramusus"/>
+			<node id="teammanager__jithintomz"/>
+			<node id="snapboard__johnboxall"/>
+			<node id="plata__matthiask"/>
+			<node id="LinkBasket__vitaly-krumins"/>
+			<node id="photo-rss-dir__fberger"/>
+			<node id="kloudless-status__chriskuehl"/>
+			<node id="pypy__aljosa"/>
+			<node id="django-prometheus__korfuri"/>
+			<node id="django-ssl-admin__Matt-Deacalion"/>
+			<node id="platform-core__bmedx"/>
+			<node id="haystack_elasticsearch_rebuild_index_bug__hekevintran"/>
+			<node id="django-gaeauth__fhahn"/>
+			<node id="docker-weblate__wichert"/>
+			<node id="web-ide__ArthurArslanaliev"/>
+			<node id="django-waffle__jsocol"/>
+			<node id="docker-django-example__mehmetakyuz"/>
+			<node id="django-uuidfield__dcramer"/>
+			<node id="django__django"/>
+			<node id="django-muzo-payment__yedpodtrzitko"/>
+			<node id="django-rest-framework-proxy__eofs"/>
+			<node id="django-compressor__django-compressor"/>
+			<node id="django-aggregates__aykut"/>
+			<node id="presentation-python-deployment__nZac"/>
+			<node id="python-twitter__pythonpro"/>
+			<node id="django-threadedcomments__HonzaKral"/>
+			<node id="django-pudb__akanouras"/>
+			<node id="django-organizations__bennylope"/>
+			<node id="queue.click.api__tonicabanas"/>
+			<node id="task__ahsan-ul-haq"/>
+			<node id="traceparent__mammique"/>
+			<node id="rapidsms-community-apps__ewheeler"/>
+			<node id="django-shop-adventures__philippeowagner"/>
+			<node id="django-secureliveservertestcase__pbrooks"/>
+			<node id="ff-sing__animan1"/>
+			<node id="django-simple-shop__vilos"/>
+			<node id="busca-misa__glarrain"/>
+			<node id="django-multitable-inheritance__GabLeRoux"/>
+			<node id="eolo__lasarux"/>
+			<node id="padam__Ge0"/>
+			<node id="adijux__ZloiGremlin"/>
+			<node id="django-sitetree__idlesign"/>
+			<node id="closet__adambrenecki"/>
+			<node id="pyoath-toolkit__malept"/>
+			<node id="django-object-actions__crccheck"/>
+			<node id="xxadmin__ly0"/>
+			<node id="gowallahash__imrehg"/>
+			<node id="batphone__willcodefortea"/>
+			<node id="mmLib__masci"/>
+			<node id="django-shop__awesto"/>
+			<node id="docker-demo__aaronfay"/>
+			<node id="django-q__Koed00"/>
+			<node id="django-nap__funkybob"/>
+			<node id="snippets__maximilianhurl"/>
+			<node id="rietveld__imirkin"/>
+			<node id="flask-example__chouseknecht"/>
+			<node id="HootMentor__jQwotos"/>
+			<node id="django-atompub__jtauber"/>
+			<node id="blog__brittdawn"/>
+			<node id="raven-python__getsentry"/>
+			<node id="django-piston__adieu"/>
+			<node id="so_question_47654662__cezar77"/>
+			<node id="django-data-exports__magopian"/>
+			<node id="duplicate_proxy_model_test__alexhayes"/>
+			<node id="django-postalcodes__bennylope"/>
+			<node id="django-filter__carltongibson"/>
+			<node id="django-easy-timezones__Miserlou"/>
+			<node id="django-machina__ellmetha"/>
+			<node id="GoShout__suneel0101"/>
+			<node id="sportlocations__knutz3n"/>
+			<node id="cityzen__nostalgiaz"/>
+			<node id="django-brunch-ts-scss__MasterKale"/>
+			<node id="prlint__ryankask"/>
+			<node id="django-cms-model-in-plugin__mkoistinen"/>
+			<node id="django-ajax-validation__alex"/>
+			<node id="gerp__i5ar"/>
+			<node id="NexToU__garcianavalon"/>
+			<node id="iktest__mgalgs"/>
+			<node id="django-bower-cdn__aericson"/>
+			<node id="cookiecutter-wagtail-dokku__johnfraney"/>
+			<node id="django-taggit-autocomplete-modified__gnotaras"/>
+			<node id="django-rest-admin__avsd"/>
+			<node id="python-postmark__themartorana"/>
+			<node id="safebrowsing-python__theju"/>
+			<node id="django-startup__1st"/>
+			<node id="cobbler__cobbler"/>
+			<node id="pybb__sinasamavati"/>
+			<node id="test.datasets__srgypetrov"/>
+			<node id="rpclib__martijnvermaat"/>
+			<node id="marpa-py__Kjir"/>
+			<node id="django-projects__vra"/>
+			<node id="django-startproject__LucianU"/>
+			<node id="dopera__haiiiiiyun"/>
+			<node id="django12factor__doismellburning"/>
+			<node id="kadist__oaubert"/>
+			<node id="buttsworth__yro"/>
+			<node id="django-webquery__muflone"/>
+			<node id="superlists__HEdingfield"/>
+			<node id="django-jinja-knockout__Dmitri-Sintsov"/>
+			<node id="pentathlon__sspross"/>
+			<node id="fuzzy-octo-batman__AndrewGrossman"/>
+			<node id="huey__coleifer"/>
+			<node id="eboersmasite__EricBoersma"/>
+			<node id="django_play__chrxr"/>
+			<node id="tildetown-admin__vilmibm"/>
+			<node id="peterdemin.github.io__peterdemin"/>
+			<node id="geopy__geopy"/>
+			<node id="do_classroom__andrewsomething"/>
+			<node id="django-avatar__grantmcconnaughey"/>
+			<node id="test_formsets__romlok"/>
+			<node id="dotfiles__saimn"/>
+			<node id="django-user-sessions__Bouke"/>
+			<node id="django-jqchat__yomguy"/>
+			<node id="headphones__rembo10"/>
+			<node id="django-seed__Brobin"/>
+			<node id="poezdka__elenaoat"/>
+			<node id="django-addanother__jonashaag"/>
+			<node id="ChatterBot__gunthercox"/>
+			<node id="launchpage__kdazzle"/>
+			<node id="cartridge-stats__joshbatchelor"/>
+			<node id="django-positions__jpwatts"/>
+			<node id="infinity-python-book__sk8erchoi"/>
+			<node id="readthedocs.org__rtfd"/>
+			<node id="bilgisayfam__tayfun"/>
+			<node id="umahistoria__flavioamieiro"/>
+			<node id="webapp-on-linux-python__shlee322"/>
+			<node id="sitapea__roboxv"/>
+			<node id="learn_django__staubina"/>
+			<node id="django-paste-organizer__rizumu"/>
+			<node id="coop-agenda__MechanisM"/>
+			<node id="django-shop-old__rfleschenberg"/>
+			<node id="django-forms-builder__stephenmcd"/>
+			<node id="django_recipes__dgrant"/>
+			<node id="cartridge_braintree__henri-hulski"/>
+			<node id="django-common__anemitz"/>
+			<node id="timetabling__danyilmaz"/>
+			<node id="lettuce-py3__adw0rd"/>
+			<node id="django-environ__joke2k"/>
+			<node id="mezzanine-slider-revolution__restless"/>
+			<node id="utils__aehlke"/>
+			<node id="twython__ryanmcgrath"/>
+			<node id="jane__krischer"/>
+			<node id="django-dirtyfields__romgar"/>
+			<node id="django-instagram-uid__zeantsoi"/>
+			<node id="django-maintenancemode__michaelgodshall"/>
+			<node id="fluidchallenge__joual"/>
+			<node id="lifetech-playground__rmihael"/>
+			<node id="django-scheduler__llazzaro"/>
+			<node id="hxat__lduarte1991"/>
+			<node id="dap-dockerized__pombredanne"/>
+			<node id="raven-bug__teeberg"/>
+			<node id="django-dequorum__funkybob"/>
+			<node id="kenix-www__knoguchi"/>
+			<node id="CALU-Team5__Ivche1337"/>
+			<node id="django-angular__jrief"/>
+			<node id="Styrax__johnjohndoe"/>
+			<node id="django-crypta__magnunleno"/>
+			<node id="tai5-uan5_gian5-gi2_phing5-tai5__sih4sing5hong5"/>
+			<node id="academicspam__yellowcap"/>
+			<node id="djangoTutorial__tbonza"/>
+			<node id="django-south__philipn"/>
+			<node id="ika__devunt"/>
+			<node id="sphinxcontrib-cacoo__tk0miya"/>
+			<node id="django-template__lojack"/>
+			<node id="sphinxcontrib-matlabdomain__boeddeker"/>
+			<node id="django-treebeard-extensions__aljosa"/>
+			<node id="django-crispy-more__ly0"/>
+			<node id="django-extensions__django-extensions"/>
+			<node id="my-first-blog__mgedmin"/>
+			<node id="Book-TDD-Web-Dev-Python__hjwp"/>
+			<node id="sentry-lighthouse__gthb"/>
+			<node id="Python-Behave-Appium-iOS__ndmanvar"/>
+			<node id="django-notification__brosner"/>
+			<node id="django-html5validator__clytwynec"/>
+			<node id="sphinxautoindex__jimfulton"/>
+			<node id="django-ssh__ErnstHaagsman"/>
+			<node id="vidi_notifications__schallis"/>
+			<node id="django-redis-sessions__dpaccoud"/>
+			<node id="django-jsonfield__dmkoch"/>
+			<node id="djangorecipe__rvanlaar"/>
+			<node id="django-safe-browsing__robertobarreda"/>
+			<node id="djangotheming__saleem-latif"/>
+			<node id="django-importer__ricobl"/>
+			<node id="e-travel__timur-orudzhov"/>
+			<node id="The--old--Applications-for-Django-CMS__evildmp"/>
+			<node id="django_celery_windows_service__azalea"/>
+			<node id="django-geoipdb-loader__kalekseev"/>
+			<node id="django-performance-metrics__orf"/>
+			<node id="cookiecutter-django__asyncee"/>
+			<node id="haiti__pygeek"/>
+			<node id="django-contact__tehfink"/>
+			<node id="django-tempocal__anentropic"/>
+			<node id="django-migration-bug__richardxia"/>
+			<node id="contradict__marnanel"/>
+			<node id="django-messagegroups__dbrgn"/>
+			<node id="pyfilesystem__ctismer"/>
+			<node id="django-mama-cas__jbittel"/>
+			<node id="webapp-eval-django__edevil"/>
+			<node id="ciencia_abierta__gitter-badger"/>
+			<node id="savanna-dashboard__denismakogon"/>
+			<node id="django_openstack_auth__gabrielhurley"/>
+			<node id="django_cgi_wrap__nmandery"/>
+			<node id="django-static-gitified__xrg"/>
+			<node id="django-cms__divio"/>
+			<node id="django-phonenumber-field__stefanfoulis"/>
+			<node id="TL-1__marjev"/>
+			<node id="humble-media__vladimiroff"/>
+			<node id="wagtail_room_booking__Tamriel"/>
+			<node id="dcf__inoks"/>
+			<node id="mitgr81com__mitgr81"/>
+			<node id="django-fixture-magic__davedash"/>
+			<node id="tillogger__sjoerdjob"/>
+			<node id="django-includes__hartym"/>
+			<node id="django-localdates__orestis"/>
+			<node id="openstack-dashboard__anotherjesse"/>
+			<node id="libreborme__PabloCastellano"/>
+			<node id="tdd_with_goat__iustitia"/>
+			<node id="django-storages__cherepski"/>
+			<node id="django-tablib__joshourisman"/>
+			<node id="django-autoconfig__mikebryant"/>
+			<node id="django-filebrowser-no-grappelli__yakky"/>
+			<node id="lightr__eranrund"/>
+			<node id="django-docs-from-tests__AndreaCrotti"/>
+			<node id="django-ajax-select__twidi"/>
+			<node id="wikiproject-med__osamak"/>
+			<node id="m2m_pizzeria__vlt"/>
+			<node id="edx-configuration__kola-er"/>
+			<node id="django-password-reset__brutasse"/>
+			<node id="Engine__jakesyl"/>
+			<node id="hue__cloudera"/>
+			<node id="taiga-docker__soudy"/>
+			<node id="splunk-django__northben"/>
+			<node id="deb-python-social-auth__myhro"/>
+			<node id="django-competitions__elmkarami"/>
+			<node id="solango__screeley"/>
+			<node id="django-evil-project__ssbb"/>
+			<node id="drf-proxy-pagination__tuffnatty"/>
+			<node id="Eth__Alpus"/>
+			<node id="django-httpbl__dekoza"/>
+			<node id="djangogirls_tutorial__pipoket"/>
+			<node id="django-notify__andreasf"/>
+			<node id="openstack-upstream-registrar__timfreund"/>
+			<node id="django-share__sarendsen"/>
+			<node id="django-event-procedures__lykkin"/>
+			<node id="WIPSTERv2__moshekaplan"/>
+			<node id="django-sophie__dduan"/>
+			<node id="db_file_storage__victor-o-silva"/>
+			<node id="e-property__Qubad786"/>
+			<node id="django-banner-rotator__martinogden"/>
+			<node id="django-nullablecharfield__alepane21"/>
+			<node id="project-matthew-scott__gldnspud"/>
+			<node id="django-logentry-admin__yprez"/>
+			<node id="elements_assignment__inytar"/>
+			<node id="django-openedx-geoinfo__stvstnfrd"/>
+			<node id="pyboleto__eduardocereto"/>
+			<node id="cinderella__jasisz"/>
+			<node id="django-sitemetrics__idlesign"/>
+			<node id="LiteElementsHack__mmardini"/>
+			<node id="tommi-func__tomas-edwardsson"/>
+			<node id="bestbuy__elliotthill"/>
+			<node id="CompostCalculator__lnhubbell"/>
+			<node id="django-podcast__jefftriplett"/>
+			<node id="django-ticket-21498-demo__mbaechtold"/>
+			<node id="django-allauth__pennersr"/>
+			<node id="edx-pr-webhooks__peter-fogg"/>
+			<node id="django-pya__fxiao"/>
+			<node id="django-rsvp__toastdriven"/>
+			<node id="django-layout__benzkji"/>
+			<node id="brewlog__zgoda"/>
+			<node id="swapi__phalt"/>
+			<node id="lazythumbs__shaunduncan"/>
+			<node id="homeboard__ildoc"/>
+			<node id="dotfiles-thomasf-base__thomasf"/>
+			<node id="django-dbsettings__sciyoshi"/>
+			<node id="Recette__QuentinVaut"/>
+			<node id="django-imaging__pielgrzym"/>
+			<node id="pinet__joshuamckenty"/>
+			<node id="mountain__apollo13"/>
+			<node id="rpc4django-demo__davidfischer"/>
+			<node id="django-rules__maraujop"/>
+			<node id="django-salted__wunki"/>
+			<node id="bot__japz"/>
+			<node id="chain-reaction__greut"/>
+			<node id="pony-homepage__toidi"/>
+			<node id="django-assetgentags__micrypt"/>
+			<node id="sct-communitytools__hpoul"/>
+			<node id="django-rest-framework-msgpack__juanriaza"/>
+			<node id="django-flat-responsive-demo__elky"/>
+			<node id="django-app__blopker"/>
+			<node id="awx__AlanCoding"/>
+			<node id="trackwriting__saturn597"/>
+			<node id="pyFilesystem__simonluijk"/>
+			<node id="django-tables2-reports__goinnn"/>
+			<node id="PyConference__barrachri"/>
+			<node id="learn-select-for-update__centralniak"/>
+			<node id="django-dag__elpaso"/>
+			<node id="pi-toolbox__achedeuzot"/>
+		</nodes>
+		<edges>
+			<edge id="0" source="django-ios-notifications__stephenmuss" start="2016-11-27" target="django-fields__svetlyak40wt"/>
+			<edge id="1" source="openstack-dashboard__termie" start="2014-09-13" target="pymtbcal__slashk"/>
+			<edge id="2" source="django-registration__macropin" start="2015-08-20" target="e-commerce__oosthuizenb"/>
+			<edge id="3" source="django-organizations__bennylope" start="2016-08-13" target="nested-formset__nyergler"/>
+			<edge id="4" source="Engine__jakesyl" start="2017-11-21" target="sentry__getsentry"/>
+			<edge id="5" source="django-dbsettings__sciyoshi" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="6" source="sentry__getsentry" start="2018-02-18" target="superlists__gotoplanb"/>
+			<edge id="7" source="django-sql-explorer__groveco" start="2016-10-22" target="drf-proxy-pagination__tuffnatty"/>
+			<edge id="8" source="pied-wagtail__helenwarren" start="2014-02-19" target="twilio-django-part-1__phalt"/>
+			<edge id="9" source="raven-python__getsentry" start="2012-04-14" target="django-urls-introspect__davidszotten"/>
+			<edge id="10" source="django-paypal__spookylukey" start="2016-06-16" target="todo__yuriiz"/>
+			<edge id="11" source="celery_source_kombu__strawposter" start="2014-04-01" target="inventory-service__bpowers"/>
+			<edge id="12" source="wagtail__wagtail" start="2016-05-19" target="django-taggit__alex"/>
+			<edge id="13" source="django-openid__cwebber" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="14" source="mezzanine-modeltranslation-backport__dekomote" start="2013-01-07" target="cartridge__stephenmcd"/>
+			<edge id="15" source="django_test__leekchan" start="2016-05-11" target="rules-testapp__highpost"/>
+			<edge id="16" source="django-lifefeed__skabber" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="17" source="django_recipes__dgrant" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="18" source="django-multilingual-ng__ojii" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="19" source="mezzanine__stephenmcd" start="2016-06-12" target="filebrowser-safe-mixin-qiniu__leoleozhu"/>
+			<edge id="20" source="graphite-instalation-on-debian__radoslawc" start="2015-03-08" target="django-dequorum__funkybob"/>
+			<edge id="21" source="zulip__zulip" start="2017-06-14" target="VIT-IEEE2018__digi0ps"/>
+			<edge id="22" source="django-cms__divio" start="2013-11-06" target="django-statictemplate__ojii"/>
+			<edge id="23" source="django-bootstrap3__dyve" start="2015-03-20" target="django-allauth__pennersr"/>
+			<edge id="24" source="celery_source_kombu__strawposter" start="2016-03-08" target="catest__wsantos"/>
+			<edge id="25" source="ghettoq__ask" start="2012-01-28" target="torretta__flaper87"/>
+			<edge id="26" source="django-braces__brack3t" start="2014-01-01" target="django-mailchimp2__akjohnson"/>
+			<edge id="27" source="django__django" start="2014-01-13" target="django_atomic_signals__adamchainz"/>
+			<edge id="28" source="geopy__geopy" start="2014-05-06" target="django-pudb__akanouras"/>
+			<edge id="29" source="xxadmin__ly0" start="2014-04-10" target="xadmin__sshwsfc"/>
+			<edge id="30" source="django-allauth__pennersr" start="2016-09-06" target="cat-quotes__levivm"/>
+			<edge id="31" source="django-rest-framework__encode" start="2014-12-04" target="swapi__phalt"/>
+			<edge id="32" source="sentry__getsentry" start="2017-11-18" target="my-first-blog__mgedmin"/>
+			<edge id="33" source="mezzanine-modeltranslation-backport__dekomote" start="2017-09-09" target="mezzanine__stephenmcd"/>
+			<edge id="34" source="raven-python__getsentry" start="2017-03-31" target="peterdemin.github.io__peterdemin"/>
+			<edge id="35" source="snapboard__johnboxall" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="36" source="mmLib__masci" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="37" source="mezzanine-modeltranslation-backport__dekomote" start="2013-11-11" target="django-scheduler__llazzaro"/>
+			<edge id="38" source="django-tastypie__django-tastypie" start="2012-04-04" target="lazythumbs__shaunduncan"/>
+			<edge id="39" source="django-jsonfield__chrismeyersfsu" start="2012-12-11" target="sphinxcontrib-cacoo__tk0miya"/>
+			<edge id="40" source="django-admin-tools__noxan" start="2012-04-11" target="djangogr__glezos"/>
+			<edge id="41" source="django-cms__divio" start="2011-01-04" target="cmsplugin-feedlist__beniwohli"/>
+			<edge id="42" source="django-cms__divio" start="2014-07-17" target="django-custard__kunitoki"/>
+			<edge id="43" source="nobot__EnTeQuAk" start="2015-02-05" target="django-debreach__lpomfrey"/>
+			<edge id="44" source="wagtail__wagtail" start="2016-11-19" target="django-admin-json-editor__abogushov"/>
+			<edge id="45" source="pypy__aljosa" start="2007-02-28" target="jinja__pallets"/>
+			<edge id="46" source="theming-edx-platform__pdehaye" start="2016-05-23" target="days__rlucioni"/>
+			<edge id="47" source="Engine__jakesyl" start="2016-08-20" target="dc17.dc.o__lamby"/>
+			<edge id="48" source="channels__django" start="2017-04-03" target="django__django"/>
+			<edge id="49" source="django-rest-framework__encode" start="2016-08-28" target="idm-core__alexsdutton"/>
+			<edge id="50" source="deb-python-social-auth__myhro" start="2014-02-05" target="celery_source_kombu__strawposter"/>
+			<edge id="51" source="django__django" start="2012-09-30" target="django-model-deploy__juanpex"/>
+			<edge id="52" source="lettuce__gabrielfalcao" start="2014-10-08" target="django-nap__funkybob"/>
+			<edge id="53" source="django_test__leekchan" start="2018-02-03" target="konradhalas.pl__konradhalas"/>
+			<edge id="54" source="django-oscar__django-oscar" start="2015-05-26" target="bestbuy__elliotthill"/>
+			<edge id="55" source="django__django" start="2017-04-10" target="ika__devunt"/>
+			<edge id="56" source="django-extensions__django-extensions" start="2013-05-17" target="django-split-settings__sobolevn"/>
+			<edge id="57" source="Book-TDD-Web-Dev-Python__hjwp" start="2017-07-17" target="HealthNet__snoozan"/>
+			<edge id="58" source="zulip__zulip" start="2018-03-01" target="CALU-Team5__Ivche1337"/>
+			<edge id="59" source="mezzanine-modeltranslation-backport__dekomote" start="2012-10-26" target="mezzanine_instagram__shurik"/>
+			<edge id="60" source="raven-python__getsentry" start="2013-02-23" target="cloudy-release__flupke"/>
+			<edge id="61" source="django-stripe-payments__grue" start="2016-11-11" target="django-easy-timezones__Miserlou"/>
+			<edge id="62" source="mezzanine-modeltranslation-backport__dekomote" start="2013-07-05" target="sorl-thumbnail-async__chhantyal"/>
+			<edge id="63" source="pinax__ingenieroariel" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="64" source="nsize-web__tapple" start="2017-12-28" target="cookiecutter-django-rest__agconti"/>
+			<edge id="65" source="xhtml2pdf__xhtml2pdf" start="2014-07-19" target="kenix-www__knoguchi"/>
+			<edge id="66" source="django-rest-framework__encode" start="2012-05-09" target="django-common__anemitz"/>
+			<edge id="67" source="readthedocs.org__rtfd" start="2017-08-14" target="django-crypta__magnunleno"/>
+			<edge id="68" source="django-social-auth__omab" start="2014-04-22" target="django__django"/>
+			<edge id="69" source="django-social-auth__omab" start="2016-02-06" target="django_mediatoolset__syabro"/>
+			<edge id="70" source="django-rest-framework__encode" start="2014-03-08" target="fluidchallenge__joual"/>
+			<edge id="71" source="sentry__getsentry" start="2017-01-09" target="craw__davidthewatson"/>
+			<edge id="72" source="django-ios-notifications__stephenmuss" start="2014-05-20" target="django-redis__niwinz"/>
+			<edge id="73" source="sphinxautoindex__jimfulton" start="2017-05-05" target="readthedocs.org__rtfd"/>
+			<edge id="74" source="django-social-auth__omab" start="2013-11-03" target="django-safe-browsing__robertobarreda"/>
+			<edge id="75" source="mezzanine-modeltranslation-backport__dekomote" start="2015-02-11" target="smyt-test-task__dizpers"/>
+			<edge id="76" source="django-social-auth__omab" start="2012-11-02" target="pyconde-website-mirror__zerok"/>
+			<edge id="77" source="django-rest-framework__encode" start="2013-03-21" target="django-ios-notifications__stephenmuss"/>
+			<edge id="78" source="geopy__geopy" start="2013-10-31" target="django-blog-zinnia__Fantomas42"/>
+			<edge id="79" source="django-tabs__davidar" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="80" source="pyramid__Pylons" start="2012-06-12" target="django-chunks__clintecker"/>
+			<edge id="81" source="django__django" start="2013-06-08" target="django-jenkins__kmmbvnr"/>
+			<edge id="82" source="project302__daniellawrence" start="2014-05-08" target="academicspam__yellowcap"/>
+			<edge id="83" source="tommi-func__tomas-edwardsson" start="2013-03-20" target="bot__japz"/>
+			<edge id="84" source="Misago__rafalp" start="2015-01-04" target="cookiecutter-django__asyncee"/>
+			<edge id="85" source="django-admin-tools__noxan" start="2010-06-17" target="eolo__lasarux"/>
+			<edge id="86" source="nobot__EnTeQuAk" start="2014-02-20" target="django-import-seeker__romgar"/>
+			<edge id="87" source="django-bootstrap3__dyve" start="2014-11-29" target="django-pieguard__rcmachado"/>
+			<edge id="88" source="django-user-sessions__Bouke" start="2018-01-08" target="bookmark-archiver__pirate"/>
+			<edge id="89" source="python-social-auth__omab" start="2017-08-24" target="ddoi__blurrcat"/>
+			<edge id="90" source="Primer-Thumber__jamesmfriedman" start="2014-01-25" target="wounds-and-dressings__Ogreman"/>
+			<edge id="91" source="django__django" start="2016-08-10" target="dj-twilio-sms__mastizada"/>
+			<edge id="92" source="django-tinymce__aljosa" start="2014-05-09" target="tor-weather__meejah"/>
+			<edge id="93" source="django__django" start="2015-05-22" target="django-countries__SmileyChris"/>
+			<edge id="94" source="django-mobile__gregmuellegger" start="2017-02-26" target="django-ticket-21498-demo__mbaechtold"/>
+			<edge id="95" source="django__django" start="2012-11-30" target="inlineformset-example__epicserve"/>
+			<edge id="96" source="Django-facebook__tschellenbach" start="2013-05-07" target="curso_django__esauro"/>
+			<edge id="97" source="SmartSecurity__domandinho" start="2017-10-20" target="django-extensions__django-extensions"/>
+			<edge id="98" source="django-tinymce__aljosa" start="2012-07-06" target="django-mptt__django-mptt"/>
+			<edge id="99" source="django-angular__jrief" start="2015-04-29" target="django-algolia__Kmaschta"/>
+			<edge id="100" source="django-extensions__django-extensions" start="2015-05-18" target="map-matching-demo__ezheidtmann"/>
+			<edge id="101" source="conference__ijstokes" start="2014-05-04" target="angular-d3-tests__valsteen"/>
+			<edge id="102" source="gtg-services__pqrth" start="2013-06-28" target="zulip__zulip"/>
+			<edge id="103" source="django-imagekit__matthewwithanm" start="2014-02-18" target="pony-homepage__toidi"/>
+			<edge id="104" source="PyPump__xray7224" start="2014-02-17" target="django-cms__divio"/>
+			<edge id="105" source="django-extensions__django-extensions" start="2015-02-23" target="django-rest-framework-tutorial__chrislea"/>
+			<edge id="106" source="django-admin-tools__artscoop" start="2012-04-11" target="djangogr__glezos"/>
+			<edge id="107" source="django-angular__jrief" start="2016-03-15" target="django_tickets__barraponto"/>
+			<edge id="108" source="hue__cloudera" start="2015-05-23" target="my-first-blog__papisz"/>
+			<edge id="109" source="django-dag__elpaso" start="2017-02-13" target="publicmeetings__ghing"/>
+			<edge id="110" source="django-gaeauth__fhahn" start="2017-01-26" target="chain-reaction__greut"/>
+			<edge id="111" source="eho-horizon__Frostman" start="2012-08-20" target="django_openstack_auth__gabrielhurley"/>
+			<edge id="112" source="django-taggit__alex" start="2016-10-24" target="cmsplugin-plaintext__russmo"/>
+			<edge id="113" source="django-blog-zinnia__Fantomas42" start="2016-07-25" target="django-debug-toolbar-request-history__djsutho"/>
+			<edge id="114" source="Django-facebook__tschellenbach" start="2013-06-13" target="Stream-Framework__tschellenbach"/>
+			<edge id="115" source="django-rest-framework__encode" start="2014-09-15" target="talon__amezhenin"/>
+			<edge id="116" source="django-autofixture__gregmuellegger" start="2015-05-05" target="django-extensions__django-extensions"/>
+			<edge id="117" source="pyjade__syrusakbary" start="2016-02-06" target="django_mediatoolset__syabro"/>
+			<edge id="118" source="django-cms__divio" start="2017-11-03" target="django-third-party-extension-tutorial__SteinRobert"/>
+			<edge id="119" source="django-podcast__jefftriplett" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="120" source="django-extensions__django-extensions" start="2010-03-07" target="pinax-ldap-project__lukeman"/>
+			<edge id="121" source="pybb__sinasamavati" start="2011-05-24" target="django-shop__awesto"/>
+			<edge id="122" source="modulestore__bmedx" start="2016-02-05" target="platform-core__bmedx"/>
+			<edge id="123" source="openstack-dashboard__anotherjesse" start="2011-04-13" target="openstack-dashboard__termie"/>
+			<edge id="124" source="django-allauth__pennersr" start="2014-09-16" target="django-real-content__mislavcimpersak"/>
+			<edge id="125" source="django-allauth__pennersr" start="2017-03-01" target="django-fullurl__Flimm"/>
+			<edge id="126" source="django-crispy-forms__django-crispy-forms" start="2012-10-18" target="django-simple-multitenant__pombredanne"/>
+			<edge id="127" source="django-phonenumber-field__stefanfoulis" start="2018-02-11" target="celerytraining__kpavlovsky"/>
+			<edge id="128" source="django-mptt__django-mptt" start="2012-07-23" target="django-easycrud__dekkers"/>
+			<edge id="129" source="django-ajax__joestump" start="2014-02-04" target="fabfile__chrisforrette"/>
+			<edge id="130" source="django-jsonfield__dmkoch" start="2015-06-24" target="sfbulkuploader__lambacck"/>
+			<edge id="131" source="django-page-cms__akaihola" start="2010-10-27" target="sportlocations__knutz3n"/>
+			<edge id="132" source="django-page-cms__akaihola" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="133" source="gbd__aflaxman" start="2010-05-10" target="meltdown-pl__karoldvl"/>
+			<edge id="134" source="lettuce__gabrielfalcao" start="2016-11-20" target="tildetown-admin__vilmibm"/>
+			<edge id="135" source="edx-configuration__kola-er" start="2016-05-05" target="huey__coleifer"/>
+			<edge id="136" source="django-oscar__django-oscar" start="2014-07-22" target="django-oracle-drcp__JohnPapps"/>
+			<edge id="137" source="django-rest-framework__encode" start="2016-07-05" target="django_cgi_wrap__nmandery"/>
+			<edge id="138" source="django-mailfriend__tmc" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="139" source="sqlmap__sqlmapproject" start="2016-09-08" target="WIPSTERv2__moshekaplan"/>
+			<edge id="140" source="django-rest-framework__encode" start="2016-04-17" target="blog-example__awwester"/>
+			<edge id="141" source="django__django" start="2014-09-13" target="django-docs-from-tests__AndreaCrotti"/>
+			<edge id="142" source="django-storages__cherepski" start="2015-10-06" target="django-registration__macropin"/>
+			<edge id="143" source="django-rest-framework__encode" start="2014-08-14" target="django-preventconcurrentlogins__pcraston"/>
+			<edge id="144" source="PyPump__xray7224" start="2014-04-11" target="eighty-seven__moggers87"/>
+			<edge id="145" source="Book-TDD-Web-Dev-Python__hjwp" start="2014-09-13" target="django-docs-from-tests__AndreaCrotti"/>
+			<edge id="146" source="django-imagekit__matthewwithanm" start="2014-04-25" target="humble-media__vladimiroff"/>
+			<edge id="147" source="django-jinja__niwinz" start="2017-01-22" target="django-tablib__joshourisman"/>
+			<edge id="148" source="django-phpbb__olethanh" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="149" source="django-guardian__django-guardian" start="2017-04-28" target="djangogirls_tutorial__pipoket"/>
+			<edge id="150" source="django__django" start="2016-01-28" target="django-migration-bug__richardxia"/>
+			<edge id="151" source="Django-facebook__tschellenbach" start="2014-04-25" target="humble-media__vladimiroff"/>
+			<edge id="152" source="django-cms__divio" start="2017-02-13" target="publicmeetings__ghing"/>
+			<edge id="153" source="raven-python__getsentry" start="2013-03-06" target="django_compressor_celery__jarus"/>
+			<edge id="154" source="eho-horizon__Frostman" start="2012-02-06" target="delorean-specs__derekhiggins"/>
+			<edge id="155" source="django-geo__obeattie" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="156" source="python-social-auth__omab" start="2017-02-07" target="django__django"/>
+			<edge id="157" source="lettuce-py3__adw0rd" start="2014-12-11" target="dap-dockerized__pombredanne"/>
+			<edge id="158" source="taiga-back__taigaio" start="2013-07-03" target="django-tint__jespino"/>
+			<edge id="159" source="django-oscar__django-oscar" start="2017-12-28" target="cookiecutter-django-rest__agconti"/>
+			<edge id="160" source="mw4068-packaging__MatthewWilkes" start="2009-11-10" target="django-registration__dinie"/>
+			<edge id="161" source="django-nonrel__flaper87" start="2010-10-09" target="django__skevy"/>
+			<edge id="162" source="tools__lsblakk" start="2012-09-12" target="python-twitter__pythonpro"/>
+			<edge id="163" source="nupic.son__rhyolight" start="2011-09-09" target="rietveld__robfig"/>
+			<edge id="164" source="django-waffle__jsocol" start="2015-11-07" target="my-first-blog__mulka"/>
+			<edge id="165" source="zulip__zulip" start="2016-06-10" target="e-store__Croolis"/>
+			<edge id="166" source="hypothesis-python__HypothesisWorks" start="2017-11-18" target="my-first-blog__mgedmin"/>
+			<edge id="167" source="django-scheduler__llazzaro" start="2013-07-29" target="Blog-Sample-Django__andyxhadji"/>
+			<edge id="168" source="model_mommy__vandersonmota" start="2012-03-19" target="umahistoria__flavioamieiro"/>
+			<edge id="169" source="pybb__sinasamavati" start="2012-08-18" target="Russian-4-Kids__alexanderad"/>
+			<edge id="170" source="eho-horizon__Frostman" start="2013-03-15" target="ceilometer-horizon__suyan"/>
+			<edge id="171" source="mezzanine-modeltranslation-backport__dekomote" start="2013-08-07" target="feedjack__mk-fg"/>
+			<edge id="172" source="gtg-services__pqrth" start="2013-03-14" target="MySQL-safe-django-openid-auth__kdazzle"/>
+			<edge id="173" source="django-import-seeker__romgar" start="2015-05-12" target="django-dirtyfields__romgar"/>
+			<edge id="174" source="twython__ryanmcgrath" start="2012-01-11" target="django_xsolla__hades"/>
+			<edge id="175" source="cmsplugin_gallery__centralniak" start="2016-07-26" target="learn-select-for-update__centralniak"/>
+			<edge id="176" source="django-redis__niwinz" start="2014-09-21" target="django-course__mauricioabreu"/>
+			<edge id="177" source="django__django" start="2016-03-30" target="django-basicauth__hirokiky"/>
+			<edge id="178" source="django_test__leekchan" start="2015-08-08" target="django-template__ameistad"/>
+			<edge id="179" source="django-rest-framework__encode" start="2013-01-21" target="django-admin-tools__artscoop"/>
+			<edge id="180" source="django-phonenumber-field__stefanfoulis" start="2017-12-29" target="django-logentry-admin__yprez"/>
+			<edge id="181" source="django__django" start="2017-11-07" target="gett_blog__Kulikovpavel"/>
+			<edge id="182" source="django-rest-framework__encode" start="2017-04-24" target="YellowIdServer__COCOLMAN"/>
+			<edge id="183" source="django__django" start="2015-12-21" target="django-app__blopker"/>
+			<edge id="184" source="flask__pallets" start="2011-02-11" target="snippets__SimonSapin"/>
+			<edge id="185" source="django-cms__divio" start="2013-12-02" target="mezzanine-slider-revolution__restless"/>
+			<edge id="186" source="splinter__cobrateam" start="2015-02-25" target="django-auth-fogbugz__dougn"/>
+			<edge id="187" source="django-guardian__django-guardian" start="2015-05-05" target="django-pure__tony"/>
+			<edge id="188" source="mongoengine__MongoEngine" start="2012-12-05" target="django-monocle__shaunduncan"/>
+			<edge id="189" source="django-cms__divio" start="2013-06-13" target="provinciasapp__elpargo"/>
+			<edge id="190" source="django-storages__cherepski" start="2017-02-07" target="wagtail-translation__skirsdeda"/>
+			<edge id="191" source="sphinx-contrib__stephenfin" start="2010-05-09" target="sphinxcontrib-cacoo__tk0miya"/>
+			<edge id="192" source="eho-horizon__Frostman" start="2012-05-13" target="fuel-check__AlexeyKasatkin"/>
+			<edge id="193" source="django-extensions__django-extensions" start="2014-12-12" target="junk__qn7o"/>
+			<edge id="194" source="lettuce-py3__adw0rd" start="2016-03-06" target="suckless__starenka"/>
+			<edge id="195" source="django-rating__ericholscher" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="196" source="ghettoq__ask" start="2013-06-12" target="django-salted__wunki"/>
+			<edge id="197" source="django__django" start="2013-08-21" target="django-taggit__alex"/>
+			<edge id="198" source="django_test__leekchan" start="2016-12-05" target="django-silk__jazzband"/>
+			<edge id="199" source="zulip__zulip" start="2018-02-15" target="django1-11__mukul09"/>
+			<edge id="200" source="django-cacheops__Suor" start="2014-04-24" target="django-aggregates__aykut"/>
+			<edge id="201" source="django-silk__jazzband" start="2016-11-17" target="cvconnect_backend__mattjegan"/>
+			<edge id="202" source="cartridge__stephenmcd" start="2015-02-04" target="django-countries__SmileyChris"/>
+			<edge id="203" source="mongoengine__MongoEngine" start="2016-05-29" target="milo_django_task__grubberr"/>
+			<edge id="204" source="django-templatesadmin__bartTC" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="205" source="django12factor__doismellburning" start="2017-03-21" target="django-multitable-inheritance__GabLeRoux"/>
+			<edge id="206" source="lazythumbs__shaunduncan" start="2013-01-13" target="django-project-template__paulfurley"/>
+			<edge id="207" source="django__django" start="2015-08-08" target="django-template__ameistad"/>
+			<edge id="208" source="django-simple-captcha__mbi" start="2016-08-09" target="patchwork__stephenfin"/>
+			<edge id="209" source="django-cms__divio" start="2013-09-20" target="django-diazomiddleware__kroman0"/>
+			<edge id="210" source="django-cms__divio" start="2017-03-01" target="django-fullurl__Flimm"/>
+			<edge id="211" source="MySQL-safe-django-openid-auth__kdazzle" start="2009-08-19" target="django-startproject__LucianU"/>
+			<edge id="212" source="django-haystack__django-haystack" start="2016-07-17" target="postorius-docker__simonsmiley"/>
+			<edge id="213" source="django-blog-zinnia__Fantomas42" start="2014-05-31" target="django-todo__shacker"/>
+			<edge id="214" source="django-social-auth-norel__antoviaque" start="2012-01-15" target="django-assetgentags__micrypt"/>
+			<edge id="215" source="django-rest-framework__encode" start="2015-05-18" target="map-matching-demo__ezheidtmann"/>
+			<edge id="216" source="django-rest-framework__encode" start="2016-03-01" target="django-multidb-bug__silviogutierrez"/>
+			<edge id="217" source="sphinxautoindex__jimfulton" start="2014-11-29" target="django-pieguard__rcmachado"/>
+			<edge id="218" source="celery_source_kombu__strawposter" start="2015-01-25" target="azure-test__aventurella"/>
+			<edge id="219" source="django-cms__divio" start="2016-07-29" target="calixos-poll__retailify"/>
+			<edge id="220" source="tweepy__tweepy" start="2015-11-03" target="Croquis__kk6"/>
+			<edge id="221" source="django-guardian__django-guardian" start="2017-12-04" target="teammanager__jithintomz"/>
+			<edge id="222" source="django-cms__divio" start="2016-07-26" target="learn-select-for-update__centralniak"/>
+			<edge id="223" source="django-reversion__etianen" start="2015-11-07" target="simple-review__RamezIssac"/>
+			<edge id="224" source="django__django" start="2016-12-05" target="django-silk__jazzband"/>
+			<edge id="225" source="django-rest-framework__encode" start="2015-03-25" target="cinderella__jasisz"/>
+			<edge id="226" source="django-oscar__django-oscar" start="2016-09-10" target="tdd-with-python__dragonjun"/>
+			<edge id="227" source="mongoengine__MongoEngine" start="2017-10-24" target="dynaconf__rochacbruno"/>
+			<edge id="228" source="django-allauth__pennersr" start="2015-01-19" target="django-sheets__georgewhewell"/>
+			<edge id="229" source="django__django" start="2016-08-03" target="django-mptt__django-mptt"/>
+			<edge id="230" source="db_file_storage__victor-o-silva" start="2017-12-28" target="cookiecutter-django-rest__agconti"/>
+			<edge id="231" source="django-reversion__etianen" start="2013-04-17" target="deploy__hevok"/>
+			<edge id="232" source="rietveld__imirkin" start="2008-06-06" target="rietveld__robfig"/>
+			<edge id="233" source="django-extensions__django-extensions" start="2017-05-25" target="drp-lifecycle-api__Fak3"/>
+			<edge id="234" source="django-allauth__pennersr" start="2016-10-06" target="meetingguide__marcelometal"/>
+			<edge id="235" source="django-bootstrap3__dyve" start="2016-06-07" target="django-paypal__spookylukey"/>
+			<edge id="236" source="django-debug-toolbar__jazzband" start="2010-10-08" target="django__skevy"/>
+			<edge id="237" source="django-cms__divio" start="2015-08-11" target="web-payments-connector__devkral"/>
+			<edge id="238" source="lettuce-py3__adw0rd" start="2013-05-11" target="mitgr81com__mitgr81"/>
+			<edge id="239" source="django-social-auth__omab" start="2013-03-20" target="pybb__sinasamavati"/>
+			<edge id="240" source="django__django" start="2012-10-03" target="rpc4django-demo__davidfischer"/>
+			<edge id="241" source="django-filer-travis-testing__stefanfoulis" start="2014-03-07" target="django-cms__divio"/>
+			<edge id="242" source="django-taggit__alex" start="2011-12-08" target="django-filebrowser-no-grappelli__yakky"/>
+			<edge id="243" source="django__django" start="2013-12-29" target="ammo__filias"/>
+			<edge id="244" source="wagtail__wagtail" start="2017-06-25" target="cookiecutter-wagtail-dokku__johnfraney"/>
+			<edge id="245" source="django-rest-framework-docs__manosim" start="2017-04-24" target="timestrap__overshard"/>
+			<edge id="246" source="django-cms__divio" start="2013-05-11" target="21challenges__Beatris"/>
+			<edge id="247" source="django-cors-headers__ottoyiu" start="2014-10-29" target="django-matome__keitaoouchi"/>
+			<edge id="248" source="modulestore__bmedx" start="2015-03-16" target="django-tdd-tutorial-code__OmarIthawi"/>
+			<edge id="249" source="edx-configuration__kola-er" start="2016-05-23" target="days__rlucioni"/>
+			<edge id="250" source="django__django" start="2015-11-07" target="simple-review__RamezIssac"/>
+			<edge id="251" source="wagtail__wagtail" start="2017-11-30" target="django-nested-inline-test-django-1.11__jasonm"/>
+			<edge id="252" source="django-bootstrap3__dyve" start="2015-05-05" target="django-extensions__django-extensions"/>
+			<edge id="253" source="django__django" start="2016-05-11" target="rules-testapp__highpost"/>
+			<edge id="254" source="django-password-reset__brutasse" start="2015-07-20" target="curs_estiu_2015_uib__aaloy"/>
+			<edge id="255" source="django__django" start="2017-03-01" target="django-fullurl__Flimm"/>
+			<edge id="256" source="model_mommy__vandersonmota" start="2012-11-04" target="django__django"/>
+			<edge id="257" source="django-pystache__dmfrancisco" start="2015-06-24" target="sfbulkuploader__lambacck"/>
+			<edge id="258" source="mezzanine-modeltranslation-backport__dekomote" start="2016-08-02" target="django-oscar__django-oscar"/>
+			<edge id="259" source="django-guardian__django-guardian" start="2016-07-03" target="django-in-request-cache__mojeto"/>
+			<edge id="260" source="django-ajax__joestump" start="2015-02-23" target="django-rest-framework-tutorial__chrislea"/>
+			<edge id="261" source="django-cms__divio" start="2017-05-02" target="djangoCMS-Template__genti94"/>
+			<edge id="262" source="sphinxautoindex__jimfulton" start="2014-09-01" target="django-auth-ldap__scari"/>
+			<edge id="263" source="django-socialregistration__flashingpumpkin" start="2011-12-30" target="django-users__AdrianRibao"/>
+			<edge id="264" source="celery_source_kombu__strawposter" start="2010-06-30" target="mountain__apollo13"/>
+			<edge id="265" source="flask-example__chouseknecht" start="2016-11-28" target="ansible-container__ansible"/>
+			<edge id="266" source="modulestore__bmedx" start="2015-10-15" target="edx-pr-webhooks__peter-fogg"/>
+			<edge id="267" source="mezzanine-modeltranslation-backport__dekomote" start="2015-04-26" target="django-notify__andreasf"/>
+			<edge id="268" source="django-rest-framework__encode" start="2015-09-23" target="Styrax__johnjohndoe"/>
+			<edge id="269" source="django-admin-easy__ebertti" start="2017-12-28" target="cookiecutter-django-rest__agconti"/>
+			<edge id="270" source="django-blog-zinnia__Fantomas42" start="2013-05-07" target="curso_django__esauro"/>
+			<edge id="271" source="django-allauth__pennersr" start="2015-09-07" target="ansible-tasker__mskarbek"/>
+			<edge id="272" source="readthedocs.org__rtfd" start="2015-05-05" target="django-pure__tony"/>
+			<edge id="273" source="cartridge__stephenmcd" start="2013-11-20" target="infinity-python-book__sk8erchoi"/>
+			<edge id="274" source="django-tastypie__django-tastypie" start="2013-03-18" target="django__django"/>
+			<edge id="275" source="pi-toolbox__achedeuzot" start="2016-09-12" target="django-timestampable__achedeuzot"/>
+			<edge id="276" source="django-crispy-forms__django-crispy-forms" start="2017-08-14" target="zulip__zulip"/>
+			<edge id="277" source="tommi-func__tomas-edwardsson" start="2012-05-03" target="delorean-specs__derekhiggins"/>
+			<edge id="278" source="satchmo__dokterbob" start="2013-01-22" target="duplicate_proxy_model_test__alexhayes"/>
+			<edge id="279" source="hackerpulse__swanson" start="2016-01-15" target="kaleo__john2x"/>
+			<edge id="280" source="django-social-auth__omab" start="2014-05-05" target="my_info__nostalgiaz"/>
+			<edge id="281" source="django-inlinetrans__WoLpH" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="282" source="zulip__zulip" start="2017-06-18" target="Projects__ParthMahawar"/>
+			<edge id="283" source="raven-python__getsentry" start="2017-02-17" target="raven-bug__teeberg"/>
+			<edge id="284" source="django-health-check__KristianOellegaard" start="2017-01-15" target="django_coverage_plugin__nedbat"/>
+			<edge id="285" source="celery_source_kombu__strawposter" start="2015-04-12" target="pgs__westurner"/>
+			<edge id="286" source="django-object-actions__crccheck" start="2016-04-16" target="django-extensions__django-extensions"/>
+			<edge id="287" source="celery_source_kombu__strawposter" start="2016-03-11" target="LinkBasket__vitaly-krumins"/>
+			<edge id="288" source="celery_source_kombu__strawposter" start="2015-11-17" target="arrr__kviktor"/>
+			<edge id="289" source="django-reversion__etianen" start="2015-08-24" target="PyConference__barrachri"/>
+			<edge id="290" source="django-rest-framework__encode" start="2013-03-20" target="django-polymorphic-ng__WhyNotHugo"/>
+			<edge id="291" source="modulestore__bmedx" start="2017-06-17" target="buttsworth__yro"/>
+			<edge id="292" source="django-rest-framework__encode" start="2015-11-30" target="django-dirtyfields__romgar"/>
+			<edge id="293" source="django-extensions__django-extensions" start="2016-01-23" target="documentstore__davea"/>
+			<edge id="294" source="tweepy__tweepy" start="2014-09-27" target="libreborme__PabloCastellano"/>
+			<edge id="295" source="django__django" start="2016-11-29" target="django-admin-book__originalankur"/>
+			<edge id="296" source="mezzanine__stephenmcd" start="2016-11-03" target="isitup_slack__pirave"/>
+			<edge id="297" source="django-appointments__airtonix" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="298" source="private-readthedocs.org__johncosta" start="2012-07-22" target="django-reversion__etianen"/>
+			<edge id="299" source="zulip__zulip" start="2017-03-25" target="Wimap__refeed"/>
+			<edge id="300" source="django-reversion__etianen" start="2014-09-21" target="django-course__mauricioabreu"/>
+			<edge id="301" source="distro-tracker__rhertzog" start="2015-05-05" target="do_classroom__andrewsomething"/>
+			<edge id="302" source="django-cities__coderholic" start="2011-04-27" target="django-oscar__django-oscar"/>
+			<edge id="303" source="django-rest-framework__encode" start="2018-02-03" target="konradhalas.pl__konradhalas"/>
+			<edge id="304" source="xappy__miracle2k" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="305" source="django__django" start="2016-03-03" target="mydjango101__florisdenhengst"/>
+			<edge id="306" source="django-ajax-select__twidi" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="307" source="django-social-auth-norel__antoviaque" start="2012-03-29" target="sakura__keiko713"/>
+			<edge id="308" source="mongoengine__MongoEngine" start="2013-02-27" target="django-javascript-features__kajic"/>
+			<edge id="309" source="django-crispy-forms__django-crispy-forms" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="310" source="Engine__jakesyl" start="2018-03-10" target="djangogirls-2018__brondsem"/>
+			<edge id="311" source="django-extensions__django-extensions" start="2017-03-21" target="django-multitable-inheritance__GabLeRoux"/>
+			<edge id="312" source="django-rest-framework__encode" start="2015-10-19" target="mongodb_cache__antonyc"/>
+			<edge id="313" source="pyfacebook__sciyoshi" start="2012-01-03" target="dotfiles__saimn"/>
+			<edge id="314" source="django-compressor__django-compressor" start="2017-03-03" target="django-q__Koed00"/>
+			<edge id="315" source="wagtail__wagtail" start="2016-03-26" target="playlistdc__CorneliusIV"/>
+			<edge id="316" source="django-debug-toolbar__jazzband" start="2009-08-03" target="django-activitystreams__nowells"/>
+			<edge id="317" source="django-model-utils__jazzband" start="2015-07-06" target="django-jeopardy__Tavistock"/>
+			<edge id="318" source="django-extensions__django-extensions" start="2013-04-30" target="bilgisayfam__tayfun"/>
+			<edge id="319" source="cartridge__stephenmcd" start="2013-06-16" target="mezzanine-modeltranslation-backport__dekomote"/>
+			<edge id="320" source="django-user-sessions__Bouke" start="2017-06-25" target="cookiecutter-wagtail-dokku__johnfraney"/>
+			<edge id="321" source="django__django" start="2017-06-02" target="fusilier__joedborg"/>
+			<edge id="322" source="django-guardian__django-guardian" start="2016-01-08" target="Sudoku-Solver__ayush1997"/>
+			<edge id="323" source="headphones__rembo10" start="2017-05-18" target="Recette__QuentinVaut"/>
+			<edge id="324" source="django-oscar__django-oscar" start="2017-06-25" target="cookiecutter-wagtail-dokku__johnfraney"/>
+			<edge id="325" source="flask__pallets" start="2012-03-23" target="gistlog__craigkerstiens"/>
+			<edge id="326" source="mezzanine__stephenmcd" start="2017-09-04" target="padam__Ge0"/>
+			<edge id="327" source="django-cms__divio" start="2016-05-20" target="itcv__askoretskiy"/>
+			<edge id="328" source="horizon-congress__aaronorosen" start="2017-01-18" target="awx__AlanCoding"/>
+			<edge id="329" source="fabric__fabric" start="2010-02-25" target="django-south__philipn"/>
+			<edge id="330" source="sentry__getsentry" start="2013-03-10" target="sentry-whatsapp__ecarreras"/>
+			<edge id="331" source="django-debug-toolbar__jazzband" start="2009-12-12" target="django-textmate.tmbundle__bryanveloso"/>
+			<edge id="332" source="awx__AlanCoding" start="2016-11-28" target="ansible-container__ansible"/>
+			<edge id="333" source="django-extensions__django-extensions" start="2011-10-02" target="django-muzo-payment__yedpodtrzitko"/>
+			<edge id="334" source="fabric__fabric" start="2015-01-08" target="djlimiter__alisaifee"/>
+			<edge id="335" source="rietveld__robfig" start="2009-04-05" target="rapidsms-community-apps__ewheeler"/>
+			<edge id="336" source="django-spurl__j4mie" start="2017-09-25" target="saleor__mirumee"/>
+			<edge id="337" source="zulip__zulip" start="2016-03-28" target="Eth__Alpus"/>
+			<edge id="338" source="platform-core__bmedx" start="2017-11-09" target="django-assets__miracle2k"/>
+			<edge id="339" source="edx-configuration__kola-er" start="2016-02-05" target="platform-core__bmedx"/>
+			<edge id="340" source="e-commerce__oosthuizenb" start="2015-08-11" target="web-payments-connector__devkral"/>
+			<edge id="341" source="django__django" start="2014-07-25" target="pygotham__djds23"/>
+			<edge id="342" source="gtg-services__pqrth" start="2015-05-05" target="do_classroom__andrewsomething"/>
+			<edge id="343" source="django-scheduler__llazzaro" start="2017-06-03" target="gerp__i5ar"/>
+			<edge id="344" source="python-social-auth__omab" start="2017-01-17" target="django-scheduler__llazzaro"/>
+			<edge id="345" source="django_test__leekchan" start="2015-05-22" target="django-countries__SmileyChris"/>
+			<edge id="346" source="django-simple-history__treyhunner" start="2017-05-31" target="netflix-notify__mikeengland"/>
+			<edge id="347" source="mezzanine-modeltranslation-backport__dekomote" start="2015-10-09" target="django__django"/>
+			<edge id="348" source="python-twitter__pythonpro" start="2017-04-13" target="django-asana__sbywater"/>
+			<edge id="349" source="django-extensions__django-extensions" start="2015-09-10" target="django__django"/>
+			<edge id="350" source="django-haystack__django-haystack" start="2012-12-19" target="django-social-auth__omab"/>
+			<edge id="351" source="django-tastypie__django-tastypie" start="2014-07-01" target="deb-python-social-auth__myhro"/>
+			<edge id="352" source="django-shop__awesto" start="2013-01-22" target="adijux__ZloiGremlin"/>
+			<edge id="353" source="django__django" start="2016-08-02" target="django-oscar__django-oscar"/>
+			<edge id="354" source="django-extensions__django-extensions" start="2018-03-05" target="m2m_pizzeria__vlt"/>
+			<edge id="355" source="wagtail__wagtail" start="2017-08-17" target="django-oscar__django-oscar"/>
+			<edge id="356" source="pypy__aljosa" start="2017-11-18" target="my-first-blog__mgedmin"/>
+			<edge id="357" source="django-rest-framework__encode" start="2013-02-12" target="django-rest-skeleton__sebastibe"/>
+			<edge id="358" source="cartridge__stephenmcd" start="2017-03-20" target="cartridge-stats__joshbatchelor"/>
+			<edge id="359" source="django-crispy-forms__django-crispy-forms" start="2015-07-26" target="django-evil-project__ssbb"/>
+			<edge id="360" source="wagtail__wagtail" start="2015-04-17" target="django-cachalot__BertrandBordage"/>
+			<edge id="361" source="django-social-auth-norel__antoviaque" start="2017-03-02" target="WoodieLMS__0xVK"/>
+			<edge id="362" source="pyfacebook__sciyoshi" start="2011-02-20" target="django-cassandra-sessions__matclayton"/>
+			<edge id="363" source="django-rest-framework__encode" start="2014-04-22" target="django__django"/>
+			<edge id="364" source="django__django" start="2018-03-05" target="m2m_pizzeria__vlt"/>
+			<edge id="365" source="django-social-auth__omab" start="2013-03-29" target="django-startup__1st"/>
+			<edge id="366" source="django-extensions__django-extensions" start="2016-07-12" target="quiz__laurivosandi"/>
+			<edge id="367" source="django__django" start="2015-12-27" target="django-rest-registration__szopu"/>
+			<edge id="368" source="django-rest-framework__encode" start="2015-07-12" target="genoomy__jiivan"/>
+			<edge id="369" source="django-rest-framework__encode" start="2017-06-20" target="serverthrallapi__NullSoldier"/>
+			<edge id="370" source="django__django" start="2013-12-20" target="django-oauth-toolkit__BenjaminHCCarr"/>
+			<edge id="371" source="django__django" start="2018-02-08" target="tus_django_test__kenial"/>
+			<edge id="372" source="django__django" start="2015-04-03" target="airavata__fdemmer"/>
+			<edge id="373" source="django-debug-toolbar__jazzband" start="2013-03-06" target="django__django"/>
+			<edge id="374" source="django__django" start="2014-07-04" target="django-app-namespace-template-loader__Fantomas42"/>
+			<edge id="375" source="debian-nm__mhall119" start="2015-03-10" target="nm2__lamby"/>
+			<edge id="376" source="django-rest-framework__encode" start="2014-11-18" target="django-oauth-toolkit__BenjaminHCCarr"/>
+			<edge id="377" source="django-redis__niwinz" start="2017-07-17" target="django__django"/>
+			<edge id="378" source="django-mailbox__coddingtonbear" start="2014-09-04" target="django-threadedcomments__HonzaKral"/>
+			<edge id="379" source="django__django" start="2017-04-10" target="django-jinja__niwinz"/>
+			<edge id="380" source="safebrowsing-python__theju" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="381" source="django-social-auth-norel__antoviaque" start="2017-05-20" target="devops_workshop__cihann"/>
+			<edge id="382" source="django__django" start="2009-10-26" target="django-jquery__aljosa"/>
+			<edge id="383" source="django__django" start="2016-07-11" target="trackwriting__saturn597"/>
+			<edge id="384" source="modulestore__bmedx" start="2016-04-22" target="gemnasium-dashboard__jbarciauskas"/>
+			<edge id="385" source="webassets__miracle2k" start="2014-02-05" target="pyoath-toolkit__malept"/>
+			<edge id="386" source="django-rest-framework__encode" start="2016-07-07" target="TNC-admin-server__ovangle"/>
+			<edge id="387" source="celery_source_kombu__strawposter" start="2014-11-15" target="appBuilds__ggendre"/>
+			<edge id="388" source="geopy__geopy" start="2015-03-09" target="django-dequorum__funkybob"/>
+			<edge id="389" source="django__django" start="2016-10-07" target="django-multiple-domains__Qlio"/>
+			<edge id="390" source="django-extensions__django-extensions" start="2014-09-01" target="connect__nlhkabu"/>
+			<edge id="391" source="celery_source_kombu__strawposter" start="2017-01-18" target="awx__AlanCoding"/>
+			<edge id="392" source="splinter__cobrateam" start="2014-05-31" target="experimento_sapl_2014__marciomazza"/>
+			<edge id="393" source="horizon-congress__aaronorosen" start="2015-03-12" target="django-openstack-auth-kerberos__jamielennox"/>
+			<edge id="394" source="celery_source_kombu__strawposter" start="2017-01-11" target="yawn__aclowes"/>
+			<edge id="395" source="django_test__leekchan" start="2016-01-28" target="django-migration-bug__richardxia"/>
+			<edge id="396" source="modulestore__bmedx" start="2016-02-25" target="e-property__Qubad786"/>
+			<edge id="397" source="django-rest-framework__encode" start="2013-10-28" target="djangorecipe__rvanlaar"/>
+			<edge id="398" source="django__django" start="2015-03-23" target="sf-base-election-data__cjerdonek"/>
+			<edge id="399" source="mongoengine__MongoEngine" start="2014-08-27" target="django-jsonvalidator__malderete"/>
+			<edge id="400" source="django-piston__EmilStenstrom" start="2009-11-05" target="django-compressor__django-compressor"/>
+			<edge id="401" source="django-social-auth-norel__antoviaque" start="2014-05-05" target="my_info__nostalgiaz"/>
+			<edge id="402" source="django-extensions__django-extensions" start="2014-09-27" target="libreborme__PabloCastellano"/>
+			<edge id="403" source="django-crispy-forms__django-crispy-forms" start="2015-10-22" target="django__django"/>
+			<edge id="404" source="conduit__nzjrs" start="2013-06-13" target="django-oauth-toolkit__BenjaminHCCarr"/>
+			<edge id="405" source="django__django" start="2013-02-01" target="django-simon__dirn"/>
+			<edge id="406" source="django-scheduler__llazzaro" start="2017-07-09" target="django-mailbox__coddingtonbear"/>
+			<edge id="407" source="hotwire__zsx" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="408" source="python-twitter__pythonpro" start="2015-03-19" target="celery_source_kombu__strawposter"/>
+			<edge id="409" source="django-threadedcomments__HonzaKral" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="410" source="django-cas__mcoconnor" start="2009-04-05" target="rapidsms-community-apps__ewheeler"/>
+			<edge id="411" source="django-allauth__pennersr" start="2015-12-18" target="graphene__graphql-python"/>
+			<edge id="412" source="dpaste__bartTC" start="2017-11-18" target="my-first-blog__mgedmin"/>
+			<edge id="413" source="cartridge__stephenmcd" start="2015-12-19" target="django-notify-x__v1k45"/>
+			<edge id="414" source="django__django" start="2013-08-31" target="reek__bpeschier"/>
+			<edge id="415" source="django__django" start="2015-10-25" target="spectator__kennydude"/>
+			<edge id="416" source="django-extensions__django-extensions" start="2016-06-07" target="django-paypal__spookylukey"/>
+			<edge id="417" source="django-oscar__django-oscar" start="2014-04-27" target="LiteElementsHack__mmardini"/>
+			<edge id="418" source="mongoengine__MongoEngine" start="2013-03-08" target="gypsy__sibsibsib"/>
+			<edge id="419" source="evserver__brosner" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="420" source="xxadmin__ly0" start="2017-10-31" target="django-xadmin-react__frmdstryr"/>
+			<edge id="421" source="django-compressor__django-compressor" start="2016-06-22" target="airman__shemigon"/>
+			<edge id="422" source="django-extensions__django-extensions" start="2015-08-08" target="django-template__ameistad"/>
+			<edge id="423" source="django-crispy-forms__django-crispy-forms" start="2013-12-21" target="django-profiles__rh0dium"/>
+			<edge id="424" source="animals-drf__EvgeneOskin" start="2017-05-12" target="django-cacheops__Suor"/>
+			<edge id="425" source="django-basic-apps__ctrochalakis" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="426" source="django-jinja__niwinz" start="2016-01-19" target="elasticstack__bennylope"/>
+			<edge id="427" source="django__django" start="2013-10-31" target="test_formsets__romlok"/>
+			<edge id="428" source="readthedocs.org__rtfd" start="2015-08-20" target="zulip__zulip"/>
+			<edge id="429" source="django_test__leekchan" start="2015-02-08" target="django-plus-falcon-pypy__rhcarvalho"/>
+			<edge id="430" source="wagtail__wagtail" start="2017-06-03" target="gerp__i5ar"/>
+			<edge id="431" source="django-reversion__etianen" start="2016-04-09" target="meow-manage__QuantumGhost"/>
+			<edge id="432" source="sentry__getsentry" start="2014-04-01" target="inventory-service__bpowers"/>
+			<edge id="433" source="freebase-python__yuvadm" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="434" source="nobot__EnTeQuAk" start="2016-01-21" target="djangocms-forms__mishbahr"/>
+			<edge id="435" source="django__django" start="2018-01-05" target="webapp-eval-django__edevil"/>
+			<edge id="436" source="mezzanine-modeltranslation-backport__dekomote" start="2014-02-02" target="urlkey__Bahus"/>
+			<edge id="437" source="django-mptt__django-mptt" start="2018-02-11" target="celerytraining__kpavlovsky"/>
+			<edge id="438" source="django-piston__adieu" start="2010-06-08" target="gae-safesearch__mdorn"/>
+			<edge id="439" source="lazythumbs__shaunduncan" start="2013-02-23" target="django-haystack__django-haystack"/>
+			<edge id="440" source="django__django" start="2016-10-09" target="scratch__wimglenn"/>
+			<edge id="441" source="delorean-specs__derekhiggins" start="2014-12-11" target="dap-dockerized__pombredanne"/>
+			<edge id="442" source="theming-edx-platform__pdehaye" start="2015-07-22" target="web-ide__ArthurArslanaliev"/>
+			<edge id="443" source="sphinxautoindex__jimfulton" start="2016-05-14" target="django-redshift-backend__shimizukawa"/>
+			<edge id="444" source="demorest__Fak3" start="2017-05-25" target="drp-lifecycle-api__Fak3"/>
+			<edge id="445" source="django-rest-framework__encode" start="2014-01-11" target="mezzanine-modeltranslation-backport__dekomote"/>
+			<edge id="446" source="genshi__hodgestar" start="2012-09-12" target="sentry__getsentry"/>
+			<edge id="447" source="soapbase__FelixSchwarz" start="2014-12-31" target="django-dash__barseghyanartur"/>
+			<edge id="448" source="django-extensions__django-extensions" start="2016-11-06" target="django-geoipdb-loader__kalekseev"/>
+			<edge id="449" source="django-rest-framework__encode" start="2014-02-05" target="random-project-random-utils__fredrik"/>
+			<edge id="450" source="django-extensions__django-extensions" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="451" source="gbd__aflaxman" start="2011-06-09" target="mongoengine__MongoEngine"/>
+			<edge id="452" source="savanna__rnirmal" start="2013-06-27" target="horizon-congress__aaronorosen"/>
+			<edge id="453" source="django-piston__adieu" start="2009-11-05" target="django-compressor__django-compressor"/>
+			<edge id="454" source="django__django" start="2015-02-13" target="django-rulez__chrisglass"/>
+			<edge id="455" source="dj-rit-auditlog__audiolion" start="2015-09-01" target="django-dbbackup__vfigueiro"/>
+			<edge id="456" source="odoo-extra__mga-odoo" start="2017-05-18" target="Recette__QuentinVaut"/>
+			<edge id="457" source="modulestore__bmedx" start="2016-05-05" target="huey__coleifer"/>
+			<edge id="458" source="django-cms__divio" start="2017-02-07" target="wagtail-translation__skirsdeda"/>
+			<edge id="459" source="pyfacebook__sciyoshi" start="2015-08-08" target="django-template__ameistad"/>
+			<edge id="460" source="xxadmin__ly0" start="2016-10-12" target="djangoTutorialv1.5__elbaulp"/>
+			<edge id="461" source="django-allauth__pennersr" start="2014-08-17" target="django-nonrel-app-engine-blog__bee-keeper"/>
+			<edge id="462" source="django-reversion__etianen" start="2017-01-07" target="youdown__wuilliam321"/>
+			<edge id="463" source="django-oscar__django-oscar" start="2015-05-26" target="django-secureliveservertestcase__pbrooks"/>
+			<edge id="464" source="bottle__bottlepy" start="2017-09-05" target="helloapp__nicolas-van"/>
+			<edge id="465" source="django-dbsettings__sciyoshi" start="2011-11-18" target="django-reversion-compare__jedie"/>
+			<edge id="466" source="django-cms__divio" start="2013-01-22" target="atmt__conrado"/>
+			<edge id="467" source="Python-Behave-Appium-iOS__ndmanvar" start="2017-10-03" target="sentry-django-rest-demo__ndmanvar"/>
+			<edge id="468" source="django-debug-toolbar__jazzband" start="2012-11-08" target="django-redmineauth__tomviner"/>
+			<edge id="469" source="lettuce-py3__adw0rd" start="2014-06-05" target="django_test_client_bugreport__xavfernandez"/>
+			<edge id="470" source="Django-facebook__tschellenbach" start="2014-11-11" target="splinter__cobrateam"/>
+			<edge id="471" source="geodevbase__W7PEA" start="2016-11-15" target="djangocms-bs4forcascade__haricot"/>
+			<edge id="472" source="django-scheduler__llazzaro" start="2014-05-18" target="dotfiles-thomasf-base__thomasf"/>
+			<edge id="473" source="comics__jodal" start="2010-10-27" target="sportlocations__knutz3n"/>
+			<edge id="474" source="django-compressor__django-compressor" start="2012-10-06" target="django-template__copitux"/>
+			<edge id="475" source="cookiecutter-django__pydanny" start="2018-01-05" target="asx__shultz"/>
+			<edge id="476" source="pyramid__Pylons" start="2017-11-18" target="my-first-blog__mgedmin"/>
+			<edge id="477" source="django-content-editor__matthiask" start="2012-06-27" target="django-password-reset__brutasse"/>
+			<edge id="478" source="cssjanus__subosito" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="479" source="deb-python-social-auth__myhro" start="2013-12-18" target="hd-test__onrik"/>
+			<edge id="480" source="django__django" start="2018-02-04" target="Probes__winsmith"/>
+			<edge id="481" source="readthedocs.org__rtfd" start="2016-01-26" target="presentation-python-deployment__nZac"/>
+			<edge id="482" source="django__django" start="2014-10-22" target="django-rest-assured__ydaniv"/>
+			<edge id="483" source="django__django" start="2017-05-26" target="django-flat-responsive-demo__elky"/>
+			<edge id="484" source="django-cms__divio" start="2017-03-23" target="memorizza__paoloromolini"/>
+			<edge id="485" source="django-form-utils__carljm" start="2014-02-07" target="django-compressor__django-compressor"/>
+			<edge id="486" source="satchmo__dokterbob" start="2014-11-29" target="django-pieguard__rcmachado"/>
+			<edge id="487" source="django-oscar__django-oscar" start="2016-07-06" target="liitokala__metamatik"/>
+			<edge id="488" source="modulestore__bmedx" start="2017-10-03" target="TL-1__marjev"/>
+			<edge id="489" source="django__django" start="2009-05-13" target="django-mailserver__telenieko"/>
+			<edge id="490" source="django-forms-builder__stephenmcd" start="2016-06-20" target="django-test-project__amadornimbis"/>
+			<edge id="491" source="celery_source_kombu__strawposter" start="2016-08-11" target="iktest__mgalgs"/>
+			<edge id="492" source="django-rest-framework__encode" start="2017-07-29" target="lti_inspector__cmurtaugh"/>
+			<edge id="493" source="django__django" start="2013-11-06" target="django-ssl-admin__Matt-Deacalion"/>
+			<edge id="494" source="django-extensions__django-extensions" start="2012-11-02" target="pyconde-website-mirror__zerok"/>
+			<edge id="495" source="django-rest-framework__encode" start="2017-10-26" target="getajobservice__jslang"/>
+			<edge id="496" source="django-rest-framework__encode" start="2016-04-16" target="django-extensions__django-extensions"/>
+			<edge id="497" source="django-allauth__pennersr" start="2016-01-19" target="elasticstack__bennylope"/>
+			<edge id="498" source="solango__brosner" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="499" source="sentry__getsentry" start="2016-05-14" target="django-redshift-backend__shimizukawa"/>
+			<edge id="500" source="solango__screeley" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="501" source="django-social-auth__omab" start="2017-05-20" target="devops_workshop__cihann"/>
+			<edge id="502" source="modulestore__bmedx" start="2015-10-14" target="django-html5validator__clytwynec"/>
+			<edge id="503" source="python-social-auth__omab" start="2016-03-05" target="BoggleGame__aparij"/>
+			<edge id="504" source="cobbler__icomfort" start="2010-12-14" target="repomirror__javiplx"/>
+			<edge id="505" source="django-chronograph__oppianmatt" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="506" source="mongoengine__MongoEngine" start="2016-08-09" target="patchwork__stephenfin"/>
+			<edge id="507" source="python-social-auth__omab" start="2017-06-04" target="mystore__cjltsod"/>
+			<edge id="508" source="django-newrpx__twidi" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="509" source="django-ldapdb__chronossc" start="2016-03-30" target="django-basicauth__hirokiky"/>
+			<edge id="510" source="xadmin__sshwsfc" start="2016-10-12" target="djangoTutorialv1.5__elbaulp"/>
+			<edge id="511" source="django-rest-framework__encode" start="2015-04-26" target="django-counter-field__kajic"/>
+			<edge id="512" source="django-rest-framework__encode" start="2016-03-30" target="django-basicauth__hirokiky"/>
+			<edge id="513" source="model_mommy__vandersonmota" start="2016-11-24" target="django-sortedm2m__gregmuellegger"/>
+			<edge id="514" source="readthedocs.org__rtfd" start="2017-04-09" target="hypothesis-python__HypothesisWorks"/>
+			<edge id="515" source="hue__cloudera" start="2017-05-27" target="algorithms__suhassatish"/>
+			<edge id="516" source="django__django" start="2018-01-08" target="bookmark-archiver__pirate"/>
+			<edge id="517" source="deseb2__buriy" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="518" source="django-rest-framework__encode" start="2015-10-02" target="djangogirls-blog__daaray"/>
+			<edge id="519" source="xadmin__sshwsfc" start="2015-11-30" target="django-test-example__cgcgbcbc"/>
+			<edge id="520" source="mongoengine__MongoEngine" start="2015-04-14" target="dcf__inoks"/>
+			<edge id="521" source="django-phonenumber-field__stefanfoulis" start="2016-11-17" target="django-cacheback__codeinthehole"/>
+			<edge id="522" source="django-threadedcomments__HonzaKral" start="2013-03-20" target="django-reversion-compare__jedie"/>
+			<edge id="523" source="django-rest-framework__encode" start="2014-10-02" target="CompostCalculator__lnhubbell"/>
+			<edge id="524" source="django-cms__divio" start="2013-09-19" target="django-sitegate__idlesign"/>
+			<edge id="525" source="django-redis__niwinz" start="2016-12-19" target="bandit-ss__zeroSteiner"/>
+			<edge id="526" source="django-sitetree__idlesign" start="2014-04-16" target="django-cms__divio"/>
+			<edge id="527" source="mezzanine__stephenmcd" start="2017-02-28" target="django-jinja-knockout__Dmitri-Sintsov"/>
+			<edge id="528" source="django__django" start="2016-01-08" target="poezdka__elenaoat"/>
+			<edge id="529" source="django-reversion__etianen" start="2017-06-25" target="cookiecutter-wagtail-dokku__johnfraney"/>
+			<edge id="530" source="private-readthedocs.org__johncosta" start="2018-01-15" target="34c3ctf-sols__niklasb"/>
+			<edge id="531" source="django-avatar__grantmcconnaughey" start="2015-03-08" target="django-dequorum__funkybob"/>
+			<edge id="532" source="django-admin-tools__artscoop" start="2013-08-15" target="debian-nm__mhall119"/>
+			<edge id="533" source="django-haystack__django-haystack" start="2014-07-12" target="django-hammer__hodgesds"/>
+			<edge id="534" source="django-weathertracking__adamfast" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="535" source="django-crispy-forms__django-crispy-forms" start="2016-05-22" target="vanhackathon-mastermind__Madalosso"/>
+			<edge id="536" source="django__django" start="2016-05-05" target="django-performance-metrics__orf"/>
+			<edge id="537" source="django-reversion__etianen" start="2013-11-29" target="django_amqp_example__mispy"/>
+			<edge id="538" source="django-shop__awesto" start="2011-05-10" target="django-shop-adventures__philippeowagner"/>
+			<edge id="539" source="cartridge__stephenmcd" start="2015-09-16" target="django-environ__joke2k"/>
+			<edge id="540" source="private-readthedocs.org__johncosta" start="2013-03-05" target="minecloud__toffer"/>
+			<edge id="541" source="python-social-auth__omab" start="2016-05-29" target="ciencia_abierta__gitter-badger"/>
+			<edge id="542" source="horizon-congress__aaronorosen" start="2014-03-24" target="django__django"/>
+			<edge id="543" source="django-mptt__django-mptt" start="2017-05-15" target="django-polyfield__suutari"/>
+			<edge id="544" source="mezzanine-modeltranslation-backport__dekomote" start="2015-02-04" target="django-countries__SmileyChris"/>
+			<edge id="545" source="django__django" start="2016-02-27" target="psihook__sibson"/>
+			<edge id="546" source="tweepy__tweepy" start="2016-08-25" target="fintest__kumanna"/>
+			<edge id="547" source="django-avatar__grantmcconnaughey" start="2016-11-11" target="django-easy-timezones__Miserlou"/>
+			<edge id="548" source="django-allauth__pennersr" start="2013-12-05" target="cmsplugin-video-youtube__jbazik"/>
+			<edge id="549" source="zulip__zulip" start="2017-10-22" target="HootMentor__jQwotos"/>
+			<edge id="550" source="django-tastypie__django-tastypie" start="2014-05-18" target="dotfiles-thomasf-base__thomasf"/>
+			<edge id="551" source="django-json-rpc__samuraisam" start="2016-01-23" target="documentstore__davea"/>
+			<edge id="552" source="cobbler__icomfort" start="2015-08-11" target="awx__AlanCoding"/>
+			<edge id="553" source="django-crispy-forms__django-crispy-forms" start="2015-04-27" target="pubhub_example__scuml"/>
+			<edge id="554" source="rietveld__imirkin" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="555" source="django-positions__jpwatts" start="2017-03-22" target="django-watson__etianen"/>
+			<edge id="556" source="django-cms__divio" start="2011-09-15" target="django-skypehub__tokibito"/>
+			<edge id="557" source="django-test-utils__ericholscher" start="2009-06-30" target="django-ajax-validation__alex"/>
+			<edge id="558" source="django__django" start="2017-03-05" target="contradict__marnanel"/>
+			<edge id="559" source="django_openstack_auth__gabrielhurley" start="2013-06-06" target="horizon-congress__aaronorosen"/>
+			<edge id="560" source="django-bootstrap3__dyve" start="2015-09-23" target="django-moderation-issue112__SamTShaw"/>
+			<edge id="561" source="django-extensions__django-extensions" start="2013-08-22" target="django-urltree-field__ralfzen"/>
+			<edge id="562" source="django__django" start="2012-10-12" target="brewlog__zgoda"/>
+			<edge id="563" source="django-content-editor__matthiask" start="2014-04-11" target="django__django"/>
+			<edge id="564" source="django-braces__brack3t" start="2016-07-26" target="learn-select-for-update__centralniak"/>
+			<edge id="565" source="django-activity-stream__justquick" start="2012-07-06" target="django-mptt__django-mptt"/>
+			<edge id="566" source="django_test__leekchan" start="2016-02-27" target="psihook__sibson"/>
+			<edge id="567" source="django-rest-framework__encode" start="2015-10-26" target="rest_condition__caxap"/>
+			<edge id="568" source="pyfacebook__sciyoshi" start="2010-04-14" target="webassets__miracle2k"/>
+			<edge id="569" source="django-oauth-toolkit__BenjaminHCCarr" start="2014-11-07" target="django-rest-framework-proxy__eofs"/>
+			<edge id="570" source="django_test__leekchan" start="2016-05-05" target="django-performance-metrics__orf"/>
+			<edge id="571" source="django-crispy-forms__django-crispy-forms" start="2014-01-20" target="django-rest-framework-jwt__GetBlimp"/>
+			<edge id="572" source="django-extensions__django-extensions" start="2014-01-23" target="django-priority-test-runner__ramn"/>
+			<edge id="573" source="raven-python__getsentry" start="2012-12-02" target="kloudless-status__chriskuehl"/>
+			<edge id="574" source="21challenges__Beatris" start="2015-08-23" target="blog__Beatris"/>
+			<edge id="575" source="mezzanine-modeltranslation-backport__dekomote" start="2013-11-08" target="horizon-congress__aaronorosen"/>
+			<edge id="576" source="mongoengine__MongoEngine" start="2016-07-07" target="poker_analyzer__Ankhbayar"/>
+			<edge id="577" source="xhtml2pdf__xhtml2pdf" start="2014-09-10" target="readthedocs.org__rtfd"/>
+			<edge id="578" source="django_test__leekchan" start="2015-04-08" target="django-project-template__muattiyah"/>
+			<edge id="579" source="zulip__zulip" start="2017-03-25" target="elements_assignment__inytar"/>
+			<edge id="580" source="mezzanine-modeltranslation-backport__dekomote" start="2016-06-12" target="filebrowser-safe-mixin-qiniu__leoleozhu"/>
+			<edge id="581" source="django-test-utils__ericholscher" start="2012-01-11" target="django-storages__cherepski"/>
+			<edge id="582" source="autotest__ColinIanKing" start="2015-08-11" target="awx__AlanCoding"/>
+			<edge id="583" source="django-allauth__pennersr" start="2016-06-11" target="kchart__pmrowla"/>
+			<edge id="584" source="raven-python__getsentry" start="2013-07-20" target="ocpolls__nonZero"/>
+			<edge id="585" source="django__django" start="2017-01-13" target="dopera__haiiiiiyun"/>
+			<edge id="586" source="django-ajax__joestump" start="2012-03-02" target="django-braces__brack3t"/>
+			<edge id="587" source="django-imagekit__matthewwithanm" start="2014-06-11" target="openpose__classner"/>
+			<edge id="588" source="scratch__wimglenn" start="2016-10-19" target="djangorestframework-queryfields__wimglenn"/>
+			<edge id="589" source="djangocms-bs4forcascade__haricot" start="2018-02-16" target="django-fobi__barseghyanartur"/>
+			<edge id="590" source="django-todo__shacker" start="2015-11-06" target="nm2__lamby"/>
+			<edge id="591" source="django-oauth-plus__lukegb" start="2014-02-05" target="pyoath-toolkit__malept"/>
+			<edge id="592" source="django-paypal__spookylukey" start="2016-01-15" target="kaleo__john2x"/>
+			<edge id="593" source="django-silk__jazzband" start="2016-11-07" target="django-crowd__gbezyuk"/>
+			<edge id="594" source="django-cms__divio" start="2014-04-23" target="django-template__lojack"/>
+			<edge id="595" source="django-oauth-toolkit__BenjaminHCCarr" start="2015-05-06" target="django-fsm__kmmbvnr"/>
+			<edge id="596" source="django-oscar__django-oscar" start="2017-03-29" target="django-admin-easy__ebertti"/>
+			<edge id="597" source="xadmin__sshwsfc" start="2017-10-31" target="django-xadmin-react__frmdstryr"/>
+			<edge id="598" source="django__django" start="2013-03-29" target="django-startup__1st"/>
+			<edge id="599" source="mezzanine-modeltranslation-backport__dekomote" start="2015-06-27" target="django-payline-dotir__Bornazadeh"/>
+			<edge id="600" source="django-reversion-compare__jedie" start="2011-08-29" target="sentry_fork__tbarbugli"/>
+			<edge id="601" source="sentry_fork__tbarbugli" start="2011-09-03" target="django-dbdump__vitaliyf"/>
+			<edge id="602" source="django__django" start="2013-11-13" target="public-contracts__jorgecarleitao"/>
+			<edge id="603" source="lettuce__gabrielfalcao" start="2014-12-11" target="dap-dockerized__pombredanne"/>
+			<edge id="604" source="django-cms__divio" start="2010-01-13" target="django-form-designer__samluescher"/>
+			<edge id="605" source="mezzanine-modeltranslation-backport__dekomote" start="2012-12-11" target="closet__adambrenecki"/>
+			<edge id="606" source="django-oscar__django-oscar" start="2015-03-09" target="cookiecutter-django__asyncee"/>
+			<edge id="607" source="cobbler__cobbler" start="2017-07-14" target="mozilla-django-oidc__karambir"/>
+			<edge id="608" source="django-cms__divio" start="2011-02-17" target="django-simple-shop__vilos"/>
+			<edge id="609" source="telapi-python__kevinburke" start="2012-06-25" target="launchpage__kdazzle"/>
+			<edge id="610" source="readthedocs.org__rtfd" start="2018-01-15" target="34c3ctf-sols__niklasb"/>
+			<edge id="611" source="sentry__getsentry" start="2017-01-06" target="readthedocs.org__rtfd"/>
+			<edge id="612" source="django__django" start="2013-01-21" target="django-admin-tools__artscoop"/>
+			<edge id="613" source="lazythumbs__shaunduncan" start="2016-11-20" target="tildetown-admin__vilmibm"/>
+			<edge id="614" source="pyboleto__eduardocereto" start="2012-08-26" target="sentry__getsentry"/>
+			<edge id="615" source="django__django" start="2017-02-28" target="django-jinja-knockout__Dmitri-Sintsov"/>
+			<edge id="616" source="django__django" start="2015-11-21" target="django-model-values__coady"/>
+			<edge id="617" source="zulip__zulip" start="2016-07-02" target="taiga-docker__soudy"/>
+			<edge id="618" source="webassets__miracle2k" start="2011-03-14" target="django-south__philipn"/>
+			<edge id="619" source="django__django" start="2016-04-23" target="django-crispy-more__ly0"/>
+			<edge id="620" source="django__django" start="2013-02-28" target="django-newsletter__dokterbob"/>
+			<edge id="621" source="django-tinymce__aljosa" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="622" source="celery_source_kombu__strawposter" start="2014-12-02" target="django-bootstrap3__dyve"/>
+			<edge id="623" source="django-markitup__zsiciarz" start="2013-06-12" target="django-salted__wunki"/>
+			<edge id="624" source="drf_openapi__limdauto" start="2017-12-28" target="cookiecutter-django-rest__agconti"/>
+			<edge id="625" source="django_test__leekchan" start="2015-03-23" target="sf-base-election-data__cjerdonek"/>
+			<edge id="626" source="django-allauth__pennersr" start="2015-08-16" target="openstack-upstream-registrar__timfreund"/>
+			<edge id="627" source="django-rest-framework__encode" start="2016-10-03" target="blog__brittdawn"/>
+			<edge id="628" source="sentry_fork__tbarbugli" start="2012-06-05" target="my_patched_photologue__MathieuDuponchelle"/>
+			<edge id="629" source="django__django" start="2015-05-10" target="django-udf__delgiudices"/>
+			<edge id="630" source="django-tastypie__django-tastypie" start="2016-01-08" target="django-readonly-onetoone__damycra"/>
+			<edge id="631" source="djfeedback__mpyatishev" start="2015-12-26" target="sitapea__roboxv"/>
+			<edge id="632" source="django-cacheops__Suor" start="2014-10-30" target="djfeedback__mpyatishev"/>
+			<edge id="633" source="django-rest-framework__encode" start="2016-05-12" target="dogslow__alexander-akhmetov"/>
+			<edge id="634" source="django-sqlalchemy__brosner" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="635" source="django-oscar__django-oscar" start="2016-03-08" target="catest__wsantos"/>
+			<edge id="636" source="django_test__leekchan" start="2015-10-28" target="cardwatcher__dlutxx"/>
+			<edge id="637" source="django-cms__divio" start="2014-09-02" target="testDinamicModel__merlex"/>
+			<edge id="638" source="django-admin-tools__noxan" start="2014-05-22" target="django-registration__macropin"/>
+			<edge id="639" source="django-mptt__django-mptt" start="2015-07-13" target="plata__matthiask"/>
+			<edge id="640" source="django-rest-framework__encode" start="2016-10-19" target="djangorestframework-queryfields__wimglenn"/>
+			<edge id="641" source="django-allauth__pennersr" start="2017-04-22" target="django-geojson_serializer__pglotov"/>
+			<edge id="642" source="django-rest-framework__encode" start="2016-05-11" target="rules-testapp__highpost"/>
+			<edge id="643" source="celery_source_kombu__strawposter" start="2015-10-01" target="django-allauth__pennersr"/>
+			<edge id="644" source="pyfacebook__sciyoshi" start="2010-12-13" target="aemanager__fgaudin"/>
+			<edge id="645" source="django-allauth__pennersr" start="2015-11-24" target="django-rest-admin__avsd"/>
+			<edge id="646" source="lazythumbs__shaunduncan" start="2013-06-20" target="UrbanTrails__jsousa1919"/>
+			<edge id="647" source="django-cms__divio" start="2015-02-08" target="django-plus-falcon-pypy__rhcarvalho"/>
+			<edge id="648" source="django-compressor__django-compressor" start="2017-06-25" target="cookiecutter-wagtail-dokku__johnfraney"/>
+			<edge id="649" source="geopy__geopy" start="2017-09-06" target="saleor__mirumee"/>
+			<edge id="650" source="django__django" start="2017-03-08" target="webapp-on-linux-python__shlee322"/>
+			<edge id="651" source="bottle__bottlepy" start="2016-08-09" target="patchwork__stephenfin"/>
+			<edge id="652" source="django__django" start="2017-01-15" target="django_coverage_plugin__nedbat"/>
+			<edge id="653" source="django-rest-framework__encode" start="2015-02-08" target="django-plus-falcon-pypy__rhcarvalho"/>
+			<edge id="654" source="Django-facebook__tschellenbach" start="2013-01-20" target="django-rest-framework__encode"/>
+			<edge id="655" source="scrapy__scrapy" start="2013-04-26" target="Django-facebook__tschellenbach"/>
+			<edge id="656" source="django-waffle-session__mwaaas" start="2016-05-23" target="days__rlucioni"/>
+			<edge id="657" source="django-cms__divio" start="2013-07-19" target="todo__dbarden"/>
+			<edge id="658" source="xadmin__sshwsfc" start="2016-02-11" target="superlists__clint74"/>
+			<edge id="659" source="hd-events__progrium" start="2011-06-28" target="django-storages__ovnicraft"/>
+			<edge id="660" source="apm-python__ruflin" start="2013-07-20" target="ocpolls__nonZero"/>
+			<edge id="661" source="django__django" start="2015-10-28" target="cardwatcher__dlutxx"/>
+			<edge id="662" source="modulestore__bmedx" start="2013-08-14" target="theming-edx-platform__pdehaye"/>
+			<edge id="663" source="django__django" start="2013-01-06" target="django-rest-framework-msgpack__juanriaza"/>
+			<edge id="664" source="django-markitup__zsiciarz" start="2016-12-07" target="django-split-settings__sobolevn"/>
+			<edge id="665" source="django-positions__jpwatts" start="2015-11-07" target="django__django"/>
+			<edge id="666" source="mezzanine-modeltranslation-backport__dekomote" start="2013-12-06" target="django-taggit-autocomplete-modified__gnotaras"/>
+			<edge id="667" source="django__django" start="2018-02-03" target="konradhalas.pl__konradhalas"/>
+			<edge id="668" source="python-social-auth__omab" start="2017-03-10" target="fullstack-challenge-backend__michaelgodshall"/>
+			<edge id="669" source="django__django" start="2012-11-02" target="pyconde-website-mirror__zerok"/>
+			<edge id="670" source="django-reversion-compare__jedie" start="2013-10-22" target="django-ordered-model__bfirsh"/>
+			<edge id="671" source="python-social-auth__omab" start="2015-04-10" target="hello_django__postrational"/>
+			<edge id="672" source="readthedocs.org__rtfd" start="2014-11-14" target="django-mathfield__danidee10"/>
+			<edge id="673" source="mezzanine-modeltranslation-backport__dekomote" start="2012-01-30" target="coop-agenda__MechanisM"/>
+			<edge id="674" source="django-social-auth-norel__antoviaque" start="2012-11-02" target="pyconde-website-mirror__zerok"/>
+			<edge id="675" source="xxadmin__ly0" start="2015-04-24" target="django-pya__fxiao"/>
+			<edge id="676" source="django_test__leekchan" start="2017-03-08" target="webapp-on-linux-python__shlee322"/>
+			<edge id="677" source="pyfacebook__sciyoshi" start="2010-02-21" target="django-efficient__danielroseman"/>
+			<edge id="678" source="python-social-auth__omab" start="2016-11-07" target="django-crowd__gbezyuk"/>
+			<edge id="679" source="raven-python__getsentry" start="2012-02-20" target="django-south__philipn"/>
+			<edge id="680" source="django-cms__divio" start="2013-03-20" target="django-polymorphic-ng__WhyNotHugo"/>
+			<edge id="681" source="facebook-sdk__kitsunde" start="2012-05-15" target="django-jsonfield__chrismeyersfsu"/>
+			<edge id="682" source="modulestore__bmedx" start="2014-11-24" target="db-utils__symbolist"/>
+			<edge id="683" source="django_test__leekchan" start="2015-08-05" target="ff-sing__animan1"/>
+			<edge id="684" source="django-debug-toolbar__jazzband" start="2012-07-15" target="pyboleto__eduardocereto"/>
+			<edge id="685" source="django-page-cms__akaihola" start="2013-03-23" target="django-reversion__etianen"/>
+			<edge id="686" source="django__django" start="2017-06-11" target="paranoiabot__saschalalala"/>
+			<edge id="687" source="django-mongo-auth__mitar" start="2014-05-04" target="TPO__mfrlin"/>
+			<edge id="688" source="flex__pipermerriam" start="2017-04-25" target="django-prometheus__korfuri"/>
+			<edge id="689" source="django__django" start="2016-03-29" target="tillogger__sjoerdjob"/>
+			<edge id="690" source="django-oscar__django-oscar" start="2015-11-30" target="mezzanine-shortcodes__ryneeverett"/>
+			<edge id="691" source="django-sms-2__grahamu" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="692" source="django-oauth-toolkit__BenjaminHCCarr" start="2014-11-27" target="django-banner-rotator__martinogden"/>
+			<edge id="693" source="satchmo__bclermont" start="2013-01-22" target="duplicate_proxy_model_test__alexhayes"/>
+			<edge id="694" source="django__django" start="2013-08-02" target="django-shop-old__rfleschenberg"/>
+			<edge id="695" source="django-cms__divio" start="2010-08-14" target="dashline__chronossc"/>
+			<edge id="696" source="openstack-dashboard__anotherjesse" start="2014-09-13" target="pymtbcal__slashk"/>
+			<edge id="697" source="cobbler__icomfort" start="2013-03-20" target="bot__japz"/>
+			<edge id="698" source="django-extensions__django-extensions" start="2014-10-26" target="django-waffle-session__mwaaas"/>
+			<edge id="699" source="sentry__getsentry" start="2013-07-14" target="django-taggit__alex"/>
+			<edge id="700" source="nobot__EnTeQuAk" start="2014-09-30" target="django-photologue__jdriscoll"/>
+			<edge id="701" source="django-cms__divio" start="2012-02-17" target="django-social-auth-norel__antoviaque"/>
+			<edge id="702" source="django-extensions__django-extensions" start="2016-04-13" target="django-querche__systemsoverload"/>
+			<edge id="703" source="django-page-cms__akaihola" start="2011-01-04" target="cmsplugin-feedlist__beniwohli"/>
+			<edge id="704" source="flask__pallets" start="2012-05-29" target="django-storages__adamzap"/>
+			<edge id="705" source="typogrify__mintchaos" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="706" source="django-shop-old__rfleschenberg" start="2017-12-22" target="lrmh_base__cirotix"/>
+			<edge id="707" source="django-uuidfield__dcramer" start="2014-11-04" target="django__django"/>
+			<edge id="708" source="django__django" start="2015-08-05" target="ff-sing__animan1"/>
+			<edge id="709" source="gtg-services__pqrth" start="2011-09-11" target="djang0byte__nvbn"/>
+			<edge id="710" source="django-rest-framework__encode" start="2014-01-17" target="drf-nested-routers__alanjds"/>
+			<edge id="711" source="django-cms__divio" start="2011-01-22" target="django-imagecrop__aaronrenner"/>
+			<edge id="712" source="django__django" start="2015-06-22" target="django-mailbox__coddingtonbear"/>
+			<edge id="713" source="django__django" start="2014-10-18" target="django-angular__jrief"/>
+			<edge id="714" source="cobbler__cobbler" start="2014-08-05" target="openstack_horizon_mydashboard__piousbox"/>
+			<edge id="715" source="cartridge__stephenmcd" start="2012-01-30" target="coop-agenda__MechanisM"/>
+			<edge id="716" source="saleor__mirumee" start="2018-01-22" target="JMJ-PANAMA__ridiaz"/>
+			<edge id="717" source="django__django" start="2016-06-07" target="django-paypal__spookylukey"/>
+			<edge id="718" source="django-rest-framework__encode" start="2011-07-17" target="django-registration__dinie"/>
+			<edge id="719" source="django__django" start="2017-12-03" target="django-cities__coderholic"/>
+			<edge id="720" source="nupic.son__rhyolight" start="2009-06-28" target="mw4068-packaging__MatthewWilkes"/>
+			<edge id="721" source="django-waffle-session__mwaaas" start="2013-11-17" target="project-matthew-scott__gldnspud"/>
+			<edge id="722" source="django-rest-framework__encode" start="2015-10-06" target="husky__mktums"/>
+			<edge id="723" source="augmented-traffic-control__facebook" start="2016-10-06" target="meetingguide__marcelometal"/>
+			<edge id="724" source="django-smart-selects__digi604" start="2016-06-14" target="django-addanother__jonashaag"/>
+			<edge id="725" source="django-assets__miracle2k" start="2017-04-04" target="django-rest-framework__encode"/>
+			<edge id="726" source="django-oscar__django-oscar" start="2014-07-28" target="django-model-utils-bug-142__therefromhere"/>
+			<edge id="727" source="cookiecutter-django__asyncee" start="2015-04-03" target="busca-misa__glarrain"/>
+			<edge id="728" source="mezzanine-modeltranslation-backport__dekomote" start="2015-09-16" target="django-environ__joke2k"/>
+			<edge id="729" source="python-twitter__pythonpro" start="2015-02-16" target="django-learning__abloch"/>
+			<edge id="730" source="sorl-thumbnail__brosner" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="731" source="django-organizations__bennylope" start="2017-12-15" target="django-mama-cas__jbittel"/>
+			<edge id="732" source="celery_source_kombu__strawposter" start="2015-10-24" target="tweetstream__offbyone"/>
+			<edge id="733" source="django-ajax__joestump" start="2015-10-04" target="django-csvtojson__njamaleddine"/>
+			<edge id="734" source="xxadmin__ly0" start="2016-01-22" target="tai5-uan5_gian5-gi2_phing5-tai5__sih4sing5hong5"/>
+			<edge id="735" source="django-cms__divio" start="2014-01-10" target="django-cms-model-in-plugin__mkoistinen"/>
+			<edge id="736" source="python-postmark__themartorana" start="2016-01-21" target="django-generic-aggregation__coleifer"/>
+			<edge id="737" source="django-crispy-forms__django-crispy-forms" start="2012-10-26" target="Primer-Thumber__jamesmfriedman"/>
+			<edge id="738" source="django-hvad__KristianOellegaard" start="2014-12-31" target="modulestore__bmedx"/>
+			<edge id="739" source="django-transmeta__ramusus" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="740" source="wagtail__wagtail" start="2014-12-08" target="django_play__chrxr"/>
+			<edge id="741" source="django__django" start="2014-02-24" target="django-cms__divio"/>
+			<edge id="742" source="mezzanine-modeltranslation-backport__dekomote" start="2014-07-14" target="django-event-procedures__lykkin"/>
+			<edge id="743" source="splinter__cobrateam" start="2014-10-13" target="sphinxcontrib-cacoo__tk0miya"/>
+			<edge id="744" source="raven-python__getsentry" start="2011-08-03" target="django-riak-sessions__flashingpumpkin"/>
+			<edge id="745" source="woodytron__yro" start="2017-06-17" target="buttsworth__yro"/>
+			<edge id="746" source="webassets__miracle2k" start="2013-08-15" target="debian-nm__mhall119"/>
+			<edge id="747" source="telapi-python__kevinburke" start="2012-03-23" target="gistlog__craigkerstiens"/>
+			<edge id="748" source="django-metaphore__dokterbob" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="749" source="horizon-congress__aaronorosen" start="2014-09-13" target="pymtbcal__slashk"/>
+			<edge id="750" source="mezzanine-modeltranslation-backport__dekomote" start="2013-01-12" target="gae-twittertimes__dergraf"/>
+			<edge id="751" source="translate-toolit__scrool" start="2013-10-13" target="ulm__dupuy"/>
+			<edge id="752" source="wagtail__wagtail" start="2015-03-23" target="batphone__willcodefortea"/>
+			<edge id="753" source="hypothesis-python__HypothesisWorks" start="2017-04-20" target="nexmo-django-2fa__tommorris"/>
+			<edge id="754" source="python-social-auth__omab" start="2017-03-21" target="django-multitable-inheritance__GabLeRoux"/>
+			<edge id="755" source="pyramid__Pylons" start="2012-06-26" target="djall-djtest__rick446"/>
+			<edge id="756" source="django-extensions__django-extensions" start="2015-11-30" target="mezzanine-shortcodes__ryneeverett"/>
+			<edge id="757" source="easy-thumbnails__SmileyChris" start="2012-10-18" target="nobot__EnTeQuAk"/>
+			<edge id="758" source="wagtail__wagtail" start="2014-11-18" target="wagtailplus__MechanisM"/>
+			<edge id="759" source="deb-python-social-auth__myhro" start="2017-03-10" target="fullstack-challenge-backend__michaelgodshall"/>
+			<edge id="760" source="twython__ryanmcgrath" start="2016-08-28" target="idm-core__alexsdutton"/>
+			<edge id="761" source="odoo-extra__mga-odoo" start="2014-06-05" target="django_test_client_bugreport__xavfernandez"/>
+			<edge id="762" source="wagtail__wagtail" start="2015-11-30" target="mezzanine-shortcodes__ryneeverett"/>
+			<edge id="763" source="django-transmeta__twidi" start="2010-09-30" target="web-payments-connector__devkral"/>
+			<edge id="764" source="django-cms__divio" start="2014-06-05" target="docker-django-example__mehmetakyuz"/>
+			<edge id="765" source="django-jenkins__kmmbvnr" start="2014-02-21" target="django-paymaster__scailer"/>
+			<edge id="766" source="django-tables2__jieter" start="2015-07-01" target="django-rest-framework__encode"/>
+			<edge id="767" source="django__django" start="2013-03-03" target="django-podcast__jefftriplett"/>
+			<edge id="768" source="django-shop-old__rfleschenberg" start="2013-08-17" target="knotcrafters__althalus"/>
+			<edge id="769" source="celery_source_kombu__strawposter" start="2015-03-29" target="chartartar__BenjiLee"/>
+			<edge id="770" source="django-adminactions__saxix" start="2014-09-23" target="django-easy-reports__saxix"/>
+			<edge id="771" source="django-oscar__django-oscar" start="2016-02-17" target="wagtail__wagtail"/>
+			<edge id="772" source="sentry__getsentry" start="2012-04-14" target="django-urls-introspect__davidszotten"/>
+			<edge id="773" source="pypy__aljosa" start="2008-05-04" target="rietveld__robfig"/>
+			<edge id="774" source="django-rest-framework__encode" start="2014-11-18" target="django-sitetree__idlesign"/>
+			<edge id="775" source="django-social-auth__omab" start="2013-07-09" target="django-ordered-model__bfirsh"/>
+			<edge id="776" source="django_test__leekchan" start="2017-03-05" target="contradict__marnanel"/>
+			<edge id="777" source="django-easy-timezones__Miserlou" start="2014-09-11" target="django-rest-framework__encode"/>
+			<edge id="778" source="django-allauth__pennersr" start="2016-03-01" target="django-controlcenter__byashimov"/>
+			<edge id="779" source="django-allauth__pennersr" start="2014-02-11" target="beginners-guide-to-django-rest-framework__commadelimited"/>
+			<edge id="780" source="django-allauth__pennersr" start="2016-01-27" target="superlists__HEdingfield"/>
+			<edge id="781" source="django-social-auth__omab" start="2013-09-19" target="django-nullablecharfield__alepane21"/>
+			<edge id="782" source="django-extensions__django-extensions" start="2014-05-28" target="django-data-exports__magopian"/>
+			<edge id="783" source="sentry__getsentry" start="2012-06-05" target="my_patched_photologue__MathieuDuponchelle"/>
+			<edge id="784" source="timetabling__danyilmaz" start="2014-01-02" target="django-oscar__django-oscar"/>
+			<edge id="785" source="django-debug-toolbar__jazzband" start="2013-03-26" target="django-ratelimit__jsocol"/>
+			<edge id="786" source="django-rest-framework__encode" start="2013-05-21" target="kadist__oaubert"/>
+			<edge id="787" source="django__django" start="2016-07-07" target="TNC-admin-server__ovangle"/>
+			<edge id="788" source="django-waffle__jsocol" start="2015-10-12" target="TwoSpaces__pizzapanther"/>
+			<edge id="789" source="django-tastypie__django-tastypie" start="2013-12-26" target="django-adminplus__jsocol"/>
+			<edge id="790" source="django__django" start="2016-12-23" target="togatest__glasnt"/>
+			<edge id="791" source="hue__cloudera" start="2013-01-31" target="django-guardian__django-guardian"/>
+			<edge id="792" source="django__django" start="2016-10-26" target="mozilla-django-oidc__karambir"/>
+			<edge id="793" source="pyfacebook__sciyoshi" start="2011-04-11" target="hostfilter__niran"/>
+			<edge id="794" source="sentry__getsentry" start="2017-10-03" target="sentry-django-rest-demo__ndmanvar"/>
+			<edge id="795" source="django-jsonfield__dmkoch" start="2015-08-10" target="e-travel__timur-orudzhov"/>
+			<edge id="796" source="modulestore__bmedx" start="2017-11-09" target="django-assets__miracle2k"/>
+			<edge id="797" source="dj-rit-auditlog__audiolion" start="2017-01-08" target="django-jsonfield-compat__kbussell"/>
+			<edge id="798" source="django-shop__awesto" start="2014-10-08" target="django-nap__funkybob"/>
+			<edge id="799" source="huey__coleifer" start="2017-03-22" target="picture_of_the_day_aggregation_site_2__qubitstream"/>
+			<edge id="800" source="twython__ryanmcgrath" start="2013-10-16" target="idesk__bsn"/>
+			<edge id="801" source="django-cms__divio" start="2009-11-16" target="django-debug-toolbar__jazzband"/>
+			<edge id="802" source="wagtail__wagtail" start="2017-04-25" target="django-prometheus__korfuri"/>
+			<edge id="803" source="django__django" start="2016-01-13" target="django-registration__macropin"/>
+			<edge id="804" source="django__django" start="2015-04-08" target="django-project-template__muattiyah"/>
+			<edge id="805" source="django-extensions__django-extensions" start="2012-08-23" target="techtalk-parsedatetime__eternicode"/>
+			<edge id="806" source="celery_source_kombu__strawposter" start="2015-08-07" target="django-tools__jedie"/>
+			<edge id="807" source="django-shop-old__rfleschenberg" start="2014-10-08" target="django-nap__funkybob"/>
+			<edge id="808" source="django-compressor__django-compressor" start="2013-06-12" target="django-salted__wunki"/>
+			<edge id="809" source="pyFilesystem__simonluijk" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="810" source="django__django" start="2015-09-08" target="django_celery_windows_service__azalea"/>
+			<edge id="811" source="django-content-editor__matthiask" start="2015-09-01" target="django-dbbackup__vfigueiro"/>
+			<edge id="812" source="pyfacebook__sciyoshi" start="2012-01-21" target="pinax__pinax"/>
+			<edge id="813" source="django-rest-framework__encode" start="2012-02-06" target="django-course__raulcd"/>
+			<edge id="814" source="django-allauth__pennersr" start="2017-02-26" target="django-ticket-21498-demo__mbaechtold"/>
+			<edge id="815" source="django-extensions__django-extensions" start="2011-09-15" target="django-skypehub__tokibito"/>
+			<edge id="816" source="django-extensions__django-extensions" start="2013-06-12" target="django-allauth__pennersr"/>
+			<edge id="817" source="django-blog-zinnia__Fantomas42" start="2015-12-30" target="youid-server__bianchimro"/>
+			<edge id="818" source="savanna__rnirmal" start="2013-06-03" target="savanna-dashboard__denismakogon"/>
+			<edge id="819" source="django-social-auth-norel__antoviaque" start="2012-06-21" target="django-storages__cherepski"/>
+			<edge id="820" source="readthedocs.org__rtfd" start="2017-02-22" target="readthedocs-docker-compose__qqbuby"/>
+			<edge id="821" source="django__django" start="2014-07-17" target="django-spillway__bkg"/>
+			<edge id="822" source="django__django" start="2015-04-06" target="django-prometheus__korfuri"/>
+			<edge id="823" source="django-admin-tools__noxan" start="2011-06-28" target="python_zipcodes__fcurella"/>
+			<edge id="824" source="django_test__leekchan" start="2016-06-07" target="django-paypal__spookylukey"/>
+			<edge id="825" source="django-cms__divio" start="2013-11-18" target="django-google-cloud-storage__ckopanos"/>
+			<edge id="826" source="django-piston__EmilStenstrom" start="2010-06-08" target="gae-safesearch__mdorn"/>
+			<edge id="827" source="django-bootstrap3__dyve" start="2017-06-25" target="cookiecutter-wagtail-dokku__johnfraney"/>
+			<edge id="828" source="eho-horizon__Frostman" start="2012-01-23" target="horizon-billing__aababilov"/>
+			<edge id="829" source="django-cms__divio" start="2012-04-12" target="django-mongo-auth__mitar"/>
+			<edge id="830" source="Django-facebook__tschellenbach" start="2016-10-06" target="meetingguide__marcelometal"/>
+			<edge id="831" source="django_test__leekchan" start="2015-09-08" target="django_celery_windows_service__azalea"/>
+			<edge id="832" source="django-cms__divio" start="2010-06-17" target="eolo__lasarux"/>
+			<edge id="833" source="telapi-python__kevinburke" start="2011-11-18" target="Twilio-Python-quickstarts__kevinburke"/>
+			<edge id="834" source="eho-horizon__Frostman" start="2012-12-20" target="odsreg__ttx"/>
+			<edge id="835" source="wagtail__wagtail" start="2018-02-28" target="motonomad__emorozov"/>
+			<edge id="836" source="pied-wagtail__helenwarren" start="2015-03-23" target="batphone__willcodefortea"/>
+			<edge id="837" source="python-twitter__pythonpro" start="2014-01-16" target="mixpanel-celery__cahlan"/>
+			<edge id="838" source="django__django" start="2016-03-18" target="https-pombredanne-bitbucket.org-schinckel-django-jsonfield__pombredanne"/>
+			<edge id="839" source="django-positions__jpwatts" start="2015-09-27" target="django-track-link__sv0"/>
+			<edge id="840" source="mezzanine-modeltranslation-backport__dekomote" start="2013-10-27" target="django-project-template__sjkingo"/>
+			<edge id="841" source="django-rest-framework__encode" start="2016-05-19" target="prlint__ryankask"/>
+			<edge id="842" source="django-mama-cas__jbittel" start="2017-05-28" target="haiti__pygeek"/>
+			<edge id="843" source="twython__ryanmcgrath" start="2011-11-09" target="django-simple-skel__therg"/>
+			<edge id="844" source="xhtml2pdf__xhtml2pdf" start="2016-07-31" target="marpa-py__Kjir"/>
+			<edge id="845" source="python-social-auth__omab" start="2015-05-04" target="bookshare__jeyraof"/>
+			<edge id="846" source="tenacious__vzvenyach" start="2014-12-27" target="djangoskeleton__vzvenyach"/>
+			<edge id="847" source="mongoengine__MongoEngine" start="2016-01-03" target="django-validajax__professorplumb"/>
+			<edge id="848" source="django-rest-framework__encode" start="2015-10-15" target="django-autoslug__neithere"/>
+			<edge id="849" source="django-cms__divio" start="2014-05-09" target="thegoat__bronsen"/>
+			<edge id="850" source="django-oscar__django-oscar" start="2013-04-09" target="e-commerce__oosthuizenb"/>
+			<edge id="851" source="eho-horizon__Frostman" start="2015-03-08" target="django-dequorum__funkybob"/>
+			<edge id="852" source="django-secure-mail__blag" start="2016-06-20" target="django-test-project__amadornimbis"/>
+			<edge id="853" source="python-postmark__themartorana" start="2016-11-27" target="django-fields__svetlyak40wt"/>
+			<edge id="854" source="django_test__leekchan" start="2015-08-20" target="zulip__zulip"/>
+			<edge id="855" source="sphinxautoindex__jimfulton" start="2015-05-05" target="django-pure__tony"/>
+			<edge id="856" source="django-sql-explorer__groveco" start="2017-11-07" target="gett_blog__Kulikovpavel"/>
+			<edge id="857" source="django-rest-framework__encode" start="2016-03-29" target="wagtail__wagtail"/>
+			<edge id="858" source="django-social-auth-norel__antoviaque" start="2012-03-20" target="django-orm-extender__bashmish"/>
+			<edge id="859" source="esphealth__jmcvetta" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="860" source="pyfilesystem__ctismer" start="2010-06-18" target="pyFilesystem__simonluijk"/>
+			<edge id="861" source="django-cms__divio" start="2012-01-26" target="django-federated-login__Bouke"/>
+			<edge id="862" source="django-assets__miracle2k" start="2016-10-06" target="meetingguide__marcelometal"/>
+			<edge id="863" source="eho-horizon__Frostman" start="2014-09-13" target="pymtbcal__slashk"/>
+			<edge id="864" source="django-page-cms__akaihola" start="2012-03-31" target="feedjack__mk-fg"/>
+			<edge id="865" source="rpclib__martijnvermaat" start="2016-07-28" target="django-scheduler__llazzaro"/>
+			<edge id="866" source="treeio__treeio" start="2012-05-06" target="django-reversion__etianen"/>
+			<edge id="867" source="wagtail__wagtail" start="2016-04-28" target="wagtail_table_block__alexgleason"/>
+			<edge id="868" source="django-mptt__django-mptt" start="2017-07-10" target="raven-python__getsentry"/>
+			<edge id="869" source="django-tastypie__django-tastypie" start="2011-04-29" target="dotcloud-sample-app__novel"/>
+			<edge id="870" source="django-debug-toolbar__jazzband" start="2017-11-23" target="pandachaika__pandabuilder"/>
+			<edge id="871" source="geopy__geopy" start="2016-01-23" target="documentstore__davea"/>
+			<edge id="872" source="treeio__treeio" start="2015-12-12" target="homeboard__ildoc"/>
+			<edge id="873" source="modulestore__bmedx" start="2014-12-04" target="hxat__lduarte1991"/>
+			<edge id="874" source="django-extensions__django-extensions" start="2009-08-13" target="django-paste-organizer__rizumu"/>
+			<edge id="875" source="django-rest-framework__encode" start="2016-03-20" target="django-seed__Brobin"/>
+			<edge id="876" source="django-allauth__pennersr" start="2016-06-30" target="tcr-crossings__terrycojones"/>
+			<edge id="877" source="pied-wagtail__helenwarren" start="2014-11-18" target="wagtailplus__MechanisM"/>
+			<edge id="878" source="channels__django" start="2018-03-05" target="m2m_pizzeria__vlt"/>
+			<edge id="879" source="django_test__leekchan" start="2016-07-11" target="trackwriting__saturn597"/>
+			<edge id="880" source="django-importer__ricobl" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="881" source="raven-python__getsentry" start="2017-04-25" target="django-prometheus__korfuri"/>
+			<edge id="882" source="geopy__geopy" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="883" source="raven-python__getsentry" start="2013-06-05" target="djvasa__cgallemore"/>
+			<edge id="884" source="conference__ijstokes" start="2013-03-06" target="django__django"/>
+			<edge id="885" source="django-extensions__django-extensions" start="2011-12-09" target="django-mcfa__alej0varas"/>
+			<edge id="886" source="django-extensions__django-extensions" start="2010-08-10" target="gtfs-data-exchange__jehiah"/>
+			<edge id="887" source="pyramid__Pylons" start="2015-03-16" target="docker-weblate__wichert"/>
+			<edge id="888" source="cookiecutter-django__asyncee" start="2016-11-10" target="pycharm_debugger__yunti"/>
+			<edge id="889" source="mezzanine-modeltranslation-backport__dekomote" start="2014-01-05" target="connect__nlhkabu"/>
+			<edge id="890" source="django-cms__divio" start="2010-05-22" target="django-sophie__dduan"/>
+			<edge id="891" source="django-cms__divio" start="2012-01-15" target="django-hitcount__thornomad"/>
+			<edge id="892" source="django-scheduler__llazzaro" start="2016-09-30" target="django-ordered-model__bfirsh"/>
+			<edge id="893" source="sentry_fork__tbarbugli" start="2016-05-20" target="sentry__getsentry"/>
+			<edge id="894" source="pypy__aljosa" start="2011-05-27" target="pysolper__aleaxit"/>
+			<edge id="895" source="awx__AlanCoding" start="2018-02-27" target="awx__ansible"/>
+			<edge id="896" source="django-imaging__pielgrzym" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="897" source="python-social-auth__omab" start="2017-12-19" target="awx-mod__scottp-dpaw"/>
+			<edge id="898" source="django-filter__carltongibson" start="2017-03-31" target="peterdemin.github.io__peterdemin"/>
+			<edge id="899" source="django-rest-framework__encode" start="2017-12-08" target="so_question_47654662__cezar77"/>
+			<edge id="900" source="django-cms__divio" start="2018-01-25" target="django-url-filter__miki725"/>
+			<edge id="901" source="bitbake__kscherer" start="2014-10-08" target="django-nap__funkybob"/>
+			<edge id="902" source="django-extensions__django-extensions" start="2012-04-11" target="djangogr__glezos"/>
+			<edge id="903" source="modulestore__bmedx" start="2017-11-29" target="djangotheming__saleem-latif"/>
+			<edge id="904" source="django-model-utils__jazzband" start="2016-09-22" target="django-sitemetrics__idlesign"/>
+			<edge id="905" source="django-angular__jrief" start="2016-04-02" target="channels-examples__andrewgodwin"/>
+			<edge id="906" source="sentry__getsentry" start="2012-03-23" target="gistlog__craigkerstiens"/>
+			<edge id="907" source="lettuce__gabrielfalcao" start="2016-09-01" target="pyjade__syrusakbary"/>
+			<edge id="908" source="Web-4D-QSAR__rougeth" start="2015-08-30" target="django-extensions__django-extensions"/>
+			<edge id="909" source="django-contact__tehfink" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="910" source="cookiecutter-django__pydanny" start="2018-02-08" target="tus_django_test__kenial"/>
+			<edge id="911" source="django-cms__divio" start="2013-06-11" target="django-hvad__KristianOellegaard"/>
+			<edge id="912" source="django-rest-framework__encode" start="2016-08-25" target="text-adventure__paolopaolopaolo"/>
+			<edge id="913" source="zulip__zulip" start="2017-11-11" target="DjangoProjects__amanharitsh123"/>
+			<edge id="914" source="django-compressor__django-compressor" start="2011-09-24" target="GuerrillaGraftersMap__tachang"/>
+			<edge id="915" source="cookiecutter-django__asyncee" start="2016-05-11" target="rules-testapp__highpost"/>
+			<edge id="916" source="django-adminactions__saxix" start="2016-06-07" target="django-paypal__spookylukey"/>
+			<edge id="917" source="celery_source_kombu__strawposter" start="2014-11-24" target="gsi__bobzz-zone"/>
+			<edge id="918" source="bottle__bottlepy" start="2017-07-07" target="jogger-demo__brettatoms"/>
+			<edge id="919" source="django-social-auth-norel__antoviaque" start="2014-10-09" target="django-cacheops__Suor"/>
+			<edge id="920" source="wagtail__wagtail" start="2014-12-27" target="djangoskeleton__vzvenyach"/>
+			<edge id="921" source="celery_source_kombu__strawposter" start="2016-11-15" target="djangocms-bs4forcascade__haricot"/>
+			<edge id="922" source="django-pagination__ericflo" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="923" source="django__django" start="2016-06-16" target="workshop__nmundar"/>
+			<edge id="924" source="django-cms__divio" start="2013-11-15" target="slimbb__hsoft"/>
+			<edge id="925" source="django-debug-toolbar__jazzband" start="2010-06-07" target="django-redis-sessions__dpaccoud"/>
+			<edge id="926" source="bottle__bottlepy" start="2015-12-02" target="soapbase__FelixSchwarz"/>
+			<edge id="927" source="django-cms__divio" start="2012-09-02" target="waterboy__averagehuman"/>
+			<edge id="928" source="django-rest-framework__encode" start="2017-06-21" target="python-voluum__mateusz-sikora"/>
+			<edge id="929" source="sentry__getsentry" start="2016-03-11" target="LinkBasket__vitaly-krumins"/>
+			<edge id="930" source="sphinxautoindex__jimfulton" start="2014-10-05" target="sphinxcontrib-cacoo__tk0miya"/>
+			<edge id="931" source="django-blogdor__jcarbaugh" start="2014-01-25" target="wounds-and-dressings__Ogreman"/>
+			<edge id="932" source="django__django" start="2016-04-26" target="SI2-Semovientes__ebar0n"/>
+			<edge id="933" source="django-extensions__django-extensions" start="2011-02-17" target="django-simple-shop__vilos"/>
+			<edge id="934" source="translate-toolit__scrool" start="2009-10-09" target="utils__aehlke"/>
+			<edge id="935" source="cookiecutter-django__asyncee" start="2015-07-06" target="django-jeopardy__Tavistock"/>
+			<edge id="936" source="django__django" start="2016-01-21" target="djangocms-forms__mishbahr"/>
+			<edge id="937" source="django-reversion__etianen" start="2014-07-04" target="django-app-namespace-template-loader__Fantomas42"/>
+			<edge id="938" source="django-jenkins__kmmbvnr" start="2014-11-11" target="splinter__cobrateam"/>
+			<edge id="939" source="django-social-auth__omab" start="2017-03-02" target="WoodieLMS__0xVK"/>
+			<edge id="940" source="awx__AlanCoding" start="2016-08-02" target="flask-example__chouseknecht"/>
+			<edge id="941" source="mezzanine__stephenmcd" start="2017-03-20" target="cartridge-stats__joshbatchelor"/>
+			<edge id="942" source="python-social-auth__omab" start="2017-10-12" target="test.datasets__srgypetrov"/>
+			<edge id="943" source="django-rest-framework__encode" start="2014-05-07" target="django-drf-template__Keats"/>
+			<edge id="944" source="scrapy__scrapy" start="2016-03-15" target="django_tickets__barraponto"/>
+			<edge id="945" source="django-filter__carltongibson" start="2018-01-22" target="SD-django__onyekaa"/>
+			<edge id="946" source="python-social-auth__omab" start="2015-01-01" target="catcurator__momamene"/>
+			<edge id="947" source="conference__ijstokes" start="2013-03-26" target="django-ratelimit__jsocol"/>
+			<edge id="948" source="django__skevy" start="2010-12-05" target="django-treebeard-extensions__aljosa"/>
+			<edge id="949" source="django-blog-zinnia__Fantomas42" start="2015-05-20" target="django-postalcodes__bennylope"/>
+			<edge id="950" source="django-content-editor__matthiask" start="2012-12-08" target="pentathlon__sspross"/>
+			<edge id="951" source="django-ordered-model__bfirsh" start="2017-03-01" target="django-fullurl__Flimm"/>
+			<edge id="952" source="django-google-analytics__clintecker" start="2013-03-03" target="django-podcast__jefftriplett"/>
+			<edge id="953" source="openstack-dashboard__anotherjesse" start="2012-05-13" target="fuel-check__AlexeyKasatkin"/>
+			<edge id="954" source="django-shop-old__rfleschenberg" start="2015-04-03" target="busca-misa__glarrain"/>
+			<edge id="955" source="django-q__Koed00" start="2017-03-21" target="django-multitable-inheritance__GabLeRoux"/>
+			<edge id="956" source="apm-python__ruflin" start="2013-03-06" target="django_compressor_celery__jarus"/>
+			<edge id="957" source="django-rest-framework__encode" start="2017-12-22" target="queue.click.api__tonicabanas"/>
+			<edge id="958" source="sentry__getsentry" start="2012-07-30" target="sentry-apps-openid-auth__bremac"/>
+			<edge id="959" source="typhoonae__sprymak" start="2017-08-17" target="django-oscar__django-oscar"/>
+			<edge id="960" source="django-rest-framework__encode" start="2014-05-01" target="django-competitions__elmkarami"/>
+			<edge id="961" source="django-machina__ellmetha" start="2017-05-16" target="mezzanine__stephenmcd"/>
+			<edge id="962" source="pypy__aljosa" start="2009-10-09" target="utils__aehlke"/>
+			<edge id="963" source="satchmo__bclermont" start="2014-11-29" target="django-pieguard__rcmachado"/>
+			<edge id="964" source="python-social-auth__omab" start="2016-08-11" target="iktest__mgalgs"/>
+			<edge id="965" source="django-admin-tools__artscoop" start="2014-05-22" target="django-registration__macropin"/>
+			<edge id="966" source="django-extensions__django-extensions" start="2012-04-27" target="GoShout__suneel0101"/>
+			<edge id="967" source="django-tastypie__django-tastypie" start="2016-01-13" target="django-registration__macropin"/>
+			<edge id="968" source="django-cms__divio" start="2016-05-05" target="django-performance-metrics__orf"/>
+			<edge id="969" source="django-tastypie__django-tastypie" start="2015-07-31" target="sortedm2m-filter-horizontal-widget__svleeuwen"/>
+			<edge id="970" source="conference__ijstokes" start="2013-12-27" target="django-petrify__kmichel"/>
+			<edge id="971" source="django-rest-framework__encode" start="2015-06-30" target="django-assets__miracle2k"/>
+			<edge id="972" source="sentry__getsentry" start="2014-04-13" target="lido-2014__hugorodgerbrown"/>
+			<edge id="973" source="wagtail__wagtail" start="2016-03-13" target="taiga-back__taigaio"/>
+			<edge id="974" source="saleor__mirumee" start="2018-01-06" target="django-cloud-tasks__GeorgeLubaretsi"/>
+			<edge id="975" source="django-annoying__skorokithakis" start="2014-02-21" target="django-autoconfig__mikebryant"/>
+			<edge id="976" source="mongoengine__MongoEngine" start="2012-11-19" target="xxadmin__ly0"/>
+			<edge id="977" source="django-jqchat__yomguy" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="978" source="django-debug-toolbar__jazzband" start="2011-08-11" target="django-messagegroups__dbrgn"/>
+			<edge id="979" source="django-treemenus__chronossc" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="980" source="deb-python-social-auth__myhro" start="2017-03-21" target="django-multitable-inheritance__GabLeRoux"/>
+			<edge id="981" source="django-form-designer__samluescher" start="2014-08-31" target="django-extensions__django-extensions"/>
+			<edge id="982" source="eho-horizon__Frostman" start="2017-11-26" target="consensu__mikalstill"/>
+			<edge id="983" source="django-rest-framework__encode" start="2014-01-15" target="model_mommy__vandersonmota"/>
+			<edge id="984" source="satchmo__bclermont" start="2017-07-10" target="raven-python__getsentry"/>
+			<edge id="985" source="django-extensions__django-extensions" start="2013-11-10" target="sentry__getsentry"/>
+			<edge id="986" source="lettuce-py3__adw0rd" start="2014-10-08" target="django-nap__funkybob"/>
+			<edge id="987" source="pg-django__lisael" start="2012-10-12" target="brewlog__zgoda"/>
+			<edge id="988" source="django-reversion-compare__jedie" start="2010-11-19" target="django-dynamic-choices__charettes"/>
+			<edge id="989" source="django-compressor__django-compressor" start="2012-07-22" target="django-reversion__etianen"/>
+			<edge id="990" source="django-social-auth__omab" start="2014-06-20" target="djangoapp__ryan-blunden"/>
+			<edge id="991" source="django-social-auth-norel__antoviaque" start="2012-03-31" target="portalettere__inve1"/>
+			<edge id="992" source="django-cms__divio" start="2011-10-02" target="django-muzo-payment__yedpodtrzitko"/>
+			<edge id="993" source="falcon__falconry" start="2018-01-21" target="django-postgresql-netfields__jimfunk"/>
+			<edge id="994" source="rpclib__martijnvermaat" start="2016-03-30" target="django-basicauth__hirokiky"/>
+			<edge id="995" source="pyjade__syrusakbary" start="2014-06-21" target="django-podcasting__rizumu"/>
+			<edge id="996" source="django-reversion-compare__jedie" start="2017-01-07" target="youdown__wuilliam321"/>
+			<edge id="997" source="django-cms__divio" start="2014-12-31" target="modulestore__bmedx"/>
+			<edge id="998" source="django-taggit__alex" start="2017-04-24" target="owlbot__payamnj"/>
+			<edge id="999" source="raven-python__getsentry" start="2012-06-05" target="my_patched_photologue__MathieuDuponchelle"/>
+			<edge id="1000" source="readthedocs.org__rtfd" start="2017-07-08" target="persist__fmoor"/>
+			<edge id="1001" source="zulip__zulip" start="2017-04-30" target="web-pcap-reader__mohsenSy"/>
+			<edge id="1002" source="celery_source_kombu__strawposter" start="2014-09-19" target="fulroster.se__wieslander"/>
+			<edge id="1003" source="django-social-auth__omab" start="2014-10-09" target="django-cacheops__Suor"/>
+			<edge id="1004" source="urgentgramme__rjwebb" start="2017-04-04" target="django-rest-framework__encode"/>
+			<edge id="1005" source="django-shop-old__rfleschenberg" start="2014-01-04" target="django-nav-tree__ikresoft"/>
+			<edge id="1006" source="MySQL-safe-django-openid-auth__kdazzle" start="2014-09-01" target="django-auth-ldap__scari"/>
+			<edge id="1007" source="django-rest-framework__encode" start="2016-02-18" target="django-prefetch__ionelmc"/>
+			<edge id="1008" source="django-extensions__django-extensions" start="2011-04-04" target="django-shop__awesto"/>
+			<edge id="1009" source="mezzanine__stephenmcd" start="2016-08-02" target="django-oscar__django-oscar"/>
+			<edge id="1010" source="djangogcal__metzlar" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1011" source="gtg-services__pqrth" start="2014-08-04" target="cs373-idb__sandan"/>
+			<edge id="1012" source="django__django" start="2013-09-25" target="gittip-calculator__ddbeck"/>
+			<edge id="1013" source="modulestore__bmedx" start="2014-08-17" target="edx-buaa__louyihua"/>
+			<edge id="1014" source="django-cms__divio" start="2010-06-24" target="django-nonrel__flaper87"/>
+			<edge id="1015" source="django-httpbl__dekoza" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1016" source="django-extensions__django-extensions" start="2015-07-31" target="sortedm2m-filter-horizontal-widget__svleeuwen"/>
+			<edge id="1017" source="django-silk__jazzband" start="2014-10-30" target="django-tastypie__django-tastypie"/>
+			<edge id="1018" source="django-reversion__etianen" start="2014-02-14" target="django-uuidfield__dcramer"/>
+			<edge id="1019" source="django__django" start="2013-04-18" target="jeikkaus__jtiai"/>
+			<edge id="1020" source="deb-python-social-auth__myhro" start="2016-11-07" target="django-crowd__gbezyuk"/>
+			<edge id="1021" source="wagtail-salesforce-demo__kaedroho" start="2014-02-06" target="pied-wagtail__helenwarren"/>
+			<edge id="1022" source="django-sitetree__idlesign" start="2014-06-23" target="django-excel-response__7wonders"/>
+			<edge id="1023" source="django__django" start="2014-05-12" target="eboersmasite__EricBoersma"/>
+			<edge id="1024" source="Django-facebook__tschellenbach" start="2013-04-26" target="django-iban__benkonrath"/>
+			<edge id="1025" source="agilito__httpdss" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1026" source="modulestore__bmedx" start="2017-04-20" target="learn_django__staubina"/>
+			<edge id="1027" source="django__skevy" start="2007-09-30" target="django-book__mariuz"/>
+			<edge id="1028" source="django-compress__pelme" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1029" source="django-filer-travis-testing__stefanfoulis" start="2013-08-16" target="cmsplugin-googleplus__itbabu"/>
+			<edge id="1030" source="celery_source_kombu__strawposter" start="2009-10-21" target="solango__screeley"/>
+			<edge id="1031" source="django-debug-toolbar__jazzband" start="2013-03-13" target="django-automation__myaser"/>
+			<edge id="1032" source="mezzanine-modeltranslation-backport__dekomote" start="2014-01-28" target="linkmanager__lowks"/>
+			<edge id="1033" source="pyfacebook__sciyoshi" start="2010-05-28" target="gowallahash__imrehg"/>
+			<edge id="1034" source="django-cms__divio" start="2014-02-11" target="jane__krischer"/>
+			<edge id="1035" source="waterboy__averagehuman" start="2015-06-09" target="django-spurl__j4mie"/>
+			<edge id="1036" source="pypy__aljosa" start="2007-07-23" target="logilab-common__pombredanne"/>
+			<edge id="1037" source="eho-horizon__Frostman" start="2013-06-01" target="horizon-congress__aaronorosen"/>
+			<edge id="1038" source="readthedocs.org__rtfd" start="2013-03-05" target="minecloud__toffer"/>
+			<edge id="1039" source="django-cms__divio" start="2013-10-31" target="test_formsets__romlok"/>
+			<edge id="1040" source="platform-core__bmedx" start="2016-05-23" target="days__rlucioni"/>
+			<edge id="1041" source="django-sortedm2m__gregmuellegger" start="2015-12-04" target="django-adminplus__jsocol"/>
+			<edge id="1042" source="django-cms__divio" start="2009-11-12" target="apache-config__skorokithakis"/>
+			<edge id="1043" source="django-social-auth-norel__antoviaque" start="2014-04-22" target="django__django"/>
+			<edge id="1044" source="django-debug-toolbar__jazzband" start="2014-07-28" target="django-debug-toolbar-request-history__djsutho"/>
+			<edge id="1045" source="cookiecutter-django__asyncee" start="2016-08-22" target="cookiecutter-saas__jayfk"/>
+			<edge id="1046" source="django-atompub__jtauber" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1047" source="wagtailmarkdownblock__FlipperPA" start="2017-08-07" target="django__django"/>
+			<edge id="1048" source="zulip__zulip" start="2018-01-30" target="zulip-cloud9__cPhost"/>
+			<edge id="1049" source="django-cms__divio" start="2012-06-05" target="sentry__getsentry"/>
+			<edge id="1050" source="django__django" start="2016-08-17" target="django-postgresql-netfields__jimfunk"/>
+			<edge id="1051" source="django-cms__divio" start="2012-01-28" target="django-postal__mthornhill"/>
+			<edge id="1052" source="django-rest-framework__encode" start="2015-08-07" target="django-tools__jedie"/>
+			<edge id="1053" source="pyfacebook__sciyoshi" start="2011-06-30" target="flowgram.com__reverie"/>
+			<edge id="1054" source="conference__ijstokes" start="2012-12-27" target="django-debug-toolbar__jazzband"/>
+			<edge id="1055" source="headphones__rembo10" start="2016-11-04" target="django-ssh__ErnstHaagsman"/>
+			<edge id="1056" source="django-tagging__brosner" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1057" source="django-health-check__KristianOellegaard" start="2017-12-28" target="cookiecutter-django-rest__agconti"/>
+			<edge id="1058" source="wagtail__wagtail" start="2016-09-07" target="my-first-blog__thibaudcolas"/>
+			<edge id="1059" source="horizon-congress__aaronorosen" start="2013-05-07" target="eho-horizon__Frostman"/>
+			<edge id="1060" source="django-cms__divio" start="2015-06-23" target="message-board__fmarco"/>
+			<edge id="1061" source="django-extensions__django-extensions" start="2017-04-04" target="django-rest-framework__encode"/>
+			<edge id="1062" source="splinter__cobrateam" start="2016-06-20" target="django-test-project__amadornimbis"/>
+			<edge id="1063" source="modulestore__bmedx" start="2014-05-26" target="django-openedx-geoinfo__stvstnfrd"/>
+			<edge id="1064" source="django-annoying__skorokithakis" start="2017-02-07" target="wagtail__wagtail"/>
+			<edge id="1065" source="tranquil__g2p" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1066" source="django-cms__divio" start="2016-01-18" target="splunk-django__northben"/>
+			<edge id="1067" source="lettuce-py3__adw0rd" start="2016-11-20" target="tildetown-admin__vilmibm"/>
+			<edge id="1068" source="ChatterBot__gunthercox" start="2018-03-03" target="django__django"/>
+			<edge id="1069" source="docutils__brechtm" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1070" source="django__django" start="2017-11-30" target="coala_community__jayvdb"/>
+			<edge id="1071" source="deb-python-social-auth__myhro" start="2014-08-19" target="dymo_label_prep__monkut"/>
+			<edge id="1072" source="django__django" start="2013-11-27" target="django-pdfviewer__oz123"/>
+			<edge id="1073" source="celery_source_kombu__strawposter" start="2013-10-22" target="django-ordered-model__bfirsh"/>
+			<edge id="1074" source="django__django" start="2013-06-11" target="django-hvad__KristianOellegaard"/>
+			<edge id="1075" source="pied-wagtail__helenwarren" start="2015-02-12" target="wagtail__wagtail"/>
+			<edge id="1076" source="treeio__treeio" start="2013-09-15" target="django-weibo-app-example__sunliwen"/>
+			<edge id="1077" source="django-hvad__KristianOellegaard" start="2014-01-10" target="django-cms-model-in-plugin__mkoistinen"/>
+			<edge id="1078" source="django-progressbarupload__ouhouhsami" start="2017-03-01" target="django-fullurl__Flimm"/>
+			<edge id="1079" source="django-blog-zinnia__Fantomas42" start="2015-09-17" target="django__django"/>
+			<edge id="1080" source="django-cms__divio" start="2014-11-10" target="docker-demo__aaronfay"/>
+			<edge id="1081" source="django-tastypie__django-tastypie" start="2015-06-14" target="fuzzy-octo-batman__AndrewGrossman"/>
+			<edge id="1082" source="django-ajax-forms__timsavage" start="2009-04-05" target="rapidsms-community-apps__ewheeler"/>
+			<edge id="1083" source="django-messages__arneb" start="2016-07-17" target="postorius-docker__simonsmiley"/>
+			<edge id="1084" source="django-cms__divio" start="2011-12-01" target="djang0byte__nvbn"/>
+			<edge id="1085" source="django__django" start="2015-08-20" target="zulip__zulip"/>
+			<edge id="1086" source="django-piston__adieu" start="2009-05-27" target="django-piston__EmilStenstrom"/>
+			<edge id="1087" source="django_test__leekchan" start="2015-05-08" target="django-simple-captcha__mbi"/>
+			<edge id="1088" source="django_test__leekchan" start="2016-03-30" target="django-basicauth__hirokiky"/>
+			<edge id="1089" source="django__django" start="2014-09-06" target="mezzanine-modeltranslation-backport__dekomote"/>
+			<edge id="1090" source="django-crispy-forms__django-crispy-forms" start="2012-08-02" target="django-oscar__django-oscar"/>
+			<edge id="1091" source="django-simple-history__treyhunner" start="2014-09-09" target="django-silk__jazzband"/>
+			<edge id="1092" source="django-extensions__django-extensions" start="2017-08-22" target="django-typogrify__chrisdrackett"/>
+			<edge id="1093" source="django-extensions__django-extensions" start="2015-04-03" target="busca-misa__glarrain"/>
+			<edge id="1094" source="django-stripe-payments__grue" start="2014-05-28" target="NexToU__garcianavalon"/>
+			<edge id="1095" source="django-crispy-forms__django-crispy-forms" start="2012-09-18" target="sentry-cfml__jmacul2"/>
+			<edge id="1096" source="sentry_fork__tbarbugli" start="2012-04-14" target="django-urls-introspect__davidszotten"/>
+			<edge id="1097" source="django-waffle-session__mwaaas" start="2014-05-05" target="my_info__nostalgiaz"/>
+			<edge id="1098" source="edx-configuration__kola-er" start="2017-11-09" target="django-assets__miracle2k"/>
+			<edge id="1099" source="python-social-auth__omab" start="2016-08-27" target="fantacalcio-asta-helper__swmerko"/>
+			<edge id="1100" source="django__django" start="2017-04-15" target="minimal-django__marios-zindilis"/>
+			<edge id="1101" source="django-maintenancemode__michaelgodshall" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1102" source="django-extensions__django-extensions" start="2015-11-27" target="prodsys2__haakenlid"/>
+			<edge id="1103" source="django-social-auth-norel__antoviaque" start="2014-06-20" target="djangoapp__ryan-blunden"/>
+			<edge id="1104" source="django-rest-framework__encode" start="2014-09-29" target="nodeshot-citysdk-synchronizers__nemesisdesign"/>
+			<edge id="1105" source="django-paging__dcramer" start="2013-06-05" target="djvasa__cgallemore"/>
+			<edge id="1106" source="xhtml2pdf__xhtml2pdf" start="2018-01-24" target="django-mobile-app-distribution__Proper-Job"/>
+			<edge id="1107" source="django__django" start="2016-08-12" target="django-timedelta-field-1.10__tuky"/>
+			<edge id="1108" source="conduit__nzjrs" start="2013-10-31" target="celery_tests__Jc2k"/>
+			<edge id="1109" source="django-haystack__django-haystack" start="2012-09-07" target="django__django"/>
+			<edge id="1110" source="django__django" start="2015-08-24" target="PyConference__barrachri"/>
+			<edge id="1111" source="django-social-auth-norel__antoviaque" start="2015-12-19" target="django-admin-views__frankwiles"/>
+			<edge id="1112" source="readthedocs.org__rtfd" start="2014-04-13" target="lido-2014__hugorodgerbrown"/>
+			<edge id="1113" source="django__django" start="2013-04-16" target="django-simple-captcha__mbi"/>
+			<edge id="1114" source="logilab-common__pombredanne" start="2012-08-06" target="btb__yourcelf"/>
+			<edge id="1115" source="mezzanine-modeltranslation-backport__dekomote" start="2017-02-28" target="django-jinja-knockout__Dmitri-Sintsov"/>
+			<edge id="1116" source="django-scheduler__llazzaro" start="2015-05-20" target="django-postalcodes__bennylope"/>
+			<edge id="1117" source="horizon-congress__aaronorosen" start="2014-11-19" target="dnd-pdf-gen-service__rrader"/>
+			<edge id="1118" source="django_test__leekchan" start="2015-04-06" target="django-prometheus__korfuri"/>
+			<edge id="1119" source="django-activity-stream__justquick" start="2017-01-08" target="django-jsonfield-compat__kbussell"/>
+			<edge id="1120" source="django-extensions__django-extensions" start="2011-06-28" target="python_zipcodes__fcurella"/>
+			<edge id="1121" source="django-model-utils__jazzband" start="2015-03-06" target="lightr__eranrund"/>
+			<edge id="1122" source="bottle__bottlepy" start="2016-04-12" target="blexplor-web__marzig76"/>
+			<edge id="1123" source="hazinses__vargi" start="2017-05-20" target="devops_workshop__cihann"/>
+			<edge id="1124" source="wagtail__wagtail" start="2016-01-21" target="wagtail_room_booking__Tamriel"/>
+			<edge id="1125" source="pydantic__samuelcolvin" start="2017-12-28" target="cookiecutter-django-rest__agconti"/>
+			<edge id="1126" source="django-assets__miracle2k" start="2015-05-05" target="django-pure__tony"/>
+			<edge id="1127" source="apm-python__ruflin" start="2012-12-02" target="kloudless-status__chriskuehl"/>
+			<edge id="1128" source="django-pressroom__mthornhill" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1129" source="django-md-cms__FlipperPA" start="2017-08-07" target="django__django"/>
+			<edge id="1130" source="django-waffle-session__mwaaas" start="2011-08-25" target="django-postmark-mailer__jemerick"/>
+			<edge id="1131" source="pyfacebook__sciyoshi" start="2011-08-25" target="django-compressor__django-compressor"/>
+			<edge id="1132" source="mezzanine__stephenmcd" start="2016-01-13" target="cartridge_braintree__henri-hulski"/>
+			<edge id="1133" source="django-reversion__etianen" start="2018-02-18" target="django-channels-chat__narrowfail"/>
+			<edge id="1134" source="lettuce__gabrielfalcao" start="2016-03-06" target="suckless__starenka"/>
+			<edge id="1135" source="django-oauth-toolkit__BenjaminHCCarr" start="2016-01-28" target="lootgame__honestbleeps"/>
+			<edge id="1136" source="tommi-func__tomas-edwardsson" start="2009-04-27" target="cobbler__icomfort"/>
+			<edge id="1137" source="django-tables2__jieter" start="2012-11-26" target="django-model-subclass-delete-problem__qris"/>
+			<edge id="1138" source="sentry__getsentry" start="2014-09-02" target="django-annoying__skorokithakis"/>
+			<edge id="1139" source="ocpolls__nonZero" start="2013-10-25" target="home-control-RPC__itamaro"/>
+			<edge id="1140" source="django-shop__awesto" start="2017-12-22" target="lrmh_base__cirotix"/>
+			<edge id="1141" source="django-dbtemplates__svetlyak40wt" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1142" source="python-twitter__pythonpro" start="2017-02-15" target="wikiproject-med__osamak"/>
+			<edge id="1143" source="deb-python-social-auth__myhro" start="2016-08-27" target="fantacalcio-asta-helper__swmerko"/>
+			<edge id="1144" source="django-representations__dokterbob" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1145" source="django-adminactions__saxix" start="2016-04-25" target="django-share__sarendsen"/>
+			<edge id="1146" source="django-waffle__jsocol" start="2016-05-23" target="days__rlucioni"/>
+			<edge id="1147" source="django-chroniker__chrisspen" start="2017-12-28" target="cookiecutter-django-rest__agconti"/>
+			<edge id="1148" source="django-cms__divio" start="2013-02-24" target="construirwebqueue__bneijt"/>
+			<edge id="1149" source="django-oscar__django-oscar" start="2015-01-24" target="djangoTutorial__tbonza"/>
+			<edge id="1150" source="django-debug-toolbar__jazzband" start="2012-03-07" target="effective-django__nyergler"/>
+			<edge id="1151" source="readthedocs.org__rtfd" start="2014-09-13" target="radar_django__abrookins"/>
+			<edge id="1152" source="docutils__brechtm" start="2014-09-02" target="vidi_notifications__schallis"/>
+			<edge id="1153" source="conduit__nzjrs" start="2012-03-17" target="django__django"/>
+			<edge id="1154" source="raven-python__getsentry" start="2017-11-18" target="my-first-blog__mgedmin"/>
+			<edge id="1155" source="django-debug-toolbar__jazzband" start="2010-07-28" target="hue__cloudera"/>
+			<edge id="1156" source="django-rsvp__toastdriven" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1157" source="celery_source_kombu__strawposter" start="2015-11-04" target="deploy__alibozorgkhan"/>
+			<edge id="1158" source="python-twitter__pythonpro" start="2016-09-08" target="WIPSTERv2__moshekaplan"/>
+			<edge id="1159" source="tools__lsblakk" start="2011-03-08" target="Civilizer__ChrisCooper"/>
+			<edge id="1160" source="django-activity-stream__justquick" start="2013-06-16" target="django_sample_app__naiquevin"/>
+			<edge id="1161" source="mezzanine-modeltranslation-backport__dekomote" start="2014-03-10" target="django-request-logger__eht16"/>
+			<edge id="1162" source="django-rest-framework-docs__manosim" start="2017-07-28" target="drf_openapi__limdauto"/>
+			<edge id="1163" source="ansible-container__ansible" start="2017-09-06" target="python-meetup-django__nonotest"/>
+			<edge id="1164" source="django-storages__jschneier" start="2017-02-07" target="wagtail-translation__skirsdeda"/>
+			<edge id="1165" source="django-mptt__django-mptt" start="2016-12-04" target="django-errorlog__yjmade"/>
+			<edge id="1166" source="django-extensions__django-extensions" start="2012-09-12" target="haystack_elasticsearch_rebuild_index_bug__hekevintran"/>
+			<edge id="1167" source="zulip__zulip" start="2017-07-27" target="django_girls_blog__lgh2"/>
+			<edge id="1168" source="django-rest-framework__encode" start="2015-03-30" target="snippets__maximilianhurl"/>
+			<edge id="1169" source="django_test__leekchan" start="2015-09-10" target="django__django"/>
+			<edge id="1170" source="django-newsletter__dokterbob" start="2017-03-23" target="django-yandex-kassa__DrMartiner"/>
+			<edge id="1171" source="django-tables2-reports__goinnn" start="2015-07-13" target="plata__matthiask"/>
+			<edge id="1172" source="apm-python__ruflin" start="2014-01-13" target="django_atomic_signals__adamchainz"/>
+			<edge id="1173" source="django-shop__awesto" start="2013-08-17" target="knotcrafters__althalus"/>
+			<edge id="1174" source="apm-python__ruflin" start="2013-02-23" target="cloudy-release__flupke"/>
+			<edge id="1175" source="django-oscar__django-oscar" start="2013-10-14" target="django__django"/>
+			<edge id="1176" source="xadmin__sshwsfc" start="2015-04-24" target="django-pya__fxiao"/>
+			<edge id="1177" source="sentry_fork__tbarbugli" start="2011-11-18" target="django-reversion-compare__jedie"/>
+			<edge id="1178" source="django-cms__divio" start="2013-07-28" target="django-template__motiteux"/>
+			<edge id="1179" source="celery_source_kombu__strawposter" start="2015-03-06" target="lightr__eranrund"/>
+			<edge id="1180" source="mezzanine-modeltranslation-backport__dekomote" start="2017-03-20" target="cartridge-stats__joshbatchelor"/>
+			<edge id="1181" source="django-socketio__stephenmcd" start="2013-11-29" target="django_amqp_example__mispy"/>
+			<edge id="1182" source="django__django" start="2015-02-08" target="django-plus-falcon-pypy__rhcarvalho"/>
+			<edge id="1183" source="django-plans__cypreess" start="2014-10-08" target="django-nap__funkybob"/>
+			<edge id="1184" source="django-oscar__django-oscar" start="2018-02-16" target="django-fobi__barseghyanartur"/>
+			<edge id="1185" source="django-oscar__django-oscar" start="2014-07-13" target="django-s3-stream__jonatron"/>
+			<edge id="1186" source="e-commerce__oosthuizenb" start="2016-10-14" target="django-poligon__car3oon"/>
+			<edge id="1187" source="django-imagekit__matthewwithanm" start="2014-10-30" target="goladder__puremourning"/>
+			<edge id="1188" source="celery_source_kombu__strawposter" start="2016-08-31" target="django-brunch-ts-scss__MasterKale"/>
+			<edge id="1189" source="sorl-watermark__originell" start="2015-03-08" target="django-dequorum__funkybob"/>
+			<edge id="1190" source="django-cms__divio" start="2012-11-08" target="django-redmineauth__tomviner"/>
+			<edge id="1191" source="feedjack__squarepegsys" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1192" source="django-cms__divio" start="2010-08-19" target="django-filer-travis-testing__stefanfoulis"/>
+			<edge id="1193" source="django-cms__divio" start="2014-09-08" target="django-layout__benzkji"/>
+			<edge id="1194" source="apm-python__ruflin" start="2016-05-20" target="sentry__getsentry"/>
+			<edge id="1195" source="django-rest-framework__encode" start="2017-11-05" target="spacetime__irrelative"/>
+			<edge id="1196" source="theming-edx-platform__pdehaye" start="2014-12-27" target="django-oauth-toolkit__BenjaminHCCarr"/>
+			<edge id="1197" source="celery_source_kombu__strawposter" start="2016-04-03" target="safecast-api__dhackner"/>
+			<edge id="1198" source="celery_source_kombu__strawposter" start="2014-11-18" target="blog_example__sibblegp"/>
+			<edge id="1199" source="django__django" start="2014-02-26" target="dj-livesettings__pjrobertson"/>
+			<edge id="1200" source="python-postmark__themartorana" start="2011-04-28" target="django-tastypie__django-tastypie"/>
+			<edge id="1201" source="django__django" start="2015-02-04" target="django-bower-cdn__aericson"/>
+			<edge id="1202" source="cityzen__nostalgiaz" start="2013-10-14" target="my_info__nostalgiaz"/>
+			<edge id="1203" source="bottle__bottlepy" start="2016-09-04" target="django-extensions__django-extensions"/>
+			<edge id="1204" source="django-social-auth__omab" start="2017-03-03" target="django-q__Koed00"/>
+			<edge id="1205" source="cookiecutter-django__asyncee" start="2015-02-15" target="django-extensions__django-extensions"/>
+			<edge id="1206" source="django-guardian__django-guardian" start="2015-05-22" target="django-countries__SmileyChris"/>
+			<edge id="1207" source="django_test__leekchan" start="2015-08-24" target="PyConference__barrachri"/>
+			<edge id="1208" source="django-rest-framework__encode" start="2017-03-31" target="peterdemin.github.io__peterdemin"/>
+			<edge id="1209" source="e-commerce__oosthuizenb" start="2018-01-06" target="django-cloud-tasks__GeorgeLubaretsi"/>
+			<edge id="1210" source="django-cms__divio" start="2010-05-07" target="pyrix-site__indexofire"/>
+			<edge id="1211" source="django-content-editor__matthiask" start="2012-11-08" target="clamopener__proycon"/>
+			<edge id="1212" source="modulestore__bmedx" start="2016-05-23" target="days__rlucioni"/>
+			<edge id="1213" source="django-extensions__django-extensions" start="2016-07-11" target="django-astoria__diego-plan9"/>
+			<edge id="1214" source="django-admin-steroids__chrisspen" start="2017-12-28" target="cookiecutter-django-rest__agconti"/>
+			<edge id="1215" source="horizon-congress__aaronorosen" start="2013-11-24" target="django-bootstrap3__dyve"/>
+			<edge id="1216" source="django_test__leekchan" start="2016-02-09" target="django_project_manager__timmartin"/>
+			<edge id="1217" source="python-social-auth__omab" start="2016-10-07" target="django-multiple-domains__Qlio"/>
+			<edge id="1218" source="django-storages__ovnicraft" start="2011-11-29" target="django-storages__cherepski"/>
+			<edge id="1219" source="django-allauth__pennersr" start="2013-09-29" target="django-friendship-network__aladagemre"/>
+			<edge id="1220" source="django-spambayes__waylan" start="2009-04-05" target="rapidsms-community-apps__ewheeler"/>
+			<edge id="1221" source="django-rest-framework__encode" start="2013-01-30" target="django-rest-framework-proxy__eofs"/>
+			<edge id="1222" source="django-notification__brosner" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1223" source="django-rest-framework__encode" start="2013-01-12" target="drf-test__alukach"/>
+			<edge id="1224" source="tweepy__tweepy" start="2015-06-11" target="djutils__pikeas"/>
+			<edge id="1225" source="django-cms__divio" start="2011-12-30" target="django-users__AdrianRibao"/>
+			<edge id="1226" source="django-admin-tools__artscoop" start="2012-06-07" target="django-cms__divio"/>
+			<edge id="1227" source="django-extensions__django-extensions" start="2016-09-12" target="django-timestampable__achedeuzot"/>
+			<edge id="1228" source="django-extensions__django-extensions" start="2010-12-04" target="django-eve-db__gtaylor"/>
+			<edge id="1229" source="satchmo__bclermont" start="2014-08-07" target="agendadulibre__mlhamel"/>
+			<edge id="1230" source="django-mptt__django-mptt" start="2017-04-24" target="djangocms-geoplaceholder__TheDeadOne"/>
+			<edge id="1231" source="celery_source_kombu__strawposter" start="2014-11-04" target="django__django"/>
+			<edge id="1232" source="wagtail__wagtail" start="2015-09-13" target="vegantx.org-wagtail__alexgleason"/>
+			<edge id="1233" source="django-content-editor__matthiask" start="2011-08-12" target="django-tempocal__anentropic"/>
+			<edge id="1234" source="django-nonrel__flaper87" start="2010-12-05" target="django-treebeard-extensions__aljosa"/>
+			<edge id="1235" source="django-guardian__django-guardian" start="2016-01-08" target="django-readonly-onetoone__damycra"/>
+			<edge id="1236" source="django-tagging__JordanReiter" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1237" source="django-jinja__niwinz" start="2016-08-06" target="django-includes__hartym"/>
+			<edge id="1238" source="django-south__philipn" start="2013-03-21" target="django-storages__cherepski"/>
+			<edge id="1239" source="django-simple-history__treyhunner" start="2016-02-23" target="django-fixture-magic__davedash"/>
+			<edge id="1240" source="django-avatar__grantmcconnaughey" start="2015-09-10" target="django-taggit__alex"/>
+			<edge id="1241" source="horizon-congress__aaronorosen" start="2017-11-26" target="consensu__mikalstill"/>
+			<edge id="1242" source="django__django" start="2016-02-09" target="django_project_manager__timmartin"/>
+			<edge id="1243" source="django-allauth__pennersr" start="2016-11-27" target="django-fields__svetlyak40wt"/>
+			<edge id="1244" source="django-oscar__django-oscar" start="2015-12-21" target="yowlayer-django-store__jlmadurga"/>
+			<edge id="1245" source="django-reversion__etianen" start="2015-10-02" target="djangogirls-blog__daaray"/>
+			<edge id="1246" source="django-form-manager__sankroh" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1247" source="python-social-auth__omab" start="2016-09-05" target="django-reversion__etianen"/>
+			<edge id="1248" source="django-cms__divio" start="2015-07-20" target="curs_estiu_2015_uib__aaloy"/>
+			<edge id="1249" source="django-blog-zinnia__Fantomas42" start="2017-03-27" target="tdd_with_goat__iustitia"/>
+			<edge id="1250" source="django-forms-builder__stephenmcd" start="2013-07-16" target="django-activity-stream__justquick"/>
+			<edge id="1251" source="django-watson__etianen" start="2017-06-25" target="cookiecutter-wagtail-dokku__johnfraney"/>
+			<edge id="1252" source="django-social-auth-norel__antoviaque" start="2014-01-28" target="django-base-template__avillavi"/>
+			<edge id="1253" source="sentry__getsentry" start="2014-04-12" target="sphinxautoindex__jimfulton"/>
+			<edge id="1254" source="ConMan__herlo" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1255" source="celery_source_kombu__strawposter" start="2011-01-17" target="photo-rss-dir__fberger"/>
+			<edge id="1256" source="django-celery__bclermont" start="2013-06-11" target="django-hvad__KristianOellegaard"/>
+			<edge id="1257" source="zulip__zulip" start="2018-01-08" target="bookmark-archiver__pirate"/>
+			<edge id="1258" source="pyramid__Pylons" start="2012-03-26" target="be.groovie__bbangert"/>
+			<edge id="1259" source="django-allauth__pennersr" start="2016-06-16" target="todo__yuriiz"/>
+			<edge id="1260" source="awx__AlanCoding" start="2016-11-19" target="Example-Django-App__AlanCoding"/>
+			<edge id="1261" source="django-rest-framework__encode" start="2017-02-22" target="readthedocs-docker-compose__qqbuby"/>
+			<edge id="1262" source="django-addendum__bennylope" start="2017-12-22" target="lrmh_base__cirotix"/>
+			<edge id="1263" source="django-content-editor__matthiask" start="2012-01-24" target="aikidocardiff__evildmp"/>
+			<edge id="1264" source="django__django" start="2016-11-07" target="django-cors-headers__ottoyiu"/>
+			<edge id="1265" source="django__django" start="2014-01-05" target="django-tastypie__django-tastypie"/>
+			<edge id="1266" source="theming-edx-platform__pdehaye" start="2013-08-13" target="modulestore__bmedx"/>
+			<edge id="1267" source="sentry__getsentry" start="2012-12-19" target="django-social-auth__omab"/>
+			<edge id="1268" source="xadmin__sshwsfc" start="2016-01-22" target="tai5-uan5_gian5-gi2_phing5-tai5__sih4sing5hong5"/>
+			<edge id="1269" source="django-multilingual-model__dokterbob" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1270" source="django-allauth__pennersr" start="2016-05-19" target="ADF-XML-format-example__manuganji"/>
+			<edge id="1271" source="autotest__ColinIanKing" start="2015-06-03" target="cobbler__cobbler"/>
+			<edge id="1272" source="django-social-auth__omab" start="2015-12-19" target="django-admin-views__frankwiles"/>
+			<edge id="1273" source="sentry__getsentry" start="2017-04-25" target="django-prometheus__korfuri"/>
+			<edge id="1274" source="django-social-auth__omab" start="2017-05-28" target="haiti__pygeek"/>
+			<edge id="1275" source="django-cms__divio" start="2009-07-15" target="The--old--Applications-for-Django-CMS__evildmp"/>
+			<edge id="1276" source="xadmin__sshwsfc" start="2015-01-16" target="djoscarshop__aldarund"/>
+			<edge id="1277" source="django-tastypie__django-tastypie" start="2016-04-13" target="django-querche__systemsoverload"/>
+			<edge id="1278" source="celery_source_kombu__strawposter" start="2013-09-04" target="sentry-lighthouse__gthb"/>
+			<edge id="1279" source="cartridge__stephenmcd" start="2015-06-27" target="django-payline-dotir__Bornazadeh"/>
+			<edge id="1280" source="celery_source_kombu__strawposter" start="2014-09-10" target="readthedocs.org__rtfd"/>
+			<edge id="1281" source="debian-nm__mhall119" start="2013-11-25" target="django-crispy-forms__django-crispy-forms"/>
+			<edge id="1282" source="pyfacebook__sciyoshi" start="2017-01-26" target="chain-reaction__greut"/>
+			<edge id="1283" source="raven-python__getsentry" start="2016-05-20" target="sentry__getsentry"/>
+			<edge id="1284" source="django-storages__jschneier" start="2017-07-12" target="django-tastypie__django-tastypie"/>
+			<edge id="1285" source="django-oscar__django-oscar" start="2012-10-15" target="django-oscar-fancypages__fmr"/>
+			<edge id="1286" source="mezzanine-modeltranslation-backport__dekomote" start="2012-12-28" target="django-instagram-uid__zeantsoi"/>
+			<edge id="1287" source="pyfacebook__sciyoshi" start="2010-10-01" target="django-postal__mthornhill"/>
+			<edge id="1288" source="eho-horizon__Frostman" start="2013-11-24" target="django-bootstrap3__dyve"/>
+			<edge id="1289" source="conference__ijstokes" start="2013-03-13" target="django-automation__myaser"/>
+			<edge id="1290" source="django-extensions__django-extensions" start="2012-07-17" target="ponycheckup__kevgathuku"/>
+			<edge id="1291" source="patchwork__stephenfin" start="2016-04-13" target="django__django"/>
+			<edge id="1292" source="django-debug-toolbar__jazzband" start="2014-05-04" target="angular-d3-tests__valsteen"/>
+			<edge id="1293" source="zulip__zulip" start="2017-04-16" target="hc_book_swap__joyhchen"/>
+			<edge id="1294" source="django-cms__divio" start="2015-04-25" target="django__django"/>
+			<edge id="1295" source="MySQL-safe-django-openid-auth__kdazzle" start="2013-07-20" target="hackedio_2013__MatMoore"/>
+			<edge id="1296" source="modulestore__bmedx" start="2016-05-22" target="task__ahsan-ul-haq"/>
+			<edge id="1297" source="django-cms__divio" start="2017-12-08" target="so_question_47654662__cezar77"/>
+			<edge id="1298" source="django-content-editor__matthiask" start="2010-08-01" target="django-csv-export__ojii"/>
+			<edge id="1299" source="django-allauth__pennersr" start="2014-09-23" target="flatsearch__simonpanay"/>
+			<edge id="1300" source="plata__matthiask" start="2014-02-14" target="ITSY__yetkinozturk"/>
+			<edge id="1301" source="django-shop__awesto" start="2016-10-13" target="django-contact-verification__enoch2110"/>
+			<edge id="1302" source="odoo-extra__mga-odoo" start="2015-09-03" target="django-projects__vra"/>
+			<edge id="1303" source="cobbler__cobbler" start="2015-08-11" target="awx__AlanCoding"/>
+			<edge id="1304" source="django-rest-framework__encode" start="2013-01-19" target="django-cors-headers__ottoyiu"/>
+			<edge id="1305" source="celery_source_kombu__strawposter" start="2014-08-19" target="dymo_label_prep__monkut"/>
+			<edge id="1306" source="django__django" start="2014-04-27" target="LiteElementsHack__mmardini"/>
+			<edge id="1307" source="django-debug-toolbar__jazzband" start="2013-12-27" target="django-petrify__kmichel"/>
+			<edge id="1308" source="django-date-paginator__JordanReiter" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1309" source="django-crispy-forms__django-crispy-forms" start="2011-07-16" target="django-rules__maraujop"/>
+			<edge id="1310" source="django-syncr__copelco" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1311" source="django-content-editor__matthiask" start="2016-07-24" target="django-smart-selects__digi604"/>
+			<edge id="1312" source="pinet__joshuamckenty" start="2011-01-12" target="openstack-dashboard__termie"/>
+			<edge id="1313" source="django-admin-tools__artscoop" start="2012-11-07" target="django-qsstats-magic__smspillaz"/>
+			<edge id="1314" source="deb-python-social-auth__myhro" start="2015-01-01" target="catcurator__momamene"/>
+			<edge id="1315" source="openstack-dashboard__termie" start="2012-05-13" target="fuel-check__AlexeyKasatkin"/>
+			<edge id="1316" source="django__django" start="2016-07-25" target="superlists__dudepare"/>
+			<edge id="1317" source="django-localdates__orestis" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1318" source="django__django" start="2017-11-27" target="debian-packaging-for-django__marcaurele"/>
+			<edge id="1319" source="scrapy__scrapy" start="2013-07-28" target="django-social-auth__omab"/>
+			<edge id="1320" source="cobbler__icomfort" start="2010-06-14" target="django-trolley__gregplaysguitar"/>
+			<edge id="1321" source="django-guardian__django-guardian" start="2013-02-11" target="django-jsonfield__dmkoch"/>
+			<edge id="1322" source="django-cms__divio" start="2010-10-15" target="sct-communitytools__hpoul"/>
+			<edge id="1323" source="readthedocs.org__rtfd" start="2016-05-27" target="guestbook__rvl"/>
+			<edge id="1324" source="green__CleanCut" start="2017-11-30" target="coala_community__jayvdb"/>
+			<edge id="1325" source="bottle__bottlepy" start="2017-06-11" target="django-webquery__muflone"/>
+			<edge id="1326" source="django-annoying__skorokithakis" start="2018-01-29" target="opencult.com__sirodoht"/>
+			<edge id="1327" source="django-shop__awesto" start="2016-09-05" target="django-custom-user__jcugat"/>
+			<edge id="1328" source="django-imagekit__matthewwithanm" start="2014-04-02" target="celeryexample__kenzic"/>
+			<edge id="1329" source="django-mptt__django-mptt" start="2017-03-01" target="django-fullurl__Flimm"/>
+			<edge id="1330" source="hypothesis-python__HypothesisWorks" start="2017-12-28" target="cookiecutter-django-rest__agconti"/>
+			<edge id="1331" source="django__django" start="2016-04-17" target="blog-example__awwester"/>
+			<edge id="1332" source="ConMan__herlo" start="2011-03-19" target="steemprojects.com__noisy"/>
+			<edge id="1333" source="django-avatar__grantmcconnaughey" start="2010-06-19" target="basicproject__johnthedebs"/>
+			<edge id="1334" source="django_test__leekchan" start="2015-05-13" target="mezzanine-modeltranslation-backport__dekomote"/>
+			<edge id="1335" source="nupic.son__rhyolight" start="2014-05-08" target="academicspam__yellowcap"/>
+			<edge id="1336" source="Mobile-Security-Framework-MobSF__MobSF" start="2017-12-28" target="cookiecutter-django-rest__agconti"/>
+			<edge id="1337" source="django-tables2__jieter" start="2016-10-25" target="django-bootstrap3__dyve"/>
+			<edge id="1338" source="django-jinja__niwinz" start="2016-12-01" target="django__django"/>
+			<edge id="1339" source="django-rest-framework__encode" start="2012-10-10" target="traceparent__mammique"/>
+			<edge id="1340" source="django__django" start="2014-05-20" target="django-redis__niwinz"/>
+			<edge id="1341" source="django-simple-captcha__mbi" start="2014-05-21" target="django-mama-cas__jbittel"/>
+			<edge id="1342" source="django-sql-explorer__groveco" start="2016-11-06" target="django-geoipdb-loader__kalekseev"/>
+			<edge id="1343" source="django-tastypie__django-tastypie" start="2016-01-03" target="django-validajax__professorplumb"/>
+			<edge id="1344" source="python-social-auth__omab" start="2017-09-02" target="kubeship__joway"/>
+			<edge id="1345" source="django-cms__divio" start="2016-06-20" target="django-test-project__amadornimbis"/>
+			<edge id="1346" source="django-extensions__django-extensions" start="2016-05-05" target="django-performance-metrics__orf"/>
+			<edge id="1347" source="mongoengine__MongoEngine" start="2013-04-17" target="django-addview__yakxxx"/>
+			<edge id="1348" source="django-social-auth__omab" start="2014-01-28" target="django-base-template__avillavi"/>
+			<edge id="1349" source="django-reversion-compare__jedie" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1350" source="tweepy__tweepy" start="2017-08-19" target="dju-comm__Kjwon15"/>
+			<edge id="1351" source="python-social-auth__omab" start="2017-03-03" target="django-q__Koed00"/>
+			<edge id="1352" source="billreminder__omaciel" start="2012-03-17" target="django__django"/>
+			<edge id="1353" source="django-avatar__grantmcconnaughey" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1354" source="sphinxcontrib-matlabdomain__boeddeker" start="2017-05-05" target="readthedocs.org__rtfd"/>
+			<edge id="1355" source="eighthbit-website__relrod" start="2012-02-17" target="django-social-auth-norel__antoviaque"/>
+			<edge id="1356" source="django-rest-framework__encode" start="2016-08-20" target="BusinessYiave__SnailJie"/>
+			<edge id="1357" source="django-extensions__django-extensions" start="2014-09-24" target="django-reversion__etianen"/>
+			<edge id="1358" source="ibm-db__digglife" start="2009-09-21" target="Theatricalia__dracos"/>
+			<edge id="1359" source="django-taggit-autocomplete-modified__gnotaras" start="2016-03-06" target="suckless__starenka"/>
+			<edge id="1360" source="sentry__getsentry" start="2014-10-27" target="mcfinance__lardissone"/>
+			<edge id="1361" source="odoo-extra__mga-odoo" start="2012-12-25" target="django-static-gitified__xrg"/>
+			<edge id="1362" source="django-south__philipn" start="2014-09-02" target="django-annoying__skorokithakis"/>
+			<edge id="1363" source="django-hvad__KristianOellegaard" start="2016-06-07" target="django-paypal__spookylukey"/>
+			<edge id="1364" source="celery_source_kombu__strawposter" start="2017-11-18" target="my-first-blog__mgedmin"/>
+			<edge id="1365" source="django-easy-reports__saxix" start="2014-07-31" target="django-adminactions__saxix"/>
+			<edge id="1366" source="django-reversion__etianen" start="2013-10-22" target="django-ordered-model__bfirsh"/>
+			<edge id="1367" source="python-twitter__pythonpro" start="2016-11-26" target="lifetech-playground__rmihael"/>
+		</edges>
+	</graph>
+</gexf>

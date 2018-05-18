@@ -1,0 +1,1042 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+	<graph defaultedgetype="directed" mode="dynamic" timeformat="date">
+		<attributes class="node"/>
+		<nodes>
+			<node id="recurrentshop__farizrahman4u"/>
+			<node id="ocf2__dottedmag"/>
+			<node id="nlp-data__joshloyal"/>
+			<node id="BukkitManager__dhatch"/>
+			<node id="python-patch__techtonik"/>
+			<node id="git-cinnabar__glandium"/>
+			<node id="dropkick__cleverdevil"/>
+			<node id="python-type-checking__chadrik"/>
+			<node id="python-ast__banga"/>
+			<node id="Do_SPDX__pombredanne"/>
+			<node id="facecoin-sharpways__gdevanla"/>
+			<node id="everyblock_code__brosner"/>
+			<node id="YAML-Macros__Thom1729"/>
+			<node id="Theano__jdemouth"/>
+			<node id="docutils_from_svn__msabramo"/>
+			<node id="flocker-profiles__wallnerryan"/>
+			<node id="crossbar__crossbario"/>
+			<node id="ias-ess__stringfellow"/>
+			<node id="parse-clausewitz__allardhoeve"/>
+			<node id="octgn-anr-spoilergrab__avandever"/>
+			<node id="persoTraitsui__MatthieuDartiailh"/>
+			<node id="SickRage_backup__gborri"/>
+			<node id="inestool__dsedivec"/>
+			<node id="django-ai__math-a3k"/>
+			<node id="nicos-test__bpedersen2"/>
+			<node id="self-ensemble-visual-domain-adapt-photo__Britefury"/>
+			<node id="filereader__deeplook"/>
+			<node id="matplotlib__matplotlib"/>
+			<node id="icemac.install.addressbook__icemac"/>
+			<node id="napimenu__nagyv"/>
+			<node id="scrapy__scrapy"/>
+			<node id="ImageStore__Peter92"/>
+			<node id="codeintel__rmccue"/>
+			<node id="webhooks__certik"/>
+			<node id="zkindlerss__insert0003"/>
+			<node id="witchcraft__llllllllll"/>
+			<node id="sympy__sympy"/>
+			<node id="test-utils__jbalogh"/>
+			<node id="iiswsgi__rpatterson"/>
+			<node id="toolbox__kumar303"/>
+			<node id="efolhadownloader__fcrespo82"/>
+			<node id="nxt_ros__daevaorn"/>
+			<node id="AstroData__adrn"/>
+			<node id="OCRF__ngoix"/>
+			<node id="coala__coala"/>
+			<node id="firefox-profilemaker__allo-"/>
+			<node id="librosa__librosa"/>
+			<node id="_automation__sdpython"/>
+			<node id="pypi4all__berdario"/>
+			<node id="scikit-image__scikit-image"/>
+			<node id="GDAd__gabisurita"/>
+			<node id="astropy__astropy"/>
+			<node id="core_models__keflavich"/>
+			<node id="rsdoc-to-sat__arekm"/>
+			<node id="pythonchallenge__generica"/>
+			<node id="quote_liker__browning"/>
+			<node id="buildbot-configs__catlee"/>
+			<node id="wheel__pombredanne"/>
+			<node id="rietveld__robfig"/>
+			<node id="brython__brython-dev"/>
+			<node id="timtools__lsaffre"/>
+			<node id="aSetOfScripts__bucketzxm"/>
+			<node id="nltk__nltk"/>
+			<node id="fnb__edisongustavo"/>
+			<node id="paste3__lig"/>
+			<node id="jhbuild__tkruse"/>
+			<node id="jython__int3"/>
+			<node id="tensor_decomp_embedding__popcorncolonel"/>
+			<node id="wbs-python__jamespharaoh"/>
+			<node id="djangoTutorial__morenoh149"/>
+			<node id="gwyjpkqidata__cbuehler"/>
+			<node id="django-photologue__aljosa"/>
+			<node id="ddns-inwx__JonasGroeger"/>
+			<node id="kallithea__msabramo"/>
+			<node id="hg-stable__vmg"/>
+			<node id="OpenMPK__d33tah"/>
+			<node id="numerox__kwgoodman"/>
+			<node id="django-federal-reserve__chrisspen"/>
+			<node id="phiclicker__kevinwang"/>
+			<node id="Saylua__LikeMyBread"/>
+			<node id="Appraise__cfedermann"/>
+			<node id="tesscred__CounterPillow"/>
+			<node id="openxml__chbrown"/>
+			<node id="yaml-macros-engine__Thom1729"/>
+			<node id="RecurrentHighwayNetworks__julian121266"/>
+			<node id="lsc2cal__oppianmatt"/>
+			<node id="true_review_web2py__lucadealfaro"/>
+			<node id="exoparams__bmorris3"/>
+			<node id="mangle__FooSoft"/>
+			<node id="pymt__tito"/>
+			<node id="kivy__kivy"/>
+			<node id="babixyz__phdowling"/>
+			<node id="terere__alexrudnick"/>
+			<node id="HexSLayer__StephenFluin"/>
+			<node id="Reddit__gitter-badger"/>
+			<node id="alleninf__chrisfilo"/>
+			<node id="bohdi__stringfellow"/>
+			<node id="OpenERP-addons__xrg"/>
+			<node id="zine__mitsuhiko"/>
+			<node id="conda-pack__jcrist"/>
+			<node id="tpn__tpn"/>
+			<node id="neural-assertion__tmills"/>
+			<node id="health-stats__ex-nerd"/>
+			<node id="biopython-2__saketkc"/>
+			<node id="py.sh__etianen"/>
+			<node id="DeepLearningFlappyBird__yenchenlin"/>
+			<node id="forroworld.com__datapythonista"/>
+			<node id="rdf2csv__rory"/>
+			<node id="deep-learning-samples__eliben"/>
+			<node id="bokeh__bokeh"/>
+			<node id="econ-project-templates__hmgaudecker"/>
+			<node id="pyglet__kmonsoor"/>
+			<node id="pacman__cjw296"/>
+			<node id="gae-tap__MiCHiLU"/>
+			<node id="reportlab__eduardocereto"/>
+			<node id="WebJukebox__computmaxer"/>
+			<node id="python-archive__gdub"/>
+			<node id="osmosis__arokem"/>
+			<node id="ninja-project-stats__LuqueDaniel"/>
+			<node id="pinax__pinax"/>
+			<node id="omp-python-test__jiffyclub"/>
+			<node id="pinax__ingenieroariel"/>
+			<node id="pyminifier__liftoff"/>
+			<node id="trakt-tools__fuzeman"/>
+			<node id="python-rogueai__barraponto"/>
+			<node id="python-cookbook__vra"/>
+			<node id="linuxdesh__safwanrahman"/>
+			<node id="pyobjc__fish2000"/>
+			<node id="pyppeteer__miyakogi"/>
+			<node id="mathics-heroku__lidavidm"/>
+			<node id="ovpn-speed-connect__N2ITN"/>
+			<node id="wibblywobbly__dharhas"/>
+			<node id="werkzeug__pallets"/>
+			<node id="pandas__pandas-dev"/>
+			<node id="eho-horizon__Frostman"/>
+			<node id="tools__lsblakk"/>
+			<node id="dummy_uwseds__hrjn"/>
+			<node id="django-content-editor__matthiask"/>
+			<node id="openpyxl__chronossc"/>
+			<node id="airs2icarol__lambacck"/>
+			<node id="vat__al45tair"/>
+			<node id="cache901__pedersen"/>
+			<node id="ImageColoring__MartinXPN"/>
+			<node id="mezzanine-modeltranslation-backport__dekomote"/>
+			<node id="dwca-python__godfoder"/>
+			<node id="androguard__vivainio"/>
+			<node id="django-book__mariuz"/>
+			<node id="indico-backup__pferreir"/>
+			<node id="slack-export-viewer__hfaran"/>
+			<node id="attention-lvcsr__rizar"/>
+			<node id="MyPythonCodeBase__guoruibiao"/>
+			<node id="pycalcstats__tnotstar"/>
+			<node id="keras__keras-team"/>
+			<node id="glancing__vincent-legoll"/>
+			<node id="qweb__antonylesuisse"/>
+			<node id="tensorflow-playground__wangz10"/>
+			<node id="djangocms-bs4forcascade__haricot"/>
+			<node id="https-chromium.googlesource.com-chromium-tools-build__pombredanne"/>
+			<node id="jbcl__yole"/>
+			<node id="SolutionNet__Deimos"/>
+			<node id="compranet__jtbates"/>
+			<node id="pliers__tyarkoni"/>
+			<node id="PyExcelerate__kz26"/>
+			<node id="cython__cython"/>
+			<node id="squeal__davidmalcolm"/>
+			<node id="banderscan__rbtcollins"/>
+			<node id="ktpl__whereismyjetpack"/>
+			<node id="achilterm__fgallaire"/>
+			<node id="trip-based-public-transit-routing-algo__mk-fg"/>
+			<node id="skunkworks__draperjames"/>
+			<node id="dotfiles__halit"/>
+			<node id="tahoe-lafs__drewp"/>
+			<node id="glove2h5__mattilyra"/>
+			<node id="carina-jupyterhub__betatim"/>
+			<node id="zotero-cli__jbaiter"/>
+			<node id="pipz__k4ml"/>
+			<node id="ginga__ejeschke"/>
+			<node id="gordon__jorgebastida"/>
+			<node id="pypi__ericholscher"/>
+			<node id="pytupi__cbentes"/>
+			<node id="mu__sivel"/>
+			<node id="Minecraft-Overviewer__overviewer"/>
+			<node id="django-amber__inglesp"/>
+			<node id="binfiles__jek"/>
+			<node id="metaextract__toabctl"/>
+			<node id="webcount__esauro"/>
+			<node id="pywinner__brandon-rhodes"/>
+			<node id="docutils__brechtm"/>
+			<node id="scikit-learn__scikit-learn"/>
+			<node id="a.r.odoo-testimport__gracinet"/>
+			<node id="thumbnail-finder__bmintz"/>
+			<node id="vauxoo_bzr2git_02__moylop260"/>
+			<node id="meteomap__simlmx"/>
+			<node id="richwareham.com__rjw57"/>
+			<node id="dotfiles__matttrent"/>
+			<node id="pycps__TomAugspurger"/>
+			<node id="evennia-game-index__gtaylor"/>
+			<node id="datasets__jramapuram"/>
+			<node id="scriptlib__xavfernandez"/>
+			<node id="scottt-bin__scottt"/>
+			<node id="tox2travis__luzfcb"/>
+			<node id="pywcsgrid2__leejjoon"/>
+			<node id="https-chromium.googlesource.com-chromiumos-chromite__pombredanne"/>
+			<node id="tippy-top-playground__rlr"/>
+			<node id="k4ml.github.com-old__k4ml"/>
+			<node id="piwheels__bennuttall"/>
+			<node id="distlib__vsajip"/>
+			<node id="komodo-python-dbgp__agroszer"/>
+			<node id="FreeCoding__mfwarren"/>
+			<node id="CouchPotatoServer__CouchPotato"/>
+			<node id="kumo__garaud"/>
+			<node id="canon__crsmithdev"/>
+			<node id="sphinx__sphinx-doc"/>
+			<node id="PoliticalRPG__aholkner"/>
+			<node id="amavisvt__ercpe"/>
+			<node id="django__skevy"/>
+			<node id="scoop__artscoop"/>
+			<node id="pycorpora__aparrish"/>
+			<node id="STIGMA__defionscode"/>
+			<node id="sugar__rparrapy"/>
+			<node id="ordhjelp__iver56"/>
+			<node id="cc__sorenh"/>
+			<node id="pinet__joshuamckenty"/>
+			<node id="relate__inducer"/>
+			<node id="setuptools__abadger"/>
+			<node id="odoo-extra__mga-odoo"/>
+			<node id="ruby-card__jakesyl"/>
+			<node id="multi-diffusion__emmanuelle"/>
+			<node id="pyside2__diorcety"/>
+			<node id="gdax_to_kafka__blbradley"/>
+			<node id="scikit-chem__richlewis42"/>
+			<node id="python-pth__ionelmc"/>
+			<node id="msgpack-numpy__lebedov"/>
+			<node id="pycrxlib__JacobOscarson"/>
+			<node id="Django-facebook__tschellenbach"/>
+			<node id="tokenization__dougalsutherland"/>
+			<node id="moin-2.0__lu-zero"/>
+			<node id="tabledata-backport__remram44"/>
+			<node id="pysolper__aleaxit"/>
+			<node id="touch_bin__Zen-CODE"/>
+			<node id="update_addons__raugturi"/>
+			<node id="ipython-wiki__Carreau"/>
+			<node id="platform_development__aosp-mirror"/>
+			<node id="download-amos__ducha-aiki"/>
+			<node id="bake__teto"/>
+			<node id="rs-skip-gram-in-myhdl__gw0"/>
+			<node id="riboplot__vimalkvn"/>
+			<node id="itchynzb__sww"/>
+			<node id="buildbot__buildbot"/>
+			<node id="nzbToMedia__clinton-hall"/>
+			<node id="cms-preimporter__vytisb"/>
+			<node id="sphinx-pypi-upload__WoLpH"/>
+			<node id="ansible__ernstp"/>
+			<node id="pymodelfit__eteq"/>
+			<node id="devide.johannes__chrisidefix"/>
+			<node id="recommend__chyikwei"/>
+			<node id="PlanetNomadsSavegameEditor__black-silence"/>
+			<node id="uo-aciss__Zsailer"/>
+			<node id="zsos__ztane"/>
+			<node id="greedy-face-features__bbenligiray"/>
+			<node id="openpyxl__gleeda"/>
+			<node id="epub-meta__paulocheque"/>
+			<node id="pytest__alfredodeza"/>
+			<node id="Medusa_1_6__FireBladeNooT"/>
+			<node id="myreco__dutradda"/>
+			<node id="PyTradeLib__briancappello"/>
+			<node id="SublimeDebugger__wvlia5"/>
+			<node id="pyopengl__mcfletch"/>
+			<node id="super_powered_recycle_bin__bfagundez"/>
+			<node id="egtp_new__zooko"/>
+			<node id="fakestockdata__mrocklin"/>
+			<node id="lettuce-py3__adw0rd"/>
+			<node id="research__ryanGT"/>
+			<node id="PostCalib__Jerry-Ma"/>
+			<node id="coveragepy__nedbat"/>
+			<node id="ElectorLights__davidbradway"/>
+			<node id="komodo-pydbgp__dougn"/>
+			<node id="ruamel-yaml__mandeep"/>
+			<node id="pydotorg.pypi__techtonik"/>
+			<node id="sming-qstart__zgoda"/>
+			<node id="dietnet__gokceneraslan"/>
+			<node id="sense-grouping-survey__lopuhin"/>
+			<node id="backports.test.support__pjdelport"/>
+			<node id="syndb__xflr6"/>
+			<node id="kpritz__tshirtman"/>
+			<node id="SickRage__SickRage"/>
+			<node id="flask-zappa__Miserlou"/>
+			<node id="logilab-common__pombredanne"/>
+			<node id="daytime__jcsmith"/>
+			<node id="pip__francescog"/>
+			<node id="Billabong__hoh"/>
+			<node id="bgelauncher__juancarlospaco"/>
+			<node id="polyglot__aboSamoor"/>
+			<node id="Flauthority__trondhindenes"/>
+			<node id="humpty__dairiki"/>
+			<node id="ocrfeeder__ackalker"/>
+			<node id="findimports__mgedmin"/>
+			<node id="Talk-Is-Cheap__tao12345666333"/>
+			<node id="vtkwheel__Korijn"/>
+			<node id="python-doc-ja.sphinx-ja__methane"/>
+			<node id="log2bq__jeremi"/>
+			<node id="master-thesis__jimmycallin"/>
+			<node id="warehouse__davidfischer"/>
+			<node id="lavender__mohanson"/>
+			<node id="condacreate__quasiben"/>
+			<node id="rf-django-misc__rfleschenberg"/>
+			<node id="blog__dhanus"/>
+			<node id="ghc-openhatch-2016__willingc"/>
+			<node id="zipfile-hacks__Yhg1s"/>
+			<node id="Practice__bluescorpio"/>
+			<node id="pip2pi__wolever"/>
+			<node id="mercurial-crew__jordigh"/>
+			<node id="lacosmic__larrybradley"/>
+			<node id="unifield__hectord"/>
+			<node id="bokeh-dashboard-webinar__pzwang"/>
+			<node id="databrewer__rmax"/>
+			<node id="Deepdream-telegram-bot__aaossa"/>
+			<node id="mozbase-testing-temp__ffledgling"/>
+			<node id="pillow-simd__peterhj"/>
+			<node id="subliminal__Diaoul"/>
+			<node id="ARCUS__hamogu"/>
+			<node id="freddo-lib__jbalogh"/>
+			<node id="assetServer-KivEntEd__chozabu"/>
+			<node id="ammonite-feedstock__abhi18av"/>
+			<node id="Skeinforge50plus__nophead"/>
+			<node id="factorio-status-ui__adamcharnock"/>
+			<node id="Skeletor__rmccue"/>
+			<node id="pyfpdf_googlecode__reingart"/>
+			<node id="ijroi__tdsmith"/>
+			<node id="enstaller__pombredanne"/>
+			<node id="pythonwise__tebeka"/>
+			<node id="Models__concerttttt"/>
+			<node id="lms-lrr-modding-system__imayhaveborkedit"/>
+			<node id="cs224n__lucasmoura"/>
+			<node id="TheBestest__nimbusscale"/>
+			<node id="oml_test__moylop260"/>
+			<node id="XDM-Plugins__bobobo1618"/>
+			<node id="KindleEar__cdhigh"/>
+			<node id="Sublime-Text-3-Pulse-Plugin__cryzed"/>
+			<node id="django-static-gitified__xrg"/>
+			<node id="deepclustering__DerThorsten"/>
+			<node id="py2exe-3__lambacck"/>
+			<node id="GeekayServer__coder46"/>
+			<node id="authorship__guyhf"/>
+			<node id="irma-scrapers__simonw"/>
+			<node id="buildout-experiments__pombredanne"/>
+			<node id="pypers__rossant"/>
+			<node id="brainstorm__IDSIA"/>
+			<node id="bigcouch__Gussy"/>
+			<node id="linear_ranking__yupbank"/>
+			<node id="Sick-Beard__midgetspy"/>
+			<node id="cx_Freeze__anthony-tuininga"/>
+			<node id="wxgeometrie__wxgeo"/>
+			<node id="CDDA-Game-Launcher__remyroy"/>
+			<node id="biutils__untom"/>
+			<node id="sprakit__aufziehvogel"/>
+			<node id="hand-helper__feuillemorte"/>
+			<node id="ipython__ipython"/>
+			<node id="hybrid-vocal-classifier__NickleDave"/>
+			<node id="exercises__skraynev"/>
+			<node id="acmi__rp-"/>
+			<node id="myLibrary__sa2ajj"/>
+			<node id="stripe-ctf-2.0__AlexCline"/>
+			<node id="aws-codepipeline-git2s3__n0ts"/>
+			<node id="asciidoc__digwanderlust"/>
+			<node id="beets__beetbox"/>
+			<node id="clam__proycon"/>
+			<node id="vim-netranger__ipod825"/>
+			<node id="ndmapper__jehturner"/>
+			<node id="2014-06-30-stanford__ivanov"/>
+			<node id="PyConference__barrachri"/>
+			<node id="ansible-docs__RobberPhex"/>
+			<node id="pip__adieu"/>
+			<node id="sagelib__williamstein"/>
+			<node id="environment__t0m"/>
+			<node id="nyu_ml_lectures__amueller"/>
+			<node id="python-parallel-talk__esc"/>
+			<node id="traitschema__mivade"/>
+			<node id="twisted__twisted"/>
+			<node id="be__tlevine"/>
+			<node id="data-science-maceio__seocam"/>
+			<node id="TriFusion__ODiogoSilva"/>
+			<node id="python-markdown__craigds"/>
+			<node id="pypy__aljosa"/>
+			<node id="pymyinstall__sdpython"/>
+			<node id="openerp-server__xrg"/>
+			<node id="altium_svg__jaseg"/>
+			<node id="porter__michaeljones"/>
+			<node id="pip__pypa"/>
+			<node id="py2cairo__khamaileon"/>
+			<node id="gevent__gevent"/>
+			<node id="getoffmylawn__jseutter"/>
+			<node id="poky-clang__mtahmed"/>
+			<node id="pyg__rubik"/>
+			<node id="core-hq__kennknowles"/>
+			<node id="baseband__mhvk"/>
+			<node id="depot_tools__bdero"/>
+			<node id="sublime-ruamel__Thom1729"/>
+			<node id="FanFicFare__JimmXinu"/>
+			<node id="haikuporter__dnivra"/>
+			<node id="lambda-harness__brandond"/>
+			<node id="alea__cocuh"/>
+			<node id="openpyxl__adammorris"/>
+			<node id="matplotlib-winbuild__jbmohler"/>
+			<node id="climactic__b33j0r"/>
+			<node id="conda-register__jjhelmus"/>
+			<node id="vmware-nsx__gkotton"/>
+			<node id="scikit-learn.org__ogrisel"/>
+			<node id="PyDev.Debugger__fabioz"/>
+			<node id="flask_mega_tutorial__akjanik"/>
+			<node id="rally-openstack__andreykurilin"/>
+			<node id="setuppytest__oscarbenjamin"/>
+			<node id="python-for-android__kivy"/>
+			<node id="bravo.plugin__MostAwesomeDude"/>
+			<node id="genc__hannosch"/>
+			<node id="blankeditor__asweigart"/>
+			<node id="cvs__Lothiraldan"/>
+			<node id="autoautotracker__bob-the-hamster"/>
+			<node id="jrti_game__encukou"/>
+			<node id="FlaskLearn__krishnakalyan3"/>
+			<node id="pybindgen__gjcarneiro"/>
+			<node id="django__django"/>
+			<node id="jaraco.develop__jaraco"/>
+			<node id="hue__cloudera"/>
+			<node id="wkr.py__wroberts"/>
+			<node id="awx__AlanCoding"/>
+			<node id="pytest-zap__davehunt"/>
+			<node id="YifySubtitles.bundle__sander1"/>
+			<node id="kay__ianlewis"/>
+			<node id="reproject__astrofrog"/>
+			<node id="breakpad-scrape-system-symbols__luser"/>
+			<node id="python-airbase__jorisvandenbossche"/>
+			<node id="ccc-gistemp_gui__ocefpaf"/>
+			<node id="swarming.client__pombredanne"/>
+			<node id="chromium-trunk-build-override__lukeweber"/>
+		</nodes>
+		<edges>
+			<edge id="0" source="docutils__brechtm" start="2009-12-24" target="python-doc-ja.sphinx-ja__methane"/>
+			<edge id="1" source="rally-openstack__andreykurilin" start="2016-08-25" target="metaextract__toabctl"/>
+			<edge id="2" source="cvs__Lothiraldan" start="2013-02-22" target="logilab-common__pombredanne"/>
+			<edge id="3" source="ansible-docs__RobberPhex" start="2015-10-30" target="mu__sivel"/>
+			<edge id="4" source="kay__ianlewis" start="2013-12-21" target="gae-tap__MiCHiLU"/>
+			<edge id="5" source="OpenERP-addons__xrg" start="2012-12-25" target="django-static-gitified__xrg"/>
+			<edge id="6" source="cvs__Lothiraldan" start="2012-01-31" target="rietveld__robfig"/>
+			<edge id="7" source="hg-stable__vmg" start="2012-05-09" target="pydotorg.pypi__techtonik"/>
+			<edge id="8" source="tools__lsblakk" start="2016-11-25" target="git-cinnabar__glandium"/>
+			<edge id="9" source="ansible-docs__RobberPhex" start="2017-07-07" target="aws-codepipeline-git2s3__n0ts"/>
+			<edge id="10" source="OpenMPK__d33tah" start="2016-08-17" target="flask_mega_tutorial__akjanik"/>
+			<edge id="11" source="pypy__aljosa" start="2011-07-25" target="pytest__alfredodeza"/>
+			<edge id="12" source="pandas__pandas-dev" start="2017-12-02" target="piwheels__bennuttall"/>
+			<edge id="13" source="keras__keras-team" start="2017-06-23" target="dietnet__gokceneraslan"/>
+			<edge id="14" source="buildbot-configs__catlee" start="2010-04-30" target="tools__lsblakk"/>
+			<edge id="15" source="hg-stable__vmg" start="2014-07-17" target="PyDev.Debugger__fabioz"/>
+			<edge id="16" source="scrapy__scrapy" start="2015-06-07" target="sprakit__aufziehvogel"/>
+			<edge id="17" source="OCRF__ngoix" start="2017-02-11" target="librosa__librosa"/>
+			<edge id="18" source="bokeh__bokeh" start="2016-02-26" target="slack-export-viewer__hfaran"/>
+			<edge id="19" source="flocker-profiles__wallnerryan" start="2017-07-20" target="ovpn-speed-connect__N2ITN"/>
+			<edge id="20" source="matplotlib__matplotlib" start="2016-12-06" target="core_models__keflavich"/>
+			<edge id="21" source="nltk__nltk" start="2014-07-16" target="polyglot__aboSamoor"/>
+			<edge id="22" source="be__tlevine" start="2013-10-23" target="2014-06-30-stanford__ivanov"/>
+			<edge id="23" source="hg-stable__vmg" start="2012-04-14" target="pypy__aljosa"/>
+			<edge id="24" source="ipython__ipython" start="2013-01-10" target="ipython-wiki__Carreau"/>
+			<edge id="25" source="scikit-learn__scikit-learn" start="2016-12-13" target="scikit-image__scikit-image"/>
+			<edge id="26" source="odoo-extra__mga-odoo" start="2016-10-21" target="python-cookbook__vra"/>
+			<edge id="27" source="test-utils__jbalogh" start="2017-10-25" target="tippy-top-playground__rlr"/>
+			<edge id="28" source="pybindgen__gjcarneiro" start="2011-05-01" target="pyglet__kmonsoor"/>
+			<edge id="29" source="bgelauncher__juancarlospaco" start="2014-10-24" target="brython__brython-dev"/>
+			<edge id="30" source="ipython__ipython" start="2013-02-06" target="python-parallel-talk__esc"/>
+			<edge id="31" source="hg-stable__vmg" start="2011-10-29" target="mangle__FooSoft"/>
+			<edge id="32" source="jhbuild__tkruse" start="2009-04-01" target="squeal__davidmalcolm"/>
+			<edge id="33" source="bokeh__bokeh" start="2015-06-03" target="tpn__tpn"/>
+			<edge id="34" source="setuptools__abadger" start="2015-01-14" target="ansible-docs__RobberPhex"/>
+			<edge id="35" source="pip__pypa" start="2013-12-19" target="python-pth__ionelmc"/>
+			<edge id="36" source="pypy__aljosa" start="2008-11-14" target="logilab-common__pombredanne"/>
+			<edge id="37" source="sphinx__sphinx-doc" start="2017-06-27" target="werkzeug__pallets"/>
+			<edge id="38" source="django__django" start="2017-06-30" target="data-science-maceio__seocam"/>
+			<edge id="39" source="sympy__sympy" start="2016-09-16" target="scikit-learn__scikit-learn"/>
+			<edge id="40" source="sympy__sympy" start="2013-12-14" target="mathics-heroku__lidavidm"/>
+			<edge id="41" source="pip__pypa" start="2016-03-09" target="backports.test.support__pjdelport"/>
+			<edge id="42" source="cython__cython" start="2017-01-22" target="acmi__rp-"/>
+			<edge id="43" source="ansible-docs__RobberPhex" start="2016-10-26" target="lambda-harness__brandond"/>
+			<edge id="44" source="django-book__mariuz" start="2015-04-06" target="aSetOfScripts__bucketzxm"/>
+			<edge id="45" source="cvs__Lothiraldan" start="2014-07-17" target="PyDev.Debugger__fabioz"/>
+			<edge id="46" source="scikit-learn__scikit-learn" start="2016-12-27" target="witchcraft__llllllllll"/>
+			<edge id="47" source="bigcouch__Gussy" start="2017-09-26" target="TheBestest__nimbusscale"/>
+			<edge id="48" source="setuptools__abadger" start="2012-04-14" target="pypy__aljosa"/>
+			<edge id="49" source="pymt__tito" start="2010-11-03" target="kivy__kivy"/>
+			<edge id="50" source="odoo-extra__mga-odoo" start="2015-02-22" target="scriptlib__xavfernandez"/>
+			<edge id="51" source="OCRF__ngoix" start="2016-06-06" target="dummy_uwseds__hrjn"/>
+			<edge id="52" source="pyobjc__fish2000" start="2006-06-15" target="python-ast__banga"/>
+			<edge id="53" source="pip__pypa" start="2015-07-09" target="humpty__dairiki"/>
+			<edge id="54" source="pinax__pinax" start="2009-07-12" target="sphinx-pypi-upload__WoLpH"/>
+			<edge id="55" source="bokeh__bokeh" start="2016-04-23" target="pliers__tyarkoni"/>
+			<edge id="56" source="scikit-learn__scikit-learn" start="2016-12-28" target="blog__dhanus"/>
+			<edge id="57" source="pywcsgrid2__leejjoon" start="2016-06-01" target="reproject__astrofrog"/>
+			<edge id="58" source="bokeh__bokeh" start="2016-06-17" target="condacreate__quasiben"/>
+			<edge id="59" source="docutils_from_svn__msabramo" start="2009-12-24" target="python-doc-ja.sphinx-ja__methane"/>
+			<edge id="60" source="pip__pypa" start="2017-06-27" target="werkzeug__pallets"/>
+			<edge id="61" source="jhbuild__tkruse" start="2008-11-30" target="django__django"/>
+			<edge id="62" source="pandas__pandas-dev" start="2017-10-17" target="conda-pack__jcrist"/>
+			<edge id="63" source="bokeh__bokeh" start="2016-12-20" target="bokeh-dashboard-webinar__pzwang"/>
+			<edge id="64" source="ipython__ipython" start="2014-09-02" target="richwareham.com__rjw57"/>
+			<edge id="65" source="python-doc-ja.sphinx-ja__methane" start="2011-07-25" target="pytest__alfredodeza"/>
+			<edge id="66" source="OCRF__ngoix" start="2017-01-14" target="multi-diffusion__emmanuelle"/>
+			<edge id="67" source="pip__adieu" start="2012-06-06" target="pip__pypa"/>
+			<edge id="68" source="ipython__ipython" start="2014-03-13" target="py2cairo__khamaileon"/>
+			<edge id="69" source="phiclicker__kevinwang" start="2017-05-11" target="PyExcelerate__kz26"/>
+			<edge id="70" source="odoo-extra__mga-odoo" start="2014-05-17" target="coala__coala"/>
+			<edge id="71" source="pypy__aljosa" start="2013-10-15" target="crossbar__crossbario"/>
+			<edge id="72" source="linuxdesh__safwanrahman" start="2017-06-02" target="daytime__jcsmith"/>
+			<edge id="73" source="python-ast__banga" start="2007-08-02" target="sphinx__sphinx-doc"/>
+			<edge id="74" source="platform_development__aosp-mirror" start="2013-12-14" target="mathics-heroku__lidavidm"/>
+			<edge id="75" source="cython__cython" start="2013-02-13" target="ipython-wiki__Carreau"/>
+			<edge id="76" source="django__django" start="2016-03-09" target="django-amber__inglesp"/>
+			<edge id="77" source="beets__beetbox" start="2015-06-23" target="inestool__dsedivec"/>
+			<edge id="78" source="Minecraft-Overviewer__overviewer" start="2012-08-10" target="Skeletor__rmccue"/>
+			<edge id="79" source="mezzanine-modeltranslation-backport__dekomote" start="2014-07-28" target="cx_Freeze__anthony-tuininga"/>
+			<edge id="80" source="python-ast__banga" start="2012-09-25" target="distlib__vsajip"/>
+			<edge id="81" source="scikit-image__scikit-image" start="2017-12-30" target="self-ensemble-visual-domain-adapt-photo__Britefury"/>
+			<edge id="82" source="ipython__ipython" start="2016-01-23" target="matplotlib__matplotlib"/>
+			<edge id="83" source="scikit-learn__scikit-learn" start="2014-07-01" target="alleninf__chrisfilo"/>
+			<edge id="84" source="pip__pypa" start="2015-02-22" target="scriptlib__xavfernandez"/>
+			<edge id="85" source="pytest__alfredodeza" start="2012-04-14" target="pypy__aljosa"/>
+			<edge id="86" source="django__django" start="2009-06-30" target="everyblock_code__brosner"/>
+			<edge id="87" source="OCRF__ngoix" start="2016-07-04" target="databrewer__rmax"/>
+			<edge id="88" source="ansible-docs__RobberPhex" start="2018-02-21" target="ktpl__whereismyjetpack"/>
+			<edge id="89" source="beets__beetbox" start="2017-10-19" target="jrti_game__encukou"/>
+			<edge id="90" source="reproject__astrofrog" start="2016-06-30" target="astropy__astropy"/>
+			<edge id="91" source="hue__cloudera" start="2017-05-11" target="PyExcelerate__kz26"/>
+			<edge id="92" source="thumbnail-finder__bmintz" start="2015-04-15" target="scoop__artscoop"/>
+			<edge id="93" source="cython__cython" start="2012-10-29" target="bravo.plugin__MostAwesomeDude"/>
+			<edge id="94" source="beets__beetbox" start="2016-10-18" target="trip-based-public-transit-routing-algo__mk-fg"/>
+			<edge id="95" source="keras__keras-team" start="2017-05-10" target="greedy-face-features__bbenligiray"/>
+			<edge id="96" source="brainstorm__IDSIA" start="2016-08-31" target="biutils__untom"/>
+			<edge id="97" source="cython__cython" start="2016-12-27" target="witchcraft__llllllllll"/>
+			<edge id="98" source="ansible-docs__RobberPhex" start="2017-07-20" target="ovpn-speed-connect__N2ITN"/>
+			<edge id="99" source="sympy__sympy" start="2015-06-09" target="climactic__b33j0r"/>
+			<edge id="100" source="TriFusion__ODiogoSilva" start="2016-12-20" target="myreco__dutradda"/>
+			<edge id="101" source="python-doc-ja.sphinx-ja__methane" start="2011-03-16" target="hg-stable__vmg"/>
+			<edge id="102" source="django__skevy" start="2009-06-30" target="everyblock_code__brosner"/>
+			<edge id="103" source="hg-stable__vmg" start="2010-03-14" target="myLibrary__sa2ajj"/>
+			<edge id="104" source="django__django" start="2016-03-01" target="dotfiles__halit"/>
+			<edge id="105" source="buildbot__buildbot" start="2013-09-03" target="2014-06-30-stanford__ivanov"/>
+			<edge id="106" source="django-content-editor__matthiask" start="2016-03-30" target="clam__proycon"/>
+			<edge id="107" source="rally-openstack__andreykurilin" start="2017-07-04" target="exercises__skraynev"/>
+			<edge id="108" source="openerp-server__xrg" start="2014-05-17" target="coala__coala"/>
+			<edge id="109" source="ansible__ernstp" start="2017-09-26" target="TheBestest__nimbusscale"/>
+			<edge id="110" source="pillow-simd__peterhj" start="2014-10-21" target="cms-preimporter__vytisb"/>
+			<edge id="111" source="scikit-learn__scikit-learn" start="2017-06-27" target="ImageColoring__MartinXPN"/>
+			<edge id="112" source="openerp-server__xrg" start="2010-03-11" target="odoo-extra__mga-odoo"/>
+			<edge id="113" source="CouchPotatoServer__CouchPotato" start="2016-09-12" target="trakt-tools__fuzeman"/>
+			<edge id="114" source="django__django" start="2016-11-06" target="tox2travis__luzfcb"/>
+			<edge id="115" source="scikit-image__scikit-image" start="2017-01-14" target="multi-diffusion__emmanuelle"/>
+			<edge id="116" source="scikit-learn__scikit-learn" start="2016-10-27" target="FlaskLearn__krishnakalyan3"/>
+			<edge id="117" source="true_review_web2py__lucadealfaro" start="2016-12-20" target="myreco__dutradda"/>
+			<edge id="118" source="ammonite-feedstock__abhi18av" start="2017-06-23" target="dietnet__gokceneraslan"/>
+			<edge id="119" source="pinet__joshuamckenty" start="2010-06-23" target="cc__sorenh"/>
+			<edge id="120" source="pandas__pandas-dev" start="2017-10-15" target="syndb__xflr6"/>
+			<edge id="121" source="OCRF__ngoix" start="2016-05-19" target="tensorflow-playground__wangz10"/>
+			<edge id="122" source="pillow-simd__peterhj" start="2014-05-24" target="pyminifier__liftoff"/>
+			<edge id="123" source="pip__francescog" start="2013-12-19" target="python-pth__ionelmc"/>
+			<edge id="124" source="scikit-learn__scikit-learn" start="2017-05-11" target="PyExcelerate__kz26"/>
+			<edge id="125" source="jython__int3" start="2009-11-25" target="pypy__aljosa"/>
+			<edge id="126" source="django__django" start="2012-02-29" target="eho-horizon__Frostman"/>
+			<edge id="127" source="ginga__ejeschke" start="2016-06-30" target="astropy__astropy"/>
+			<edge id="128" source="mercurial-crew__jordigh" start="2013-03-02" target="lms-lrr-modding-system__imayhaveborkedit"/>
+			<edge id="129" source="ansible__ernstp" start="2018-02-21" target="ktpl__whereismyjetpack"/>
+			<edge id="130" source="mercurial-crew__jordigh" start="2006-12-14" target="hg-stable__vmg"/>
+			<edge id="131" source="pip__pypa" start="2014-06-02" target="tabledata-backport__remram44"/>
+			<edge id="132" source="buildbot__buildbot" start="2014-12-28" target="ocf2__dottedmag"/>
+			<edge id="133" source="twisted__twisted" start="2009-02-19" target="tahoe-lafs__drewp"/>
+			<edge id="134" source="keras__keras-team" start="2018-02-01" target="download-amos__ducha-aiki"/>
+			<edge id="135" source="OCRF__ngoix" start="2017-03-28" target="glove2h5__mattilyra"/>
+			<edge id="136" source="pip__pypa" start="2012-06-23" target="wheel__pombredanne"/>
+			<edge id="137" source="Sick-Beard__midgetspy" start="2015-03-08" target="twisted__twisted"/>
+			<edge id="138" source="pillow-simd__peterhj" start="2015-01-01" target="pyfpdf_googlecode__reingart"/>
+			<edge id="139" source="odoo-extra__mga-odoo" start="2009-01-02" target="openerp-server__xrg"/>
+			<edge id="140" source="scrapy__scrapy" start="2017-09-14" target="Practice__bluescorpio"/>
+			<edge id="141" source="scikit-learn__scikit-learn" start="2017-01-14" target="recommend__chyikwei"/>
+			<edge id="142" source="pypy__aljosa" start="2016-03-06" target="pypi4all__berdario"/>
+			<edge id="143" source="thumbnail-finder__bmintz" start="2014-06-16" target="SolutionNet__Deimos"/>
+			<edge id="144" source="CouchPotatoServer__CouchPotato" start="2014-06-27" target="nzbToMedia__clinton-hall"/>
+			<edge id="145" source="hg-stable__vmg" start="2015-12-29" target="CDDA-Game-Launcher__remyroy"/>
+			<edge id="146" source="lettuce-py3__adw0rd" start="2016-07-14" target="unifield__hectord"/>
+			<edge id="147" source="scrapy__scrapy" start="2015-11-17" target="python-rogueai__barraponto"/>
+			<edge id="148" source="cython__cython" start="2015-01-29" target="pymodelfit__eteq"/>
+			<edge id="149" source="logilab-common__pombredanne" start="2015-06-16" target="kumo__garaud"/>
+			<edge id="150" source="kivy__kivy" start="2016-08-18" target="epub-meta__paulocheque"/>
+			<edge id="151" source="cvs__Lothiraldan" start="2010-03-14" target="myLibrary__sa2ajj"/>
+			<edge id="152" source="bokeh__bokeh" start="2016-06-30" target="astropy__astropy"/>
+			<edge id="153" source="platform_development__aosp-mirror" start="2012-01-04" target="scottt-bin__scottt"/>
+			<edge id="154" source="pandas__pandas-dev" start="2015-03-31" target="ijroi__tdsmith"/>
+			<edge id="155" source="pillow-simd__peterhj" start="2014-08-28" target="omp-python-test__jiffyclub"/>
+			<edge id="156" source="buildbot__buildbot" start="2013-01-09" target="lsc2cal__oppianmatt"/>
+			<edge id="157" source="pandas__pandas-dev" start="2014-07-20" target="pycps__TomAugspurger"/>
+			<edge id="158" source="python-ast__banga" start="2005-06-06" target="pypy__aljosa"/>
+			<edge id="159" source="k4ml.github.com-old__k4ml" start="2013-09-11" target="pipz__k4ml"/>
+			<edge id="160" source="pip__francescog" start="2012-06-23" target="wheel__pombredanne"/>
+			<edge id="161" source="python-doc-ja.sphinx-ja__methane" start="2013-08-11" target="achilterm__fgallaire"/>
+			<edge id="162" source="django__django" start="2015-10-22" target="PyConference__barrachri"/>
+			<edge id="163" source="pip__adieu" start="2012-09-29" target="toolbox__kumar303"/>
+			<edge id="164" source="OCRF__ngoix" start="2016-12-13" target="scikit-image__scikit-image"/>
+			<edge id="165" source="ipython__ipython" start="2015-01-29" target="pymodelfit__eteq"/>
+			<edge id="166" source="cython__cython" start="2017-10-19" target="jrti_game__encukou"/>
+			<edge id="167" source="linuxdesh__safwanrahman" start="2017-10-25" target="tippy-top-playground__rlr"/>
+			<edge id="168" source="django__django" start="2016-12-12" target="rf-django-misc__rfleschenberg"/>
+			<edge id="169" source="https-chromium.googlesource.com-chromium-tools-build__pombredanne" start="2013-08-21" target="swarming.client__pombredanne"/>
+			<edge id="170" source="django__django" start="2012-06-06" target="pip__pypa"/>
+			<edge id="171" source="ipython__ipython" start="2017-01-22" target="pypers__rossant"/>
+			<edge id="172" source="lettuce-py3__adw0rd" start="2016-02-28" target="bohdi__stringfellow"/>
+			<edge id="173" source="pypy__aljosa" start="2016-08-13" target="sense-grouping-survey__lopuhin"/>
+			<edge id="174" source="ansible-docs__RobberPhex" start="2017-06-07" target="parse-clausewitz__allardhoeve"/>
+			<edge id="175" source="buildbot-configs__catlee" start="2011-03-10" target="breakpad-scrape-system-symbols__luser"/>
+			<edge id="176" source="Medusa_1_6__FireBladeNooT" start="2016-06-06" target="nzbToMedia__clinton-hall"/>
+			<edge id="177" source="pinax__pinax" start="2011-01-19" target="pypy__aljosa"/>
+			<edge id="178" source="ipython__ipython" start="2015-09-08" target="uo-aciss__Zsailer"/>
+			<edge id="179" source="scikit-learn__scikit-learn" start="2012-01-09" target="scikit-learn.org__ogrisel"/>
+			<edge id="180" source="python-doc-ja.sphinx-ja__methane" start="2009-09-14" target="timtools__lsaffre"/>
+			<edge id="181" source="buildbot__buildbot" start="2015-06-01" target="rsdoc-to-sat__arekm"/>
+			<edge id="182" source="keras__keras-team" start="2017-06-23" target="Models__concerttttt"/>
+			<edge id="183" source="sympy__sympy" start="2010-12-07" target="wxgeometrie__wxgeo"/>
+			<edge id="184" source="ipython__ipython" start="2014-04-29" target="octgn-anr-spoilergrab__avandever"/>
+			<edge id="185" source="pandas__pandas-dev" start="2017-10-28" target="gdax_to_kafka__blbradley"/>
+			<edge id="186" source="django__django" start="2017-06-19" target="sming-qstart__zgoda"/>
+			<edge id="187" source="mercurial-crew__jordigh" start="2009-01-25" target="cvs__Lothiraldan"/>
+			<edge id="188" source="OpenERP-addons__xrg" start="2009-01-02" target="openerp-server__xrg"/>
+			<edge id="189" source="pinax__pinax" start="2017-06-23" target="komodo-pydbgp__dougn"/>
+			<edge id="190" source="OCRF__ngoix" start="2017-10-18" target="numerox__kwgoodman"/>
+			<edge id="191" source="ipython__ipython" start="2014-03-20" target="authorship__guyhf"/>
+			<edge id="192" source="ipython__ipython" start="2013-11-15" target="androguard__vivainio"/>
+			<edge id="193" source="twisted__twisted" start="2016-03-06" target="pypi4all__berdario"/>
+			<edge id="194" source="zine__mitsuhiko" start="2009-12-24" target="python-doc-ja.sphinx-ja__methane"/>
+			<edge id="195" source="kivy__kivy" start="2017-08-09" target="deepclustering__DerThorsten"/>
+			<edge id="196" source="jhbuild__tkruse" start="2009-12-17" target="pybindgen__gjcarneiro"/>
+			<edge id="197" source="setuptools__abadger" start="2010-07-30" target="jaraco.develop__jaraco"/>
+			<edge id="198" source="scikit-learn__scikit-learn" start="2016-10-17" target="ghc-openhatch-2016__willingc"/>
+			<edge id="199" source="sugar__rparrapy" start="2008-10-15" target="pip__pypa"/>
+			<edge id="200" source="buildout-experiments__pombredanne" start="2013-04-16" target="pacman__cjw296"/>
+			<edge id="201" source="pip__pypa" start="2015-01-14" target="ansible-docs__RobberPhex"/>
+			<edge id="202" source="twisted__twisted" start="2015-07-28" target="flocker-profiles__wallnerryan"/>
+			<edge id="203" source="sphinx__sphinx-doc" start="2017-09-02" target="pip__pypa"/>
+			<edge id="204" source="cvs__Lothiraldan" start="2017-03-02" target="python-type-checking__chadrik"/>
+			<edge id="205" source="keras__keras-team" start="2017-05-17" target="recurrentshop__farizrahman4u"/>
+			<edge id="206" source="python-ast__banga" start="2012-04-23" target="pip2pi__wolever"/>
+			<edge id="207" source="django__django" start="2015-12-05" target="webcount__esauro"/>
+			<edge id="208" source="brainstorm__IDSIA" start="2017-03-06" target="RecurrentHighwayNetworks__julian121266"/>
+			<edge id="209" source="pypy__aljosa" start="2009-07-07" target="findimports__mgedmin"/>
+			<edge id="210" source="poky-clang__mtahmed" start="2015-06-08" target="nyu_ml_lectures__amueller"/>
+			<edge id="211" source="Django-facebook__tschellenbach" start="2017-11-19" target="factorio-status-ui__adamcharnock"/>
+			<edge id="212" source="depot_tools__bdero" start="2015-10-02" target="https-chromium.googlesource.com-chromium-tools-build__pombredanne"/>
+			<edge id="213" source="sympy__sympy" start="2014-08-02" target="facecoin-sharpways__gdevanla"/>
+			<edge id="214" source="beets__beetbox" start="2016-05-04" target="zotero-cli__jbaiter"/>
+			<edge id="215" source="kivy__kivy" start="2017-06-27" target="ImageColoring__MartinXPN"/>
+			<edge id="216" source="oml_test__moylop260" start="2012-01-30" target="vauxoo_bzr2git_02__moylop260"/>
+			<edge id="217" source="matplotlib__matplotlib" start="2016-06-01" target="reproject__astrofrog"/>
+			<edge id="218" source="pypy__aljosa" start="2014-02-24" target="pycrxlib__JacobOscarson"/>
+			<edge id="219" source="python-ast__banga" start="2011-07-25" target="pytest__alfredodeza"/>
+			<edge id="220" source="django__django" start="2015-02-22" target="scriptlib__xavfernandez"/>
+			<edge id="221" source="mezzanine-modeltranslation-backport__dekomote" start="2012-07-21" target="openxml__chbrown"/>
+			<edge id="222" source="django__django" start="2011-01-21" target="django-photologue__aljosa"/>
+			<edge id="223" source="buildbot__buildbot" start="2013-06-27" target="rietveld__robfig"/>
+			<edge id="224" source="Minecraft-Overviewer__overviewer" start="2016-07-21" target="tesscred__CounterPillow"/>
+			<edge id="225" source="ipython__ipython" start="2016-06-01" target="reproject__astrofrog"/>
+			<edge id="226" source="OCRF__ngoix" start="2017-01-14" target="recommend__chyikwei"/>
+			<edge id="227" source="Django-facebook__tschellenbach" start="2016-04-01" target="evennia-game-index__gtaylor"/>
+			<edge id="228" source="odoo-extra__mga-odoo" start="2012-12-25" target="django-static-gitified__xrg"/>
+			<edge id="229" source="SickRage_backup__gborri" start="2016-08-17" target="flask_mega_tutorial__akjanik"/>
+			<edge id="230" source="python-for-android__kivy" start="2015-06-03" target="autoautotracker__bob-the-hamster"/>
+			<edge id="231" source="ipython__ipython" start="2015-04-20" target="python-airbase__jorisvandenbossche"/>
+			<edge id="232" source="bokeh__bokeh" start="2016-08-19" target="filereader__deeplook"/>
+			<edge id="233" source="ansible__ernstp" start="2017-10-03" target="Talk-Is-Cheap__tao12345666333"/>
+			<edge id="234" source="scikit-image__scikit-image" start="2017-06-13" target="dotfiles__matttrent"/>
+			<edge id="235" source="pandas__pandas-dev" start="2016-12-27" target="witchcraft__llllllllll"/>
+			<edge id="236" source="baseband__mhvk" start="2016-12-06" target="core_models__keflavich"/>
+			<edge id="237" source="odoo-extra__mga-odoo" start="2011-02-26" target="qweb__antonylesuisse"/>
+			<edge id="238" source="django-content-editor__matthiask" start="2012-05-18" target="nltk__nltk"/>
+			<edge id="239" source="gevent__gevent" start="2016-12-27" target="witchcraft__llllllllll"/>
+			<edge id="240" source="vmware-nsx__gkotton" start="2016-09-08" target="neural-assertion__tmills"/>
+			<edge id="241" source="pip__pypa" start="2012-09-29" target="k4ml.github.com-old__k4ml"/>
+			<edge id="242" source="bokeh__bokeh" start="2015-03-29" target="pycorpora__aparrish"/>
+			<edge id="243" source="matplotlib__matplotlib" start="2016-06-01" target="lacosmic__larrybradley"/>
+			<edge id="244" source="pymyinstall__sdpython" start="2017-11-28" target="_automation__sdpython"/>
+			<edge id="245" source="scikit-image__scikit-image" start="2018-02-21" target="vtkwheel__Korijn"/>
+			<edge id="246" source="pypy__aljosa" start="2016-08-19" target="filereader__deeplook"/>
+			<edge id="247" source="sympy__sympy" start="2017-08-02" target="canon__crsmithdev"/>
+			<edge id="248" source="sympy__sympy" start="2016-06-22" target="fakestockdata__mrocklin"/>
+			<edge id="249" source="OpenERP-addons__xrg" start="2008-10-09" target="odoo-extra__mga-odoo"/>
+			<edge id="250" source="keras__keras-team" start="2017-11-30" target="vim-netranger__ipod825"/>
+			<edge id="251" source="astropy__astropy" start="2016-10-08" target="exoparams__bmorris3"/>
+			<edge id="252" source="astropy__astropy" start="2016-06-01" target="reproject__astrofrog"/>
+			<edge id="253" source="python-ast__banga" start="2017-05-03" target="zipfile-hacks__Yhg1s"/>
+			<edge id="254" source="setuptools__abadger" start="2012-09-25" target="distlib__vsajip"/>
+			<edge id="255" source="Theano__jdemouth" start="2015-07-20" target="meteomap__simlmx"/>
+			<edge id="256" source="ammonite-feedstock__abhi18av" start="2018-02-17" target="conda-register__jjhelmus"/>
+			<edge id="257" source="python-markdown__craigds" start="2012-04-23" target="pip2pi__wolever"/>
+			<edge id="258" source="hg-stable__vmg" start="2011-03-01" target="pyg__rubik"/>
+			<edge id="259" source="matplotlib__matplotlib" start="2017-10-06" target="pandas__pandas-dev"/>
+			<edge id="260" source="pip__adieu" start="2017-06-27" target="werkzeug__pallets"/>
+			<edge id="261" source="pypy__aljosa" start="2010-09-30" target="core-hq__kennknowles"/>
+			<edge id="262" source="hg-stable__vmg" start="2010-03-17" target="cache901__pedersen"/>
+			<edge id="263" source="pillow-simd__peterhj" start="2015-03-29" target="pycorpora__aparrish"/>
+			<edge id="264" source="pandas__pandas-dev" start="2015-06-16" target="kumo__garaud"/>
+			<edge id="265" source="scikit-learn__scikit-learn" start="2017-01-14" target="multi-diffusion__emmanuelle"/>
+			<edge id="266" source="pandas__pandas-dev" start="2014-01-23" target="ipython__ipython"/>
+			<edge id="267" source="pip__pypa" start="2014-12-12" target="msgpack-numpy__lebedov"/>
+			<edge id="268" source="cvs__Lothiraldan" start="2015-03-08" target="twisted__twisted"/>
+			<edge id="269" source="python-doc-ja.sphinx-ja__methane" start="2013-06-26" target="porter__michaeljones"/>
+			<edge id="270" source="nltk__nltk" start="2014-08-27" target="terere__alexrudnick"/>
+			<edge id="271" source="werkzeug__pallets" start="2017-12-17" target="Deepdream-telegram-bot__aaossa"/>
+			<edge id="272" source="Minecraft-Overviewer__overviewer" start="2013-05-26" target="stripe-ctf-2.0__AlexCline"/>
+			<edge id="273" source="pip__pypa" start="2018-01-17" target="yaml-macros-engine__Thom1729"/>
+			<edge id="274" source="python-markdown__craigds" start="2010-09-13" target="freddo-lib__jbalogh"/>
+			<edge id="275" source="tensor_decomp_embedding__popcorncolonel" start="2017-01-14" target="recommend__chyikwei"/>
+			<edge id="276" source="OCRF__ngoix" start="2016-08-31" target="biutils__untom"/>
+			<edge id="277" source="pypy__aljosa" start="2015-07-17" target="glancing__vincent-legoll"/>
+			<edge id="278" source="ninja-project-stats__LuqueDaniel" start="2014-10-24" target="brython__brython-dev"/>
+			<edge id="279" source="odoo-extra__mga-odoo" start="2008-09-26" target="OpenERP-addons__xrg"/>
+			<edge id="280" source="django-content-editor__matthiask" start="2013-05-30" target="WebJukebox__computmaxer"/>
+			<edge id="281" source="ammonite-feedstock__abhi18av" start="2017-06-19" target="fnb__edisongustavo"/>
+			<edge id="282" source="pip__pypa" start="2014-10-11" target="rdf2csv__rory"/>
+			<edge id="283" source="cvs__Lothiraldan" start="2015-04-06" target="aSetOfScripts__bucketzxm"/>
+			<edge id="284" source="astropy__astropy" start="2017-10-06" target="pandas__pandas-dev"/>
+			<edge id="285" source="mozbase-testing-temp__ffledgling" start="2015-01-06" target="cvs__Lothiraldan"/>
+			<edge id="286" source="odoo-extra__mga-odoo" start="2012-10-03" target="napimenu__nagyv"/>
+			<edge id="287" source="Django-facebook__tschellenbach" start="2015-04-06" target="aSetOfScripts__bucketzxm"/>
+			<edge id="288" source="pypy__aljosa" start="2015-04-16" target="airs2icarol__lambacck"/>
+			<edge id="289" source="poky-clang__mtahmed" start="2015-12-03" target="phiclicker__kevinwang"/>
+			<edge id="290" source="cvs__Lothiraldan" start="2015-12-29" target="CDDA-Game-Launcher__remyroy"/>
+			<edge id="291" source="OCRF__ngoix" start="2017-06-27" target="ImageColoring__MartinXPN"/>
+			<edge id="292" source="logilab-common__pombredanne" start="2017-06-06" target="zkindlerss__insert0003"/>
+			<edge id="293" source="keras__keras-team" start="2017-09-09" target="alea__cocuh"/>
+			<edge id="294" source="cvs__Lothiraldan" start="2014-07-02" target="kallithea__msabramo"/>
+			<edge id="295" source="setuptools__abadger" start="2015-09-04" target="genc__hannosch"/>
+			<edge id="296" source="vmware-nsx__gkotton" start="2014-06-11" target="wheel__pombredanne"/>
+			<edge id="297" source="OCRF__ngoix" start="2016-09-16" target="scikit-learn__scikit-learn"/>
+			<edge id="298" source="kivy__kivy" start="2015-04-26" target="python-for-android__kivy"/>
+			<edge id="299" source="sympy__sympy" start="2010-06-10" target="nxt_ros__daevaorn"/>
+			<edge id="300" source="recurrentshop__farizrahman4u" start="2017-08-15" target="babixyz__phdowling"/>
+			<edge id="301" source="django__django" start="2015-07-31" target="environment__t0m"/>
+			<edge id="302" source="sympy__sympy" start="2014-07-23" target="gwyjpkqidata__cbuehler"/>
+			<edge id="303" source="YAML-Macros__Thom1729" start="2018-01-17" target="yaml-macros-engine__Thom1729"/>
+			<edge id="304" source="django__django" start="2015-11-01" target="gordon__jorgebastida"/>
+			<edge id="305" source="pillow-simd__peterhj" start="2016-12-13" target="scikit-image__scikit-image"/>
+			<edge id="306" source="ansible-docs__RobberPhex" start="2017-07-27" target="hand-helper__feuillemorte"/>
+			<edge id="307" source="pyglet__kmonsoor" start="2016-08-17" target="flask_mega_tutorial__akjanik"/>
+			<edge id="308" source="zkindlerss__insert0003" start="2017-08-01" target="KindleEar__cdhigh"/>
+			<edge id="309" source="pip__pypa" start="2013-10-23" target="2014-06-30-stanford__ivanov"/>
+			<edge id="310" source="pillow-simd__peterhj" start="2017-02-11" target="sphinx__sphinx-doc"/>
+			<edge id="311" source="twisted__twisted" start="2007-08-07" target="paste3__lig"/>
+			<edge id="312" source="true_review_web2py__lucadealfaro" start="2017-07-27" target="hand-helper__feuillemorte"/>
+			<edge id="313" source="scikit-learn__scikit-learn" start="2016-10-16" target="ordhjelp__iver56"/>
+			<edge id="314" source="nltk__nltk" start="2017-10-13" target="Appraise__cfedermann"/>
+			<edge id="315" source="chromium-trunk-build-override__lukeweber" start="2010-09-06" target="https-chromium.googlesource.com-chromium-tools-build__pombredanne"/>
+			<edge id="316" source="cvs__Lothiraldan" start="2012-06-23" target="wheel__pombredanne"/>
+			<edge id="317" source="django__django" start="2016-07-14" target="deep-learning-samples__eliben"/>
+			<edge id="318" source="cython__cython" start="2013-10-23" target="2014-06-30-stanford__ivanov"/>
+			<edge id="319" source="openpyxl__gleeda" start="2013-05-06" target="openpyxl__adammorris"/>
+			<edge id="320" source="scikit-learn__scikit-learn" start="2016-10-12" target="cython__cython"/>
+			<edge id="321" source="python-ast__banga" start="2006-06-19" target="buildout-experiments__pombredanne"/>
+			<edge id="322" source="hg-stable__vmg" start="2012-01-31" target="rietveld__robfig"/>
+			<edge id="323" source="thumbnail-finder__bmintz" start="2016-07-07" target="Saylua__LikeMyBread"/>
+			<edge id="324" source="keras__keras-team" start="2018-01-13" target="cs224n__lucasmoura"/>
+			<edge id="325" source="ipython__ipython" start="2014-03-20" target="ccc-gistemp_gui__ocefpaf"/>
+			<edge id="326" source="sympy__sympy" start="2016-01-19" target="relate__inducer"/>
+			<edge id="327" source="python-ast__banga" start="2012-07-17" target="pyglet__kmonsoor"/>
+			<edge id="328" source="kivy__kivy" start="2016-12-20" target="myreco__dutradda"/>
+			<edge id="329" source="https-chromium.googlesource.com-chromium-tools-build__pombredanne" start="2014-08-11" target="depot_tools__bdero"/>
+			<edge id="330" source="pip__adieu" start="2013-12-19" target="python-pth__ionelmc"/>
+			<edge id="331" source="cvs__Lothiraldan" start="2012-03-20" target="log2bq__jeremi"/>
+			<edge id="332" source="python-ast__banga" start="2014-05-08" target="py2exe-3__lambacck"/>
+			<edge id="333" source="sympy__sympy" start="2014-01-23" target="ipython__ipython"/>
+			<edge id="334" source="pandas__pandas-dev" start="2018-02-17" target="conda-register__jjhelmus"/>
+			<edge id="335" source="awx__AlanCoding" start="2016-12-08" target="ansible-docs__RobberPhex"/>
+			<edge id="336" source="ElectorLights__davidbradway" start="2016-07-07" target="Saylua__LikeMyBread"/>
+			<edge id="337" source="python-ast__banga" start="2009-04-27" target="getoffmylawn__jseutter"/>
+			<edge id="338" source="pinax__ingenieroariel" start="2009-06-30" target="everyblock_code__brosner"/>
+			<edge id="339" source="Theano__jdemouth" start="2017-06-13" target="dotfiles__matttrent"/>
+			<edge id="340" source="hg-stable__vmg" start="2005-09-01" target="cvs__Lothiraldan"/>
+			<edge id="341" source="sympy__sympy" start="2010-05-07" target="research__ryanGT"/>
+			<edge id="342" source="scikit-learn__scikit-learn" start="2017-05-28" target="DeepLearningFlappyBird__yenchenlin"/>
+			<edge id="343" source="hg-stable__vmg" start="2017-03-02" target="python-type-checking__chadrik"/>
+			<edge id="344" source="buildbot__buildbot" start="2015-03-25" target="banderscan__rbtcollins"/>
+			<edge id="345" source="Minecraft-Overviewer__overviewer" start="2011-12-24" target="HexSLayer__StephenFluin"/>
+			<edge id="346" source="buildbot__buildbot" start="2012-12-25" target="django-static-gitified__xrg"/>
+			<edge id="347" source="cvs__Lothiraldan" start="2012-04-23" target="pip2pi__wolever"/>
+			<edge id="348" source="pillow-simd__peterhj" start="2017-07-28" target="nicos-test__bpedersen2"/>
+			<edge id="349" source="SickRage_backup__gborri" start="2015-08-29" target="subliminal__Diaoul"/>
+			<edge id="350" source="pandas__pandas-dev" start="2017-05-08" target="ruamel-yaml__mandeep"/>
+			<edge id="351" source="pip__adieu" start="2012-03-14" target="jython__int3"/>
+			<edge id="352" source="sugar__rparrapy" start="2008-09-20" target="pyopengl__mcfletch"/>
+			<edge id="353" source="ansible-docs__RobberPhex" start="2015-09-29" target="rs-skip-gram-in-myhdl__gw0"/>
+			<edge id="354" source="cvs__Lothiraldan" start="2016-11-25" target="git-cinnabar__glandium"/>
+			<edge id="355" source="scikit-learn__scikit-learn" start="2018-02-17" target="conda-register__jjhelmus"/>
+			<edge id="356" source="cvs__Lothiraldan" start="2012-05-09" target="pydotorg.pypi__techtonik"/>
+			<edge id="357" source="hg-stable__vmg" start="2012-04-23" target="pip2pi__wolever"/>
+			<edge id="358" source="jhbuild__tkruse" start="2009-03-31" target="GDAd__gabisurita"/>
+			<edge id="359" source="pip__francescog" start="2012-09-29" target="toolbox__kumar303"/>
+			<edge id="360" source="pycalcstats__tnotstar" start="2015-04-15" target="scoop__artscoop"/>
+			<edge id="361" source="openpyxl__adammorris" start="2013-10-19" target="openpyxl__gleeda"/>
+			<edge id="362" source="scikit-learn__scikit-learn" start="2017-10-27" target="hybrid-vocal-classifier__NickleDave"/>
+			<edge id="363" source="efolhadownloader__fcrespo82" start="2017-07-01" target="subliminal__Diaoul"/>
+			<edge id="364" source="openerp-server__xrg" start="2016-10-21" target="python-cookbook__vra"/>
+			<edge id="365" source="Do_SPDX__pombredanne" start="2015-12-03" target="phiclicker__kevinwang"/>
+			<edge id="366" source="setuptools__abadger" start="2012-08-08" target="komodo-python-dbgp__agroszer"/>
+			<edge id="367" source="ipython__ipython" start="2016-06-15" target="djangoTutorial__morenoh149"/>
+			<edge id="368" source="django-content-editor__matthiask" start="2016-04-01" target="evennia-game-index__gtaylor"/>
+			<edge id="369" source="Medusa_1_6__FireBladeNooT" start="2016-08-17" target="flask_mega_tutorial__akjanik"/>
+			<edge id="370" source="cvs__Lothiraldan" start="2011-03-01" target="pyg__rubik"/>
+			<edge id="371" source="cvs__Lothiraldan" start="2005-09-01" target="hg-stable__vmg"/>
+			<edge id="372" source="python-ast__banga" start="2011-05-27" target="pysolper__aleaxit"/>
+			<edge id="373" source="platform_development__aosp-mirror" start="2010-11-23" target="FanFicFare__JimmXinu"/>
+			<edge id="374" source="ansible-docs__RobberPhex" start="2015-01-29" target="awx__AlanCoding"/>
+			<edge id="375" source="mozbase-testing-temp__ffledgling" start="2012-09-24" target="pytest-zap__davehunt"/>
+			<edge id="376" source="sphinx__sphinx-doc" start="2017-08-29" target="pyppeteer__miyakogi"/>
+			<edge id="377" source="OpenERP-addons__xrg" start="2016-10-21" target="python-cookbook__vra"/>
+			<edge id="378" source="cvs__Lothiraldan" start="2011-10-29" target="mangle__FooSoft"/>
+			<edge id="379" source="kivy__kivy" start="2014-06-22" target="assetServer-KivEntEd__chozabu"/>
+			<edge id="380" source="vmware-nsx__gkotton" start="2015-06-05" target="dropkick__cleverdevil"/>
+			<edge id="381" source="scikit-image__scikit-image" start="2018-03-13" target="ndmapper__jehturner"/>
+			<edge id="382" source="ipython__ipython" start="2013-10-23" target="2014-06-30-stanford__ivanov"/>
+			<edge id="383" source="ansible-docs__RobberPhex" start="2015-06-23" target="inestool__dsedivec"/>
+			<edge id="384" source="ansible-docs__RobberPhex" start="2016-11-26" target="altium_svg__jaseg"/>
+			<edge id="385" source="ias-ess__stringfellow" start="2016-02-28" target="bohdi__stringfellow"/>
+			<edge id="386" source="wheel__pombredanne" start="2016-08-13" target="sense-grouping-survey__lopuhin"/>
+			<edge id="387" source="asciidoc__digwanderlust" start="2010-03-15" target="setuptools__abadger"/>
+			<edge id="388" source="cvs__Lothiraldan" start="2009-11-11" target="haikuporter__dnivra"/>
+			<edge id="389" source="pillow-simd__peterhj" start="2016-07-21" target="tesscred__CounterPillow"/>
+			<edge id="390" source="cvs__Lothiraldan" start="2010-03-17" target="cache901__pedersen"/>
+			<edge id="391" source="django__django" start="2016-08-24" target="py.sh__etianen"/>
+			<edge id="392" source="sagelib__williamstein" start="2009-07-17" target="webhooks__certik"/>
+			<edge id="393" source="cvs__Lothiraldan" start="2010-03-15" target="setuptools__abadger"/>
+			<edge id="394" source="Theano__jdemouth" start="2015-07-03" target="attention-lvcsr__rizar"/>
+			<edge id="395" source="mercurial-crew__jordigh" start="2010-03-14" target="myLibrary__sa2ajj"/>
+			<edge id="396" source="docutils_from_svn__msabramo" start="2013-07-31" target="docutils__brechtm"/>
+			<edge id="397" source="librosa__librosa" start="2017-10-19" target="jrti_game__encukou"/>
+			<edge id="398" source="Do_SPDX__pombredanne" start="2015-06-08" target="nyu_ml_lectures__amueller"/>
+			<edge id="399" source="sympy__sympy" start="2013-09-05" target="setuppytest__oscarbenjamin"/>
+			<edge id="400" source="pypy__aljosa" start="2012-07-09" target="coveragepy__nedbat"/>
+			<edge id="401" source="astropy__astropy" start="2016-12-31" target="AstroData__adrn"/>
+			<edge id="402" source="pandas__pandas-dev" start="2017-10-10" target="skunkworks__draperjames"/>
+			<edge id="403" source="django__django" start="2011-01-19" target="pypy__aljosa"/>
+			<edge id="404" source="brython__brython-dev" start="2016-07-07" target="Saylua__LikeMyBread"/>
+			<edge id="405" source="cvs__Lothiraldan" start="2012-04-14" target="pypy__aljosa"/>
+			<edge id="406" source="mozbase-testing-temp__ffledgling" start="2013-09-10" target="wheel__pombredanne"/>
+			<edge id="407" source="true_review_web2py__lucadealfaro" start="2017-05-22" target="binfiles__jek"/>
+			<edge id="408" source="setuptools__abadger" start="2013-05-27" target="pip__pypa"/>
+			<edge id="409" source="devide.johannes__chrisidefix" start="2015-01-15" target="ImageStore__Peter92"/>
+			<edge id="410" source="scrapy__scrapy" start="2015-06-10" target="GeekayServer__coder46"/>
+			<edge id="411" source="reproject__astrofrog" start="2016-12-06" target="core_models__keflavich"/>
+			<edge id="412" source="mozbase-testing-temp__ffledgling" start="2016-11-25" target="git-cinnabar__glandium"/>
+			<edge id="413" source="pyglet__kmonsoor" start="2014-05-11" target="PoliticalRPG__aholkner"/>
+			<edge id="414" source="keras__keras-team" start="2018-03-04" target="datasets__jramapuram"/>
+			<edge id="415" source="pyside2__diorcety" start="2014-08-20" target="matplotlib-winbuild__jbmohler"/>
+			<edge id="416" source="hg-stable__vmg" start="2013-02-22" target="logilab-common__pombredanne"/>
+			<edge id="417" source="sublime-ruamel__Thom1729" start="2018-01-17" target="yaml-macros-engine__Thom1729"/>
+			<edge id="418" source="ansible-docs__RobberPhex" start="2016-03-01" target="flask-zappa__Miserlou"/>
+			<edge id="419" source="pip__pypa" start="2012-09-25" target="distlib__vsajip"/>
+			<edge id="420" source="django__django" start="2009-07-12" target="sphinx-pypi-upload__WoLpH"/>
+			<edge id="421" source="enstaller__pombredanne" start="2009-01-09" target="tahoe-lafs__drewp"/>
+			<edge id="422" source="lettuce-py3__adw0rd" start="2016-11-06" target="tox2travis__luzfcb"/>
+			<edge id="423" source="astropy__astropy" start="2018-03-13" target="ndmapper__jehturner"/>
+			<edge id="424" source="nltk__nltk" start="2017-06-23" target="wkr.py__wroberts"/>
+			<edge id="425" source="odoo-extra__mga-odoo" start="2012-01-30" target="vauxoo_bzr2git_02__moylop260"/>
+			<edge id="426" source="scikit-learn__scikit-learn" start="2017-02-22" target="nlp-data__joshloyal"/>
+			<edge id="427" source="astropy__astropy" start="2015-01-29" target="pymodelfit__eteq"/>
+			<edge id="428" source="django__django" start="2010-07-26" target="python-archive__gdub"/>
+			<edge id="429" source="buildout-experiments__pombredanne" start="2012-08-08" target="komodo-python-dbgp__agroszer"/>
+			<edge id="430" source="tensor_decomp_embedding__popcorncolonel" start="2017-08-15" target="babixyz__phdowling"/>
+			<edge id="431" source="python-ast__banga" start="2008-04-18" target="nltk__nltk"/>
+			<edge id="432" source="ansible-docs__RobberPhex" start="2016-09-08" target="neural-assertion__tmills"/>
+			<edge id="433" source="twisted__twisted" start="2011-06-01" target="itchynzb__sww"/>
+			<edge id="434" source="pyglet__kmonsoor" start="2012-05-09" target="pydotorg.pypi__techtonik"/>
+			<edge id="435" source="https-chromium.googlesource.com-chromium-tools-build__pombredanne" start="2014-02-06" target="rietveld__robfig"/>
+			<edge id="436" source="scikit-learn__scikit-learn" start="2013-05-05" target="wibblywobbly__dharhas"/>
+			<edge id="437" source="scrapy__scrapy" start="2016-07-04" target="databrewer__rmax"/>
+			<edge id="438" source="pypy__aljosa" start="2012-10-29" target="bravo.plugin__MostAwesomeDude"/>
+			<edge id="439" source="buildout-experiments__pombredanne" start="2015-09-04" target="genc__hannosch"/>
+			<edge id="440" source="pip__francescog" start="2017-06-27" target="werkzeug__pallets"/>
+			<edge id="441" source="kivy__kivy" start="2016-12-29" target="icemac.install.addressbook__icemac"/>
+			<edge id="442" source="Sick-Beard__midgetspy" start="2014-12-15" target="YifySubtitles.bundle__sander1"/>
+			<edge id="443" source="kivy__kivy" start="2014-03-04" target="kpritz__tshirtman"/>
+			<edge id="444" source="Theano__jdemouth" start="2016-06-22" target="fakestockdata__mrocklin"/>
+			<edge id="445" source="hg-stable__vmg" start="2012-06-23" target="wheel__pombredanne"/>
+			<edge id="446" source="kivy__kivy" start="2016-09-16" target="touch_bin__Zen-CODE"/>
+			<edge id="447" source="pandas__pandas-dev" start="2016-02-08" target="Billabong__hoh"/>
+			<edge id="448" source="ipython__ipython" start="2017-06-06" target="zkindlerss__insert0003"/>
+			<edge id="449" source="Reddit__gitter-badger" start="2015-04-15" target="scoop__artscoop"/>
+			<edge id="450" source="ruby-card__jakesyl" start="2016-05-04" target="zotero-cli__jbaiter"/>
+			<edge id="451" source="ansible-docs__RobberPhex" start="2017-01-25" target="Flauthority__trondhindenes"/>
+			<edge id="452" source="python-ast__banga" start="2007-09-24" target="codeintel__rmccue"/>
+			<edge id="453" source="pandas__pandas-dev" start="2014-07-28" target="cx_Freeze__anthony-tuininga"/>
+			<edge id="454" source="ipython-wiki__Carreau" start="2014-01-23" target="ipython__ipython"/>
+			<edge id="455" source="astropy__astropy" start="2016-12-06" target="core_models__keflavich"/>
+			<edge id="456" source="python-doc-ja.sphinx-ja__methane" start="2012-05-09" target="pydotorg.pypi__techtonik"/>
+			<edge id="457" source="hg-stable__vmg" start="2012-03-20" target="log2bq__jeremi"/>
+			<edge id="458" source="matplotlib__matplotlib" start="2017-06-13" target="ARCUS__hamogu"/>
+			<edge id="459" source="pillow-simd__peterhj" start="2014-12-23" target="vat__al45tair"/>
+			<edge id="460" source="baseband__mhvk" start="2017-06-13" target="ARCUS__hamogu"/>
+			<edge id="461" source="python-for-android__kivy" start="2015-08-26" target="riboplot__vimalkvn"/>
+			<edge id="462" source="ocrfeeder__ackalker" start="2012-12-25" target="django-static-gitified__xrg"/>
+			<edge id="463" source="pip__francescog" start="2012-06-06" target="pip__pypa"/>
+			<edge id="464" source="hg-stable__vmg" start="2010-03-15" target="setuptools__abadger"/>
+			<edge id="465" source="openpyxl__gleeda" start="2016-11-25" target="blankeditor__asweigart"/>
+			<edge id="466" source="astropy__astropy" start="2017-06-13" target="ARCUS__hamogu"/>
+			<edge id="467" source="OCRF__ngoix" start="2017-02-11" target="tokenization__dougalsutherland"/>
+			<edge id="468" source="django__django" start="2011-07-25" target="forroworld.com__datapythonista"/>
+			<edge id="469" source="Sick-Beard__midgetspy" start="2015-12-07" target="PyTradeLib__briancappello"/>
+			<edge id="470" source="sphinx__sphinx-doc" start="2017-11-28" target="_automation__sdpython"/>
+			<edge id="471" source="openerp-server__xrg" start="2012-12-25" target="django-static-gitified__xrg"/>
+			<edge id="472" source="pymt__tito" start="2014-03-04" target="kpritz__tshirtman"/>
+			<edge id="473" source="pandas__pandas-dev" start="2017-01-19" target="master-thesis__jimmycallin"/>
+			<edge id="474" source="ammonite-feedstock__abhi18av" start="2017-10-17" target="conda-pack__jcrist"/>
+			<edge id="475" source="indico-backup__pferreir" start="2017-07-28" target="nicos-test__bpedersen2"/>
+			<edge id="476" source="rietveld__robfig" start="2012-05-09" target="pydotorg.pypi__techtonik"/>
+			<edge id="477" source="test-utils__jbalogh" start="2012-09-29" target="toolbox__kumar303"/>
+			<edge id="478" source="ginga__ejeschke" start="2016-06-01" target="reproject__astrofrog"/>
+			<edge id="479" source="django__django" start="2017-09-11" target="irma-scrapers__simonw"/>
+			<edge id="480" source="openpyxl__chronossc" start="2013-05-06" target="openpyxl__gleeda"/>
+			<edge id="481" source="twisted__twisted" start="2010-06-23" target="cc__sorenh"/>
+			<edge id="482" source="bokeh__bokeh" start="2014-12-16" target="pythonwise__tebeka"/>
+			<edge id="483" source="pip__francescog" start="2012-03-14" target="jython__int3"/>
+			<edge id="484" source="sympy__sympy" start="2014-07-21" target="bokeh__bokeh"/>
+			<edge id="485" source="thumbnail-finder__bmintz" start="2013-03-09" target="jbcl__yole"/>
+			<edge id="486" source="buildout-experiments__pombredanne" start="2016-12-29" target="icemac.install.addressbook__icemac"/>
+			<edge id="487" source="zsos__ztane" start="2013-12-21" target="gae-tap__MiCHiLU"/>
+			<edge id="488" source="SickRage__SickRage" start="2017-07-01" target="subliminal__Diaoul"/>
+			<edge id="489" source="OCRF__ngoix" start="2018-02-17" target="conda-register__jjhelmus"/>
+			<edge id="490" source="pandas__pandas-dev" start="2016-03-26" target="scoop__artscoop"/>
+			<edge id="491" source="scikit-learn__scikit-learn" start="2017-02-11" target="tokenization__dougalsutherland"/>
+			<edge id="492" source="djangocms-bs4forcascade__haricot" start="2016-08-18" target="epub-meta__paulocheque"/>
+			<edge id="493" source="true_review_web2py__lucadealfaro" start="2017-06-23" target="dietnet__gokceneraslan"/>
+			<edge id="494" source="FanFicFare__JimmXinu" start="2014-09-04" target="Sublime-Text-3-Pulse-Plugin__cryzed"/>
+			<edge id="495" source="cx_Freeze__anthony-tuininga" start="2017-08-24" target="ddns-inwx__JonasGroeger"/>
+			<edge id="496" source="pypy__aljosa" start="2011-05-27" target="pysolper__aleaxit"/>
+			<edge id="497" source="scrapy__scrapy" start="2016-07-05" target="MyPythonCodeBase__guoruibiao"/>
+			<edge id="498" source="ammonite-feedstock__abhi18av" start="2018-02-21" target="vtkwheel__Korijn"/>
+			<edge id="499" source="pydotorg.pypi__techtonik" start="2012-07-17" target="pyglet__kmonsoor"/>
+			<edge id="500" source="tensor_decomp_embedding__popcorncolonel" start="2017-03-28" target="glove2h5__mattilyra"/>
+			<edge id="501" source="hg-stable__vmg" start="2014-08-06" target="kallithea__msabramo"/>
+			<edge id="502" source="GDAd__gabisurita" start="2017-12-13" target="django-ai__math-a3k"/>
+			<edge id="503" source="ansible-docs__RobberPhex" start="2015-02-15" target="FreeCoding__mfwarren"/>
+			<edge id="504" source="coveragepy__nedbat" start="2014-06-11" target="pywinner__brandon-rhodes"/>
+			<edge id="505" source="sphinx__sphinx-doc" start="2017-08-20" target="ammonite-feedstock__abhi18av"/>
+			<edge id="506" source="Reddit__gitter-badger" start="2016-07-07" target="Saylua__LikeMyBread"/>
+			<edge id="507" source="python-for-android__kivy" start="2018-03-08" target="traitschema__mivade"/>
+			<edge id="508" source="CouchPotatoServer__CouchPotato" start="2013-08-16" target="super_powered_recycle_bin__bfagundez"/>
+			<edge id="509" source="Sick-Beard__midgetspy" start="2014-03-17" target="pythonchallenge__generica"/>
+			<edge id="510" source="buildout-experiments__pombredanne" start="2012-08-14" target="iiswsgi__rpatterson"/>
+			<edge id="511" source="pip__francescog" start="2010-04-18" target="pip__adieu"/>
+			<edge id="512" source="scikit-learn__scikit-learn" start="2017-02-11" target="librosa__librosa"/>
+			<edge id="513" source="baseband__mhvk" start="2016-06-30" target="astropy__astropy"/>
+			<edge id="514" source="pandas__pandas-dev" start="2014-02-24" target="econ-project-templates__hmgaudecker"/>
+			<edge id="515" source="astropy__astropy" start="2017-08-09" target="PostCalib__Jerry-Ma"/>
+			<edge id="516" source="kivy__kivy" start="2018-01-10" target="SublimeDebugger__wvlia5"/>
+			<edge id="517" source="django__skevy" start="2015-04-06" target="aSetOfScripts__bucketzxm"/>
+			<edge id="518" source="cvs__Lothiraldan" start="2013-03-02" target="lms-lrr-modding-system__imayhaveborkedit"/>
+			<edge id="519" source="sympy__sympy" start="2012-01-09" target="scikit-learn.org__ogrisel"/>
+			<edge id="520" source="pip__pypa" start="2013-01-06" target="warehouse__davidfischer"/>
+			<edge id="521" source="djangocms-bs4forcascade__haricot" start="2016-12-12" target="rf-django-misc__rfleschenberg"/>
+			<edge id="522" source="matplotlib__matplotlib" start="2016-12-31" target="AstroData__adrn"/>
+			<edge id="523" source="keras__keras-team" start="2017-05-21" target="pytupi__cbentes"/>
+			<edge id="524" source="Sick-Beard__midgetspy" start="2016-03-26" target="scoop__artscoop"/>
+			<edge id="525" source="docutils__brechtm" start="2009-10-11" target="docutils_from_svn__msabramo"/>
+			<edge id="526" source="kivy__kivy" start="2015-06-03" target="autoautotracker__bob-the-hamster"/>
+			<edge id="527" source="pandas__pandas-dev" start="2016-06-12" target="scikit-chem__richlewis42"/>
+			<edge id="528" source="platform_development__aosp-mirror" start="2013-09-24" target="Skeinforge50plus__nophead"/>
+			<edge id="529" source="astropy__astropy" start="2014-08-28" target="omp-python-test__jiffyclub"/>
+			<edge id="530" source="tools__lsblakk" start="2011-03-10" target="breakpad-scrape-system-symbols__luser"/>
+			<edge id="531" source="openerp-server__xrg" start="2015-09-04" target="genc__hannosch"/>
+			<edge id="532" source="twisted__twisted" start="2013-12-15" target="django-federal-reserve__chrisspen"/>
+			<edge id="533" source="pip__pypa" start="2012-09-29" target="toolbox__kumar303"/>
+			<edge id="534" source="ansible-docs__RobberPhex" start="2016-08-17" target="flask_mega_tutorial__akjanik"/>
+			<edge id="535" source="cvs__Lothiraldan" start="2006-12-13" target="mercurial-crew__jordigh"/>
+			<edge id="536" source="pinax__pinax" start="2009-06-30" target="everyblock_code__brosner"/>
+			<edge id="537" source="python-for-android__kivy" start="2017-10-19" target="jrti_game__encukou"/>
+			<edge id="538" source="nltk__nltk" start="2014-06-11" target="pywinner__brandon-rhodes"/>
+			<edge id="539" source="django__skevy" start="2011-11-17" target="dwca-python__godfoder"/>
+			<edge id="540" source="egtp_new__zooko" start="2010-05-23" target="tahoe-lafs__drewp"/>
+			<edge id="541" source="hg-stable__vmg" start="2009-11-11" target="haikuporter__dnivra"/>
+			<edge id="542" source="pandas__pandas-dev" start="2017-03-13" target="linear_ranking__yupbank"/>
+			<edge id="543" source="scikit-learn__scikit-learn" start="2012-11-14" target="osmosis__arokem"/>
+			<edge id="544" source="scikit-image__scikit-image" start="2018-02-17" target="conda-register__jjhelmus"/>
+			<edge id="545" source="scikit-learn__scikit-learn" start="2017-10-18" target="numerox__kwgoodman"/>
+			<edge id="546" source="OCRF__ngoix" start="2017-05-28" target="DeepLearningFlappyBird__yenchenlin"/>
+			<edge id="547" source="openpyxl__gleeda" start="2013-10-23" target="2014-06-30-stanford__ivanov"/>
+			<edge id="548" source="pybindgen__gjcarneiro" start="2011-11-01" target="bake__teto"/>
+			<edge id="549" source="ansible-docs__RobberPhex" start="2015-06-04" target="wbs-python__jamespharaoh"/>
+			<edge id="550" source="vmware-nsx__gkotton" start="2015-03-25" target="banderscan__rbtcollins"/>
+			<edge id="551" source="docutils__brechtm" start="2005-03-20" target="pypi__ericholscher"/>
+			<edge id="552" source="ipython__ipython" start="2015-01-15" target="ImageStore__Peter92"/>
+			<edge id="553" source="buildbot__buildbot" start="2013-07-24" target="a.r.odoo-testimport__gracinet"/>
+			<edge id="554" source="https-chromium.googlesource.com-chromiumos-chromite__pombredanne" start="2015-02-21" target="pip__pypa"/>
+			<edge id="555" source="nltk__nltk" start="2014-04-05" target="XDM-Plugins__bobobo1618"/>
+			<edge id="556" source="reportlab__eduardocereto" start="2010-06-23" target="cc__sorenh"/>
+			<edge id="557" source="pip__adieu" start="2012-06-23" target="wheel__pombredanne"/>
+			<edge id="558" source="ansible-docs__RobberPhex" start="2016-02-21" target="amavisvt__ercpe"/>
+			<edge id="559" source="OCRF__ngoix" start="2016-12-27" target="witchcraft__llllllllll"/>
+			<edge id="560" source="pip__pypa" start="2013-12-21" target="gae-tap__MiCHiLU"/>
+			<edge id="561" source="sagelib__williamstein" start="2014-08-20" target="matplotlib-winbuild__jbmohler"/>
+			<edge id="562" source="mozbase-testing-temp__ffledgling" start="2013-02-09" target="hg-stable__vmg"/>
+			<edge id="563" source="ansible-docs__RobberPhex" start="2015-02-22" target="STIGMA__defionscode"/>
+			<edge id="564" source="lettuce-py3__adw0rd" start="2016-07-07" target="Saylua__LikeMyBread"/>
+			<edge id="565" source="KindleEar__cdhigh" start="2017-08-02" target="zkindlerss__insert0003"/>
+			<edge id="566" source="persoTraitsui__MatthieuDartiailh" start="2008-11-03" target="enstaller__pombredanne"/>
+			<edge id="567" source="scikit-learn__scikit-learn" start="2017-03-28" target="glove2h5__mattilyra"/>
+			<edge id="568" source="moin-2.0__lu-zero" start="2012-04-14" target="pypy__aljosa"/>
+			<edge id="569" source="openerp-server__xrg" start="2011-02-26" target="qweb__antonylesuisse"/>
+			<edge id="570" source="sugar__rparrapy" start="2009-03-31" target="GDAd__gabisurita"/>
+			<edge id="571" source="tensor_decomp_embedding__popcorncolonel" start="2016-11-29" target="compranet__jtbates"/>
+			<edge id="572" source="ammonite-feedstock__abhi18av" start="2017-02-11" target="librosa__librosa"/>
+			<edge id="573" source="biopython-2__saketkc" start="2015-01-15" target="ImageStore__Peter92"/>
+			<edge id="574" source="BukkitManager__dhatch" start="2015-12-07" target="PyTradeLib__briancappello"/>
+			<edge id="575" source="pillow-simd__peterhj" start="2016-08-25" target="metaextract__toabctl"/>
+			<edge id="576" source="ansible-docs__RobberPhex" start="2017-05-03" target="health-stats__ex-nerd"/>
+			<edge id="577" source="cython__cython" start="2017-06-13" target="ARCUS__hamogu"/>
+			<edge id="578" source="setuptools__abadger" start="2014-05-05" target="pyside2__diorcety"/>
+			<edge id="579" source="buildbot__buildbot" start="2013-10-15" target="crossbar__crossbario"/>
+			<edge id="580" source="linuxdesh__safwanrahman" start="2013-12-05" target="quote_liker__browning"/>
+			<edge id="581" source="ipython__ipython" start="2014-05-24" target="pyminifier__liftoff"/>
+			<edge id="582" source="openpyxl__gleeda" start="2017-03-03" target="sphinx__sphinx-doc"/>
+			<edge id="583" source="python-ast__banga" start="2015-06-03" target="tpn__tpn"/>
+			<edge id="584" source="keras__keras-team" start="2017-09-14" target="lavender__mohanson"/>
+			<edge id="585" source="OCRF__ngoix" start="2017-02-22" target="nlp-data__joshloyal"/>
+			<edge id="586" source="matplotlib__matplotlib" start="2017-08-20" target="ammonite-feedstock__abhi18av"/>
+			<edge id="587" source="Medusa_1_6__FireBladeNooT" start="2017-07-01" target="subliminal__Diaoul"/>
+			<edge id="588" source="kivy__kivy" start="2017-10-19" target="jrti_game__encukou"/>
+			<edge id="589" source="GDAd__gabisurita" start="2014-11-20" target="kallithea__msabramo"/>
+			<edge id="590" source="Theano__jdemouth" start="2015-11-24" target="carina-jupyterhub__betatim"/>
+			<edge id="591" source="thumbnail-finder__bmintz" start="2013-02-09" target="update_addons__raugturi"/>
+			<edge id="592" source="depot_tools__bdero" start="2015-02-05" target="python-patch__techtonik"/>
+			<edge id="593" source="ruby-card__jakesyl" start="2018-02-02" target="PlanetNomadsSavegameEditor__black-silence"/>
+			<edge id="594" source="sphinx__sphinx-doc" start="2017-06-13" target="ARCUS__hamogu"/>
+			<edge id="595" source="pillow-simd__peterhj" start="2015-09-19" target="firefox-profilemaker__allo-"/>
+			<edge id="596" source="Django-facebook__tschellenbach" start="2015-12-05" target="webcount__esauro"/>
+		</edges>
+	</graph>
+</gexf>

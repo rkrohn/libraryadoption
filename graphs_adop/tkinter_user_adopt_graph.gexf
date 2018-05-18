@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+	<graph defaultedgetype="directed" mode="dynamic" timeformat="date">
+		<attributes class="node"/>
+		<nodes>
+			<node id="37373"/>
+			<node id="1167"/>
+			<node id="10537"/>
+			<node id="8222"/>
+			<node id="8428"/>
+			<node id="8350"/>
+			<node id="31305"/>
+			<node id="42561"/>
+			<node id="11324"/>
+			<node id="25420"/>
+			<node id="10434"/>
+			<node id="55875"/>
+			<node id="87109"/>
+			<node id="18930"/>
+			<node id="26099"/>
+			<node id="26097"/>
+			<node id="1580"/>
+			<node id="36522"/>
+			<node id="40"/>
+			<node id="2173"/>
+			<node id="38159"/>
+			<node id="2508"/>
+			<node id="9955"/>
+			<node id="36046"/>
+			<node id="70805"/>
+			<node id="36620"/>
+			<node id="35325"/>
+			<node id="1176"/>
+			<node id="1236"/>
+			<node id="9725"/>
+			<node id="757"/>
+			<node id="12366"/>
+			<node id="2368"/>
+			<node id="32806"/>
+			<node id="1276"/>
+			<node id="8286"/>
+			<node id="244"/>
+			<node id="10397"/>
+			<node id="3647"/>
+			<node id="7306"/>
+			<node id="62570"/>
+			<node id="8025"/>
+			<node id="5267"/>
+			<node id="11002"/>
+			<node id="5265"/>
+			<node id="25744"/>
+			<node id="114921"/>
+			<node id="12414"/>
+			<node id="49002"/>
+			<node id="13394"/>
+			<node id="111956"/>
+			<node id="26105"/>
+			<node id="13173"/>
+			<node id="38261"/>
+			<node id="18396"/>
+			<node id="51211"/>
+		</nodes>
+		<edges>
+			<edge id="0" source="111956" start="2016-05-20" target="8025"/>
+			<edge id="1" source="25744" start="2017-04-02" target="11002"/>
+			<edge id="2" source="62570" start="2017-02-01" target="9955"/>
+			<edge id="3" source="26099" start="2013-03-03" target="25744"/>
+			<edge id="4" source="49002" start="2015-04-14" target="26097"/>
+			<edge id="5" source="32806" start="2017-09-12" target="8222"/>
+			<edge id="6" source="8286" start="2016-02-03" target="1236"/>
+			<edge id="7" source="8350" start="2015-03-26" target="757"/>
+			<edge id="8" source="757" start="2015-06-09" target="36046"/>
+			<edge id="9" source="1276" start="2017-04-02" target="11002"/>
+			<edge id="10" source="1276" start="2017-12-27" target="36620"/>
+			<edge id="11" source="111956" start="2018-02-15" target="31305"/>
+			<edge id="12" source="1276" start="2015-06-21" target="35325"/>
+			<edge id="13" source="757" start="2016-05-20" target="8025"/>
+			<edge id="14" source="38159" start="2017-10-15" target="10537"/>
+			<edge id="15" source="51211" start="2016-05-20" target="8025"/>
+			<edge id="16" source="70805" start="2015-11-27" target="1176"/>
+			<edge id="17" source="757" start="2015-08-24" target="10434"/>
+			<edge id="18" source="62570" start="2016-09-22" target="11324"/>
+			<edge id="19" source="111956" start="2017-07-05" target="37373"/>
+			<edge id="20" source="1276" start="2016-05-20" target="8025"/>
+			<edge id="21" source="1167" start="2018-02-15" target="31305"/>
+			<edge id="22" source="13173" start="2017-04-02" target="11002"/>
+			<edge id="23" source="32806" start="2018-02-15" target="31305"/>
+			<edge id="24" source="26099" start="2017-04-02" target="11002"/>
+			<edge id="25" source="62570" start="2016-05-20" target="8025"/>
+			<edge id="26" source="111956" start="2015-03-26" target="757"/>
+			<edge id="27" source="26099" start="2013-09-12" target="18930"/>
+			<edge id="28" source="9725" start="2011-10-11" target="26099"/>
+			<edge id="29" source="111956" start="2014-12-04" target="36522"/>
+			<edge id="30" source="8286" start="2016-06-15" target="38159"/>
+			<edge id="31" source="51211" start="2016-12-14" target="10397"/>
+			<edge id="32" source="51211" start="2017-07-05" target="37373"/>
+			<edge id="33" source="244" start="2016-12-14" target="10397"/>
+			<edge id="34" source="62570" start="2016-04-15" target="8428"/>
+			<edge id="35" source="757" start="2016-06-05" target="5265"/>
+			<edge id="36" source="1176" start="2016-05-01" target="13394"/>
+			<edge id="37" source="111956" start="2017-11-16" target="42561"/>
+			<edge id="38" source="12414" start="2008-05-18" target="9725"/>
+			<edge id="39" source="87109" start="2015-06-07" target="40"/>
+			<edge id="40" source="55875" start="2015-06-07" target="40"/>
+			<edge id="41" source="757" start="2016-05-01" target="13394"/>
+			<edge id="42" source="32806" start="2017-06-19" target="12366"/>
+			<edge id="43" source="5267" start="2016-07-12" target="244"/>
+			<edge id="44" source="8286" start="2015-06-25" target="38261"/>
+			<edge id="45" source="25744" start="2013-09-12" target="18930"/>
+			<edge id="46" source="13173" start="2018-02-21" target="7306"/>
+			<edge id="47" source="1276" start="2015-06-07" target="40"/>
+			<edge id="48" source="51211" start="2017-01-27" target="18396"/>
+			<edge id="49" source="1167" start="2017-11-16" target="42561"/>
+			<edge id="50" source="8286" start="2017-10-15" target="10537"/>
+			<edge id="51" source="62570" start="2017-01-22" target="2173"/>
+			<edge id="52" source="1167" start="2017-07-05" target="37373"/>
+			<edge id="53" source="9725" start="2014-09-24" target="26105"/>
+			<edge id="54" source="9725" start="2013-09-18" target="2368"/>
+			<edge id="55" source="757" start="2015-09-25" target="2508"/>
+			<edge id="56" source="111956" start="2015-11-29" target="3647"/>
+			<edge id="57" source="114921" start="2015-11-29" target="3647"/>
+			<edge id="58" source="9725" start="2015-04-14" target="26097"/>
+			<edge id="59" source="1580" start="2013-03-03" target="25744"/>
+			<edge id="60" source="26099" start="2012-04-14" target="1580"/>
+			<edge id="61" source="8286" start="2015-06-07" target="40"/>
+			<edge id="62" source="32806" start="2017-07-04" target="25420"/>
+		</edges>
+	</graph>
+</gexf>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+	<graph defaultedgetype="directed" mode="dynamic" timeformat="date">
+		<attributes class="node"/>
+		<nodes>
+			<node id="113584"/>
+			<node id="21722"/>
+			<node id="65155"/>
+			<node id="94093"/>
+			<node id="78489"/>
+			<node id="43369"/>
+			<node id="43370"/>
+			<node id="2096"/>
+			<node id="49263"/>
+			<node id="53644"/>
+			<node id="122571"/>
+			<node id="4639"/>
+			<node id="60112"/>
+			<node id="45802"/>
+			<node id="9871"/>
+			<node id="60910"/>
+			<node id="71898"/>
+			<node id="28703"/>
+			<node id="43338"/>
+			<node id="43339"/>
+			<node id="10891"/>
+			<node id="10890"/>
+			<node id="46384"/>
+			<node id="30375"/>
+			<node id="14533"/>
+			<node id="8371"/>
+			<node id="24459"/>
+			<node id="93018"/>
+			<node id="93016"/>
+			<node id="27740"/>
+			<node id="109635"/>
+			<node id="9133"/>
+			<node id="78539"/>
+			<node id="49213"/>
+			<node id="72715"/>
+			<node id="45751"/>
+			<node id="7809"/>
+			<node id="59158"/>
+			<node id="122583"/>
+			<node id="99305"/>
+			<node id="21915"/>
+			<node id="18123"/>
+			<node id="13350"/>
+			<node id="13722"/>
+			<node id="28983"/>
+			<node id="43346"/>
+			<node id="49197"/>
+			<node id="43341"/>
+			<node id="49193"/>
+			<node id="21982"/>
+			<node id="61711"/>
+			<node id="863"/>
+			<node id="78433"/>
+			<node id="93378"/>
+			<node id="18251"/>
+			<node id="39277"/>
+			<node id="43381"/>
+			<node id="39273"/>
+			<node id="37219"/>
+			<node id="35801"/>
+			<node id="39320"/>
+			<node id="43779"/>
+			<node id="37315"/>
+			<node id="49186"/>
+			<node id="74436"/>
+			<node id="28939"/>
+			<node id="3446"/>
+			<node id="43333"/>
+			<node id="49206"/>
+			<node id="21662"/>
+			<node id="122558"/>
+			<node id="43358"/>
+			<node id="11323"/>
+			<node id="28683"/>
+			<node id="8447"/>
+			<node id="39405"/>
+			<node id="48170"/>
+			<node id="14490"/>
+			<node id="39329"/>
+			<node id="43356"/>
+			<node id="39367"/>
+			<node id="3348"/>
+			<node id="47582"/>
+			<node id="14513"/>
+			<node id="1715"/>
+			<node id="47409"/>
+			<node id="91756"/>
+			<node id="93072"/>
+			<node id="57842"/>
+			<node id="78472"/>
+			<node id="40"/>
+			<node id="49159"/>
+			<node id="42319"/>
+			<node id="93440"/>
+			<node id="2389"/>
+			<node id="10608"/>
+			<node id="528"/>
+			<node id="8809"/>
+			<node id="22097"/>
+			<node id="10991"/>
+			<node id="43366"/>
+			<node id="14647"/>
+			<node id="46857"/>
+			<node id="43956"/>
+			<node id="9257"/>
+			<node id="78391"/>
+			<node id="9338"/>
+			<node id="14336"/>
+			<node id="93023"/>
+			<node id="39410"/>
+			<node id="10541"/>
+			<node id="4113"/>
+			<node id="28675"/>
+			<node id="3702"/>
+			<node id="39448"/>
+			<node id="20538"/>
+			<node id="9216"/>
+			<node id="91657"/>
+			<node id="9396"/>
+			<node id="43329"/>
+			<node id="878"/>
+			<node id="56697"/>
+			<node id="26462"/>
+			<node id="43326"/>
+			<node id="28115"/>
+			<node id="30731"/>
+			<node id="24441"/>
+			<node id="39391"/>
+			<node id="12202"/>
+			<node id="43825"/>
+			<node id="16019"/>
+			<node id="57156"/>
+			<node id="8856"/>
+			<node id="42293"/>
+		</nodes>
+		<edges>
+			<edge id="0" source="39273" start="2017-10-27" target="39320"/>
+			<edge id="1" source="22097" start="2018-02-21" target="53644"/>
+			<edge id="2" source="22097" start="2018-02-08" target="21982"/>
+			<edge id="3" source="109635" start="2018-01-30" target="8856"/>
+			<edge id="4" source="49197" start="2016-06-13" target="46384"/>
+			<edge id="5" source="18251" start="2017-11-26" target="3348"/>
+			<edge id="6" source="22097" start="2018-01-28" target="30375"/>
+			<edge id="7" source="122571" start="2017-01-08" target="40"/>
+			<edge id="8" source="43339" start="2017-11-28" target="21722"/>
+			<edge id="9" source="78489" start="2017-04-22" target="26462"/>
+			<edge id="10" source="24459" start="2018-01-23" target="878"/>
+			<edge id="11" source="39448" start="2016-10-22" target="28939"/>
+			<edge id="12" source="39273" start="2017-10-12" target="2096"/>
+			<edge id="13" source="109635" start="2018-01-23" target="878"/>
+			<edge id="14" source="39273" start="2017-12-03" target="39391"/>
+			<edge id="15" source="39448" start="2017-03-31" target="10891"/>
+			<edge id="16" source="14513" start="2017-07-10" target="78391"/>
+			<edge id="17" source="43333" start="2018-02-03" target="20538"/>
+			<edge id="18" source="39448" start="2016-11-28" target="3702"/>
+			<edge id="19" source="49197" start="2016-05-23" target="18123"/>
+			<edge id="20" source="113584" start="2017-11-28" target="21722"/>
+			<edge id="21" source="43370" start="2017-12-05" target="43338"/>
+			<edge id="22" source="93016" start="2018-01-23" target="878"/>
+			<edge id="23" source="18123" start="2017-01-08" target="40"/>
+			<edge id="24" source="43339" start="2017-11-24" target="39329"/>
+			<edge id="25" source="78472" start="2017-06-11" target="49186"/>
+			<edge id="26" source="93440" start="2017-12-15" target="16019"/>
+			<edge id="27" source="122558" start="2017-10-27" target="60112"/>
+			<edge id="28" source="37219" start="2017-11-14" target="93378"/>
+			<edge id="29" source="122558" start="2018-01-29" target="93072"/>
+			<edge id="30" source="28675" start="2017-10-08" target="8447"/>
+			<edge id="31" source="93018" start="2018-01-06" target="93016"/>
+			<edge id="32" source="78472" start="2017-05-16" target="2389"/>
+			<edge id="33" source="39448" start="2016-11-19" target="9257"/>
+			<edge id="34" source="122558" start="2017-12-18" target="56697"/>
+			<edge id="35" source="78433" start="2017-10-04" target="72715"/>
+			<edge id="36" source="39448" start="2017-01-25" target="45751"/>
+			<edge id="37" source="42293" start="2017-06-01" target="42319"/>
+			<edge id="38" source="78433" start="2017-09-29" target="10608"/>
+			<edge id="39" source="39448" start="2017-03-29" target="35801"/>
+			<edge id="40" source="11323" start="2017-07-18" target="39367"/>
+			<edge id="41" source="39448" start="2017-01-04" target="47409"/>
+			<edge id="42" source="39273" start="2017-11-17" target="21662"/>
+			<edge id="43" source="43356" start="2018-01-19" target="43358"/>
+			<edge id="44" source="72715" start="2017-10-19" target="60910"/>
+			<edge id="45" source="122571" start="2016-10-20" target="9396"/>
+			<edge id="46" source="49197" start="2016-02-22" target="49193"/>
+			<edge id="47" source="43370" start="2017-12-03" target="39391"/>
+			<edge id="48" source="72715" start="2017-10-12" target="78539"/>
+			<edge id="49" source="47409" start="2017-01-04" target="42293"/>
+			<edge id="50" source="37219" start="2018-02-12" target="27740"/>
+			<edge id="51" source="4113" start="2017-09-29" target="10608"/>
+			<edge id="52" source="10991" start="2017-08-20" target="10541"/>
+			<edge id="53" source="59158" start="2018-01-03" target="93018"/>
+			<edge id="54" source="39448" start="2016-12-15" target="9338"/>
+			<edge id="55" source="78433" start="2017-09-29" target="49213"/>
+			<edge id="56" source="39273" start="2018-01-23" target="878"/>
+			<edge id="57" source="49197" start="2016-01-03" target="8371"/>
+			<edge id="58" source="72715" start="2017-10-31" target="14533"/>
+			<edge id="59" source="74436" start="2018-01-23" target="878"/>
+			<edge id="60" source="7809" start="2017-12-07" target="39410"/>
+			<edge id="61" source="57842" start="2016-11-03" target="48170"/>
+			<edge id="62" source="39405" start="2016-10-14" target="39448"/>
+			<edge id="63" source="39273" start="2017-10-25" target="39277"/>
+			<edge id="64" source="122558" start="2018-01-21" target="13722"/>
+			<edge id="65" source="94093" start="2017-12-06" target="7809"/>
+			<edge id="66" source="49197" start="2016-01-21" target="45802"/>
+			<edge id="67" source="39273" start="2017-12-15" target="16019"/>
+			<edge id="68" source="61711" start="2017-11-01" target="43329"/>
+			<edge id="69" source="22097" start="2018-02-03" target="20538"/>
+			<edge id="70" source="22097" start="2018-01-28" target="65155"/>
+			<edge id="71" source="39448" start="2017-01-17" target="49159"/>
+			<edge id="72" source="13350" start="2017-01-24" target="37219"/>
+			<edge id="73" source="24459" start="2017-11-26" target="3348"/>
+			<edge id="74" source="43369" start="2017-12-15" target="16019"/>
+			<edge id="75" source="78489" start="2017-04-18" target="10890"/>
+			<edge id="76" source="43333" start="2018-02-07" target="43366"/>
+			<edge id="77" source="57842" start="2017-01-08" target="40"/>
+			<edge id="78" source="39448" start="2017-03-15" target="47582"/>
+			<edge id="79" source="93440" start="2018-01-23" target="878"/>
+			<edge id="80" source="122571" start="2017-01-30" target="122583"/>
+			<edge id="81" source="22097" start="2018-01-29" target="46857"/>
+			<edge id="82" source="14513" start="2017-07-31" target="528"/>
+			<edge id="83" source="39448" start="2016-11-17" target="28703"/>
+			<edge id="84" source="49197" start="2016-01-13" target="43779"/>
+			<edge id="85" source="37219" start="2017-03-20" target="12202"/>
+			<edge id="86" source="39448" start="2017-01-16" target="9871"/>
+			<edge id="87" source="39448" start="2017-03-11" target="14336"/>
+			<edge id="88" source="43326" start="2018-01-12" target="43356"/>
+			<edge id="89" source="122558" start="2018-01-29" target="46857"/>
+			<edge id="90" source="8809" start="2017-05-29" target="28983"/>
+			<edge id="91" source="49197" start="2016-04-04" target="1715"/>
+			<edge id="92" source="37219" start="2017-03-20" target="91756"/>
+			<edge id="93" source="49197" start="2016-05-26" target="30731"/>
+			<edge id="94" source="39448" start="2017-02-15" target="4639"/>
+			<edge id="95" source="28675" start="2017-04-22" target="26462"/>
+			<edge id="96" source="43346" start="2017-10-27" target="39320"/>
+			<edge id="97" source="49197" start="2016-03-04" target="14647"/>
+			<edge id="98" source="24459" start="2017-12-20" target="49206"/>
+			<edge id="99" source="39448" start="2016-12-13" target="9216"/>
+			<edge id="100" source="93440" start="2017-12-07" target="39410"/>
+			<edge id="101" source="43956" start="2018-02-03" target="20538"/>
+			<edge id="102" source="43356" start="2018-01-23" target="878"/>
+			<edge id="103" source="93440" start="2018-02-03" target="20538"/>
+			<edge id="104" source="43346" start="2017-10-25" target="39277"/>
+			<edge id="105" source="43329" start="2017-11-17" target="21662"/>
+			<edge id="106" source="43329" start="2017-11-09" target="43381"/>
+			<edge id="107" source="863" start="2018-01-23" target="878"/>
+			<edge id="108" source="13350" start="2017-01-11" target="37315"/>
+			<edge id="109" source="72715" start="2017-10-12" target="2096"/>
+			<edge id="110" source="43333" start="2018-02-22" target="43341"/>
+			<edge id="111" source="14513" start="2017-08-20" target="10541"/>
+			<edge id="112" source="93016" start="2018-01-07" target="93023"/>
+			<edge id="113" source="39273" start="2017-11-28" target="21722"/>
+			<edge id="114" source="22097" start="2018-02-03" target="3446"/>
+			<edge id="115" source="91657" start="2017-03-31" target="10891"/>
+			<edge id="116" source="11323" start="2017-07-14" target="14490"/>
+			<edge id="117" source="13350" start="2017-01-08" target="40"/>
+			<edge id="118" source="43825" start="2018-01-23" target="878"/>
+			<edge id="119" source="43339" start="2017-11-26" target="3348"/>
+			<edge id="120" source="93440" start="2017-12-03" target="39391"/>
+			<edge id="121" source="42293" start="2017-01-22" target="28683"/>
+			<edge id="122" source="39448" start="2017-01-02" target="28115"/>
+			<edge id="123" source="28675" start="2017-07-18" target="39367"/>
+			<edge id="124" source="78472" start="2017-06-03" target="57156"/>
+			<edge id="125" source="78489" start="2017-04-18" target="9133"/>
+			<edge id="126" source="78472" start="2017-06-14" target="14513"/>
+			<edge id="127" source="39273" start="2017-11-24" target="39329"/>
+			<edge id="128" source="78489" start="2017-04-08" target="21915"/>
+			<edge id="129" source="24441" start="2018-01-23" target="878"/>
+			<edge id="130" source="14513" start="2017-07-03" target="49263"/>
+			<edge id="131" source="71898" start="2018-02-08" target="21982"/>
+			<edge id="132" source="39273" start="2017-12-07" target="39410"/>
+			<edge id="133" source="91657" start="2017-05-18" target="8809"/>
+			<edge id="134" source="122558" start="2017-11-12" target="99305"/>
+		</edges>
+	</graph>
+</gexf>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+	<graph defaultedgetype="directed" mode="dynamic" timeformat="date">
+		<attributes class="node"/>
+		<nodes>
+			<node id="5176"/>
+			<node id="5166"/>
+			<node id="111490"/>
+			<node id="111491"/>
+			<node id="111492"/>
+			<node id="111493"/>
+			<node id="1355"/>
+			<node id="52315"/>
+			<node id="20551"/>
+			<node id="37474"/>
+			<node id="10445"/>
+			<node id="93419"/>
+			<node id="8863"/>
+			<node id="45463"/>
+			<node id="52323"/>
+			<node id="52338"/>
+			<node id="35847"/>
+			<node id="35846"/>
+			<node id="52316"/>
+			<node id="52317"/>
+			<node id="52314"/>
+			<node id="5169"/>
+			<node id="52327"/>
+			<node id="52332"/>
+			<node id="52333"/>
+			<node id="52334"/>
+			<node id="52335"/>
+			<node id="52336"/>
+			<node id="52337"/>
+		</nodes>
+		<edges>
+			<edge id="0" source="52336" start="2007-06-18" target="52333"/>
+			<edge id="1" source="5166" start="2007-06-17" target="111491"/>
+			<edge id="2" source="20551" start="2007-05-17" target="52316"/>
+			<edge id="3" source="52314" start="2010-03-09" target="52327"/>
+			<edge id="4" source="52327" start="2010-09-30" target="52323"/>
+			<edge id="5" source="20551" start="2007-08-06" target="52317"/>
+			<edge id="6" source="111492" start="2007-05-17" target="5166"/>
+			<edge id="7" source="52316" start="2007-06-17" target="52336"/>
+			<edge id="8" source="52338" start="2006-12-04" target="37474"/>
+			<edge id="9" source="10445" start="2007-07-20" target="1355"/>
+			<edge id="10" source="52332" start="2006-11-07" target="52338"/>
+			<edge id="11" source="1355" start="2007-08-06" target="5169"/>
+			<edge id="12" source="35847" start="2006-11-07" target="111493"/>
+			<edge id="13" source="111491" start="2007-06-18" target="10445"/>
+			<edge id="14" source="5169" start="2007-08-25" target="45463"/>
+			<edge id="15" source="93419" start="2006-12-15" target="111490"/>
+			<edge id="16" source="35846" start="2006-11-06" target="35847"/>
+			<edge id="17" source="52315" start="2007-09-19" target="8863"/>
+			<edge id="18" source="52315" start="2010-03-09" target="52327"/>
+			<edge id="19" source="52334" start="2007-08-25" target="52315"/>
+			<edge id="20" source="52335" start="2007-03-14" target="52337"/>
+			<edge id="21" source="111490" start="2007-03-14" target="111492"/>
+			<edge id="22" source="52334" start="2007-08-06" target="52317"/>
+			<edge id="23" source="45463" start="2007-09-19" target="5176"/>
+			<edge id="24" source="52317" start="2007-09-19" target="8863"/>
+			<edge id="25" source="37474" start="2006-12-15" target="52335"/>
+			<edge id="26" source="52337" start="2007-05-17" target="52316"/>
+			<edge id="27" source="52333" start="2007-07-20" target="52334"/>
+			<edge id="28" source="111493" start="2006-12-04" target="93419"/>
+		</edges>
+	</graph>
+</gexf>

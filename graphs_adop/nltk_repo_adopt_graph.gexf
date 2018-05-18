@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+	<graph defaultedgetype="directed" mode="dynamic" timeformat="date">
+		<attributes class="node"/>
+		<nodes>
+			<node id="tmp__barancik"/>
+			<node id="drkcm__nursix"/>
+			<node id="charlevel_convnet__aetilley"/>
+			<node id="ohDoclus__codacy-badger"/>
+			<node id="github_issue_similarity__pawl"/>
+			<node id="sequential-denoising-autoencoder-tf__jihunchoi"/>
+			<node id="Ralybot__dmptrluke"/>
+			<node id="retickrtools__adamhaney"/>
+			<node id="clevertagger__rsennrich"/>
+			<node id="datascience-tower__mrdrozdov"/>
+			<node id="nltk__nltk"/>
+			<node id="kl__peterbe"/>
+			<node id="_schwarzenegger-chan___AadityaJ"/>
+			<node id="kernel-affinity-propagation__fannix"/>
+			<node id="scripts__gmarmstrong"/>
+			<node id="tensor_decomp_embedding__popcorncolonel"/>
+			<node id="text-as-data__rspeer"/>
+			<node id="Text_Classification_Using_CNN__metalaman"/>
+			<node id="listenerplugins__benhoff"/>
+			<node id="ling473-proj1__erip"/>
+			<node id="pubmed_scripts__capdevc"/>
+			<node id="univ-tasks__himkt"/>
+			<node id="knmt__fabiencro"/>
+			<node id="MonkeySeeMonkeyRead__onesandzeroes"/>
+			<node id="nlp-rest-client__relwell"/>
+		</nodes>
+		<edges>
+			<edge id="0" source="nltk__nltk" start="2017-12-17" target="scripts__gmarmstrong"/>
+			<edge id="1" source="tensor_decomp_embedding__popcorncolonel" start="2017-09-03" target="Text_Classification_Using_CNN__metalaman"/>
+			<edge id="2" source="tensor_decomp_embedding__popcorncolonel" start="2017-03-19" target="github_issue_similarity__pawl"/>
+			<edge id="3" source="nltk__nltk" start="2015-01-19" target="pubmed_scripts__capdevc"/>
+			<edge id="4" source="nltk__nltk" start="2013-08-21" target="nlp-rest-client__relwell"/>
+			<edge id="5" source="nltk__nltk" start="2017-06-28" target="univ-tasks__himkt"/>
+			<edge id="6" source="nltk__nltk" start="2017-06-12" target="knmt__fabiencro"/>
+			<edge id="7" source="retickrtools__adamhaney" start="2013-08-21" target="nlp-rest-client__relwell"/>
+			<edge id="8" source="listenerplugins__benhoff" start="2017-02-12" target="tensor_decomp_embedding__popcorncolonel"/>
+			<edge id="9" source="tensor_decomp_embedding__popcorncolonel" start="2017-02-20" target="_schwarzenegger-chan___AadityaJ"/>
+			<edge id="10" source="nltk__nltk" start="2016-07-12" target="tmp__barancik"/>
+			<edge id="11" source="nltk__nltk" start="2017-02-03" target="sequential-denoising-autoencoder-tf__jihunchoi"/>
+			<edge id="12" source="nltk__nltk" start="2017-04-29" target="charlevel_convnet__aetilley"/>
+			<edge id="13" source="nltk__nltk" start="2012-02-25" target="clevertagger__rsennrich"/>
+			<edge id="14" source="tensor_decomp_embedding__popcorncolonel" start="2016-10-24" target="ohDoclus__codacy-badger"/>
+			<edge id="15" source="nltk__nltk" start="2011-04-15" target="kernel-affinity-propagation__fannix"/>
+			<edge id="16" source="Ralybot__dmptrluke" start="2017-02-12" target="tensor_decomp_embedding__popcorncolonel"/>
+			<edge id="17" source="nltk__nltk" start="2017-08-05" target="ling473-proj1__erip"/>
+			<edge id="18" source="nltk__nltk" start="2013-09-06" target="MonkeySeeMonkeyRead__onesandzeroes"/>
+			<edge id="19" source="drkcm__nursix" start="2013-08-21" target="nlp-rest-client__relwell"/>
+			<edge id="20" source="nltk__nltk" start="2013-07-27" target="text-as-data__rspeer"/>
+			<edge id="21" source="nltk__nltk" start="2018-02-19" target="datascience-tower__mrdrozdov"/>
+			<edge id="22" source="tensor_decomp_embedding__popcorncolonel" start="2017-06-28" target="univ-tasks__himkt"/>
+			<edge id="23" source="kl__peterbe" start="2013-08-21" target="nlp-rest-client__relwell"/>
+		</edges>
+	</graph>
+</gexf>

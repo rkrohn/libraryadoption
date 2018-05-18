@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+	<graph defaultedgetype="directed" mode="dynamic" timeformat="date">
+		<attributes class="node"/>
+		<nodes>
+			<node id="gnuplot-py__keszybz"/>
+			<node id="Manygui__ProgVal"/>
+			<node id="Zope__baijum"/>
+			<node id="distlib__vsajip"/>
+			<node id="setuptools__abadger"/>
+			<node id="ciel__mrry"/>
+			<node id="buildout-experiments__pombredanne"/>
+			<node id="python__orestis"/>
+			<node id="Zope__MatthewWilkes"/>
+			<node id="gnuplot-py__tschaume"/>
+			<node id="python-ast__banga"/>
+			<node id="reportlab__eduardocereto"/>
+			<node id="angel-app-svnmirror__infothrill"/>
+			<node id="pypy__aljosa"/>
+			<node id="reportlab__MatthewWilkes"/>
+			<node id="jython__int3"/>
+			<node id="node-build-linux2-x64__bennoleslie"/>
+			<node id="vim-java-debugger__mpobrien"/>
+			<node id="hpk42-execnet__pombredanne"/>
+			<node id="stackless__wkhere"/>
+			<node id="play-forked__moriyoshi"/>
+		</nodes>
+		<edges>
+			<edge id="0" source="Zope__baijum" start="2009-02-08" target="Zope__MatthewWilkes"/>
+			<edge id="1" source="buildout-experiments__pombredanne" start="2009-02-08" target="Zope__MatthewWilkes"/>
+			<edge id="2" source="buildout-experiments__pombredanne" start="2015-03-08" target="hpk42-execnet__pombredanne"/>
+			<edge id="3" source="Zope__MatthewWilkes" start="2008-03-09" target="Zope__baijum"/>
+			<edge id="4" source="Zope__baijum" start="2002-09-01" target="Manygui__ProgVal"/>
+			<edge id="5" source="play-forked__moriyoshi" start="2011-10-16" target="node-build-linux2-x64__bennoleslie"/>
+			<edge id="6" source="python-ast__banga" start="2015-03-29" target="distlib__vsajip"/>
+			<edge id="7" source="python-ast__banga" start="2005-01-29" target="pypy__aljosa"/>
+			<edge id="8" source="gnuplot-py__keszybz" start="2011-10-16" target="node-build-linux2-x64__bennoleslie"/>
+			<edge id="9" source="angel-app-svnmirror__infothrill" start="2011-10-16" target="node-build-linux2-x64__bennoleslie"/>
+			<edge id="10" source="Zope__baijum" start="2011-10-16" target="node-build-linux2-x64__bennoleslie"/>
+			<edge id="11" source="gnuplot-py__tschaume" start="2011-10-16" target="node-build-linux2-x64__bennoleslie"/>
+			<edge id="12" source="Zope__MatthewWilkes" start="2011-10-16" target="node-build-linux2-x64__bennoleslie"/>
+			<edge id="13" source="setuptools__abadger" start="2015-03-29" target="distlib__vsajip"/>
+			<edge id="14" source="python-ast__banga" start="2008-06-22" target="jython__int3"/>
+			<edge id="15" source="Zope__baijum" start="2009-07-11" target="vim-java-debugger__mpobrien"/>
+			<edge id="16" source="reportlab__eduardocereto" start="2009-07-11" target="vim-java-debugger__mpobrien"/>
+			<edge id="17" source="Zope__MatthewWilkes" start="2009-07-11" target="vim-java-debugger__mpobrien"/>
+			<edge id="18" source="Zope__baijum" start="2015-03-08" target="hpk42-execnet__pombredanne"/>
+			<edge id="19" source="Zope__MatthewWilkes" start="2013-10-14" target="reportlab__MatthewWilkes"/>
+			<edge id="20" source="pypy__aljosa" start="2013-10-14" target="reportlab__MatthewWilkes"/>
+			<edge id="21" source="Zope__MatthewWilkes" start="2002-09-01" target="Manygui__ProgVal"/>
+			<edge id="22" source="python__orestis" start="2002-09-01" target="Manygui__ProgVal"/>
+			<edge id="23" source="ciel__mrry" start="2011-10-16" target="node-build-linux2-x64__bennoleslie"/>
+			<edge id="24" source="python__orestis" start="2006-06-13" target="stackless__wkhere"/>
+			<edge id="25" source="Zope__MatthewWilkes" start="2015-03-08" target="hpk42-execnet__pombredanne"/>
+			<edge id="26" source="stackless__wkhere" start="2006-08-11" target="python__orestis"/>
+		</edges>
+	</graph>
+</gexf>
