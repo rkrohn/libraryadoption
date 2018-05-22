@@ -20,10 +20,9 @@ import matplotlib.pyplot as plt
 import file_utils as utils
 import data_utils as data
 import plot_utils	
+import package_type
 	
 #--- MAIN EXECUTION BEGINS HERE---#	
-	
-SUBMODULE = False	#set False if want only top-level modules, true if not
 	
 #check for required command line param
 if len(sys.argv) != 2:
@@ -36,10 +35,7 @@ lib = sys.argv[1]
 print "Analyzing", lib
 	
 #set string suffix for submodule mode
-if SUBMODULE:
-	suf = "SUB"
-else:
-	suf = "TOP"
+suf = package_type.get_type()
 	
 #read library->repos mapping, extract lists for this library
 repos_list = utils.load_json("import_repos_lists_%s.json" % suf)[lib]

@@ -20,15 +20,10 @@ import itertools
 import pandas as pd
 import numpy as np	
 import plot_utils
+import package_type
 	
 
 #--- MAIN EXECUTION BEGINS HERE---#	
-
-
-#flag to determine how to count
-#if true, take import exactly as stored, submodules included (SUB)
-#if false, only take top package level, strip submodules (TOP)
-SUB_MODULE = False	
 
 #flag to determine adoption definition
 #if true, assume user must see library get committed for it to count as an adoption
@@ -38,14 +33,6 @@ SUB_MODULE = False
 #	start watching - no visible commit required
 SIGHT = True
 
-#module-type specifier (at this point, more of a file suffix specifier)
-if SUB_MODULE:
-	print "Searching for submodule adoptions"
-	module_type = "SUB"
-else:
-	print "Searching for parent module adoptions"
-	module_type = "TOP"	
-	
 #adoption condition specifier (another suffix)
 if SIGHT:
 	print "Adoption requires direct commit view"
@@ -53,6 +40,8 @@ if SIGHT:
 else:
 	print "Adoption from repo history allowed"
 	adop_type = "HISTORY"
+	
+module_type = package_type.get_type()
 
 #load adoption events
 print "Loading all adoption events..."

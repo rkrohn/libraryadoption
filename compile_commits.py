@@ -13,22 +13,12 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pylab as plt
 import file_utils as utils	
+import package_type
 
-#--- MAIN EXECUTION BEGINS HERE---#	
+#--- MAIN EXECUTION BEGINS HERE---#
 
-
-#flag to determine how to count
-#if true, take import exactly as stored, submodules included (SUB)
-#if false, only take top package level, strip submodules (TOP)
-SUB_MODULE = False	
-
-#module-type specifier
-if SUB_MODULE:
-	print "Compiling submodule commits"
-	module_type = "SUB"
-else:
-	print "Compiling top-level package commits"
-	module_type = "TOP"
+#how to count: top-level vs submodules
+module_type = package_type.get_type()
 
 #load all commits if have them
 all_commits = utils.load_json("datafiles/all_add_commits_%s.json" % module_type)
@@ -75,7 +65,7 @@ if all_commits == False:
 				#pull packages to add to commit
 				for package in commit[2]["+"]:
 					#counting with submodules, take package name as-is
-					if SUB_MODULE:
+					if module_type == "SUB":
 						lib = package						
 					#not counting with submodules, get parent package only
 					else:

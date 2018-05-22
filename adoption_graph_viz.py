@@ -17,15 +17,9 @@ import gexfbuilder as gexf
 import datetime
 import file_utils as utils
 import data_utils as data
-	
+import package_type
 
 #--- MAIN EXECUTION BEGINS HERE---#	
-
-
-#flag to determine how to count
-#if true, take import exactly as stored, submodules included (SUB)
-#if false, only take top package level, strip submodules (TOP)
-SUB_MODULE = False	
 
 #flag to determine adoption definition
 #if true, assume user must see library get committed for it to count as an adoption
@@ -55,12 +49,7 @@ else:
 	LIB = "ALL"		#for later file names
 
 #module-type specifier (at this point, more of a file suffix specifier)
-if SUB_MODULE:
-	print "Searching for submodule adoptions"
-	module_type = "SUB"
-else:
-	print "Searching for parent module adoptions"
-	module_type = "TOP"	
+module_type = package_type.get_type()
 	
 #adoption condition specifier (another suffix)
 if SIGHT:

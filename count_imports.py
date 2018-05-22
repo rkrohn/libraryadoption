@@ -11,21 +11,12 @@ from collections import OrderedDict
 from operator import itemgetter
 import file_utils as utils
 import plot_utils
+import package_type
 
 #--- MAIN EXECUTION BEGINS HERE---#	
 
-#flag to determine how to count
-#if true, take import exactly as stored, submodules included
-#if false, only take top package level, strip submodules
-SUB_MODULE = True	
-
 #file count-type specifier
-if SUB_MODULE:
-	print "Counting with submodules"
-	count_type = "SUB"
-else:
-	print "Counting top-level package only"
-	count_type = "TOP"
+count_type = package_type.get_type()
 
 self_ref_count = 0
 
@@ -57,7 +48,7 @@ if import_counts_overall == False or import_repo_counts == False or import_user_
 				#update counts/sets for each import package
 				for package in commit[2]["+"]:
 					#counting with submodules, take package name as-is
-					if SUB_MODULE:
+					if count_type == "SUB":
 						lib = package						
 					#not counting with submodules, get parent package only
 					else:
