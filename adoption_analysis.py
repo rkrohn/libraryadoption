@@ -1,6 +1,5 @@
 #given adoption events and library usage counts, compute some counts and plot some frequency distributions
 
-import json
 import os.path
 import subprocess
 import sys
@@ -14,92 +13,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pylab as plt
 import numpy as np
-
-#save some data structure to json file
-def save_json(data, filename):
-	with open(filename, 'w') as fp:
-		json.dump(data, fp, indent=4, sort_keys=False)
-		
-#load json to dictionary
-def load_json(filename):
-	if os.path.isfile(filename):
-		with open(filename) as fp:
-			data = json.load(fp)
-			return data
-	return False
-
-#given a user, repo, time triple, create a dictionary containing those values
-def build_dict(user, repo, time):
-	d = {}
-	d["user"] = user
-	d["repo"] = repo
-	d["time"] = time
-	return d
-	
-#given a dict with user, repo, time keys, unfold it
-def unfold_dict(d):
-	return d["user"], d["repo"], d["time"]
-	
-#given a sequence of values and a single value x, compute the CDF of x in that sequence
-#if list is sorted and supply an index, should run faster
-#returns value between 0 and 1	
-def get_cdf(seq, x, index = -1):
-	count = 0
-	if index == -1:
-		for value in seq:
-			if value <= x:
-				count = count + 1
-	else:
-		count = index
-	prob = float(count) / float(len(seq))
-	return prob	
-	
-#given dictionary of form key->count, compute frequencies of different counts
-def count_freq(data):
-	freq = defaultdict(int)
-	min = -1
-	max = -1
-	for key in data:
-		freq[data[key]] = freq[data[key]] + 1
-		if min == -1 or data[key] < min:
-			min = data[key]
-		if max == -1 or data[key] > max:
-			max = data[key]
-	return freq, min, max
-		
-	
-#given frequencies as dictionary, key = size, value = freq, plot them	
-def plot_freq(freq, xlabel, ylabel, title, filename = "", x_max = 0, x_min = 0, log_scale = False, scatter = False):	
-	lists = sorted(freq.items())
-	x,y = zip(*lists)
-	plot_data(x, y, xlabel, ylabel, title, filename, x_max, x_min, log_scale, scatter)	
-
-#plot data given as x and y lists	
-def plot_data(x, y, xlabel, ylabel, title, filename = "", x_max = 0, x_min = 0, log_scale = False, scatter = False):
-	plt.clf()	
-	fig, ax = plt.subplots()
-
-	if scatter:
-		plt.scatter(x, y)
-	else:
-		plt.plot(x, y)
-	plt.title(title)
-	plt.xlabel(xlabel)
-	plt.ylabel(ylabel)
-	if log_scale:
-		ax.set_yscale('log')
-		ax.set_xscale('log')
-	if x_max != 0 and x_min != 0:
-		plt.xlim(xmin=x_min, xmax=x_max)
-	elif x_max != 0:
-		plt.xlim(xmin=0, xmax=x_max)
-	elif x_min != 0:
-		plt.xlim(xmin=x_min, xmax=x_max)	
-	if filename == "":
-		plt.show()
-	else:
-		plt.savefig(filename, bbox_inches='tight')
-	
+import file_utils as utils
+import plot_utils
 
 #--- MAIN EXECUTION BEGINS HERE---#	
 
@@ -135,11 +50,11 @@ else:
 
 #load adoption events
 print "Loading all adoption events..."
-adoption_events = load_json("datafiles/adoption_events_%s.json" % (module_type + "_" + adop_type))
+adoption_events = utils.load_json("datafiles/adoption_events_%s.json" % (module_type + "_" + adop_type))
 
 #load library usage counts (overall for now)
 print "Loading library usage counts..."
-usage_counts = load_json("datafiles/import_counts_overall_%s.json" % module_type)
+usage_counts = utils.load_json("datafiles/import_counts_overall_%s.json" % module_type)
 
 #don't have an adoption event file, yell at the user
 if adoption_events == False or usage_counts == False:
@@ -224,7 +139,7 @@ print zero_count, "adoption source-target pairs with time delay of 0"
 
 #save lib adoption counts sorted most to least
 lib_adop_counts_sorted = OrderedDict(sorted(lib_adop_counts.items(), key=itemgetter(1), reverse=True))
-save_json(lib_adop_counts_sorted, "datafiles/lib_adop_counts_sorted_%s.json" % (module_type + "_" + adop_type))
+utils.save_json(lib_adop_counts_sorted, "datafiles/lib_adop_counts_sorted_%s.json" % (module_type + "_" + adop_type))
 
 #plots use usage counts, adoption counts, and average delta t: 
 
@@ -237,20 +152,20 @@ for lib in usage_counts:
 		adop_counts.append(lib_adop_counts[lib])
 		avg_delta.append(lib_delta[lib])
 #total # of usages for library on x, total # of adoptions for lib on y
-plot_data(use_counts, adop_counts, "Number of uses", "Number of adoptions", "Uses vs. Adoptions per Library", filename = "results/uses_vs_adoptions.png", scatter = True, log_scale = True)
+plot_utils.plot_data(use_counts, adop_counts, "Number of uses", "Number of adoptions", "Uses vs. Adoptions per Library", filename = "results/uses_vs_adoptions.png", scatter = True, log_scale = True)
 print "Uses vs. adoptions plot saved to results/uses_vs_adoptions.png"
 
 #frequency distribution of # of adoptions per library
-lib_adop_freq, min_lib_adop, max_lib_adop = count_freq(lib_adop_counts)
-plot_freq(lib_adop_freq, "library adoption count", "freq", "Frequency of library adoption counts", filename = "results/lib_adop_freq.jpg", log_scale = True)
+lib_adop_freq, min_lib_adop, max_lib_adop = plot_utils.count_freq(lib_adop_counts)
+plot_utils.plot_freq(lib_adop_freq, "library adoption count", "freq", "Frequency of library adoption counts", filename = "results/lib_adop_freq.jpg", log_scale = True)
 print "lib adop counts: min =", min_lib_adop, ", max =", max_lib_adop
 print "library adoption frequency distribution saved to results/lib_adop_freq.jpg"
 
 #usages of library on x, average delta t on y
-plot_data(use_counts, avg_delta, "Number of uses", "Average adoption time delay", "Uses vs. Adoption Time Delay per Library", filename = "results/uses_vs_avgdelta.png", scatter = True, log_scale = True)
+plot_utils.plot_data(use_counts, avg_delta, "Number of uses", "Average adoption time delay", "Uses vs. Adoption Time Delay per Library", filename = "results/uses_vs_avgdelta.png", scatter = True, log_scale = True)
 print "Uses vs. average delta t plot saved to results/uses_vs_avgdelta.png"
 #number of adoptions on x, average delta t on y
-plot_data(adop_counts, avg_delta, "Number of adoptions", "Average adoption time delay", "Adoptions vs. Adoption Time Delay per Library", filename = "results/adoptions_vs_avgdelta.png", scatter = True, log_scale = True)
+plot_utils.plot_data(adop_counts, avg_delta, "Number of adoptions", "Average adoption time delay", "Adoptions vs. Adoption Time Delay per Library", filename = "results/adoptions_vs_avgdelta.png", scatter = True, log_scale = True)
 print "Adoptions vs. average delta t plot saved to results/adoptions_vs_avgdelta.png"
 
 #sort the delta-t
@@ -285,9 +200,9 @@ for val in delta_t_sorted:
 probs = [float(item) / float(n) for item in counts]	
 	
 #plot CDF
-plot_data(delta_t_sample, cdf_delta, "Adoption time delay (seconds)", "Probability", "CDF of Adoption Time Delay", filename = "results/adopt_delay_cdf.png")
+plot_utils.plot_data(delta_t_sample, cdf_delta, "Adoption time delay (seconds)", "Probability", "CDF of Adoption Time Delay", filename = "results/adopt_delay_cdf.png")
 print "CDF plot saved to results/adopt_delay_cdf.png"
 
 #plot PDF
-plot_data(bins, probs, "Adoption time delay (days)", "Probability", "PDF of Adoption Time Delay", filename = "results/adopt_delay_pdf.png", log_scale = True)
+plot_utils.plot_data(bins, probs, "Adoption time delay (days)", "Probability", "PDF of Adoption Time Delay", filename = "results/adopt_delay_pdf.png", log_scale = True)
 print "PDF plot saved to results/adopt_delay_pdf.png"

@@ -1,6 +1,5 @@
 #compile all addition commits to a single file
 
-import json
 import os.path
 import subprocess
 import sys
@@ -13,21 +12,7 @@ from operator import itemgetter
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pylab as plt
-
-#save some data structure to json file
-def save_json(data, filename):
-	with open(filename, 'w') as fp:
-		json.dump(data, fp, indent=4, sort_keys=False)
-		
-#load json to dictionary
-def load_json(filename):
-	if os.path.isfile(filename):
-		with open(filename) as fp:
-			data = json.load(fp)
-			return data
-	return False
-
-	
+import file_utils as utils	
 
 #--- MAIN EXECUTION BEGINS HERE---#	
 
@@ -46,7 +31,7 @@ else:
 	module_type = "TOP"
 
 #load all commits if have them
-all_commits = load_json("datafiles/all_add_commits_%s.json" % module_type)
+all_commits = utils.load_json("datafiles/all_add_commits_%s.json" % module_type)
 
 #don't have a compiled version yet, build it
 if all_commits == False:
@@ -117,7 +102,7 @@ if all_commits == False:
 			print "finished", file_idx, "repo files"
 			
 	#save all commits to json (large file incoming)
-	save_json(all_commits, "datafiles/all_add_commits_%s.json" % module_type)
+	utils.save_json(all_commits, "datafiles/all_add_commits_%s.json" % module_type)
 
 	print "results saved to datafiles/all_add_commits_%s.json" % module_type
 	

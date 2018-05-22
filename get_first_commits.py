@@ -1,6 +1,5 @@
 #extract and parse each user's first commit (any commit) to each repo
 
-import json
 import os.path
 import subprocess
 import sys
@@ -8,12 +7,13 @@ import urllib2
 import io
 import unicodedata
 from collections import defaultdict
+import file_utils as utils
 
 #--- MAIN EXECUTION BEGINS HERE---#	
 
 #read userid mappings from files
-email_to_id = load_json("email_to_userid.json")
-name_to_id = load_json("name_to_userid.json")
+email_to_id = utils.load_json("email_to_userid.json")
+name_to_id = utils.load_json("name_to_userid.json")
 
 #get max value (not key) appearing in either dictionary, use as starting point for 
 #any new id assignments
@@ -42,7 +42,7 @@ for repo in os.listdir("."):
 	os.chdir(repo)
 	
 	#run git log, drop in temporary file
-	run_bash('''git log --encoding=utf-8 --full-history --reverse "--format=format:%aE, %aN, %at" > ../../temprepolog.txt''' , True)
+	utils.run_bash('''git log --encoding=utf-8 --full-history --reverse "--format=format:%aE, %aN, %at" > ../../temprepolog.txt''' , True)
 	
 	#change back to parent dir (repo_clones)
 	os.chdir("..")
@@ -117,10 +117,10 @@ os.chdir("..")
 
 #save results
 #save updated user lists
-save_json(name_to_id, "name_to_userid.json")
-save_json(email_to_id, "email_to_userid.json")
+utils.save_json(name_to_id, "name_to_userid.json")
+utils.save_json(email_to_id, "email_to_userid.json")
 print "final user list saved to name_to_userid.json and email_to_userid.json"
 
 #save first commit info
-save_json(first_commits, "first_commits.json")
+utils.save_json(first_commits, "first_commits.json")
 print "saved first commit data to first_commits.json"

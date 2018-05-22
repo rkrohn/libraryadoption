@@ -1,6 +1,5 @@
 #plot adoptions and total import commits over time
 
-import json
 import os.path
 import subprocess
 import sys
@@ -19,71 +18,8 @@ from lxml import etree
 import datetime
 import itertools
 import pandas as pd
-import numpy as np
-
-#save some data structure to json file
-def save_json(data, filename):
-	with open(filename, 'w') as fp:
-		json.dump(data, fp, indent=4, sort_keys=False)
-		
-#load json to dictionary
-def load_json(filename):
-	if os.path.isfile(filename):
-		with open(filename) as fp:
-			data = json.load(fp)
-			return data
-	return False
-	
-
-#plot data given as x and y lists	
-def plot_data(x, y, xlabel, ylabel, title, filename = "", x_max = 0, x_min = 0, log_scale = False):
-	plt.clf()	
-	fig, ax = plt.subplots()
-
-	plt.plot(x, y)
-	plt.title(title)
-	plt.xlabel(xlabel)
-	plt.ylabel(ylabel)
-	if log_scale:
-		ax.set_yscale('log')
-		ax.set_xscale('log')
-	if x_max != 0 and x_min != 0:
-		plt.xlim(xmin=x_min, xmax=x_max)
-	elif x_max != 0:
-		plt.xlim(xmin=0, xmax=x_max)
-	elif x_min != 0:
-		plt.xlim(xmin=x_min, xmax=x_max)	
-	if filename == "":
-		plt.show()
-	else:
-		plt.savefig(filename, bbox_inches='tight')
-		
-		
-#plot data given as x and 2 y lists	- will have 2 y axes on plot
-def plot_two_axes(x, data1, data2, xlabel, ylabel1, ylabel2, title, filename = ""):
-	plt.clf()	
-		
-	fig, ax1 = plt.subplots()
-
-	ax1.set_xlabel(xlabel)
-	ax1.set_ylabel(ylabel1, color='b')
-	ax1.plot(x, data1, 'b-')
-	ax1.tick_params(axis='y', labelcolor='b')
-
-	ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
-
-	ax2.set_ylabel(ylabel2, color='r')  # we already handled the x-label with ax1
-	ax2.plot(x, data2, 'r-')
-	ax2.tick_params(axis='y', labelcolor='r')
-	
-	plt.title(title)
-
-	fig.tight_layout()  # otherwise the right y-label is slightly clipped	
-		
-	if filename == "":
-		plt.show()
-	else:
-		plt.savefig(filename, bbox_inches='tight')
+import numpy as np	
+import plot_utils
 	
 
 #--- MAIN EXECUTION BEGINS HERE---#	
@@ -120,11 +56,11 @@ else:
 
 #load adoption events
 print "Loading all adoption events..."
-adoption_events = load_json("datafiles/adoption_events_%s.json" % (module_type + "_" + adop_type))
+adoption_events = utils.load_json("datafiles/adoption_events_%s.json" % (module_type + "_" + adop_type))
 
 #load all commits
 print "Loading all commits..."
-all_commits = load_json("datafiles/all_add_commits_%s.json" % module_type)
+all_commits = utils.load_json("datafiles/all_add_commits_%s.json" % module_type)
 
 #don't have an adoption event file, yell at the user
 if adoption_events == False or all_commits == False:
@@ -191,9 +127,9 @@ commit_week.columns = ['commits']
 week_merged = week_counts.merge(commit_week, how='outer', left_index=True, right_index=True)
 week_merged.fillna(int(0), inplace=True)
 #plot?
-plot_data(week_counts.index, week_counts['adoptions'], "time", "number of adoption events per week", "Adoption Events Per Week", filename = "results/adop_over_time_week.png")
+plot_utils.plot_data(week_counts.index, week_counts['adoptions'], "time", "number of adoption events per week", "Adoption Events Per Week", filename = "results/adop_over_time_week.png")
 #double axis plot
-plot_two_axes(week_merged.index, week_merged['adoptions'], week_merged['commits'], "time", "number of adoption events per week", "number of import commits per week", "Adoption Events and Import Commits Per Week", filename = "results/adop_commit_over_time_week.png")
+plot_utils.plot_two_axes(week_merged.index, week_merged['adoptions'], week_merged['commits'], "time", "number of adoption events per week", "number of import commits per week", "Adoption Events and Import Commits Per Week", filename = "results/adop_commit_over_time_week.png")
 
 # Group the data by week, and take the count for each week
 month_counts = df.resample('M').count()
@@ -204,7 +140,7 @@ commit_month.columns = ['commits']
 month_merged = month_counts.merge(commit_month, how='outer', left_index=True, right_index=True)
 month_merged.fillna(int(0), inplace=True)
 #plot?
-plot_data(month_counts.index, month_counts['adoptions'], "time", "number of adoption events per month", "Adoption Events Per Month", filename = "results/adop_over_time_month.png")
+plot_utils.plot_data(month_counts.index, month_counts['adoptions'], "time", "number of adoption events per month", "Adoption Events Per Month", filename = "results/adop_over_time_month.png")
 #double axis plot
-plot_two_axes(month_merged.index, month_merged['adoptions'], month_merged['commits'], "time", "number of adoption events per month", "number of import commits per month", "Adoption Events and Import Commits Per Month", filename = "results/adop_commit_over_time_month.png")
+plot_utils.plot_two_axes(month_merged.index, month_merged['adoptions'], month_merged['commits'], "time", "number of adoption events per month", "number of import commits per month", "Adoption Events and Import Commits Per Month", filename = "results/adop_commit_over_time_month.png")
 	

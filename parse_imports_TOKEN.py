@@ -1,6 +1,5 @@
 #old, sad code for parsing imports - DON'T USE THIS!
 
-import json
 import os.path
 import subprocess
 import sys
@@ -8,27 +7,7 @@ import urllib2
 import io
 from collections import defaultdict
 import unicodedata
-
-#save some data structure to json file
-def save_json(data, filename):
-	with open(filename, 'w') as fp:
-		json.dump(data, fp, indent=4, sort_keys=False)
-		
-#load json to dictionary
-def load_json(filename):
-	if os.path.isfile(filename):
-		with open(filename) as fp:
-			data = json.load(fp)
-			return data
-	return False
-	
-#run bash command
-def run_bash(command, shell=False):
-	if shell:
-		process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
-	else:
-		process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
-	output, error = process.communicate()
+import file_utils as utils
 
 #given a line of commit metadata and user dictionaries, returns a user id and timestamp
 def get_user_and_time(line, email_to_id, name_to_id):
@@ -115,8 +94,8 @@ def parse_import(line):
 #--- MAIN EXECUTION BEGINS HERE---#	
 
 #read userid mappings from files
-email_to_id = load_json("email_to_userid.json")
-name_to_id = load_json("name_to_userid.json")
+email_to_id = utils.load_json("email_to_userid.json")
+name_to_id = utils.load_json("name_to_userid.json")
 
 file_idx = 0
 
@@ -163,7 +142,7 @@ for filename in os.listdir('commit_data'):
 		commits_list.append([user, time, imports])	#save commit
 
 	#save file commit data to json
-	save_json(commits_list, "imports_data/%s.log" % filename[:-12])
+	utils.save_json(commits_list, "imports_data/%s.log" % filename[:-12])
 
 	#period prints
 	file_idx = file_idx + 1

@@ -15,70 +15,8 @@ matplotlib.use('Agg')
 import matplotlib.pylab as plt
 import networkx as nx
 from networkx.algorithms import bipartite
-
-#save some data structure to json file
-def save_json(data, filename):
-	with open(filename, 'w') as fp:
-		json.dump(data, fp, indent=4, sort_keys=False)
-		
-#load json to dictionary
-def load_json(filename):
-	if os.path.isfile(filename):
-		with open(filename) as fp:
-			data = json.load(fp)
-			return data
-	return False
-
-#given a user, repo, time triple, create a dictionary containing those values
-def build_dict(user, repo, time):
-	d = {}
-	d["user"] = user
-	d["repo"] = repo
-	d["time"] = time
-	return d
-	
-#given a dict with user, repo, time keys, unfold it
-def unfold_dict(d):
-	return d["user"], d["repo"], d["time"]
-	
-#given a sequence of values and a single value x, compute the CDF of x in that sequence
-#if list is sorted and supply an index, should run faster
-#returns value between 0 and 1	
-def get_cdf(seq, x, index = -1):
-	count = 0
-	if index == -1:
-		for value in seq:
-			if value <= x:
-				count = count + 1
-	else:
-		count = index
-	prob = float(count) / float(len(seq))
-	return prob	
-	
-
-#plot data given as x and y lists	
-def plot_data(x, y, xlabel, ylabel, title, filename = "", x_max = 0, x_min = 0, log_scale = False):
-	plt.clf()	
-	fig, ax = plt.subplots()
-
-	plt.plot(x, y)
-	plt.title(title)
-	plt.xlabel(xlabel)
-	plt.ylabel(ylabel)
-	if log_scale:
-		ax.set_yscale('log')
-		ax.set_xscale('log')
-	if x_max != 0 and x_min != 0:
-		plt.xlim(xmin=x_min, xmax=x_max)
-	elif x_max != 0:
-		plt.xlim(xmin=0, xmax=x_max)
-	elif x_min != 0:
-		plt.xlim(xmin=x_min, xmax=x_max)	
-	if filename == "":
-		plt.show()
-	else:
-		plt.savefig(filename, bbox_inches='tight')
-	
+import file_utils as utils
+import plot_utils	
 
 #--- MAIN EXECUTION BEGINS HERE---#	
 
@@ -114,11 +52,11 @@ else:
 
 #load adoption events
 print "Loading all adoption events..."
-adoption_events = load_json("datafiles/adoption_events_%s.json" % (module_type + "_" + adop_type))
+adoption_events = utils.load_json("datafiles/adoption_events_%s.json" % (module_type + "_" + adop_type))
 
 #read user->repos mapping (to use as user and repo list)
 print "Loading user and repo list..."
-user_to_repos = load_json("datafiles/user_to_repo_list.json")
+user_to_repos = utils.load_json("datafiles/user_to_repo_list.json")
 
 #don't have an adoption event file, yell at the user
 if adoption_events == False or user_to_repos == False:
@@ -222,7 +160,7 @@ repo_comp_data.append(len(repo_comps))
 times.append(events_list[n-1]["target"]["time"])
 
 #plot number of components over time
-plot_data(times, user_comp_data, "Time (UNIX)", "Number of Components in User Graph", "Number of Components in User Graph over Time", filename = "results/time_components_user.png", log_scale = False)
+plot_utils.plot_data(times, user_comp_data, "Time (UNIX)", "Number of Components in User Graph", "Number of Components in User Graph over Time", filename = "results/time_components_user.png", log_scale = False)
 print "user component plot saved to results/time_components_user.png"
-plot_data(times, repo_comp_data, "Time (UNIX)", "Number of Components in Repo Graph", "Number of Components in Repo Graph over Time", filename = "results/time_components_repo.png", log_scale = False)
+plot_utils.plot_data(times, repo_comp_data, "Time (UNIX)", "Number of Components in Repo Graph", "Number of Components in Repo Graph over Time", filename = "results/time_components_repo.png", log_scale = False)
 print "repo component plot saved to results/time_components_repo.png"

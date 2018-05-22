@@ -13,19 +13,7 @@ from operator import itemgetter
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pylab as plt
-
-#save some data structure to json file
-def save_json(data, filename):
-	with open(filename, 'w') as fp:
-		json.dump(data, fp, indent=4, sort_keys=False)
-		
-#load json to dictionary
-def load_json(filename):
-	if os.path.isfile(filename):
-		with open(filename) as fp:
-			data = json.load(fp)
-			return data
-	return False
+import file_utils as utils
 	
 
 #--- MAIN EXECUTION BEGINS HERE---#	
@@ -34,7 +22,7 @@ def load_json(filename):
 #build dictionary of user->list of contributing repos (additions only)
 
 #load dict if have it
-user_to_repo = load_json("user_to_repo_list.json")
+user_to_repo = utils.load_json("user_to_repo_list.json")
 if user_to_repo == False:
 	user_to_repo = defaultdict(set)	
 
@@ -47,7 +35,7 @@ if user_to_repo == False:
 		repo = filename[:-4]
 
 		#read in all commits
-		commits = load_json("imports_data/%s" % filename)
+		commits = utils.load_json("imports_data/%s" % filename)
 		#list of commits, each commit is a list containing user, time, and import dict
 		#import dict has keys "+" and "-", leads to list of packages/libraries
 		
@@ -69,7 +57,7 @@ if user_to_repo == False:
 		user_to_repo_list[k] = list(user_to_repo[k])
 			
 	#save list to file
-	save_json(user_to_repo_list, "user_to_repo_list.json")
+	utils.save_json(user_to_repo_list, "user_to_repo_list.json")
 
 	print "results saved to user_to_repo_list.json"
 else:

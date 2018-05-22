@@ -1,28 +1,7 @@
-import json
 import os.path
 import subprocess
 import sys
-
-#save some data structure to json file
-def save_json(data, filename):
-	with open(filename, 'w') as fp:
-		json.dump(data, fp, indent=4, sort_keys=False)
-		
-#load json to dictionary
-def load_json(filename):
-	if os.path.isfile(filename):
-		with open(filename) as fp:
-			data = json.load(fp)
-			return data
-	return False
-	
-#run bash command
-def run_bash(command, shell=False):
-	if shell:
-		process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
-	else:
-		process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
-	output, error = process.communicate()
+import file_utils as utils
 
 #--- MAIN EXECUTION BEGINS HERE---#	
 	
@@ -33,7 +12,7 @@ if len(sys.argv) != 3:
 	sys.exit(0)
 
 #read list of repos to clone and scrape
-repos = load_json("all_repos.json")
+repos = utils.load_json("all_repos.json")
 print "Read", len(repos['items']), "repos"
 
 #grab and save current working directory
@@ -68,7 +47,7 @@ for i in range(idx, idx+limit):
 	#clone repo if doesn't exist
 	if os.path.isdir(repo_name) == False:
 		#clone repo (ugh...)
-		run_bash("git clone %s %s" % (clone_url, repo_name))
+		utils.run_bash("git clone %s %s" % (clone_url, repo_name))
 	else:
 		print "Already cloned", repo_name
 	
@@ -81,7 +60,7 @@ for i in range(idx, idx+limit):
 	
 	#get list of all matching commit diffs, save to file (if not already done)
 	if os.path.isfile("%s/commit_data/%s_commits.log" % (dir, repo_name)) == False:
-		run_bash('''git show --format="#######%%aE, %%aN, %%at" --unified=0 $(git rev-list --all) | awk '/^#####/ || /\-[[:blank:]]*import/ || /\+[[:blank:]]*import/  || /\-[[:blank:]]*from/ || /\+[[:blank:]]*from/'  > %s/commit_data/%s_commits.log''' % (dir, repo_name) , True)	
+		utils.run_bash('''git show --format="#######%%aE, %%aN, %%at" --unified=0 $(git rev-list --all) | awk '/^#####/ || /\-[[:blank:]]*import/ || /\+[[:blank:]]*import/  || /\-[[:blank:]]*from/ || /\+[[:blank:]]*from/'  > %s/commit_data/%s_commits.log''' % (dir, repo_name) , True)	
 	
 	#change back to previous working directory
 	os.chdir("../..")	
@@ -111,9 +90,9 @@ for i in range(idx, idx+limit):
 	'''
 
 	#delete the repo
-	#run_bash("rm -r %s" % repo_name)
+	#utils.run_bash("rm -r %s" % repo_name)
 	#delete other temporary files
-	#run_bash("rm commits.log")
+	#utils.run_bash("rm commits.log")
 	
 	#stop when reach index limit
 	idx = idx + 1

@@ -1,7 +1,5 @@
 #searches import data (with first commits as context) for adoption events
 
-import json
-import os.path
 import subprocess
 import sys
 import urllib2
@@ -13,31 +11,9 @@ from operator import itemgetter
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pylab as plt
+import file_utils as utils
+import data_utils as data
 
-#save some data structure to json file
-def save_json(data, filename):
-	with open(filename, 'w') as fp:
-		json.dump(data, fp, indent=4, sort_keys=False)
-		
-#load json to dictionary
-def load_json(filename):
-	if os.path.isfile(filename):
-		with open(filename) as fp:
-			data = json.load(fp)
-			return data
-	return False
-
-#given a user, repo, time triple, create a dictionary containing those values
-def build_dict(user, repo, time):
-	d = {}
-	d["user"] = user
-	d["repo"] = repo
-	d["time"] = time
-	return d
-	
-#given a dict with user, repo, time keys, unfold it
-def unfold_dict(d):
-	return d["user"], d["repo"], d["time"]
 
 #--- MAIN EXECUTION BEGINS HERE---#	
 
@@ -73,11 +49,11 @@ else:
 
 #load all commits
 print "Loading all import commits..."
-all_lib_commits = load_json("datafiles/all_add_commits_%s.json" % module_type)
+all_lib_commits = utils.load_json("datafiles/all_add_commits_%s.json" % module_type)
 
 #load first commits for each user
 print "Loading all user/repo first commits..."
-first_commits = load_json("datafiles/first_commits.json")
+first_commits = utils.load_json("datafiles/first_commits.json")
 
 #don't have a compiled commit file, yell at the user
 if all_lib_commits == False or first_commits == False:
@@ -145,7 +121,7 @@ user_repos = defaultdict(set)
 print "Looping commits in time order..."
 for commit in sorted(all_commits, key=lambda d: d["time"]):		#sorted by time
 		#grab some fields for ease of reading and usage
-		user, repo, time = unfold_dict(commit)
+		user, repo, time = data.unfold_dict(commit)
 
 		#user first commit, no imports
 		if "libs" not in commit:
@@ -186,12 +162,12 @@ for commit in sorted(all_commits, key=lambda d: d["time"]):		#sorted by time
 						#user subscribed, adoption!
 						if lib in repo_imports[r] and repo_imports[r][lib]["time"] > repo_users[r][user]:
 							#save the adoption! add repo commit to source list
-							adopt["source"].append(build_dict(repo_imports[r][lib]["user"], r, repo_imports[r][lib]["time"]))
+							adopt["source"].append(data.build_dict(repo_imports[r][lib]["user"], r, repo_imports[r][lib]["time"]))
 							
 					#if adoption has valid sources, set up "target" and save
 					if len(adopt["source"]) != 0:
 						#set up target data
-						adopt["target"] = build_dict(user, repo, time)
+						adopt["target"] = data.build_dict(user, repo, time)
 						#save adoption event to list
 						adoption_events[lib].append(adopt)
 						adoption_count =  adoption_count + 1
@@ -223,7 +199,7 @@ for commit in sorted(all_commits, key=lambda d: d["time"]):		#sorted by time
 		#	break
 			
 #save all adoption events to json (large file incoming, hope it has everything we need)
-save_json(adoption_events, "datafiles/adoption_events_%s.json" % (module_type + "_" + adop_type))
+utils.save_json(adoption_events, "datafiles/adoption_events_%s.json" % (module_type + "_" + adop_type))
 print "results saved to datafiles/adoption_events_%s.json" % (module_type + "_" + adop_type)
 
 #regardless, print number of adoptions found

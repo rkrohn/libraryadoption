@@ -1,6 +1,5 @@
 #graph analysis of commit graph (NOT adoption graph) based on raw commit data
 
-import json
 import os.path
 import subprocess
 import sys
@@ -16,19 +15,7 @@ from networkx.algorithms import bipartite
 import collections
 import matplotlib.pyplot as plt
 import unicodedata
-
-#save some data structure to json file
-def save_json(data, filename):
-	with open(filename, 'w') as fp:
-		json.dump(data, fp, indent=4, sort_keys=False)
-		
-#load json to dictionary
-def load_json(filename):
-	if os.path.isfile(filename):
-		with open(filename) as fp:
-			data = json.load(fp)
-			return data
-	return False
+import file_utils as utils
 
 #computes and plots degree distribution for given node set (assume all nodes if no set given
 def deg_dist(graph, title, ylabel, xlabel, filename, node_set = False):	
@@ -142,8 +129,8 @@ def bfs_eff_diam(G, NTestNodes, P):
 #--- MAIN EXECUTION BEGINS HERE---#	
 
 #read mappings from files
-email_to_id = load_json("email_to_userid.json")
-name_to_id = load_json("name_to_userid.json")
+email_to_id = utils.load_json("email_to_userid.json")
+name_to_id = utils.load_json("name_to_userid.json")
 
 file_idx = 0
 

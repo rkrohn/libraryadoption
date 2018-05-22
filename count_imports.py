@@ -1,6 +1,5 @@
 #compute and plot import counts, frequencies, and distributions
 
-import json
 import os.path
 import subprocess
 import sys
@@ -10,67 +9,10 @@ from collections import defaultdict
 import unicodedata
 from collections import OrderedDict
 from operator import itemgetter
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pylab as plt
-
-#save some data structure to json file
-def save_json(data, filename):
-	with open(filename, 'w') as fp:
-		json.dump(data, fp, indent=4, sort_keys=False)
-		
-#load json to dictionary
-def load_json(filename):
-	if os.path.isfile(filename):
-		with open(filename) as fp:
-			data = json.load(fp)
-			return data
-	return False
-
-#given dictionary of form key->count, compute frequencies of different counts
-def count_freq(data, local = True):
-	freq = defaultdict(int)
-	min = -1
-	max = -1
-	for key in data:
-		if local and key[0] == '.':
-			continue
-		freq[data[key]] = freq[data[key]] + 1
-		if min == -1 or data[key] < min:
-			min = data[key]
-		if max == -1 or data[key] > max:
-			max = data[key]
-	return freq, min, max
-		
-	
-#given frequencies as dictionary, key = size, value = freq, plot them	
-def plot_freq(freq, xlabel, ylabel, title, filename = "", x_max = 0, x_min = 0, log_scale = False):
-	plt.clf()	
-	lists = sorted(freq.items())
-	x,y = zip(*lists)
-	fig, ax = plt.subplots()
-	plt.plot(x,y)
-	plt.title(title)
-	plt.xlabel(xlabel)
-	plt.ylabel(ylabel)
-	if log_scale:
-		ax.set_yscale('log')
-		ax.set_xscale('log')
-	if x_max != 0 and x_min != 0:
-		plt.xlim(xmin=x_min, xmax=x_max)
-	elif x_max != 0:
-		plt.xlim(xmin=0, xmax=x_max)
-	elif x_min != 0:
-		plt.xlim(xmin=x_min, xmax=x_max)	
-	if filename == "":
-		plt.show()
-	else:
-		plt.savefig(filename, bbox_inches='tight')
-
-	
+import file_utils as utils
+import plot_utils
 
 #--- MAIN EXECUTION BEGINS HERE---#	
-
 
 #flag to determine how to count
 #if true, take import exactly as stored, submodules included
@@ -88,9 +30,9 @@ else:
 self_ref_count = 0
 
 #load counts if have them
-import_counts_overall = load_json("import_counts_overall_%s.json" % count_type)
-import_repo_counts = load_json("import_repo_counts_%s.json" % count_type)
-import_user_counts = load_json("import_user_counts_%s.json" % count_type)
+import_counts_overall = utils.load_json("import_counts_overall_%s.json" % count_type)
+import_repo_counts = utils.load_json("import_repo_counts_%s.json" % count_type)
+import_user_counts = utils.load_json("import_user_counts_%s.json" % count_type)
 if import_counts_overall == False or import_repo_counts == False or import_user_counts == False:
 	import_counts_overall = defaultdict(int)	#number of additions across all repos and users
 	import_repos = defaultdict(set) #list of repos using library
@@ -105,7 +47,7 @@ if import_counts_overall == False or import_repo_counts == False or import_user_
 		repo = filename[:-4]
 
 		#read in all commits
-		commits = load_json("imports_data/%s" % filename)
+		commits = utils.load_json("imports_data/%s" % filename)
 		#list of commits, each commit is a list containing user, time, and import dict
 		#import dict has keys "+" and "-", leads to list of packages/libraries
 		
@@ -160,13 +102,13 @@ if import_counts_overall == False or import_repo_counts == False or import_user_
 	import_user_counts = OrderedDict(sorted(import_user_counts.items(), key=itemgetter(1), reverse=True))	
 
 	#save counts to json
-	save_json(import_counts_overall, "import_counts_overall_%s.json" % count_type)
-	save_json(import_repo_counts, "import_repo_counts_%s.json" % count_type)
-	save_json(import_user_counts, "import_user_counts_%s.json" % count_type)
+	utils.save_json(import_counts_overall, "import_counts_overall_%s.json" % count_type)
+	utils.save_json(import_repo_counts, "import_repo_counts_%s.json" % count_type)
+	utils.save_json(import_user_counts, "import_user_counts_%s.json" % count_type)
 
 	#save the lists too (why not)
-	save_json(import_repos_list, "import_repos_lists_%s.json" % count_type)
-	save_json(import_users_list, "import_users_lists_%s.json" % count_type)
+	utils.save_json(import_repos_list, "import_repos_lists_%s.json" % count_type)
+	utils.save_json(import_users_list, "import_users_lists_%s.json" % count_type)
 
 	print "results saved to import_??_counts.json (3 files) and import_??_lists.json (2 files)"
 else:
@@ -179,35 +121,35 @@ for key in import_counts_overall:
 	
 #plot distributions regardless
 #repo count distribution, front and all
-repo_count_freq, repo_min, repo_max = count_freq(import_repo_counts)
+repo_count_freq, repo_min, repo_max = plot_utils.count_freq(import_repo_counts)
 print "repo counts: min", repo_min, "max", repo_max
-plot_freq(repo_count_freq, "number of unique repos importing", "frequency", "Package Import Frequency (%s)" % count_type, filename = "results/repo_count_freq_%s.png" % count_type, log_scale = True)
+plot_utils.plot_freq(repo_count_freq, "number of unique repos importing", "frequency", "Package Import Frequency (%s)" % count_type, filename = "results/repo_count_freq_%s.png" % count_type, log_scale = True)
 
 #user count distribution
 user_count_freq, user_min, user_max = count_freq(import_user_counts)
 print "user counts: min", user_min, "max", user_max
-plot_freq(user_count_freq, "number of unique users importing", "frequency", "Package Import Frequency (%s)" % count_type, filename = "results/user_count_freq_%s.png" % count_type, log_scale = True)
+plot_utils.plot_freq(user_count_freq, "number of unique users importing", "frequency", "Package Import Frequency (%s)" % count_type, filename = "results/user_count_freq_%s.png" % count_type, log_scale = True)
 
 #overall occurrence count distribution
-overall_count_freq, overall_min, overall_max = count_freq(import_counts_overall)
+overall_count_freq, overall_min, overall_max = plot_utils.count_freq(import_counts_overall)
 print "overall counts: min", overall_min, "max", overall_max
-plot_freq(overall_count_freq, "number of times imported", "frequency", "Package Import Frequency (%s)" % count_type, filename = "results/overall_count_freq_%s.png" % count_type, log_scale = True)
+plot_utils.plot_freq(overall_count_freq, "number of times imported", "frequency", "Package Import Frequency (%s)" % count_type, filename = "results/overall_count_freq_%s.png" % count_type, log_scale = True)
 
 #plot again without local (self-ref) modules
 #repo count distribution, front and all
-repo_count_freq, repo_min, repo_max = count_freq(import_repo_counts, False)
+repo_count_freq, repo_min, repo_max = plot_utils.count_freq(import_repo_counts, False)
 print "repo counts: min", repo_min, "max", repo_max
-plot_freq(repo_count_freq, "number of unique repos importing", "frequency", "Package Import Frequency (%s)" % count_type, filename = "results/repo_count_freq_no_path%s.png" % count_type, log_scale = True)
+plot_utils.plot_freq(repo_count_freq, "number of unique repos importing", "frequency", "Package Import Frequency (%s)" % count_type, filename = "results/repo_count_freq_no_path%s.png" % count_type, log_scale = True)
 
 #user count distribution
-user_count_freq, user_min, user_max = count_freq(import_user_counts, False)
+user_count_freq, user_min, user_max = plot_utils.count_freq(import_user_counts, False)
 print "user counts: min", user_min, "max", user_max
-plot_freq(user_count_freq, "number of unique users importing", "frequency", "Package Import Frequency (%s)" % count_type, filename = "results/user_count_freq_no_path%s.png" % count_type, log_scale = True)
+plot_utils.plot_freq(user_count_freq, "number of unique users importing", "frequency", "Package Import Frequency (%s)" % count_type, filename = "results/user_count_freq_no_path%s.png" % count_type, log_scale = True)
 
 #overall occurrence count distribution
-overall_count_freq, overall_min, overall_max = count_freq(import_counts_overall, False)
+overall_count_freq, overall_min, overall_max = plot_utils.count_freq(import_counts_overall, False)
 print "overall counts: min", overall_min, "max", overall_max
-plot_freq(overall_count_freq, "number of times imported", "frequency", "Package Import Frequency (%s)" % count_type, filename = "results/overall_count_freq_no_path%s.png" % count_type, log_scale = True)
+plot_utils.plot_freq(overall_count_freq, "number of times imported", "frequency", "Package Import Frequency (%s)" % count_type, filename = "results/overall_count_freq_no_path%s.png" % count_type, log_scale = True)
 
 
 print "found", len(import_counts_overall), "unique packages"
