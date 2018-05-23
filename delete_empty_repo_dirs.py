@@ -1,6 +1,8 @@
 #crawls the repo_clones directory and deletes all empty directories
 #should be run after data_shrink.py
 
+#well, I ran it, and it didn't find anything to delete - so don't bother
+
 import os
 import shutil
 
