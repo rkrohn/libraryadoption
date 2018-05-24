@@ -229,7 +229,7 @@ def get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, heade
 #build request metadata
 #user-agent header so I don't get kicked off; plus, accept text-match results
 headers = {'User-Agent': 'rkrohn - scraping data for PhD research', 'From': 'rkrohn@nd.edu', 'Accept': 'application/vnd.github.v3.text-match+json', 'Accept': 'application/vnd.github.cloak-preview'}
-auth=('rkrohn','4df6f29a7d65560c59bd3d9eb4de63c08098a891')		#REMOVE OAuth token before committing!!!!!!
+auth=('rkrohn','')		#REMOVE OAuth token before committing!!!!!!
 
 #get first 1000 python repos - DONE
 print "loading saved repositories..."
