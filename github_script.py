@@ -45,15 +45,19 @@ def get_first_repos(auth, headers):
 			url = ""
 		print url
 	#save all results to json file
-	with open('github_files/github_all_repos.json', 'w') as fp:
-		json.dump(all_results, fp, indent=4, sort_keys=False)
+	utils.save_json(all_results, "github_files/github_all_repos.json")
+	return all_results
+#end get_first_repos
 
 #get contributors for repos
-def get_contrib(repos, auth, headers):
-	#load existing data (if there)
-	all_contrib = utils.load_json("github_files/github_all_contrib.json")	#existing contributors
-	user_to_repo = to_int(utils.load_json("github_files/github_user_to_repo.json"))	#user->repos dict
-	repo_to_contrib = to_int(utils.load_json("github_files/github_repo_to_contrib.json"))		#repo->contribs dict
+def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = False, repo_to_contrib = False):
+	#load existing data from files if not passed in and files exist
+	if all_contrib == False:	#existing contributors
+		all_contrib = utils.load_json("github_files/github_all_contrib.json")	
+	if user_to_repo	== False:	#user->repos dict
+		user_to_repo = dict_key_to_int(utils.load_json("github_files/github_user_to_repo.json"))	
+	if repo_to_contrib == False:	#repo->contribs dict
+		repo_to_contrib = dict_key_to_int(utils.load_json("github_files/github_repo_to_contrib.json"))		
 	
 	#if no contributors list or correlative dictionaries, initialize empty containers
 	if all_contrib == False or user_to_repo == False or repo_to_contrib == False:
@@ -95,7 +99,7 @@ def get_contrib(repos, auth, headers):
 		repo_count += 1
 		
 		#intermediate saves... just in case
-		if repo_count % 10 == 0:
+		if repo_count % 100 == 0:
 			#save all contrib to json file
 			utils.save_json(all_contrib, "github_files/github_all_contrib.json")
 			#save correlative lists
@@ -115,13 +119,17 @@ def get_contrib(repos, auth, headers):
 #end get_contrib
 	
 #for all users so far, get all their Python repos	
-def get_more_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, headers):
+def get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, headers):
 	#since this will take more than 5000 requests, keep a bookmark in a file - in case something goes wrong
 	
 	#read simple list of users that are done already, will update
 	finished_users = utils.load_json("github_files/github_finished_users.json")
 	if finished_users == False:
 		finished_users = list()
+
+	#if all the users we have so far are already finished, return input as results instead of loop-checking
+	if len(finished_users) == len(all_contrib):
+		return all_contrib, all_repos, user_to_repo, repo_to_contrib
 		
 	#also keep list of users that don't search properly (private repos?)
 	bad_users = utils.load_json("github_files/github_bad_users.json")
@@ -182,9 +190,9 @@ def get_more_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, 
 				url = ""
 		
 			#intermediate saves and prints
-			if request_count % 10 == 0:
-				print request_count, "requests done"
 			if request_count % 100 == 0:
+				print request_count, "requests done"
+			if request_count % 250 == 0:
 				#save all repos to json file
 				utils.save_json(all_repos, "github_files/github_all_repos.json")
 				#save correlative lists
@@ -214,22 +222,38 @@ def get_more_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, 
 	print "Saved all data to files"
 	
 	return all_contrib, all_repos, user_to_repo, repo_to_contrib	#return all results
-#end get_more_repos
+#end get_repos
 	
 #--- MAIN EXECUTION BEGINS HERE---#	
 
 #build request metadata
 #user-agent header so I don't get kicked off; plus, accept text-match results
 headers = {'User-Agent': 'rkrohn - scraping data for PhD research', 'From': 'rkrohn@nd.edu', 'Accept': 'application/vnd.github.v3.text-match+json', 'Accept': 'application/vnd.github.cloak-preview'}
-auth=('rkrohn','c4a6c57e7c775792bc0483d7004aa7f161363f43')
+auth=('rkrohn','4df6f29a7d65560c59bd3d9eb4de63c08098a891')		#REMOVE OAuth token before committing!!!!!!
 
 #get first 1000 python repos - DONE
+print "loading saved repositories..."
 all_repos = get_first_repos(auth, headers)
-print len(all_repos['items']), "repos"
+print "loaded", len(all_repos['items']), "repos"
 
 #get contributors of these 1000 repos - DONE
+print "loading saved contributors and correlations..."
 all_contrib, user_to_repo, repo_to_contrib = get_contrib(all_repos, auth, headers)
-print len(all_contrib), "contributors"
+print "loaded", len(all_contrib), "contributors"
 
 #get all python repos for all users we have so far - roughly 45K - DONE
-all_contrib, all_repos, user_to_repo, repo_to_contrib = get_more_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, headers)
+print "verifying have all repos for those users..."
+all_contrib, all_repos, user_to_repo, repo_to_contrib = get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, headers)
+print "have", len(all_repos['items']), "repos for all users"
+
+#go another ripple - get all users contributing to any repos we have so far
+print "fetching new contributors for all repos (active requests, this could take a while)..."
+all_contrib, user_to_repo, repo_to_contrib = get_contrib(all_repos, auth, headers, all_contrib, user_to_repo, repo_to_contrib)
+print "now have", len(all_contrib), "contributors"
+
+#rest of ripple - get all repos contributing to all those users
+print "fetching new repos for expanded list of contributors (active requests, this could take a while)..."
+all_contrib, all_repos, user_to_repo, repo_to_contrib = get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, headers)
+print "now have", len(all_repos['items']), "repos"
+
+
