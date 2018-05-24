@@ -15,7 +15,7 @@ def dict_key_to_int(data):
 #fetch first 1000 python repos as selected by github - these appear to be larger/more popular ones
 def get_first_repos(auth, headers):
 	#check if file exists, if yes just read it in
-	data = utils.load_json("github_all_repos.json")
+	data = utils.load_json("github_files/github_all_repos.json")
 	if data != False:
 		return data
 
@@ -45,15 +45,15 @@ def get_first_repos(auth, headers):
 			url = ""
 		print url
 	#save all results to json file
-	with open('github_all_repos.json', 'w') as fp:
+	with open('github_files/github_all_repos.json', 'w') as fp:
 		json.dump(all_results, fp, indent=4, sort_keys=False)
 
 #get contributors for repos
 def get_contrib(repos, auth, headers):
 	#load existing data (if there)
-	all_contrib = utils.load_json("github_all_contrib.json")	#existing contributors
-	user_to_repo = to_int(utils.load_json("github_user_to_repo.json"))	#user->repos dict
-	repo_to_contrib = to_int(utils.load_json("github_repo_to_contrib.json"))		#repo->contribs dict
+	all_contrib = utils.load_json("github_files/github_all_contrib.json")	#existing contributors
+	user_to_repo = to_int(utils.load_json("github_files/github_user_to_repo.json"))	#user->repos dict
+	repo_to_contrib = to_int(utils.load_json("github_files/github_repo_to_contrib.json"))		#repo->contribs dict
 	
 	#if no contributors list or correlative dictionaries, initialize empty containers
 	if all_contrib == False or user_to_repo == False or repo_to_contrib == False:
@@ -97,18 +97,18 @@ def get_contrib(repos, auth, headers):
 		#intermediate saves... just in case
 		if repo_count % 10 == 0:
 			#save all contrib to json file
-			utils.save_json(all_contrib, "github_all_contrib.json")
+			utils.save_json(all_contrib, "github_files/github_all_contrib.json")
 			#save correlative lists
-			utils.save_json(user_to_repo, "github_user_to_repo.json")
-			utils.save_json(repo_to_contrib, "github_repo_to_contrib.json")
+			utils.save_json(user_to_repo, "github_files/github_user_to_repo.json")
+			utils.save_json(repo_to_contrib, "github_files/github_repo_to_contrib.json")
 			print "saved contributors of", count, "repos"
 			
 	#all done - save results
 	#save all contrib to json file
-	utils.save_json(all_contrib, "github_all_contrib.json")
+	utils.save_json(all_contrib, "github_files/github_all_contrib.json")
 	#save correlative dictionaries
-	utils.save_json(user_to_repo, "github_user_to_repo.json")
-	utils.save_json(repo_to_contrib, "github_repo_to_contrib.json")
+	utils.save_json(user_to_repo, "github_files/github_user_to_repo.json")
+	utils.save_json(repo_to_contrib, "github_files/github_repo_to_contrib.json")
 	
 	#return results
 	return all_contrib, user_to_repo, repo_to_contrib
@@ -119,12 +119,12 @@ def get_more_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, 
 	#since this will take more than 5000 requests, keep a bookmark in a file - in case something goes wrong
 	
 	#read simple list of users that are done already, will update
-	finished_users = utils.load_json("github_finished_users.json")
+	finished_users = utils.load_json("github_files/github_finished_users.json")
 	if finished_users == False:
 		finished_users = list()
 		
 	#also keep list of users that don't search properly (private repos?)
-	bad_users = utils.load_json("github_bad_users.json")
+	bad_users = utils.load_json("github_files/github_bad_users.json")
 	if bad_users == False:
 		bad_users = list()
 		
@@ -186,15 +186,15 @@ def get_more_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, 
 				print request_count, "requests done"
 			if request_count % 100 == 0:
 				#save all repos to json file
-				utils.save_json(all_repos, "github_all_repos.json")
+				utils.save_json(all_repos, "github_files/github_all_repos.json")
 				#save correlative lists
-				utils.save_json(user_to_repo, "github_user_to_repo.json")
-				utils.save_json(repo_to_contrib, "github_repo_to_contrib.json")
+				utils.save_json(user_to_repo, "github_files/github_user_to_repo.json")
+				utils.save_json(repo_to_contrib, "github_files/github_repo_to_contrib.json")
 				print "Saved", request_count, "repo requests"
 				#save bad users list
-				utils.save_json(bad_users, "github_bad_users.json")
+				utils.save_json(bad_users, "github_files/github_bad_users.json")
 				#save list of finished users
-				utils.save_json(finished_users, "github_finished_users.json")
+				utils.save_json(finished_users, "github_files/github_finished_users.json")
 						
 		#finished user, add to bookmark
 		finished_users.append(user['id'])
@@ -203,14 +203,14 @@ def get_more_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, 
 	
 	#final save before return
 	#save all repos to json file
-	utils.save_json(all_repos, "github_all_repos.json")
+	utils.save_json(all_repos, "github_files/github_all_repos.json")
 	#save correlative lists
-	utils.save_json(user_to_repo, "github_user_to_repo.json")
-	utils.save_json(repo_to_contrib, "github_repo_to_contrib.json")
+	utils.save_json(user_to_repo, "github_files/github_user_to_repo.json")
+	utils.save_json(repo_to_contrib, "github_files/github_repo_to_contrib.json")
 	#save bad users list
-	utils.save_json(bad_users, "github_bad_users.json")
+	utils.save_json(bad_users, "github_files/github_bad_users.json")
 	#save list of finished users
-	utils.save_json(finished_users, "github_finished_users.json")
+	utils.save_json(finished_users, "github_files/github_finished_users.json")
 	print "Saved all data to files"
 	
 	return all_contrib, all_repos, user_to_repo, repo_to_contrib	#return all results
