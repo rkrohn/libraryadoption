@@ -5,6 +5,7 @@ from collections import defaultdict
 import numpy as np
 import time
 import file_utils as utils
+from datetime import datetime
 	
 #converts dictionary with unicode keys to int keys	
 def dict_key_to_int(data):
@@ -50,7 +51,7 @@ def get_first_repos(auth, headers):
 #end get_first_repos
 
 #get contributors for repos
-def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = False, repo_to_contrib = False, new = False):
+def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = False, repo_to_contrib = False):
 	#load existing data from files if not passed in and files exist
 	if all_contrib == False:	#existing contributors
 		all_contrib = utils.load_json("github_files/all_contrib.json")	
@@ -64,24 +65,25 @@ def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = Fa
 		user_to_repo = defaultdict(list)	#user id to list of repo ids
 		repo_to_contrib = defaultdict(list)  #repo id to list of contrib
 		all_contrib = list()
+
+	#keep a bookmark of finished repos
+	finished_repos = utils.load_json("github_files/github_finished_repos.json")
+	if finished_repos == False:
+		finished_repos = list()
 		
 	#loop all repos from list, fetch contributors if don't have them	
 	repo_count = 0
 	for repo in all_repos['items']:
 		#check if have contributors for this repo already, skip if yes
-		if new == False and repo['id'] in repo_to_contrib:
+		if repo['id'] in finished_repos:
 			continue
 			
 		#need to fetch contributors for this repo
-		print "Fetching repo", repo['id']		
+		#print "Fetching repo", repo['id']		
 		contrib_count = 0
 		#get request url for this repo
 		url = repo['contributors_url']
 		while url != "":
-			#sleep for ~0.75 seconds before next request, to prevent getting kicked off
-			#(requests limited to 5000 per hour)
-			time.sleep(0.75)
-
 			#get the json!
 			r = requests.get(url, auth=auth, headers=headers) 
 			res = r.json()			
@@ -104,8 +106,16 @@ def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = Fa
 				url = r.links['next']['url']
 			else:		#no new pages, done
 				url = ""
-		print "Repo", repo['id'], ":", contrib_count, "contributors"
+
+			#check the rate limit, sleep if we need to
+			if r.headers['X-RateLimit-Remaining'] == 0:
+				now = datetime.utcnow()
+				print "Sleeping..."
+				time.sleep((r.headers['X-RateLimit-Reset'] - now).seconds + 1)
+
+		#print "Repo", repo['id'], ":", contrib_count, "contributors"
 		repo_count += 1
+		finished_repos.append(repo['id'])
 		
 		#intermediate saves... just in case
 		if repo_count % 100 == 0:
@@ -114,6 +124,8 @@ def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = Fa
 			#save correlative lists
 			utils.save_json(user_to_repo, "github_files/github_user_to_repo.json")
 			utils.save_json(repo_to_contrib, "github_files/github_repo_to_contrib.json")
+			#save bookmark
+			utils.save_json(finished_repos, "github_files/github_finished_repos.json")
 			print "saved contributors of", repo_count, "repos"
 			
 	#all done - save results
@@ -122,6 +134,9 @@ def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = Fa
 	#save correlative dictionaries
 	utils.save_json(user_to_repo, "github_files/github_user_to_repo.json")
 	utils.save_json(repo_to_contrib, "github_files/github_repo_to_contrib.json")
+	#final bookmark
+	utils.save_json(finished_repos, "github_files/github_finished_repos.json")
+
 	
 	#return results
 	return all_contrib, user_to_repo, repo_to_contrib
@@ -259,7 +274,7 @@ print "have", len(all_repos['items']), "repos for all users"
 
 #go another ripple - get all users contributing to any repos we have so far
 print "fetching new contributors for all repos (active requests, this could take a while)..."
-all_contrib, user_to_repo, repo_to_contrib = get_contrib(all_repos, auth, headers, all_contrib, user_to_repo, repo_to_contrib, new=True)
+all_contrib, user_to_repo, repo_to_contrib = get_contrib(all_repos, auth, headers, all_contrib, user_to_repo, repo_to_contrib)
 print "now have", len(all_contrib), "contributors"
 
 '''
