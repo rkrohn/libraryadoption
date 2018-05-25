@@ -6,6 +6,20 @@ import numpy as np
 import time
 import file_utils as utils
 from datetime import datetime
+from dateutil import parser
+
+#given a request result, check if we are in violation of the rate limit and sleep if necessary
+def check_rate_limit(r):
+	if int(r.headers['X-RateLimit-Remaining']) == 0:
+		now = datetime.now()
+		reset = datetime.fromtimestamp(int(r.headers['X-RateLimit-Reset']))		
+		delay = (reset - now).seconds
+		print "Sleeping for", delay, "seconds..."
+		if delay > 0:
+			time.sleep(delay)
+	return
+#end check_rate_limit
+
 	
 #converts dictionary with unicode keys to int keys	
 def dict_key_to_int(data):
@@ -51,15 +65,18 @@ def get_first_repos(auth, headers):
 #end get_first_repos
 
 #get contributors for repos
-def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = False, repo_to_contrib = False):
+def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = False, repo_to_contrib = False, new = False):
 	#load existing data from files if not passed in and files exist
 	if all_contrib == False:	#existing contributors
-		all_contrib = utils.load_json("github_files/all_contrib.json")	
+		all_contrib = utils.load_json("github_files/github_all_contrib.json")	
 	if user_to_repo	== False:	#user->repos dict
-		user_to_repo = dict_key_to_int(utils.load_json("github_files/user_to_repo.json"))	
+		user_to_repo = dict_key_to_int(utils.load_json("github_files/github_user_to_repo.json"))	
 	if repo_to_contrib == False:	#repo->contribs dict
-		repo_to_contrib = dict_key_to_int(utils.load_json("github_files/repo_to_contrib.json"))		
+		repo_to_contrib = dict_key_to_int(utils.load_json("github_files/github_repo_to_contrib.json"))		
 	
+	if new == False:
+		return all_contrib, user_to_repo, repo_to_contrib
+
 	#if no contributors list or correlative dictionaries, initialize empty containers
 	if all_contrib == False or user_to_repo == False or repo_to_contrib == False:
 		user_to_repo = defaultdict(list)	#user id to list of repo ids
@@ -70,6 +87,11 @@ def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = Fa
 	finished_repos = utils.load_json("github_files/github_finished_repos.json")
 	if finished_repos == False:
 		finished_repos = list()
+
+	#check the rate limit before we start by making a dummy request, sleep if we need to
+	url = 'https://api.github.com/repos/vinta/awesome-python/contributors'	#any url will do
+	r = requests.get(url, auth=auth, headers=headers) 
+	check_rate_limit(r)
 		
 	#loop all repos from list, fetch contributors if don't have them	
 	repo_count = 0
@@ -88,6 +110,10 @@ def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = Fa
 			r = requests.get(url, auth=auth, headers=headers) 
 			res = r.json()			
 			contrib_count = contrib_count + len(res)
+
+			#repo not found (probably made private), skip and move to next
+			if type(res) is not list and res['documentation_url'] == "https://developer.github.com/v3/repos/#list-contributors":
+				break
 
 			#parse out this request result
 			for usr in res:
@@ -108,10 +134,10 @@ def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = Fa
 				url = ""
 
 			#check the rate limit, sleep if we need to
-			if r.headers['X-RateLimit-Remaining'] == 0:
-				now = datetime.utcnow()
-				print "Sleeping..."
-				time.sleep((r.headers['X-RateLimit-Reset'] - now).seconds + 1)
+			check_rate_limit(r)
+
+			#sleep for ~0.5 seconds to space out the requests better
+			time.sleep(0.5)
 
 		#print "Repo", repo['id'], ":", contrib_count, "contributors"
 		repo_count += 1
@@ -192,7 +218,7 @@ def get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, heade
 					continue
 				#bad results for this particular user, they might be private now - add to list and skip
 				else:
-					print res
+					#print res
 					bad_users.append(user)
 					break	#move to next user
 					
@@ -257,6 +283,7 @@ def get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, heade
 headers = {'User-Agent': 'rkrohn - scraping data for PhD research', 'From': 'rkrohn@nd.edu', 'Accept': 'application/vnd.github.v3.text-match+json', 'Accept': 'application/vnd.github.cloak-preview'}
 auth=('rkrohn','')		#REMOVE OAuth token before committing!!!!!!
 
+'''
 #get first 1000 python repos - DONE
 print "loading saved repositories..."
 all_repos = get_first_repos(auth, headers)
@@ -271,10 +298,25 @@ print "loaded", len(all_contrib), "contributors"
 print "verifying have all repos for those users..."
 all_contrib, all_repos, user_to_repo, repo_to_contrib = get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, headers)
 print "have", len(all_repos['items']), "repos for all users"
+'''
+
+print "reading in repos..."
+all_repos = utils.load_json("github_files/github_all_repos.json")
+print len(all_repos['items']), "repositories"
+
+print "reading in users..."
+all_contrib = utils.load_json("github_files/github_all_contrib.json")
+print len(all_contrib), "users"
+
+'''
+all_repos = list()
+all_contrib = list()
+'''
 
 #go another ripple - get all users contributing to any repos we have so far
 print "fetching new contributors for all repos (active requests, this could take a while)..."
-all_contrib, user_to_repo, repo_to_contrib = get_contrib(all_repos, auth, headers, all_contrib, user_to_repo, repo_to_contrib)
+#all_contrib, user_to_repo, repo_to_contrib = get_contrib(all_repos, auth, headers, all_contrib, user_to_repo, repo_to_contrib, True)
+all_contrib, user_to_repo, repo_to_contrib = get_contrib(all_repos, auth, headers, all_contrib, False, False, True)
 print "now have", len(all_contrib), "contributors"
 
 '''
