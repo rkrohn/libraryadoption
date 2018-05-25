@@ -87,6 +87,8 @@ def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = Fa
 	finished_repos = utils.load_json("github_files/github_finished_repos.json")
 	if finished_repos == False:
 		finished_repos = list()
+	else:
+		print "read in", len(finished_repos), "finished repos"
 
 	#check the rate limit before we start by making a dummy request, sleep if we need to
 	url = 'https://api.github.com/repos/vinta/awesome-python/contributors'	#any url will do
@@ -112,8 +114,17 @@ def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = Fa
 			contrib_count = contrib_count + len(res)
 
 			#repo not found (probably made private), skip and move to next
-			if type(res) is not list and res['documentation_url'] == "https://developer.github.com/v3/repos/#list-contributors":
+			if type(res) is not list and "message" in res and res['message'] == "Not Found":
 				break
+			#server error 502 - try the request again
+			elif type(res) is not list and "message" in res and res['message'] == "Server Error":
+				continue
+			#other fail? dump some output and quit so we can fix it
+			elif type(res) is not list:
+				print r
+				print res
+				print url
+				exit(0)
 
 			#parse out this request result
 			for usr in res:
@@ -173,7 +184,7 @@ def get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, heade
 	#since this will take more than 5000 requests, keep a bookmark in a file - in case something goes wrong
 	
 	#read simple list of users that are done already, will update
-	finished_users = utils.load_json("github_files/finished_users.json")
+	finished_users = utils.load_json("github_files/github_finished_users.json")
 	if finished_users == False:
 		finished_users = list()
 
@@ -185,9 +196,9 @@ def get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, heade
 	bad_users = utils.load_json("github_files/bad_users.json")
 	if bad_users == False:
 		bad_users = list()
-		
-	#also maintain a request count, dump if we get close to 5000 and resume later
-	request_count = 0
+
+	#count users done
+	user_count = 0
 	
 	#loop all users (should be all contributors of the 1000 initial repos), fetch their python repos
 	for user in all_contrib:
@@ -206,21 +217,26 @@ def get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, heade
 			
 			#get the json!
 			r = requests.get(url, auth=auth, headers=headers) 
-			request_count += 1		#increment request counter
 			res = r.json()
 			
 			#handle bad results and try to continue
 			if 'items' not in res:
 				#rate limit? wait for 60 seconds and try the same url again
-				if res['documentation_url'] == "https://developer.github.com/v3/#rate-limiting":
+				if 'documentation_url' in res and res['documentation_url'] == "https://developer.github.com/v3/#rate-limiting":
 					print "rate limit wait"
 					time.sleep(60)
 					continue
-				#bad results for this particular user, they might be private now - add to list and skip
+				#server error 502 - try the request again
+				elif "message" in res and res['message'] == "Server Error":
+					continue
+				#bad results for this particular user, they might be private now - add to list, dump, and exit
 				else:
 					#print res
 					bad_users.append(user)
-					break	#move to next user
+					print r
+					print res
+					print url
+					exit(0)
 					
 			#good results, parse and store
 			for repo in res['items']:
@@ -239,26 +255,24 @@ def get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, heade
 			if 'next' in r.links:
 				url = r.links['next']['url']
 			else:	#no more pages, quit for this user
-				url = ""
-		
-			#intermediate saves and prints
-			if request_count % 100 == 0:
-				print request_count, "requests done"
-			if request_count % 250 == 0:
-				#save all repos to json file
-				utils.save_json(all_repos, "github_files/github_all_repos.json")
-				#save correlative lists
-				utils.save_json(user_to_repo, "github_files/github_user_to_repo.json")
-				utils.save_json(repo_to_contrib, "github_files/github_repo_to_contrib.json")
-				print "Saved", request_count, "repo requests"
-				#save bad users list
-				utils.save_json(bad_users, "github_files/github_bad_users.json")
-				#save list of finished users
-				utils.save_json(finished_users, "github_files/github_finished_users.json")
+				url = ""		
 						
 		#finished user, add to bookmark
 		finished_users.append(user['id'])
-		
+		user_count += 1
+
+		#intermediate saves and prints
+		if user_count % 100 == 0:
+			#save all repos to json file
+			utils.save_json(all_repos, "github_files/github_all_repos.json")
+			#save correlative lists
+			utils.save_json(user_to_repo, "github_files/github_user_to_repo.json")
+			utils.save_json(repo_to_contrib, "github_files/github_repo_to_contrib.json")
+			print "Saved repos of", user_count, "users"
+			#save bad users list
+			utils.save_json(bad_users, "github_files/github_bad_users.json")
+			#save list of finished users
+			utils.save_json(finished_users, "github_files/github_finished_users.json")		
 	#end for users
 	
 	#final save before return
@@ -307,11 +321,6 @@ print len(all_repos['items']), "repositories"
 print "reading in users..."
 all_contrib = utils.load_json("github_files/github_all_contrib.json")
 print len(all_contrib), "users"
-
-'''
-all_repos = list()
-all_contrib = list()
-'''
 
 #go another ripple - get all users contributing to any repos we have so far
 print "fetching new contributors for all repos (active requests, this could take a while)..."
