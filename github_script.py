@@ -110,6 +110,10 @@ def get_contrib(all_repos, auth, headers, all_contrib = False, user_to_repo = Fa
 		while url != "":
 			#get the json!
 			r = requests.get(url, auth=auth, headers=headers) 
+			#check for 204 response code - seems to indicate empty repo, and fails on json parse
+			if r.status_code == 204:
+				break
+			#parse request response to json
 			res = r.json()			
 			contrib_count = contrib_count + len(res)
 
