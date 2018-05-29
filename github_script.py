@@ -233,14 +233,11 @@ def get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, heade
 				#server error 502 - try the request again
 				elif "message" in res and res['message'] == "Server Error":
 					continue
-				#bad results for this particular user, they might be private now - add to list, dump, and exit
+				#bad results for this particular user, they might be private now - skip and move to next
 				else:
 					#print res
 					bad_users.append(user)
-					print r
-					print res
-					print url
-					exit(0)
+					break
 					
 			#good results, parse and store
 			for repo in res['items']:
@@ -248,6 +245,8 @@ def get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, heade
 				if repo['id'] not in repo_to_contrib:
 					all_repos['items'].append(repo)					
 				#always add to correlative structures
+				if user['id'] not in user_to_repo:
+					user_to_repo[user['id']] = list()
 				if repo['id'] not in user_to_repo[user['id']]:
 					user_to_repo[user['id']].append(repo['id'])
 				if repo['id'] in repo_to_contrib and user['id'] not in repo_to_contrib[repo['id']]:
@@ -327,15 +326,17 @@ all_contrib = utils.load_json("github_files/github_all_contrib.json")
 print len(all_contrib), "users"
 
 #go another ripple - get all users contributing to any repos we have so far
+'''
 print "fetching new contributors for all repos (active requests, this could take a while)..."
-#all_contrib, user_to_repo, repo_to_contrib = get_contrib(all_repos, auth, headers, all_contrib, user_to_repo, repo_to_contrib, True)
 all_contrib, user_to_repo, repo_to_contrib = get_contrib(all_repos, auth, headers, all_contrib, False, False, True)
 print "now have", len(all_contrib), "contributors"
-
 '''
+
+print "reading in correlative lists..."
+user_to_repo = utils.load_json("github_files/github_user_to_repo.json")
+repo_to_contrib = utils.load_json("github_files/github_repo_to_contrib.json")
+
 #rest of ripple - get all repos contributing to all those users
 print "fetching new repos for expanded list of contributors (active requests, this could take a while)..."
 all_contrib, all_repos, user_to_repo, repo_to_contrib = get_repos(all_contrib, all_repos, user_to_repo, repo_to_contrib, auth, headers)
 print "now have", len(all_repos['items']), "repos"
-'''
-
