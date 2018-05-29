@@ -9,7 +9,7 @@ import re
 
 #appends repo name to fail log file for later
 def log_fail(root_dir, repo_name):
-	with open(("%s/github_files/github_fail_clone.txt", root_dir), "a") as fail_log:
+	with open(root_dir + "/github_files/github_fail_clone.txt", "a") as fail_log:
 		fail_log.write(repo_name + "\n")
 #end log_fail
 
@@ -34,6 +34,8 @@ def contains_import(filename):
 #	- do not contain an import statement
 #	- are not a python file (py, pyc, pyd, pyo, py3, pyw, pyx, pxd, pxi, pyi, pyz, pywz, ipynb)
 def delete_files(dir):
+	delete_count = 0
+
 	#loop all files in directory
 	for root, dirs, files in os.walk(dir):
 		#skip the hidden directories and files (git stuff)
@@ -61,9 +63,10 @@ def delete_files(dir):
 				#true delete for files
 				else:
 					os.remove(path)
-				delete_count = delete_count + 1
+				delete_count += 1
 			except:
-				print path
+				print "fail", path
+	print "deleted", delete_count, "files"
 #end delete_files	
 		
 #given repo name and owner login, clone the repo
@@ -78,6 +81,7 @@ def clone_repo(repo_name, base_name, owner):
 	#if can access web page, repo exists, clone
 	if res.code in (200, 401):
 		#clone repo (ugh...)
+		print "Cloning", repo_name
 		utils.run_bash("git clone %s %s" % (clone_url, repo_name))
 		
 		#second check for successful clone, if no directory log fail and return false
@@ -105,7 +109,8 @@ if len(sys.argv) != 3:
 	sys.exit(0)
 
 #read list of repos to clone
-repos = utils.load_json("github_files/all_repos_small.json") #github_all_repos.json")	CHANGE ME BACK
+print "Reading repo list..."
+repos = utils.load_json("github_files/github_all_repos.json")	
 print "Read", len(repos['items']), "repos"
 
 #grab and save current working directory
@@ -152,8 +157,7 @@ for i in range(idx, idx+limit):
 		#get list of all matching commit diffs, save to file (if not already done)
 		if os.path.isfile("%s/commit_data/%s_commits.log" % (dir, repo_name)) == False:
 			#pull all commit data, and commit contents starting with "import" or "from"
-			#utils.run_bash('''git show --format="#######%%aE, %%aN, %%at" --unified=0 $(git rev-list --all) | awk '/^#####/ || /\-[[:blank:]]*import/ || /\+[[:blank:]]*import/  || /\-[[:blank:]]*from/ || /\+[[:blank:]]*from/'  > %s/commit_data/%s_commits.log''' % (dir, repo_name) , True)
-			print "do the thing"
+			utils.run_bash('''git show --format="#######%%aE, %%aN, %%at" --unified=0 $(git rev-list --all) | awk '/^#####/ || /\-[[:blank:]]*import/ || /\+[[:blank:]]*import/  || /\-[[:blank:]]*from/ || /\+[[:blank:]]*from/'  > %s/commit_data/%s_commits.log''' % (root_dir, repo_name) , True)
 
 		#change back to repo_clones directory
 		os.chdir("..")		
@@ -171,3 +175,5 @@ for i in range(idx, idx+limit):
 	if idx % 100 == 0:
 		print "FINISHED", idx, "REPOS"
 
+#final print
+print "Done"
