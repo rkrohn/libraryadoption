@@ -155,7 +155,7 @@ for i in range(idx, idx+limit):
 		os.chdir(repo_name)
 
 		#get list of all matching commit diffs, save to file (if not already done)
-		if os.path.isfile("%s/commit_data/%s_commits.log" % (dir, repo_name)) == False:
+		if os.path.isfile("%s/commit_data/%s_commits.log" % (root_dir, repo_name)) == False:
 			#pull all commit data, and commit contents starting with "import" or "from"
 			utils.run_bash('''git show --format="#######%%aE, %%aN, %%at" --unified=0 $(git rev-list --all) | awk '/^#####/ || /\-[[:blank:]]*import/ || /\+[[:blank:]]*import/  || /\-[[:blank:]]*from/ || /\+[[:blank:]]*from/'  > %s/commit_data/%s_commits.log''' % (root_dir, repo_name) , True)
 
