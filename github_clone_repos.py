@@ -132,6 +132,10 @@ os.chdir("repo_clones")
 
 #process each repo
 for i in range(idx, idx+limit):
+	#quit if reached end of list
+	if i >= len(repos['items']):
+		break
+
 	#current repo to clone
 	r = repos['items'][i]
 
@@ -147,7 +151,7 @@ for i in range(idx, idx+limit):
 	else:
 		clone_res = True
 		
-	#clone repo if commit log file doesn't exist
+	#extract commit data if commit log file doesn't exist
 	if clone_res and os.path.isfile("%s/commit_data/%s_commits.log" % (root_dir, repo_name)) == False:
 		print "Extracting commit data from", repo_name
 	
