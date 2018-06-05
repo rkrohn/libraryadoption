@@ -1,0 +1,88 @@
+procedure
+
+1. Scrape list of repos to clone from GitHub, using github_script.py
+
+	Fetch first 1000 Python repos, as determined by GitHub (seems to be based on popularity - stars or watches)
+	
+	Get all contributors to those 1000 repos.
+	
+	Get all Python repositories owned by those contributors.
+	
+	This produces lists of:
+		157778 repos
+		45476 contributors
+		
+	Now, add all contributors to those ~158K repos.
+	
+	Add all Python repos owned by that larger list of contributors.
+	
+	This yields a final list of:
+		259923 repositories
+		89311 users
+		
+	Input files: none
+	Output files: located in github_files directory
+		github_all_contrib.json    		list of all GitHub users contributing to scraped repositories  
+		github_finished_users.json		list of users for which owned Python repos have been fetched (program-specific bookmark, not used later)
+		github_all_repos.json        	list of all Python repositories scraped - used by clone program later
+		github_repo_to_contrib.json		mapping of repositories to contributing users
+		github_user_to_repo.json		mapping of GitHub users to repos they contribute to
+		github_bad_users.json
+
+2. Clone repositories, cleanup files, and extract raw commit data using github_clone_repos.py
+
+	For each repo in github_all_repos.json, perform the following procedure:
+	
+	Clone the repository to repo_clones directory. Each repository will end up in a folder named <repo name>_<GitHub user owner>.
+		
+	Crawl the repository file structure to delete any unecessary files to save disk space. All that remains are .py (or similar extension) files and any files containing a valid import statement. The .git directory is unaffected.
+		
+	Do a first-pass search of commits, creating a file in the commit_data folder. All git diffs are searched for lines beginning with "import" or "from". These lines, along with the corresponding commit date, author name, and author email, are logged in that repository's commit data file.
+		
+	Input files:
+		github_files/github_all_repos.json			list of all repositories to clone
+	Output files: 
+		github_files/github_fail_clone.txt			list of repositories that failed to clone (not used later)
+		repo_clones/<repo name>__<owner GitHub id>/		one for each cloned repository
+		commit_data/<repo_name>__<owner GitHub id>/		list of raw import commits for each repo
+		
+3. Build a list of users from the commit data, since there is no (easy) way to directly correlate GitHub users with git data. Uses build_user_list.py to create list, check_user_ids.py to run a quick assessment of mappings.
+
+	For each commit in the raw files in commit_data, use the name and email address of the commit author to build a list of arbitrary user ids. 
+
+	TODO - look at this file again, see if we need to tweak the id assignment
+	maybe worried about common foreign names lumping too many users together
+	
+	Tim says just combine via email - but I'm not sure you can really do that
+		
+	Input files:
+		commit_data/<repo_name>__<owner GitHub id>/		list of raw import commits for each repo
+	Output files: 
+		data_files/name_to_id.json		mapping of name to integer user id
+		data_files/email_to_id.json		mapping of email to integer user id
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
