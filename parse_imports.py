@@ -106,16 +106,27 @@ def parse_import(line):
 #--- MAIN EXECUTION BEGINS HERE---#	
 
 #read userid mappings from files
-email_to_id = utils.load_json("email_to_userid.json")
-name_to_id = utils.load_json("name_to_userid.json")
+email_to_id = utils.load_json("data_files/email_to_userid.json")
+name_to_id = utils.load_json("data_files/name_to_userid.json")
+
+if name_to_id == False or email_to_id == False:
+	print "Must have name/email to user id mapping files. Exiting"
+	exit(0)
 
 file_idx = 0
+
+#create imports_data directory if it does not exist
+if os.path.isdir("imports_data") == False:
+	os.makedirs("imports_data")
 
 #for each commit log file:
 for filename in os.listdir('commit_data'):
 	commits_list = []	#overall commit list for file
 	imports = defaultdict(list)	#import list and count for each commit
 	imports_count = 0	
+
+	#define user for first loop
+	user = ""
 
 	#check if this repo done already
 	if os.path.isfile("imports_data/%s.log" % filename[:-12]) == True:
@@ -131,11 +142,13 @@ for filename in os.listdir('commit_data'):
 	for line in io.open("commit_data/%s" % filename, encoding="ISO-8859-1"):
 		#commit line
 		if line.startswith("#######"):
-			#save data from previous commit (if it exists)
-			if imports_count != 0:
+			#save data from previous commit (even if empty commit)
+			if user != "":
 				commits_list.append([user, time, imports])	#save commit
-				imports = defaultdict(list)	#clear list and counts
+				#clear list and counts
+				imports = defaultdict(list)	
 				imports_count = 0
+
 			#grab new commit data, replace the old
 			user, time = get_user_and_time(line, email_to_id, name_to_id)
 			if user == False:
@@ -152,8 +165,7 @@ for filename in os.listdir('commit_data'):
 				imports['-'].extend(lib)
 
 	#finished file, save any lingering data
-	if imports_count != 0:
-		commits_list.append([user, time, imports])	#save commit
+	commits_list.append([user, time, imports])	#save commit
 
 	#save file commit data to json
 	utils.save_json(commits_list, "imports_data/%s.log" % filename[:-12])
