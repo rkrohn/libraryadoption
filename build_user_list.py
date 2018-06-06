@@ -7,6 +7,14 @@ import urllib2
 import io
 import unicodedata
 import file_utils as utils
+import data_utils as data
+
+#given a dictionary of the form key->set of values, add a new value to a particular key's list
+def add_to_dict_set(dict, key, new_val):
+	if key not in dict:
+		dict[key] = set()
+	dict[key].add(new_val)
+#end add_to_dict_set
 
 #--- MAIN EXECUTION BEGINS HERE---#	
 
@@ -16,6 +24,14 @@ name_to_id = utils.load_json("data_files/name_to_userid.json")
 if email_to_id == False or name_to_id == False:
 	email_to_id = dict()
 	name_to_id = dict()
+
+#correlate both ways - sad, but makes the combining correct
+id_to_email = dict()
+id_to_name = dict()
+
+#bring id to other up to date based on read-in mapping
+id_to_name = data.flip_dict_set(name_to_id)
+id_to_email = data.flip_dict_set(email_to_id)
 
 next_id = 0		#keep index of next user id to use
 #easy version, find highest id in existing and start one higher than that
@@ -50,7 +66,13 @@ for filename in os.listdir('commit_data'):
 			for token in commit[1:-1]:
 				name = name + token
 			#normalize out all the weird characters
-			name = unicodedata.normalize('NFD', name).encode('ascii', 'ignore')	
+			name = unicodedata.normalize('NFD', name).encode('ascii', 'ignore')
+
+			#special-case some troublesome names and emails - set to "" instead
+			if name == "Unknown" or name == "root" or name == "(no author)" or name == "unknown":
+				name = ""	
+			if email == "none@none" or email == "" or email == "unknown" or email == "Unknown":
+				email == ""
 
 			#mystery committer, just skip and move on
 			if name == "" and email == "":
@@ -66,26 +88,44 @@ for filename in os.listdir('commit_data'):
 			if have_name == False and have_email == False:
 				if email != "":
 					email_to_id[email] = next_id
+					add_to_dict_set(id_to_email, email, next_id)
 				if name != "":
 					name_to_id[name] = next_id
+					add_to_dict_set(id_to_name, name, next_id)
 				next_id = next_id + 1
 			#have one or the other (but not both), use id we know for both
 			#seen email but not name
-			elif have_email == True and have_name == False:
-				if name != "":
-					name_to_id[name] = email_to_id[email]			
+			elif have_email == True and have_name == False and name != "":
+				email_id = email_to_id[email]
+				name_to_id[name] = email_id
+				add_to_dict_set(id_to_name, name, email_id)			
 			#seen name but not email
-			elif have_name == True and have_email == False: 
-				if email != "":
-					email_to_id[email] = name_to_id[name]
-			#have seen both name and email
-			else: #have_email = T and have_name = T
+			elif have_name == True and have_email == False and email != "": 
+				name_id = name_to_id[name]
+				email_to_id[email] = name_id
+				add_to_dict_set(id_to_email, email, name_id)
+			#have seen both name and email, combine into single user
+			elif have_email == True and have_name == True:
 				name_id = name_to_id[name]
 				email_id = email_to_id[email]
 				#if point to different ids, combine into a single user
 				if name_id != email_id:
-					email_to_id[email] = name_id
+					#get list of names using 'old' id, and remove from that dictionary
+					update_names = id_to_name.pop(name_id, None)
+					#assign email_id (arbitrary choice) to all of user's names
+					if update_names is not None:
+						id_to_name[email_id].update(update_names)
+						for n in update_names:
+							name_to_id[n] = email_id
+					#get list of emails using 'old' id, and remove from that dictionary
+					update_emails = id_to_email.pop(name_id, None)
+					#assign email_id (arbitrary choice) to all of user's emails
+					if update_emails is not None:
+						id_to_email[email_id].update(update_emails)
+						for e in update_emails:
+							email_to_id[e] = email_id
 
+					
 	#keep count of repos with mystery commits
 	if mystery_repo_flag == True:
 		mystery_repo_count = mystery_repo_count + 1
