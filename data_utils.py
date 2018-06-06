@@ -22,6 +22,18 @@ def flip_dict(dict, parallel = None):
 		else:
 			flip[v].append((k, parallel[k]))
 	return flip
+
+#given a dictionary of key->value, return a new dict of value->set of keys
+#if given a second parallel dict using same keys, values in new dict will be tuples
+def flip_dict_set(dict, parallel = None):
+	flip = defaultdict(set)
+	for k, v in dict.iteritems():
+		if parallel == None:
+			flip[v].add(k)
+		else:
+			flip[v].add((k, parallel[k]))
+	return flip
+
 	
 #given a sequence of values and a single value x, compute the CDF of x in that sequence
 #if list is sorted and supply an index, should run faster
