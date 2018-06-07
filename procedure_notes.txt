@@ -24,7 +24,7 @@ procedure
 	Output files: located in github_files directory
 		github_all_contrib.json    		list of all GitHub users contributing to scraped repositories  
 		github_finished_users.json		list of users for which owned Python repos have been fetched (program-specific bookmark, not used later)
-		github_all_repos.json        	list of all Python repositories scraped - used by clone program later
+		github_all_repos.json        		list of all Python repositories scraped - used by clone program later
 		github_repo_to_contrib.json		mapping of repositories to contributing users
 		github_user_to_repo.json		mapping of GitHub users to repos they contribute to
 		github_bad_users.json
@@ -46,7 +46,7 @@ procedure
 	Output files: 
 		github_files/github_fail_clone.txt			list of repositories that failed to clone (not used later)
 		repo_clones/<repo name>__<owner GitHub id>/		one for each cloned repository
-		commit_data/<repo_name>__<owner GitHub id>/		list of raw import commits for each repo
+		commit_data/<repo_name>__<owner GitHub id>.log		list of raw import commits for each repo
 		
 3. Build a list of users from the commit data, since there is no (easy) way to directly correlate GitHub users with git data. Uses build_user_list.py to create list, check_user_ids.py to run a quick assessment of mappings.
 
@@ -61,7 +61,7 @@ procedure
 
 	commit_author_freq.py
 	Input files:
-		commit_data/<repo_name>__<owner GitHub id>/		list of raw import commits for each repo
+		commit_data/<repo_name>__<owner GitHub id>.log		list of raw import commits for each repo
 	Output files: 
 		data_files/author_email_freq.json		list of author emails and frequencies, sorted by frequency
 		data_files/author_name_freq.json		list of author names and frequencies, sorted by frequency
@@ -74,7 +74,7 @@ procedure
 		final user list saved to name_to_userid.json and email_to_userid.json
 
 	Input files:
-		commit_data/<repo_name>__<owner GitHub id>/		list of raw import commits for each repo
+		commit_data/<repo_name>__<owner GitHub id>.log		list of raw import commits for each repo
 	Output files: 
 		data_files/name_to_id.json		mapping of name to integer user id
 		data_files/email_to_id.json		mapping of email to integer user id
@@ -96,9 +96,65 @@ procedure
 	Output files: 
 		none		
 		
-		
-		
-		
+4. Parse raw commit data for each repo into a more usable format using parse_commits.py.
+
+	For each raw file in the commit_data directory, read in all commits to that repo and convert them to a file in the parsed_commit_data directory.
+
+	For each commit, convert git author name and email to user id based on existing mapping files (from step 3). Preserve string UTC timestamp. 
+
+	Parses each library import change to create a list of libraries imported and deleted for each commit. Valid import statements are located using a regex to ensure only true libraries are extracted. Depending on the current package_type flag in package_type.py, submodules are either preserved or stripped. Each commit written to a repo's log file has the following form:
+
+	[
+        	10890,
+        	"1392579553",
+        	{
+            	"+": [
+                	"os.path.join",
+                	"os.path.dirname",
+                	"setuptools.setup",
+                	"setuptools.find_packages"
+            	],
+            	"-": [
+                	"setuptools.setup"
+            	]
+        	}
+    	]
+
+	Note the "+" and "-" lists may not exist (absent dictionary keys) if the commit did not contain any import statements, since we want all commits represented.
+
+	Input files:
+		commit_data/<repo_name>__<owner GitHub id>.log		list of raw import commits for each repo
+		data_files/name_to_id.json		mapping of name to integer user id
+		data_files/email_to_id.json		mapping of email to integer user id
+	Output files: 
+		parsed_commit_data/<repo_name>__<owner Github id>.log	single processed commit file for each repository
+	
+5. Compile all commits, across all repos, into a single json file using compile_all_commits.py
+
+	Script reads each repo's log file in parsed_commit_data	and further processes the commit data: adds human-readable dictionary keys to all fields, converts UTC timestamp to integer, and adds field for repository name. All commits for all repos are saved to the same all_commits_<package_type>.json file. Each commit takes the following form:
+
+	{
+        	"repo": "active__fengmk2",
+        	"add_libs": [
+            		"urlparse.urlparse",
+            		"urlparse.parse_qs",
+            		"cgi.parse_qs"
+        	],
+        	"user": 48374,
+        	"del_libs": [
+            		"urlparse.parse_qs",
+            		"urlparse.urlparse"
+        	],
+        	"time": 1306263191
+    	}
+
+	Note the add_libs and del_libs lists may be empty, since this file contains all commits, not only import commits.
+
+	Input files:
+		parsed_commit_data/<repo_name>__<owner Github id>.log	single processed commit file for each repository
+	Output files: 
+		data_files/all_commits_<package_type>.json	list of ALL commits (not just imports) across all repositories
+
 		
 		
 		
