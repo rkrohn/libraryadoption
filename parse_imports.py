@@ -24,16 +24,22 @@ def get_user_and_time(line, email_to_id, name_to_id):
 	for token in commit[1:-1]:
 		name = name + token
 	name = unicodedata.normalize('NFD', name).encode('ascii', 'ignore')
+
+	#special-case some troublesome names and emails - set to "" instead
+	if name == "Unknown" or name == "root" or name == "(no author)" or name == "unknown":
+		name = ""	
+	if email == "none@none" or email == "" or email == "unknown" or email == "Unknown":
+		email == ""
 	
 	#find user for this commit
 	#no name or email, myster committer
 	if name == "" and email == "":
 		user = -5
 	#user name or email to get user id
-	elif name != "":
-		user = name_to_id[name]
-	else:
+	elif email != "":
 		user = email_to_id[email]
+	else:
+		user = name_to_id[name]
 	
 	return user, time
 
