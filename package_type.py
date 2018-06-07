@@ -8,7 +8,7 @@ def get_type():
 	#if true, take import exactly as given, submodules/packages included (ie, os.path)
 	#if false, only take top package level, strip submodules (ie, os only)
 	
-	SUB_PACKAGE = False	
+	SUB_PACKAGE = True	
 
 	#file count-type specifier
 	if SUB_PACKAGE:
@@ -21,6 +21,7 @@ def get_type():
 	return type_subscript
 	
 	
-	
+'''	
 import package_type
 package_type.get_type()
+'''
