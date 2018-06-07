@@ -9,9 +9,6 @@ from collections import defaultdict
 import unicodedata
 from collections import OrderedDict
 from operator import itemgetter
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pylab as plt
 import file_utils as utils	
 import package_type
 
