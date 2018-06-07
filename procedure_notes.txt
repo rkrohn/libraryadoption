@@ -38,7 +38,9 @@ procedure
 	Crawl the repository file structure to delete any unecessary files to save disk space. All that remains are .py (or similar extension) files and any files containing a valid import statement. The .git directory is unaffected.
 		
 	Do a first-pass search of commits, creating a file in the commit_data folder. All git diffs are searched for lines beginning with "import" or "from". These lines, along with the corresponding commit date, author name, and author email, are logged in that repository's commit data file.
-		
+	
+	Final results: 259690 repositories cloned
+	
 	Input files:
 		github_files/github_all_repos.json			list of all repositories to clone
 	Output files: 
@@ -48,19 +50,51 @@ procedure
 		
 3. Build a list of users from the commit data, since there is no (easy) way to directly correlate GitHub users with git data. Uses build_user_list.py to create list, check_user_ids.py to run a quick assessment of mappings.
 
-	For each commit in the raw files in commit_data, use the name and email address of the commit author to build a list of arbitrary user ids. 
+	For each commit in the raw files in commit_data, use the name and email address of the commit author to build a list of arbitrary user ids. Each unseen author name and email pair is assigned a new user id. If one of the identifiers, but not both, has already been seen, we assign the known user id to the unknown identifier. If both the name and email have been seen, but have conflicting user ids, combine the two users (along with all names and emails) into a single user.
 
-	TODO - look at this file again, see if we need to tweak the id assignment
-	maybe worried about common foreign names lumping too many users together
-	
-	Tim says just combine via email - but I'm not sure you can really do that
-		
+	A few common, but unhelpful names and emails are not used for identifying users:
+		names: "Unknown", "", "root", "(no author)", "unknown":
+		emails: "none@none", "", "unknown", "Unknown":
+	These were identified using commit_author_freq.py, which produces a sorted list of names/emails by frequency across all commits. Visual inspection of the top results revealed these unhelpful/standard identifiers.
+
+	The optional check_user_ids.py reads the finished user list to compute the total number of users, the number of users with multiple names/emails, and the maximum number of names/emails for any single user.
+
+	commit_author_freq.py
+	Input files:
+		commit_data/<repo_name>__<owner GitHub id>/		list of raw import commits for each repo
+	Output files: 
+		data_files/author_email_freq.json		list of author emails and frequencies, sorted by frequency
+		data_files/author_name_freq.json		list of author names and frequencies, sorted by frequency
+
+	build_user_list.py produces:
+
+		found 163677 users
+		530 mystery commits (not necessarily import commits)
+		72 repos affected
+		final user list saved to name_to_userid.json and email_to_userid.json
+
 	Input files:
 		commit_data/<repo_name>__<owner GitHub id>/		list of raw import commits for each repo
 	Output files: 
 		data_files/name_to_id.json		mapping of name to integer user id
 		data_files/email_to_id.json		mapping of email to integer user id
+
+
+	check_user_ids.py produces:
+
+		found 160105 name users
+		found 162852 email users
+		found 163677 total users
+		max email addresses per user: 739
+		number of users with multiple email addresses: 40286
+		max names per user: 777
+		number of users with multiple names 29528
 		
+	Input files:
+		data_files/name_to_id.json		mapping of name to integer user id
+		data_files/email_to_id.json		mapping of email to integer user id
+	Output files: 
+		none		
 		
 		
 		
