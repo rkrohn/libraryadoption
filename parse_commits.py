@@ -1,4 +1,7 @@
-#loops all commit log files and parses import statements (regex) to create imports_data file for each repo
+#loops all commit log files and parses commits, including import statements (regex) to create parsed_commit_data file for each repo
+#converts git user data to our user ids
+#includes UTC timestamp
+#final files include ALL commits, not just the ones with valid import statements
 
 import os.path
 import subprocess
@@ -121,9 +124,9 @@ if name_to_id == False or email_to_id == False:
 
 file_idx = 0
 
-#create imports_data directory if it does not exist
-if os.path.isdir("imports_data") == False:
-	os.makedirs("imports_data")
+#create parsed_commit_data directory if it does not exist
+if os.path.isdir("parsed_commit_data") == False:
+	os.makedirs("parsed_commit_data")
 
 #for each commit log file:
 for filename in os.listdir('commit_data'):
@@ -135,7 +138,7 @@ for filename in os.listdir('commit_data'):
 	user = ""
 
 	#check if this repo done already
-	if os.path.isfile("imports_data/%s.log" % filename[:-12]) == True:
+	if os.path.isfile("parsed_commit_data/%s.log" % filename[:-12]) == True:
 		#print filename, "already done"
 		continue
 	
@@ -174,7 +177,7 @@ for filename in os.listdir('commit_data'):
 	commits_list.append([user, time, imports])	#save commit
 
 	#save file commit data to json
-	utils.save_json(commits_list, "imports_data/%s.log" % filename[:-12])
+	utils.save_json(commits_list, "parsed_commit_data/%s.log" % filename[:-12])
 
 	#period prints
 	file_idx = file_idx + 1
