@@ -64,7 +64,7 @@ if all_commits == False:
 		for commit in commits:		#each commit is user, time, dictionary of imports
 
 			#verify that commit has valid timestamp
-			if len(commit[1]) == 0:
+			if isinstance(commit[1], basestring) == False or len(commit[1]) == 0:
 				missing_time_count = missing_time_count + 1
 				continue
 
