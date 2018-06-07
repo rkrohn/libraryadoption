@@ -1,4 +1,5 @@
 #first pass at commit parsing - builds (approximate) user list from raw commit data
+#creates list of users across all repos, with id, name, and email (not perfect)
 
 import os.path
 import subprocess
@@ -16,12 +17,22 @@ def add_to_dict_set(dict, key, new_val):
 	dict[key].add(new_val)
 #end add_to_dict_set
 
+#given a dictionary, return the largest value (not key) in the dictionary
+def largest_dict_val(dict):
+	key_max = max(dict.keys(), key=(lambda k: dict[k]))
+	return dict[key_max]
+#end largest_dict_val
+
 #--- MAIN EXECUTION BEGINS HERE---#	
 
-#first step in parsing commit data: creates list of users across all repos, with id, name, and email (not perfect)
+#check if this step already completed
 email_to_id = utils.load_json("data_files/email_to_userid.json")
 name_to_id = utils.load_json("data_files/name_to_userid.json")
-if email_to_id == False or name_to_id == False:
+if email_to_id != False or name_to_id != False:
+	print "list already exists, exiting"
+	exit(0)
+#no lists, create new dictionaries
+else:
 	email_to_id = dict()
 	name_to_id = dict()
 
@@ -30,17 +41,20 @@ id_to_email = dict()
 id_to_name = dict()
 
 #bring id to other up to date based on read-in mapping
-id_to_name = data.flip_dict_set(name_to_id)
-id_to_email = data.flip_dict_set(email_to_id)
+#legacy - only impacts if are starting from an existing list
+if len(email_to_id) != 0:
+	id_to_name = data.flip_dict_set(name_to_id)
+	id_to_email = data.flip_dict_set(email_to_id)
 
 next_id = 0		#keep index of next user id to use
+
+#legacy again - if building off existing user list, id counter can't start at 0
 #easy version, find highest id in existing and start one higher than that
-for k, v in email_to_id:
-	if v > next_id:
-		next_id = v + 1
-for k, v, in name_to_id:
-	if v > next_id:
-		next_id = v + 1
+if len(email_to_id) != 0:
+	next_id = max(next_id, largest_dict_val(email_to_id)+1, largest_dict_val(name_to_id)+1)
+
+print next_id
+
 file_idx = 0	#count files as finished
 
 mystery_commit_count = 0
