@@ -150,7 +150,7 @@ procedure
 
 	Note the add_libs and del_libs lists may be empty, since this file contains all commits, not only import commits.
 
-	Script output:
+	Script output: UPDATE THIS
 		results saved to data_files/all_commits_SUB.json
     			586 commits without timestamp (not included in compiled list)
 		24668306 commits total
@@ -160,7 +160,16 @@ procedure
 	Output files: 
 		data_files/all_commits_<package_type>.json	list of ALL commits (not just imports) across all repositories
 		
-		
+6. 
+	
+	
+
+Steps to writeup/update:
+
+find_adoptions
+adoption_analysis 
+adoption_graph.py 
+	
 		
 		
 		
