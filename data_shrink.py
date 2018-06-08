@@ -1,3 +1,7 @@
+#old script for removing unneeded files from repo clones
+#crawls directory tree and removes any files that are not Python and do not contain a matching import statement
+#this functionality was later rolled into github_clone_repos.py, so is not used anymore
+
 import json
 import os
 import os.path
