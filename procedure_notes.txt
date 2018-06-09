@@ -18,7 +18,7 @@ procedure
 	
 	This yields a final list of:
 		259923 repositories
-		89311 users
+		89311 GitHub users
 		
 	Input files: none
 	Output files: located in github_files directory
@@ -68,9 +68,9 @@ procedure
 
 	build_user_list.py produces:
 
-		found 163677 users
-		530 mystery commits (not necessarily import commits)
-		72 repos affected
+		found 170413 users
+		532 mystery commits (not necessarily import commits)
+		74 repos affected
 		final user list saved to name_to_userid.json and email_to_userid.json
 
 	Input files:
@@ -79,16 +79,15 @@ procedure
 		data_files/name_to_id.json		mapping of name to integer user id
 		data_files/email_to_id.json		mapping of email to integer user id
 
-
 	check_user_ids.py produces:
 
-		found 160105 name users
-		found 162852 email users
-		found 163677 total users
-		max email addresses per user: 739
-		number of users with multiple email addresses: 40286
-		max names per user: 777
-		number of users with multiple names 29528
+		found 166793 name users
+		found 169354 email users
+		found 170413 total users
+		max email addresses per user: 741
+		number of users with multiple email addresses: 41069
+		max names per user: 781
+		number of users with multiple names 30030
 		
 	Input files:
 		data_files/name_to_id.json		mapping of name to integer user id
