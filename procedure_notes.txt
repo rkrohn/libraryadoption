@@ -149,19 +149,81 @@ procedure
 
 	Note the add_libs and del_libs lists may be empty, since this file contains all commits, not only import commits.
 
-	Script output: UPDATE THIS
+	Script output:
 		results saved to data_files/all_commits_SUB.json
     			586 commits without timestamp (not included in compiled list)
-		24668306 commits total
+		29268548 commits total
 
 	Input files:
 		parsed_commit_data/<repo_name>__<owner Github id>.log	single processed commit file for each repository
 	Output files: 
 		data_files/all_commits_<package_type>.json	list of ALL commits (not just imports) across all repositories
 		
-6. 
-	
-	
+6. Sort the list of all commits by time, allowing for streaming processing of data. Also chunk the data into separate files by commit year to allow for easier model training and testing. Uses script sort_commits.py
+
+	Script output:
+		Preserving submodules
+		reading in commit data...
+		read in 29268548 commits
+		sorting commits...
+		saving sorted commits...
+		29268548 sorted commits saved to data_files/all_commits_SUB_sorted.json
+		earliest commit in 1969
+		latest commit in 5586
+    			2050 : 1 commits
+    			2070 : 4 commits
+    			overflow : 2 commits
+    			1969 : 829 commits
+    			1970 : 21 commits
+    			1973 : 28 commits
+    			1979 : 2 commits
+    			1980 : 13 commits
+    			1985 : 3 commits
+    			1986 : 1 commits
+    			1987 : 2 commits
+    			1990 : 2523 commits
+    			1991 : 10680 commits
+    			1992 : 15064 commits
+    			1993 : 6936 commits
+    			1994 : 13958 commits
+    			1995 : 30126 commits
+    			1996 : 37284 commits
+    			1997 : 53766 commits
+    			1998 : 73004 commits
+   			 1999 : 62020 commits
+    			2000 : 120050 commits
+    			2001 : 181902 commits
+    			2002 : 187556 commits
+    			2003 : 208286 commits
+    			2004 : 234022 commits
+    			2005 : 307315 commits
+    			2006 : 521339 commits
+    			2007 : 787204 commits
+    			2008 : 1012142 commits
+    			2009 : 1262158 commits
+    			2010 : 1848185 commits
+    			2011 : 2459750 commits
+    			2012 : 3160030 commits
+    			2013 : 3590287 commits
+    			2014 : 3340657 commits
+    			2015 : 3328950 commits
+    			2016 : 2901661 commits
+    			2017 : 2986646 commits
+    			2018 : 524122 commits
+    			2019 : 3 commits
+    			2021 : 1 commits
+    			2031 : 6 commits
+    			2037 : 2 commits
+    			2040 : 2 commits
+    			2045 : 5 commits
+		year-divided commits saved to data_files/all_commits_by_year/<year>_commits_SUB_sorted.json
+
+	Input files:
+		data_files/all_commits_<package_type>.json	list of ALL commits across all repos
+	Output files: 
+		data_files/all_commits_<package_type>_sorted.json	sorted list of all commits
+		data_files/all_commits_by_year			directory containing one file per list of commits
+
 
 Steps to writeup/update:
 
