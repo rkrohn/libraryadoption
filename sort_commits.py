@@ -60,7 +60,7 @@ print "latest commit in", last_year
 year_commits = defaultdict(list)
 
 #split list of commits by year
-for commit in data:
+for commit in ordered_commits:
 	try:
 		year = datetime.fromtimestamp(commit['time']).year
 	except:
