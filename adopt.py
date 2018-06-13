@@ -20,9 +20,9 @@ class User:
 	% commits with adoptions within last 10% of commits	last_adopt_commit_count/len(last_commits)
 	% commits with imports within last 10% of commits	last_import_commit_count/len(last_commits)
 	# implicitly seen package i				seen_libs_freq[i]
-	# implicitly seen package i within last 10% of commits
+	# implicitly seen package i within last 10% of commits	lib_view_freq() - first return value
 	# implicitly seen package i / total # implicit packages seen	seen_libs_freq[i]/sum(seen_libs_freq.values())
-	# implicitly seen package i within last 10% commits / total # implicit packages seen within last 10% commits
+	# implicitly seen package i within last 10% commits / total # implicit packages seen within last 10% commits	lib_view_freq - first return / second return
 	{packages implicitly seen}				seen_libs
 	'''
 
@@ -44,6 +44,7 @@ class User:
 		self.avg_commit_delta = None	#average time between last 10% of user's commits
 		self.last_import_commit_count = 0	#number of commits containing import in last 10% of user's commits
 		self.last_adopt_commit_count = 0	#number of commits producing adoption in last 10% of user's commits
+		
 
 	#given a list of repository updated repos, and the repo name, update user state
 	def implicit_view(self, repo_libs, repo, time):	
@@ -61,7 +62,7 @@ class User:
 		self.quiver[lib] = time
 
 	#log new user commit (not necessarily a library commit), along with purpose of commit: regular commit, lib import, or adoption
-	def log_commit(self, time, repo, has_lib = False, adopt = False):
+	def log_commit(self, time, repo, implicit_libs, has_lib = False, adopt = False):
 		self.last_commit = time		#update last commit time
 		self.commit_count += 1		#update overall commit count
 
@@ -98,7 +99,7 @@ class User:
 			self.avg_commit_delta = time - self.last_commits[-1]['time']
 
 		#always append newest commit
-		self.last_commits.append({'time': time, 'repo': repo, 'import': has_lib, 'adopt': adopt})
+		self.last_commits.append({'time': time, 'repo': repo, 'import': has_lib, 'adopt': adopt, 'implicit': implicit_libs})
 		
 	#log new user adoption
 	def log_adopt(self, lib, time):
@@ -118,7 +119,18 @@ class User:
 		for commit in self.last_commits:
 			last_repos.add(commit['repo'])
 		return len(last_repos)		#return number of repos in set
-		
+	
+	#return two values: a count of how many times a user has seen the query library, and a count of total library implicit views, both within the last 10% of this user's commits
+	def lib_view_freq(self, lib):
+		lib_count = 0		#number of times, within last 10% of commits, user has implicitly seen the query library
+		total_count = 0		#total number of implicit library views within last 10% of commits, where libraries may be viewed (and counted) more than once
+
+		#loop windowed commit history to get counts
+		for commit in self.last_commits:
+			if lib in commit['implicit']:
+				lib_count += 1
+			total_count += len(commit['implicit'])
+		return lib_count, total_count	
 
 class Repo:
 	def __init__(self, name):
@@ -186,9 +198,9 @@ def process_commit(c):
 
 	#log this commit, import/adoption or not
 	if len(added_libs) != 0:
-		user.log_commit(time, repo.name, True, adopt)	#yes, commit contains add import
+		user.log_commit(time, repo.name, updated_libs, True, adopt)	#yes, commit contains add import
 	else:
-		user.log_commit(time, repo.name, False, adopt)	#no, commit contains no add imports
+		user.log_commit(time, repo.name, updated_libs, False, adopt)	#no, commit contains no add imports
 
 	#resolve updates
 	for added_lib in added_libs:
@@ -237,3 +249,10 @@ if __name__ == "__main__":
 			print("user", user.name, "adopted", len(user.adopted_libs), "libraries in", user.commit_count, "commits ("+str(user.adopt_commit_count), "adop,", user.import_commit_count, "import)") 
 			print("    last 10%:", (str(datetime.timedelta(seconds=round(user.avg_commit_delta))) if len(user.last_commits)>1 else None), "intra-commit delta,", user.last_repos_count(), "repos")
 			print("             ", len(user.last_commits), "commits (" + str(user.last_adopt_commit_count), "adopt,", user.last_import_commit_count, "import)")
+
+	#testing the implicit package view query (specific to both a package and a user)
+	lib_freq, all_freq = users[1506].lib_view_freq("urlparse")
+	print("viewed urlparse", lib_freq, "times, all libraries", all_freq, "times in", len(users[1506].last_commits), "commits")
+
+	lib_freq, all_freq = users[31175].lib_view_freq("curses")
+	print("viewed curses", lib_freq, "times, all libraries", all_freq, "times in", len(users[31175].last_commits), "commits")
