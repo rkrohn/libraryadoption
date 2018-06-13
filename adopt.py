@@ -2,6 +2,8 @@ import json
 import datetime
 import random as r
 
+WINDOW = 0.1		#for windowed stats, take last 10% of a user/repo's commits (once user has at least 5 commits in history)
+
 #User class: contains user id/name, dictionary of used lib->time used, and repo->time of last interaction
 class User:
 	'''
@@ -19,7 +21,7 @@ class User:
 	% commits with imports within last 10% of commits
 	# implicitly seen package i				seen_libs_freq[i]
 	# implicitly seen package i within last 10% of commits
-	# implicitly seen package i / total # implicit packages seen
+	# implicitly seen package i / total # implicit packages seen	seen_libs_freq[i]/sum(seen_libs_freq.values())
 	# implicitly seen package i within last 10% commits / total # implicit packages seen within last 10% commits
 	{packages implicitly seen}				seen_libs
 	'''
@@ -37,6 +39,10 @@ class User:
 		self.import_commit_count = 0	#number of commits containing imports made by user
 		self.adopt_commit_count = 0	#number of commits resulting in an adoption (may be smaller than #adoptions)
 
+		#windowed stuff starts here
+		self.last_commits = list()	#list of last 10% of commits (time, repo)
+		self.avg_commit_delta = -1	#average time between last 10% of user's commits
+
 	#given a list of repository updated repos, and the repo name, update user state
 	def implicit_view(self, repo_libs, repo, time):	
 		#update last seen time and seen frequency for each library
@@ -53,14 +59,34 @@ class User:
 		self.quiver[lib] = time
 
 	#log new user commit (not necessarily a library commit), along with purpose of commit: regular commit, lib import, or adoption
-	def log_commit(self, time, lib = False, adopt = False):
-		self.last_commit = time	#update last commit time
-		self.commit_count += 1
+	def log_commit(self, time, repo, lib = False, adopt = False):
+		self.last_commit = time		#update last commit time
+		self.commit_count += 1		#update overall commit count
+
+		#update adopt and import commit counts
 		if adopt:
 			self.adopt_commit_count += 1
 		if lib:
 			self.import_commit_count += 1
+		
+		#update list of last_commits, so that history is limited to 10% of all of user's commits (once user passes 5 total commits)
+		
+		#remove earliest commit if list too long before updating list and delta-t
+		num_commits = len(self.last_commits)		#number of commits in current history list
 
+		#if list long enough to remove oldest commit, do that and update
+		if (num_commits) / float(self.commit_count) > WINDOW and num_commits > 5:
+			removed = self.last_commits.pop(0)	#remove oldest commit
+			delta = ((time-self.last_commits[-1]['time']) - (self.last_commits[0]['time']-removed['time'])) / num_commits	#compute change to average intra-commit delta-t
+			self.avg_commit_delta += delta		#update average intra-commit delta
+
+		#list not too long, just update avg delta-t
+		elif num_commits >= 1:
+			self.avg_commit_delta = ((time-self.last_commits[-1]['time']) + num_commits * self.avg_commit_delta) / (num_commits+1)
+
+		#always append newest commit
+		self.last_commits.append({'time': time, 'repo': repo})
+		
 	#log new user adoption
 	def log_adopt(self, lib, time):
 		self.last_adopt = time	#set last adopt time
@@ -139,9 +165,9 @@ def process_commit(c):
 
 	#log this commit, import/adoption or not
 	if len(added_libs) != 0:
-		user.log_commit(time, True, adopt)	#yes, commit contains add import
+		user.log_commit(time, repo, True, adopt)	#yes, commit contains add import
 	else:
-		user.log_commit(time, False, adopt)	#no, commit contains no add imports
+		user.log_commit(time, repo, False, adopt)	#no, commit contains no add imports
 
 	#resolve updates
 	for added_lib in added_libs:
@@ -187,4 +213,4 @@ if __name__ == "__main__":
 	#print some user results (checking the code)
 	for user_id, user in users.items():
 		if len(user.adopted_libs) > 0:
-			print("user", user.name, "adopted", len(user.adopted_libs), "libraries in", user.commit_count, "commits ("+str(user.adopt_commit_count), "adop,", user.import_commit_count, "import)")
+			print("user", user.name, "adopted", len(user.adopted_libs), "libraries in", user.commit_count, "commits ("+str(user.adopt_commit_count), "adop,", user.import_commit_count, "import,", str(datetime.timedelta(seconds=user.avg_commit_delta)), "delta)")
