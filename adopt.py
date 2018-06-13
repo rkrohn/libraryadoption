@@ -12,7 +12,7 @@ class User:
 	# packages implicitly seen				len(seen_libs)
 	time since last commit					last_commit
 	time since last adoption				last_adopt
-	intra-commit duration for last 10% of commits
+	intra-commit duration for last 10% of commits		avg_commit_delta
 	# repositories commited to				len(repos)
 	# repositories commited to in last 10% of commits
 	% commits with adoptions				adopt_commit_count/commit_count
@@ -39,7 +39,7 @@ class User:
 		self.import_commit_count = 0	#number of commits containing imports made by user
 		self.adopt_commit_count = 0	#number of commits resulting in an adoption (may be smaller than #adoptions)
 
-		#windowed stuff starts here
+		#windowed history stuff starts here
 		self.last_commits = list()	#list of last 10% of commits (time, repo)
 		self.avg_commit_delta = -1	#average time between last 10% of user's commits
 
@@ -71,7 +71,7 @@ class User:
 		
 		#update list of last_commits, so that history is limited to 10% of all of user's commits (once user passes 5 total commits)
 		
-		#remove earliest commit if list too long before updating list and delta-t
+		#remove earliest commit if history list too long before updating list and delta-t
 		num_commits = len(self.last_commits)		#number of commits in current history list
 
 		#if list long enough to remove oldest commit, do that and update
@@ -82,7 +82,7 @@ class User:
 
 		#list not too long, just update avg delta-t
 		elif num_commits >= 1:
-			self.avg_commit_delta = ((time-self.last_commits[-1]['time']) + num_commits * self.avg_commit_delta) / (num_commits+1)
+			self.avg_commit_delta = ((time-self.last_commits[-1]['time']) + num_commits * self.avg_commit_delta) / (num_commits+1)			
 
 		#always append newest commit
 		self.last_commits.append({'time': time, 'repo': repo})
@@ -98,6 +98,14 @@ class User:
 			return -1
 		return self.repos[repo]
 
+	#return a count of the repos this user has committed to in the last 10% of their commits
+	def last_repos_count(self):
+		#build set of repos from commit history
+		last_repos = set()
+		for commit in self.last_commits:
+			last_repos.add(commit['repo'])
+		return len(last_repos)		#return number of repos in set
+		
 
 class Repo:
 	def __init__(self, name):
@@ -165,9 +173,9 @@ def process_commit(c):
 
 	#log this commit, import/adoption or not
 	if len(added_libs) != 0:
-		user.log_commit(time, repo, True, adopt)	#yes, commit contains add import
+		user.log_commit(time, repo.name, True, adopt)	#yes, commit contains add import
 	else:
-		user.log_commit(time, repo, False, adopt)	#no, commit contains no add imports
+		user.log_commit(time, repo.name, False, adopt)	#no, commit contains no add imports
 
 	#resolve updates
 	for added_lib in added_libs:
@@ -213,4 +221,5 @@ if __name__ == "__main__":
 	#print some user results (checking the code)
 	for user_id, user in users.items():
 		if len(user.adopted_libs) > 0:
-			print("user", user.name, "adopted", len(user.adopted_libs), "libraries in", user.commit_count, "commits ("+str(user.adopt_commit_count), "adop,", user.import_commit_count, "import,", str(datetime.timedelta(seconds=user.avg_commit_delta)), "delta)")
+			print("user", user.name, "adopted", len(user.adopted_libs), "libraries in", user.commit_count, "commits ("+str(user.adopt_commit_count), "adop,", user.import_commit_count, "import)") 
+			print("    last 10%:", str(datetime.timedelta(seconds=round(user.avg_commit_delta))), "intra-commit delta,", user.last_repos_count(), "repos")
