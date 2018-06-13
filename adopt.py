@@ -14,11 +14,11 @@ class User:
 	time since last adoption				last_adopt
 	intra-commit duration for last 10% of commits		avg_commit_delta
 	# repositories commited to				len(repos)
-	# repositories commited to in last 10% of commits
+	# repositories commited to in last 10% of commits	last_repos_count()
 	% commits with adoptions				adopt_commit_count/commit_count
 	% commits with imports					import_commit_count/commit_count
-	% commits with adoptions within last 10% of commits
-	% commits with imports within last 10% of commits
+	% commits with adoptions within last 10% of commits	last_adopt_commit_count/len(last_commits)
+	% commits with imports within last 10% of commits	last_import_commit_count/len(last_commits)
 	# implicitly seen package i				seen_libs_freq[i]
 	# implicitly seen package i within last 10% of commits
 	# implicitly seen package i / total # implicit packages seen	seen_libs_freq[i]/sum(seen_libs_freq.values())
@@ -41,7 +41,9 @@ class User:
 
 		#windowed history stuff starts here
 		self.last_commits = list()	#list of last 10% of commits (time, repo)
-		self.avg_commit_delta = -1	#average time between last 10% of user's commits
+		self.avg_commit_delta = None	#average time between last 10% of user's commits
+		self.last_import_commit_count = 0	#number of commits containing import in last 10% of user's commits
+		self.last_adopt_commit_count = 0	#number of commits producing adoption in last 10% of user's commits
 
 	#given a list of repository updated repos, and the repo name, update user state
 	def implicit_view(self, repo_libs, repo, time):	
@@ -59,15 +61,17 @@ class User:
 		self.quiver[lib] = time
 
 	#log new user commit (not necessarily a library commit), along with purpose of commit: regular commit, lib import, or adoption
-	def log_commit(self, time, repo, lib = False, adopt = False):
+	def log_commit(self, time, repo, has_lib = False, adopt = False):
 		self.last_commit = time		#update last commit time
 		self.commit_count += 1		#update overall commit count
 
-		#update adopt and import commit counts
+		#update adopt and import commit counts, both global and windowed
 		if adopt:
 			self.adopt_commit_count += 1
-		if lib:
+			self.last_adopt_commit_count += 1
+		if has_lib:
 			self.import_commit_count += 1
+			self.last_import_commit_count += 1
 		
 		#update list of last_commits, so that history is limited to 10% of all of user's commits (once user passes 5 total commits)
 		
@@ -77,15 +81,24 @@ class User:
 		#if list long enough to remove oldest commit, do that and update
 		if (num_commits) / float(self.commit_count) > WINDOW and num_commits > 5:
 			removed = self.last_commits.pop(0)	#remove oldest commit
-			delta = ((time-self.last_commits[-1]['time']) - (self.last_commits[0]['time']-removed['time'])) / num_commits	#compute change to average intra-commit delta-t
+			delta = ((time-self.last_commits[-1]['time']) - (self.last_commits[0]['time']-removed['time'])) / (num_commits-1)	#compute change to average intra-commit delta-t
 			self.avg_commit_delta += delta		#update average intra-commit delta
 
+			#update import/adopt windowed commit counts based on removed commit
+			if removed['import']:
+				self.last_import_commit_count -= 1
+			if removed['adopt']:
+				self.last_adopt_commit_count -= 1
+
 		#list not too long, just update avg delta-t
-		elif num_commits >= 1:
-			self.avg_commit_delta = ((time-self.last_commits[-1]['time']) + num_commits * self.avg_commit_delta) / (num_commits+1)			
+		elif num_commits > 1:
+			self.avg_commit_delta = ((time-self.last_commits[-1]['time']) + num_commits * self.avg_commit_delta) / num_commits		
+		#second commit, explicitly set the average delta
+		elif num_commits == 1:
+			self.avg_commit_delta = time - self.last_commits[-1]['time']
 
 		#always append newest commit
-		self.last_commits.append({'time': time, 'repo': repo})
+		self.last_commits.append({'time': time, 'repo': repo, 'import': has_lib, 'adopt': adopt})
 		
 	#log new user adoption
 	def log_adopt(self, lib, time):
@@ -222,4 +235,5 @@ if __name__ == "__main__":
 	for user_id, user in users.items():
 		if len(user.adopted_libs) > 0:
 			print("user", user.name, "adopted", len(user.adopted_libs), "libraries in", user.commit_count, "commits ("+str(user.adopt_commit_count), "adop,", user.import_commit_count, "import)") 
-			print("    last 10%:", str(datetime.timedelta(seconds=round(user.avg_commit_delta))), "intra-commit delta,", user.last_repos_count(), "repos")
+			print("    last 10%:", (str(datetime.timedelta(seconds=round(user.avg_commit_delta))) if len(user.last_commits)>1 else None), "intra-commit delta,", user.last_repos_count(), "repos")
+			print("             ", len(user.last_commits), "commits (" + str(user.last_adopt_commit_count), "adopt,", user.last_import_commit_count, "import)")
