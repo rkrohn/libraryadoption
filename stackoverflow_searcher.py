@@ -31,6 +31,8 @@ class Searcher(object):
         self.idx_fp.close()
 
     def search(self, term, from_date=datetime(1, 1, 1), until_date=datetime.now()):
+        if term not in self.offset_dict:
+            return []
         self.idx_fp.seek(self.offset_dict[term])
 
         whole_leng = struct.unpack('i', self.idx_fp.read(4))[0]
