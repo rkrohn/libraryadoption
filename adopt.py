@@ -194,10 +194,8 @@ def process_commit(c, s):
 			adopt = True
 			if r.random() > .9:
 				print("   ", user.name, 'adopts', lib, 'at:', datetime.fromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S'))
-				try:
-					print("   ", len(s.search(lib, datetime(1, 1, 1), datetime.fromtimestamp(time))), "stackoverflow posts")
-				except:
-					print("    0 stackoverflow posts (key error)")				
+				print("   ", len(s.search(lib, datetime(1, 1, 1), datetime.fromtimestamp(time))), "stackoverflow posts")
+			
 
 	#update user state based on new libraries seen
 	user.implicit_view(updated_libs, repo, time)	
