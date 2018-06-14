@@ -1,6 +1,7 @@
 import json
-import datetime
+from datetime import datetime, timedelta
 import random as r
+from stackoverflow_searcher import Searcher
 
 WINDOW = 0.1		#for windowed stats, take last 10% of a user/repo's commits (once user has at least 5 commits in history)
 
@@ -150,7 +151,8 @@ users = {}
 repos = {}
 
 #given a single commit, process and update user/repo library listings and identify any adoption events
-def process_commit(c):
+#arguments are commit c and initialized StackOverflow Searcher s
+def process_commit(c, s):
 	#grab commit fields: user, repo, time
 	repo = c['repo']
 	time = int(c['time'])
@@ -160,7 +162,7 @@ def process_commit(c):
 	else:
 		user = int(c['user'])
 
-	#print(datetime.datetime.fromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S'))
+	#print(datetime.fromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S'))
 
 	added_libs = c['add_libs']
 	deleted_libs = c['del_libs']
@@ -191,7 +193,11 @@ def process_commit(c):
 			user.log_adopt(lib, time)
 			adopt = True
 			if r.random() > .9:
-				print(user.name, 'adopts', lib, 'at:', datetime.datetime.fromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S'))
+				print("   ", user.name, 'adopts', lib, 'at:', datetime.fromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S'))
+				try:
+					print("   ", len(s.search(lib, datetime(1, 1, 1), datetime.fromtimestamp(time))), "stackoverflow posts")
+				except:
+					print("    0 stackoverflow posts (key error)")				
 
 	#update user state based on new libraries seen
 	user.implicit_view(updated_libs, repo, time)	
@@ -235,19 +241,35 @@ def stream(f):
 
 if __name__ == "__main__":
 	#stream data from sorted json file
-	f = open('data_files/all_commits_by_year/2000_commits_SUB_sorted.json')
+	f = open('data_files/all_commits_by_year/2017_commits_SUB_sorted.json')
 	commits = stream(f)
+
+	#declare/initialize a Stackoverflow Searcher
+	s = Searcher()
+	#some example queries
+	'''
+	posts = s.search('numpy', datetime(2000, 1, 1), datetime(2009, 1, 1))
+	print(len(posts), "posts,", sum(x[2] for x in posts), "total views")
+	posts = s.search('numpy', datetime(2014, 1, 1), datetime(2017, 1, 1))
+	print(len(posts), "posts,", sum(x[2] for x in posts), "total views")
+	'''
+
+	commit_count = 0
 
 	#process all commits in date order
 	for x in commits:
-		process_commit(x)
+		process_commit(x, s)
+		commit_count += 1
+		if commit_count % 1000 == 0:
+			print("finished", commit_count, "commits")
 	f.close()
 
+	exit(0)
 	#print some user results (checking the code)
 	for user_id, user in users.items():
 		if len(user.adopted_libs) > 0:
 			print("user", user.name, "adopted", len(user.adopted_libs), "libraries in", user.commit_count, "commits ("+str(user.adopt_commit_count), "adop,", user.import_commit_count, "import)") 
-			print("    last 10%:", (str(datetime.timedelta(seconds=round(user.avg_commit_delta))) if len(user.last_commits)>1 else None), "intra-commit delta,", user.last_repos_count(), "repos")
+			print("    last 10%:", (str(timedelta(seconds=round(user.avg_commit_delta))) if len(user.last_commits)>1 else None), "intra-commit delta,", user.last_repos_count(), "repos")
 			print("             ", len(user.last_commits), "commits (" + str(user.last_adopt_commit_count), "adopt,", user.last_import_commit_count, "import)")
 
 	#testing the implicit package view query (specific to both a package and a user)
@@ -256,3 +278,5 @@ if __name__ == "__main__":
 
 	lib_freq, all_freq = users[31175].lib_view_freq("curses")
 	print("viewed curses", lib_freq, "times, all libraries", all_freq, "times in", len(users[31175].last_commits), "commits")
+
+
