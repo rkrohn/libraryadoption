@@ -55,6 +55,9 @@ class Package:
 			self.adopt_users.add(user)
 			self.adopt_repos.add(repo)
 			self.last_adoption = time
+
+			#update commit history for adoptions of this library
+			self.last_adopts, self.avg_adopt_delta = self.update_history(self.last_adopts, self.avg_adopt_delta, len(self.adopt_users), time, adopt)
 		
 		#update commit history for additions of this library
 		self.last_commits, self.avg_commit_delta = self.update_history(self.last_commits, self.avg_commit_delta, self.add_commits, time, adopt)
