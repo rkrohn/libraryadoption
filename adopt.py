@@ -65,7 +65,7 @@ def process_commit(c, s):
 			if r.random() > .9:
 				print("   ", user.name, 'adopts', lib, 'at:', datetime.fromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S'))
 				print("   ", len(s.search(lib, datetime(1, 1, 1), datetime.fromtimestamp(time))), "stackoverflow posts")
-				print("   ", package.name + ":", package.add_commits, "commits,", len(package.adopt_users), "adoptions,", len(package.repos), "repos")
+				print("   ", package.name + ":", package.add_commits, "commits,", len(package.adopt_users), "adoptions,", len(package.repos), "repos,", str(timedelta(seconds=round(package.avg_commit_delta))), "delta t")
 		#not an adoption, just log the package commit
 		else:
 			package.commit_lib(user, repo, time, adopt=False)

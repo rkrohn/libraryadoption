@@ -24,6 +24,8 @@ current rank
     # of additions - # deletions (true additions/deletions only)
 '''
 
+WINDOW = 0.1		#for windowed stats, take last 10% of a user/repo's commits (once user has at least 5 commits in history)
+
 class Package:
 	def __init__(self, name):
 		self.name = name		#package/library name
@@ -34,6 +36,10 @@ class Package:
 		self.adopt_repos = set()	#set of repos an adoption event of this package occurred in
 		self.last_adoption = None	#time of last adoption event for this package
 		self.last_commit = None		#time of last add commit for this package
+
+		#windowed history stuff starts here
+		self.last_commits = list()	#list of last 10% of commits of this package
+		self.avg_commit_delta = None	#average time between commits, taken over last 10% of package commits
 
 	#given an addition commit by user to repo, log the commit
 	def commit_lib(self, user, repo, time, adopt = False):
@@ -47,3 +53,25 @@ class Package:
 			self.adopt_users.add(user)
 			self.adopt_repos.add(repo)
 			self.last_adoption = time
+
+		#update list of last_commits, so that history is limited to 10% of all of package's commits (once package passes 5 total commits)
+		
+		#remove earliest commit if history list too long before updating list and delta-t
+		num_commits = len(self.last_commits)		#number of commits in current history list
+
+		#if list long enough to remove oldest commit, do that and update
+		if (num_commits) / float(self.add_commits) > WINDOW and num_commits > 5:
+			removed = self.last_commits.pop(0)	#remove oldest commit
+			delta = ((time-self.last_commits[-1]['time']) - (self.last_commits[0]['time']-removed['time'])) / (num_commits-1)	#compute change to average intra-commit delta-t
+			self.avg_commit_delta += delta		#update average intra-commit delta
+
+		#list not too long, just update avg delta-t
+		elif num_commits > 1:
+			self.avg_commit_delta = ((time-self.last_commits[-1]['time']) + num_commits * self.avg_commit_delta) / num_commits		
+		#second commit, explicitly set the average delta
+		elif num_commits == 1:
+			self.avg_commit_delta = time - self.last_commits[-1]['time']
+
+		#always append newest commit
+		self.last_commits.append({'time': time, 'adopt': adopt})
+
