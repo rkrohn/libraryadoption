@@ -1,6 +1,7 @@
 import json
 from datetime import datetime, timedelta
 import random as r
+from collections import deque
 from stackoverflow_searcher import Searcher
 from User import User
 from Repo import Repo
@@ -13,9 +14,15 @@ users = {}
 repos = {}
 packages = {}
 
+#list of commit timestamps for last 10% of ALL commits - used for computing some package features
+#commit_history = deque()
+#commit_count		#count of ALL commits - defined and initialized in main
+
 #given a single commit, process and update user/repo library listings and identify any adoption events
 #arguments are commit c and initialized StackOverflow Searcher s
 def process_commit(c, s):
+	global commit_count, commit_history	#use the global variable
+
 	#grab commit fields: user, repo, time
 	repo = c['repo']
 	time = int(c['time'])
@@ -84,6 +91,20 @@ def process_commit(c, s):
 	for added_lib in added_libs:
 		user.use_lib(added_lib, time)
 		repo.use_lib(added_lib, time)
+
+	#add commit timestamp to history list, limit to last 10% (once more than 5)
+	#remove earliest commit if history list too long before appending new
+	num_commits = len(commit_history)		#number of commits in current history list
+	#if list long enough to remove oldest commit, do that 
+	if num_commits > 5 and (num_commits) / float(commit_count) > WINDOW:
+		commit_history.popleft()	#remove oldest commit		
+	#always append newest commit
+	commit_history.append(time)
+
+	commit_count += 1	#add to overall commit count
+	if commit_count % 1000 == 0:
+		print(len(commit_history))		
+
 #end process_commit
 
 #stream json data one object at a time (generator function)
@@ -114,6 +135,10 @@ def stream(f):
 #--- MAIN EXECUTION BEGINS HERE---#
 
 if __name__ == "__main__":
+	global commit_count, commit_history
+	commit_count = 0
+	commit_history = deque()
+
 	#stream data from sorted json file
 	f = open('data_files/all_commits_by_year/2005_commits_SUB_sorted.json')
 	commits = stream(f)
@@ -126,16 +151,13 @@ if __name__ == "__main__":
 	print(len(posts), "posts,", sum(x[2] for x in posts), "total views")
 	posts = s.search('numpy', datetime(2014, 1, 1), datetime(2017, 1, 1))
 	print(len(posts), "posts,", sum(x[2] for x in posts), "total views")
-	'''
-
-	commit_count = 0
+	'''	
 
 	#process all commits in date order
 	for x in commits:
-		process_commit(x, s)
-		commit_count += 1
+		process_commit(x, s)		#commit_count incremented here
 		if commit_count % 1000 == 0:
-			print("finished", commit_count, "commits")
+			print("finished", commit_count, "commits,", len(commit_history), "commits in history")
 	f.close()
 
 	exit(0)
