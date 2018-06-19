@@ -36,13 +36,18 @@ def process_commit(c):
 	else:
 		user = int(c['user'])
 
-	added_libs = c['add_libs']
-	deleted_libs = c['del_libs']
+	#remove duplicate libraries from lists by converting them to sets
+	added_libs = set(c['add_libs'])
+	deleted_libs = set(c['del_libs'])
 
 	#change added/deleted_libs so that "moved libs" i.e., libs that are added and deleted in the same commit are not considered for adoptions
-	added_and_deleted = set(added_libs).intersection(set(deleted_libs))
+	added_and_deleted = added_libs.intersection(deleted_libs)
 	deleted_libs = [item for item in deleted_libs if item not in added_and_deleted]
 	added_libs = [item for item in added_libs if item not in added_and_deleted]
+
+	if len(added_libs) != len(set(added_libs)):
+		print("duplicate libraries!", added_libs)
+		exit(0)
 
 	#grab repo object, create if doesn't exist yet
 	if repo not in repos:
