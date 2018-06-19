@@ -45,10 +45,6 @@ def process_commit(c):
 	deleted_libs = [item for item in deleted_libs if item not in added_and_deleted]
 	added_libs = [item for item in added_libs if item not in added_and_deleted]
 
-	if len(added_libs) != len(set(added_libs)):
-		print("duplicate libraries!", added_libs)
-		exit(0)
-
 	#grab repo object, create if doesn't exist yet
 	if repo not in repos:
 		repos[repo] = Repo(repo)
