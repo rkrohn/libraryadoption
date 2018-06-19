@@ -18,10 +18,14 @@ packages = {}
 #commit_history = deque()
 #commit_count		#count of ALL commits - defined and initialized in main
 
+#global StackOverflow Searcher
+#s = Searcher()
+
 #given a single commit, process and update user/repo library listings and identify any adoption events
 #arguments are commit c and initialized StackOverflow Searcher s
-def process_commit(c, s):
-	global commit_count, commit_history	#use the global variable
+def process_commit(c):
+	global commit_count, commit_history	#use the global variables
+	global s
 
 	#grab commit fields: user, repo, time
 	repo = c['repo']
@@ -135,12 +139,12 @@ def stream(f):
 #--- MAIN EXECUTION BEGINS HERE---#
 
 if __name__ == "__main__":
-	global commit_count, commit_history
+	global commit_count, commit_history, s		#use the global variables
 	commit_count = 0
 	commit_history = deque()
 
 	#stream data from sorted json file
-	f = open('data_files/all_commits_by_year/2005_commits_SUB_sorted.json')
+	f = open('data_files/all_commits_by_year/2011_commits_SUB_sorted.json')
 	commits = stream(f)
 
 	#declare/initialize a Stackoverflow Searcher
@@ -155,12 +159,11 @@ if __name__ == "__main__":
 
 	#process all commits in date order
 	for x in commits:
-		process_commit(x, s)		#commit_count incremented here
+		process_commit(x)		#commit_count incremented here
 		if commit_count % 1000 == 0:
 			print("finished", commit_count, "commits,", len(commit_history), "commits in history")
 	f.close()
 
-	exit(0)
 	#print some user results (checking the code)
 	for user_id, user in users.items():
 		if len(user.adopted_libs) > 0:
