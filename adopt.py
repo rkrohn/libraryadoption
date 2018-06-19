@@ -72,8 +72,10 @@ def process_commit(c, s):
 			if r.random() > .9:
 				print("   ", user.name, 'adopts', lib, 'at:', datetime.fromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S'))
 				print("   ", len(s.search(lib, datetime(1, 1, 1), datetime.fromtimestamp(time))), "stackoverflow posts")
-				print("   ", package.name + ":", package.add_commits, "commits,", len(package.adopt_users), "adoptions,", len(package.repos), "repos,", str(timedelta(seconds=round(package.avg_adopt_delta))) if len(package.adopt_users) > 1 else None, "adopt delta t")
-		#not an adoption, just log the package commit
+				print("    package:", package.add_commits, "commits,", len(package.adopt_users), "adoptions,", len(package.repos), "repos;", "adopt delta t:", str(timedelta(seconds=round(package.avg_adopt_delta))) if len(package.adopt_users) > 1 else None, "commit delta t:", str(timedelta(seconds=round(package.avg_commit_delta))) if package.add_commits > 1 else None)
+				print("    deltas in last 10% of all commits:", package.get_deltas(commit_history[0]))
+
+		#not an adoption, just log the package commit				
 		else:
 			package.commit_lib(user, repo, time, adopt=False)
 		
@@ -101,9 +103,7 @@ def process_commit(c, s):
 	#always append newest commit
 	commit_history.append(time)
 
-	commit_count += 1	#add to overall commit count
-	if commit_count % 1000 == 0:
-		print(len(commit_history))		
+	commit_count += 1	#add to overall commit count	
 
 #end process_commit
 

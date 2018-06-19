@@ -1,3 +1,5 @@
+from bisect import bisect_left
+
 '''
 Package Features - specific to one particular package
 *****
@@ -12,10 +14,10 @@ Jaccard - {u committed packages} ^ {U committed packages}
     (those last three are specific to the user as well)
 time since last adoption				current time - last_adoption
 time since last commit					current time - last_commit
-time between adoptions within last 10% of adoptions of this package
-time between adoptions within last 10% of commits
+time between adoptions within last 10% of adoptions of this package	avg_adopt_delta
+time between adoptions within last 10% of commits			second return of get_deltas
 time between commits within last 10% of commits of this package		avg_commit_delta
-time between commits within last 10% of all commits
+time between commits within last 10% of all commits			first return of get_deltas
 current rank
     # of adoptions
     # of uses
@@ -88,5 +90,31 @@ class Package:
 
 		return history_list, history_delta	#pass by ref doesn't seem to be working, force an overwrite update
 	#end update_history
+
+	#given a starting timestamp (representing the beginning of the last 10% of ALL commits), compute the average commit delta and average adoption delta after that time for this package
+	def get_deltas(self, start_time):
+		#do all package commits first
+		commit_delta = 0
+		pos = bisect_left([i['time'] for i in self.last_commits], start_time)	#index of first eligible commit
+		for i in range(pos, len(self.last_commits)-1):
+			commit_delta += self.last_commits[i+1]['time'] - self.last_commits[i]['time']
+		if len(self.last_commits)-pos-1 > 0:
+			commit_delta = commit_delta / (len(self.last_commits)-pos-1)		#divide to get average
+		else:
+			commit_delta = None
+
+		#then adoption commits
+		adopt_delta = 0
+		pos = bisect_left([i['time'] for i in self.last_adopts], start_time)	#index of first eligible adoption commit
+		for i in range(pos, len(self.last_adopts)-1):
+			adopt_delta += self.last_adopts[i+1]['time'] - self.last_adopts[i]['time']
+		if len(self.last_adopts)-pos-1 > 0:
+			adopt_delta = adopt_delta / (len(self.last_adopts)-pos-1)		#divide to get average
+		else:
+			adopt_delta = None
+
+		return commit_delta, adopt_delta
+	#end get_deltas
+
 
 
