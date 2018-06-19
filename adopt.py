@@ -27,7 +27,7 @@ def process_commit(c):
 	global commit_count, commit_history	#use the global variables
 	global s
 
-	#grab commit fields: user, repo, time
+	#grab commit fields: user, repo, time, added_libs, and deleted_libs
 	repo = c['repo']
 	time = int(c['time'])
 	if c['user'] == '':
@@ -35,8 +35,6 @@ def process_commit(c):
 		user = 0
 	else:
 		user = int(c['user'])
-
-	#print(datetime.fromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S'))
 
 	added_libs = c['add_libs']
 	deleted_libs = c['del_libs']
@@ -59,8 +57,8 @@ def process_commit(c):
 	#updated_libs are those libraries that were implicitly viewed by the user via a pull (immediately) before a commit
 	updated_libs = [lib for lib in repo.libs if repo.last_interaction(lib) > user.last_interaction(repo)]
 
-	adopt = False		#reset flag
-	#loop all libraries
+	adopt = False		#reset flag for this commit
+	#loop all libraries added in this commit
 	for lib in added_libs:
 		#grab/create class object for this package/library
 		if lib not in packages:
@@ -97,8 +95,9 @@ def process_commit(c):
 	for added_lib in added_libs:
 		user.use_lib(added_lib, time)
 		repo.use_lib(added_lib, time)
+	user.finalize()		#finalize pending adoption updates on user
 
-	#add commit timestamp to history list, limit to last 10% (once more than 5)
+	#add commit timestamp to history list, limit to last 10% (once more than 5 commits)
 	#remove earliest commit if history list too long before appending new
 	num_commits = len(commit_history)		#number of commits in current history list
 	#if list long enough to remove oldest commit, do that 

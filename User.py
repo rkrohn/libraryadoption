@@ -10,6 +10,7 @@ class User:
 	User Features (specific to a particular package)
 	# packages commited - half-life?			len(quiver)
 	# packages implicitly seen				len(seen_libs)
+	# packages adopted					len(adopted_libs)
 	time since last commit					last_commit
 	time since last adoption				last_adopt
 	intra-commit duration for last 10% of commits		avg_commit_delta
@@ -39,6 +40,10 @@ class User:
 		self.commit_count = 0	#number of total commits made by user (imports and not)
 		self.import_commit_count = 0	#number of commits containing imports made by user
 		self.adopt_commit_count = 0	#number of commits resulting in an adoption (may be smaller than #adoptions)
+
+		#cached/pending updates
+		self.pending_last_adopt = -1
+		self.pending_adopted_libs = {}
 
 		#windowed history stuff starts here
 		self.last_commits = list()	#list of last 10% of commits (time, repo)
@@ -102,16 +107,24 @@ class User:
 		#always append newest commit
 		self.last_commits.append({'time': time, 'repo': repo, 'import': has_lib, 'adopt': adopt, 'implicit': implicit_libs})
 		
-	#log new user adoption
+	#log new user adoption, but do not update the real metadata until finalize() is called to maintain accurate metadata for events
 	def log_adopt(self, lib, time):
-		self.last_adopt = time	#set last adopt time
-		self.adopted_libs[lib] = time	
+		self.pending_last_adopt = time		#set pending last adopt time
+		self.pending_adopted_libs[lib] = time	
 
 	#for a particular repository, get time of user's last interaction (-1 if no interaction to date)
 	def last_interaction(self, repo):
 		if repo not in self.repos:
 			return -1
 		return self.repos[repo]
+
+	#finalize any pending updates (to keep metadata correct, and commit all libraries from the same commit at the same time)
+	def finalize(self):
+		if self.last_adopt != self.pending_last_adopt:
+			self.last_adopt = self.pending_last_adopt
+			for lib in self.pending_adopted_libs:
+				self.adopted_libs[lib] = self.pending_adopted_libs[lib]
+			self.pending_adopted_libs.clear()		
 
 	#return a count of the repos this user has committed to in the last 10% of their commits
 	def last_repos_count(self):
