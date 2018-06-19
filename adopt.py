@@ -68,10 +68,12 @@ def process_commit(c):
 
 		#if an added lib is in updated_lib but not in the user's quiver, then it must be an adoption
 		if lib in updated_libs and lib not in user.quiver:
-			#found an adoption! log it
+			#found an adoption! log it for both user and package
 			user.log_adopt(lib, time)	#log for user
 			package.commit_lib(user, repo, time, adopt=True)
-			adopt = True
+			adopt = True		#set flag for this commit
+
+			#print a few of these adoption events for anybody watching the program
 			if r.random() > .9:
 				print("   ", user.name, 'adopts', lib, 'at:', datetime.fromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S'))
 				print("   ", len(s.search(lib, datetime(1, 1, 1), datetime.fromtimestamp(time))), "stackoverflow posts")
@@ -80,8 +82,7 @@ def process_commit(c):
 
 		#not an adoption, just log the package commit				
 		else:
-			package.commit_lib(user, repo, time, adopt=False)
-		
+			package.commit_lib(user, repo, time, adopt=False)		
 
 	#update user state based on new libraries seen
 	user.implicit_view(updated_libs, repo, time)	
@@ -92,16 +93,15 @@ def process_commit(c):
 	else:
 		user.log_commit(time, repo.name, updated_libs, False, adopt)	#no, commit contains no add imports
 
-	#resolve updates
+	#resolve remaining updates
 	for added_lib in added_libs:
 		user.use_lib(added_lib, time)
 		repo.use_lib(added_lib, time)
 	user.finalize()		#finalize pending adoption updates on user
 
 	#add commit timestamp to history list, limit to last 10% (once more than 5 commits)
-	#remove earliest commit if history list too long before appending new
 	num_commits = len(commit_history)		#number of commits in current history list
-	#if list long enough to remove oldest commit, do that 
+	#remove earliest commit if history list too long before appending new
 	if num_commits > 5 and (num_commits) / float(commit_count) > WINDOW:
 		commit_history.popleft()	#remove oldest commit		
 	#always append newest commit
