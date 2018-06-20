@@ -78,9 +78,11 @@ def process_commit(c):
 	#updated_libs are those libraries that were implicitly viewed by the user via a pull (immediately) before a commit
 	updated_libs = [lib for lib in repo.libs if repo.last_interaction(lib) > user.last_interaction(repo)]
 
-	adopt = False		#reset flag for this commit
+	commit_adopt = False		#reset flag for this commit
 	#loop all libraries added in this commit
 	for lib in added_libs:
+		lib_adopt = False	#reset flat for this library
+
 		#grab/create class object for this package/library
 		if lib not in packages:
 			packages[lib] = Package(lib)
@@ -94,28 +96,21 @@ def process_commit(c):
 		if lib in updated_libs and lib not in user.quiver:
 			#found an adoption! log it for both user and package
 			user.log_adopt(lib, time)	#log for user
-			package.commit_lib(user, repo, time, adopt=True)
-			adopt = True		#set flag for this commit
+			commit_adopt = True		#set flag for this commit
+			lib_adopt = True		#set flag for this library
 
 			#print a few of these adoption events for anybody watching the program
 			if r.random() > .9:
 				print("   ", user.name, 'adopts', lib, 'at:', datetime.fromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S'))
-				print("   ", len(s.search(lib, datetime(1, 1, 1), datetime.fromtimestamp(time))), "stackoverflow posts")
-				print("    package:", package.add_commits, "commits,", len(package.adopt_users), "adoptions,", len(package.repos), "repos;", "adopt delta t:", str(timedelta(seconds=round(package.avg_adopt_delta))) if len(package.adopt_users) > 1 else None, "commit delta t:", str(timedelta(seconds=round(package.avg_commit_delta))) if package.add_commits > 1 else None)
-				print("    deltas in last 10% of all commits:", package.get_deltas(commit_history[0]))
 
-		#not an adoption, just log the package commit				
-		else:
-			package.commit_lib(user, repo, time, adopt=False)	#log package commit	
+		#always log the package commit				
+		package.commit_lib(user, repo, time, lib_adopt)	
 
 	#update user state based on new libraries seen
 	user.implicit_view(updated_libs, repo, time)	
 
 	#log this user commit, import/adoption or not
-	if len(added_libs) != 0:
-		user.log_commit(time, repo.name, updated_libs, True, adopt)	#yes, commit contains add import
-	else:
-		user.log_commit(time, repo.name, updated_libs, False, adopt)	#no, commit contains no add imports
+	user.log_commit(time, repo.name, updated_libs, (len(added_libs) != 0), commit_adopt)	#no added libs, no library import
 
 	#resolve remaining updates
 	for added_lib in added_libs:
