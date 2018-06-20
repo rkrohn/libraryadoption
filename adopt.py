@@ -27,7 +27,19 @@ def get_features(user, package, time):
 
 	vector = user.get_features(package.name, time)		#start with user features
 	vector.extend(package.get_features(time, commit_history[0]))	#add on package features
-	print(vector)
+
+	#add the StackOverflow features
+	#all posts with this package, ever
+	all_posts = s.search(package.name, until_date=datetime.fromtimestamp(time))	
+	vector.append(len(all_posts))			#total number of posts containing this package
+	vector.append(sum(x[2] for x in all_posts))	#total views of all posts
+
+	#posts added in last 30 days (months are too hard)
+	recent_posts = s.search(package.name, from_date=datetime.fromtimestamp(time)-timedelta(days=30), until_date=datetime.fromtimestamp(time))
+	vector.append(len(recent_posts))		#number of recent posts
+	vector.append(sum(x[2] for x in recent_posts))	#total views of recent posts
+
+	return vector
 
 #given a single commit, process and update user/repo library listings and identify any adoption events
 #arguments are commit c and initialized StackOverflow Searcher s
