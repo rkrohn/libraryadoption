@@ -2,6 +2,8 @@ import json
 from datetime import datetime, timedelta
 import random as r
 from collections import deque
+import pickle
+import os.path
 from stackoverflow_searcher import Searcher
 from User import User
 from Repo import Repo
@@ -20,6 +22,12 @@ packages = {}
 
 #global StackOverflow Searcher
 #s = Searcher()
+
+#global array (list of lists) containing user-package instance feature vectors and classifying labels
+data = []
+labels = []
+data_month = -1
+data_year = -1
 
 #given a User user and Package package, generate the complete feature vector for this 
 def get_features(user, package, time):
@@ -40,12 +48,43 @@ def get_features(user, package, time):
 	vector.append(sum(x[2] for x in recent_posts))	#total views of recent posts
 
 	return vector
+#end get_features
+
+#dump all currently cached data (for a single month) to file
+def dump_data():
+	global data, labels	#use global variables
+
+	#no data yet, skip
+	if data_year == -1:
+		return
+
+	#make sure directory for this year exists
+	if os.path.isdir("data_files/event_features/%s" % data_year) == False:
+		os.makedirs("data_files/event_features/%s" % data_year)
+
+	#save data array to file
+	pik = ("data_files/event_features/%s/%s_events.pkl" % (data_year, data_month))
+	with open(pik, "wb") as f:
+		pickle.dump(data, f)
+
+	#save labels to corresponding file
+	pik = ("data_files/event_features/%s/%s_labels.pkl" % (data_year, data_month))
+	with open(pik, "wb") as f:
+		pickle.dump(labels, f)	
+
+	#clear data and labels
+	data = []
+	labels = []
+
+	print ("saved events for %s-%s" % (data_month, data_year))
+#end dump_data
 
 #given a single commit, process and update user/repo library listings and identify any adoption events
 #arguments are commit c and initialized StackOverflow Searcher s
 def process_commit(c):
 	global commit_count, commit_history	#use the global variables
 	global s
+	global data, labels, data_month, data_year
 
 	#grab commit fields: user, repo, time, added_libs, and deleted_libs
 	repo = c['repo']
@@ -78,6 +117,13 @@ def process_commit(c):
 	#updated_libs are those libraries that were implicitly viewed by the user via a pull (immediately) before a commit
 	updated_libs = [lib for lib in repo.libs if repo.last_interaction(lib) > user.last_interaction(repo)]
 
+	#is this new commit from a different month than the current feature data? if so, dump existing to file
+	date = datetime.fromtimestamp(time)
+	if date.month != data_month or date.year != data_year:
+		dump_data()
+		data_month = date.month
+		data_year = date.year
+
 	commit_adopt = False		#reset flag for this commit
 	#loop all libraries added in this commit
 	for lib in added_libs:
@@ -104,7 +150,11 @@ def process_commit(c):
 				print("   ", user.name, 'adopts', lib, 'at:', datetime.fromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S'))
 
 		#always log the package commit				
-		package.commit_lib(user, repo, time, lib_adopt)	
+		package.commit_lib(user, repo, time, lib_adopt)			
+
+		#add new instance of feature vector and classication label to overall data
+		data.append(feature_vector)
+		labels.append(1 if lib_adopt else 0)		#labels: 1 = adoption, 0 = no adoption
 
 	#update user state based on new libraries seen
 	user.implicit_view(updated_libs, repo, time)	
@@ -163,18 +213,15 @@ if __name__ == "__main__":
 	commit_history = deque()
 
 	#stream data from sorted json file
-	f = open('data_files/all_commits_by_year/2011_commits_SUB_sorted.json')
+	f = open('data_files/all_commits_by_year/1990_commits_SUB_sorted.json')
 	commits = stream(f)
 
 	#declare/initialize a Stackoverflow Searcher
 	s = Searcher()
-	#some example queries
-	'''
-	posts = s.search('numpy', datetime(2000, 1, 1), datetime(2009, 1, 1))
-	print(len(posts), "posts,", sum(x[2] for x in posts), "total views")
-	posts = s.search('numpy', datetime(2014, 1, 1), datetime(2017, 1, 1))
-	print(len(posts), "posts,", sum(x[2] for x in posts), "total views")
-	'''	
+
+	#create directory for output files if it doesn't exist
+	if os.path.isdir("data_files/event_features") == False:
+		os.makedirs("data_files/event_features")
 
 	#process all commits in date order
 	for x in commits:
@@ -182,19 +229,4 @@ if __name__ == "__main__":
 		if commit_count % 1000 == 0:
 			print("finished", commit_count, "commits,", len(commit_history), "commits in history")
 	f.close()
-
-	#print some user results (checking the code)
-	for user_id, user in users.items():
-		if len(user.adopted_libs) > 0:
-			print("user", user.name, "adopted", len(user.adopted_libs), "libraries in", user.commit_count, "commits ("+str(user.adopt_commit_count), "adop,", user.import_commit_count, "import)") 
-			print("    last 10%:", (str(timedelta(seconds=round(user.avg_commit_delta))) if len(user.last_commits)>1 else None), "intra-commit delta,", user.last_repos_count(), "repos")
-			print("             ", len(user.last_commits), "commits (" + str(user.last_adopt_commit_count), "adopt,", user.last_import_commit_count, "import)")
-
-	#testing the implicit package view query (specific to both a package and a user)
-	lib_freq, all_freq = users[1506].lib_view_freq("urlparse")
-	print("viewed urlparse", lib_freq, "times, all libraries", all_freq, "times in", len(users[1506].last_commits), "commits")
-
-	lib_freq, all_freq = users[31175].lib_view_freq("curses")
-	print("viewed curses", lib_freq, "times, all libraries", all_freq, "times in", len(users[31175].last_commits), "commits")
-
 
