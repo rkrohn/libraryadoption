@@ -15,7 +15,7 @@ Jaccard - {u committed packages} ^ {U committed packages}
 time since last adoption				current time - last_adoption
 time since last commit					current time - last_commit
 time between adoptions within last 10% of adoptions of this package	avg_adopt_delta
-time between adoptions within last 10% of commits			second return of get_deltas
+time between adoptions within last 10% of all commits			second return of get_deltas
 time between commits within last 10% of commits of this package		avg_commit_delta
 time between commits within last 10% of all commits			first return of get_deltas
 current rank
@@ -44,6 +44,28 @@ class Package:
 		self.avg_commit_delta = None	#average time between commits, taken over last 10% of package commits
 		self.last_adopts = list()	#list of last 10% of package's adoption commits
 		self.avg_adopt_delta = None	#average time between package adoptions, taken over last 10% of adoption commits
+
+	#for this particular package, grab all features and return as vector (list)
+	def get_features(self, time, last_commits_start_time):
+		vector = []		#build feature vector as list
+		
+		vector.append(self.add_commits)		#number of commits adding this library
+		vector.append(len(self.commit_users))	#number of users who have committed this library
+		vector.append(len(self.adopt_users))	#number of users who have adopted = number of adoptions
+		vector.append(len(self.repos))		#number of repos containing this library
+		vector.append(len(self.adopt_repos))	#number of repos this library was adopted in
+		vector.append(time - self.last_adoption if self.last_adoption is not None else None)	#time since last adoption (in seconds)
+		vector.append(time - self.last_commit if self.last_commit is not None else None)	#time since last commit (in seconds)
+		vector.append(self.avg_adopt_delta)		#avg time between adoptions in last 10% of adoptions
+		vector.append(self.avg_commit_delta)		#avg time between commits within last 10% of commits of this package
+
+
+		commit_delta, adopt_commit_delta = self.get_deltas(last_commits_start_time)	
+		vector.append(commit_delta)		#time between commits of this package within last 10% of ALL commits
+		vector.append(adopt_commit_delta)	#time between adoptions of this package within last 10% of ALL commits
+
+		return vector
+	#end get_features
 
 	#given an addition commit by user to repo, log the commit
 	def commit_lib(self, user, repo, time, adopt = False):

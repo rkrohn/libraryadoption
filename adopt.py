@@ -23,10 +23,11 @@ packages = {}
 
 #given a User user and Package package, generate the complete feature vector for this 
 def get_features(user, package, time):
-	vector = user.get_features(package.name, time)	#start with user features
-	print(vector)
+	global commit_history
 
-	#vector.append(package.get_features()
+	vector = user.get_features(package.name, time)		#start with user features
+	vector.extend(package.get_features(time, commit_history[0]))	#add on package features
+	print(vector)
 
 #given a single commit, process and update user/repo library listings and identify any adoption events
 #arguments are commit c and initialized StackOverflow Searcher s
