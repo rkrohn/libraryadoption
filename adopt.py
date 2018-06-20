@@ -21,6 +21,13 @@ packages = {}
 #global StackOverflow Searcher
 #s = Searcher()
 
+#given a User user and Package package, generate the complete feature vector for this 
+def get_features(user, package, time):
+	vector = user.get_features(package.name, time)	#start with user features
+	print(vector)
+
+	#vector.append(package.get_features()
+
 #given a single commit, process and update user/repo library listings and identify any adoption events
 #arguments are commit c and initialized StackOverflow Searcher s
 def process_commit(c):
@@ -66,6 +73,10 @@ def process_commit(c):
 			packages[lib] = Package(lib)
 		package = packages[lib]
 
+		#before updating any package or user metadata, create the event instance for this user-package pair 
+		#(same features for adoptions and not, classification label comes later)
+		feature_vector = get_features(user, package, time)
+
 		#if an added lib is in updated_lib but not in the user's quiver, then it must be an adoption
 		if lib in updated_libs and lib not in user.quiver:
 			#found an adoption! log it for both user and package
@@ -82,7 +93,7 @@ def process_commit(c):
 
 		#not an adoption, just log the package commit				
 		else:
-			package.commit_lib(user, repo, time, adopt=False)		
+			package.commit_lib(user, repo, time, adopt=False)	#log package commit	
 
 	#update user state based on new libraries seen
 	user.implicit_view(updated_libs, repo, time)	

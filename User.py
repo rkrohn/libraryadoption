@@ -15,6 +15,7 @@ class User:
 	time since last adoption				last_adopt
 	intra-commit duration for last 10% of commits		avg_commit_delta
 	already adopted library?				check against adopted_libs
+	already used library?					check against quiver
 	# repositories commited to				len(repos)
 	# repositories commited to in last 10% of commits	last_repos_count()
 	% commits with adoptions				adopt_commit_count/commit_count
@@ -35,8 +36,8 @@ class User:
 		self.adopted_libs = {}	#dictionary of adopted lib->time of adoption
 		self.quiver = {}	#dictionary of used libraries->last time user "used" it
 		self.repos = {}		#dictionary of repo name->time of user's last interaction with repo
-		self.last_commit = -1	#time of user's last commit
-		self.last_adopt = -1	#time of user's last adoption
+		self.last_commit = None	#time of user's last commit
+		self.last_adopt = None	#time of user's last adoption
 		self.commit_count = 0	#number of total commits made by user (imports and not)
 		self.import_commit_count = 0	#number of commits containing imports made by user
 		self.adopt_commit_count = 0	#number of commits resulting in an adoption (may be smaller than #adoptions)
@@ -50,7 +51,52 @@ class User:
 		self.avg_commit_delta = None	#average time between last 10% of user's commits
 		self.last_import_commit_count = 0	#number of commits containing import in last 10% of user's commits
 		self.last_adopt_commit_count = 0	#number of commits producing adoption in last 10% of user's commits
+	
+	#return a vector of user features
+	def get_features(self, lib, time):
+		vector = []	#build feature vector as list
+
+		#user-only features first
+		vector.append(len(self.quiver))			#number of packages committed
+		vector.append(len(self.seen_libs))		#number of packages implicitly seen
+		vector.append(len(self.adopted_libs))		#number of packages adopted
+
+		if self.last_commit != None:
+			vector.append(time - self.last_commit)		#time since last commit
+		else:
+			vector.append(None)
+
+		if self.last_adopt != None:
+			vector.append(time - self.last_adopt)		#time since last adoption (in seconds)
+		else:
+			vector.append(None)
+
+		vector.append(self.avg_commit_delta)		#intra-commit duration for last 10% of commits
+		vector.append(len(self.repos))			#number of repos commited to
+		vector.append(self.last_repos_count())		#number of repos commited to in last 10% of commits
+
+		if self.commit_count != 0:
+			vector.append(float(self.adopt_commit_count)/self.commit_count)		#percentage of commits with adoptions
+			vector.append(float(self.import_commit_count)/self.commit_count)	#percentage of commits with library imports
+			vector.append(float(self.last_adopt_commit_count)/len(self.last_commits))	#percentage of adoption commits in last 10%
+			vector.append(float(self.last_import_commit_count)/len(self.last_commits))	#percentage of lib import commits in last 10%
+		else:
+			vector.extend([None, None, None, None])
+
+		#package-specific user features
+		vector.append(1 if lib in self.adopted_libs else 0)	#1 if adopted this library, 0 if not
+		vector.append(1 if lib in self.quiver else 0)		#1 if used this library, 0 if not
+		vector.append(self.seen_libs_freq[lib] if lib in self.seen_libs_freq else 0)		#number of times implicitly seen lib
+		spec_lib, total_lib = self.lib_view_freq(lib)
+		vector.append(spec_lib)					#number of time implicitly seen lib within last 10% of commits
+		if lib in self.seen_libs_freq:
+			vector.append(float(self.seen_libs_freq[lib])/sum(self.seen_libs_freq.values()))	#times seen lib / total time seen all packages
+		else:
+			vector.append(0)
+		vector.append(float(spec_lib)/total_lib if total_lib != 0 else None)		#times seen lib in last 10% / total time seen all packages in last 10%
 		
+		return vector		
+	#end get_features	
 
 	#given a list of repository updated repos, and the repo name, update user state
 	def implicit_view(self, repo_libs, repo, time):	
