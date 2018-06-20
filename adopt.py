@@ -212,10 +212,6 @@ if __name__ == "__main__":
 	commit_count = 0
 	commit_history = deque()
 
-	#stream data from sorted json file
-	f = open('data_files/all_commits_by_year/1990_commits_SUB_sorted.json')
-	commits = stream(f)
-
 	#declare/initialize a Stackoverflow Searcher
 	s = Searcher()
 
@@ -223,10 +219,18 @@ if __name__ == "__main__":
 	if os.path.isdir("data_files/event_features") == False:
 		os.makedirs("data_files/event_features")
 
-	#process all commits in date order
-	for x in commits:
-		process_commit(x)		#commit_count incremented here
-		if commit_count % 1000 == 0:
-			print("finished", commit_count, "commits,", len(commit_history), "commits in history")
-	f.close()
+	#stream data from sorted json files
+	for year in range(1990, 2019):		#read and process 1990 through 2018
+		print("PROCESSING", year)
+
+		#stream from current year's output file
+		f = open('data_files/all_commits_by_year/%s_commits_SUB_sorted.json' % year)
+		commits = stream(f)
+
+		#process all commits in date order
+		for x in commits:
+			process_commit(x)		#commit_count incremented here
+			if commit_count % 1000 == 0:
+				print("finished", commit_count, "commits,", len(commit_history), "commits in history")
+		f.close()
 
