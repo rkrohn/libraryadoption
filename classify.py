@@ -42,8 +42,8 @@ def replace_nan(data, value = -1):
 
 #set training and testing years here
 training_start = 1993
-training_end = 1993		#this year will be included in training
-testing_year = 1994		#single year for testing
+training_end = 2000		#this year will be included in training
+testing_year = 2001		#single year for testing
 
 #load all training data
 training_events_raw, training_labels_raw = load_year_range(training_start, training_end)
@@ -69,7 +69,7 @@ testing_events_raw, testing_labels_raw = load_year_range(testing_year)
 #convert testing data to np array
 testing_events = np.asarray(testing_events_raw, dtype=np.float32)
 testing_labels = np.asarray(testing_labels_raw, dtype=np.float32)
-print("read", testing_events.shape[0], "testing events with", testing_events.shape[1], "features")
+print("read", testing_events.shape[0], "testing events with", testing_events.shape[1], "features\n")
 
 #replace any nan values with -1
 replace_nan(testing_events)
@@ -78,8 +78,39 @@ replace_nan(testing_events)
 predicted_labels = clf.predict(testing_events)
 
 #for now, just print predicted vs actual for the first 25 events
+'''
 print("\nactual\tpredicted")
 for i in range(0, 25):
 	print(testing_labels[0], "\t", predicted_labels[0])
+print("\n")
+'''
+
+#well, that didn't show much - let's look for adoptions, correctly predicted or not
+
+#how many adoptions in real labels vs predicted?
+print(int(sum(testing_labels)), "adoption events in", len(testing_labels), "import events")
+print("predicted", int(sum(predicted_labels)), "adoptions")
+
+#of the predicted adoptions, how many were correct vs false positives?
+true_neg = 0
+true_pos = 0
+false_neg = 0
+false_pos = 0
+for i in range(0, len(predicted_labels)):
+	if testing_labels[i] == 0 and predicted_labels[i] == 0:
+		true_neg += 1
+	elif testing_labels[i] == 0 and predicted_labels[i] == 1:
+		false_pos += 1
+	elif testing_labels[i] == 1 and predicted_labels[i] == 0:
+		false_neg += 1
+	else:
+		true_pos += 1
+print("\ntrue pos:", true_pos)
+print("true neg:", true_neg)
+print("false pos:", false_pos)
+print("false neg:", false_neg)
+
+
+
 
 
