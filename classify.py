@@ -42,8 +42,8 @@ def replace_nan(data, value = -1):
 
 #set training and testing years here
 training_start = 1993
-training_end = 2000		#this year will be included in training
-testing_year = 2001		#single year for testing
+training_end = 2012		#this year will be included in training
+testing_year = 2013		#single year for testing
 
 #load all training data
 training_events_raw, training_labels_raw = load_year_range(training_start, training_end)
@@ -51,17 +51,21 @@ training_events_raw, training_labels_raw = load_year_range(training_start, train
 #convert training data to np arrays
 training_events = np.asarray(training_events_raw, dtype=np.float32)
 training_labels = np.asarray(training_labels_raw, dtype=np.float32)
-print("read", training_events.shape[0], "training events with", training_events.shape[1], "features\n")
+print("read", training_events.shape[0], "import training events with", training_events.shape[1], "features")
+print("   ", int(sum(training_labels)), "events are adoptions\n")
 
 #replace any nan values with -1
 replace_nan(training_events)
 
 #train the classifier
 clf = linear_model.SGDClassifier(shuffle=True)
-print(clf.fit(training_events, training_labels))
+#print(clf.fit(training_events, training_labels))
+clf.fit(training_events, training_labels)
 
+'''
 print("\ncoefficients:", clf.coef_)
 print("intercept:", clf.intercept_, "\n")
+'''
 
 #read testing data
 testing_events_raw, testing_labels_raw = load_year_range(testing_year)
@@ -77,15 +81,7 @@ replace_nan(testing_events)
 #predict on the testing events
 predicted_labels = clf.predict(testing_events)
 
-#for now, just print predicted vs actual for the first 25 events
-'''
-print("\nactual\tpredicted")
-for i in range(0, 25):
-	print(testing_labels[0], "\t", predicted_labels[0])
-print("\n")
-'''
-
-#well, that didn't show much - let's look for adoptions, correctly predicted or not
+#look for adoptions, correctly predicted or not
 
 #how many adoptions in real labels vs predicted?
 print(int(sum(testing_labels)), "adoption events in", len(testing_labels), "import events")
@@ -108,8 +104,7 @@ for i in range(0, len(predicted_labels)):
 print("\ntrue pos:", true_pos)
 print("true neg:", true_neg)
 print("false pos:", false_pos)
-print("false neg:", false_neg)
-
+print("false neg:", false_neg, "\n")
 
 
 
