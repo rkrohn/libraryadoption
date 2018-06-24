@@ -34,7 +34,7 @@ def load_year_range(start, end=-1):
 #end load_year_range
 
 #given an np array, replace any nan values with value
-def replace_nan(data, value = -1):
+def replace_nan(data, value = 0):
 	data[np.isnan(data)] = value
 #end replace_nan
 
@@ -58,9 +58,9 @@ print("   ", int(sum(training_labels)), "events are adoptions\n")
 replace_nan(training_events)
 
 #train the classifier
-clf = linear_model.SGDClassifier(shuffle=True)
-#print(clf.fit(training_events, training_labels))
-clf.fit(training_events, training_labels)
+clf = linear_model.SGDClassifier(shuffle=True, loss='log', n_iter=1000)
+print(clf.fit(training_events, training_labels), "\n")
+#clf.fit(training_events, training_labels)
 
 '''
 print("\ncoefficients:", clf.coef_)
@@ -101,11 +101,18 @@ for i in range(0, len(predicted_labels)):
 		false_neg += 1
 	else:
 		true_pos += 1
+
+recall = float(true_pos) / (true_pos + false_neg)
+precision = float(true_pos) / (true_pos + false_pos)
+f_score = 2.0 * (precision * recall) / (precision + recall)
+
 print("\ntrue pos:", true_pos)
 print("true neg:", true_neg)
 print("false pos:", false_pos)
 print("false neg:", false_neg, "\n")
-
+print("recall:", recall)
+print("precision:", precision)
+print("F-score:", f_score)
 
 
 
