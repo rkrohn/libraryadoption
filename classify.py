@@ -11,7 +11,7 @@ def load_pickle(filename):
 #end load_pickle
 
 #load all data for specified year range (inclusive) and return as a single events list and separate labels list
-def load_year_range(start, end=-1):
+def load_year_range(start, end=-1, months=12):
 	all_events = []
 	all_labels = []
 
@@ -21,16 +21,17 @@ def load_year_range(start, end=-1):
 	for year in range(start, end+1):
 		print("Loading events for", year)
 
-		#load all months of data
-		for month in range(1, 13):
+		#load all requested months of data
+		for month in range(1, 1+months):
 			#read raw (list-format) data for this month
 			events = load_pickle("data_files/event_features/%s/%s_events.pkl" % (year, month))
-			labels = load_pickle("data_files/event_features/%s/%s_labels.pkl" % (year, month))	
+			labels = load_pickle("data_files/event_features/%s/%s_labels.pkl" % (year, month))
+			print(month)
 
 			#append to all data
 			all_events.extend(events)
 			all_labels.extend(labels)
-	
+
 	return all_events, all_labels
 #end load_year_range
 
@@ -43,8 +44,8 @@ def replace_nan(data, value = 0):
 
 #set training and testing years here
 training_start = 1993
-training_end = 2012		#this year will be included in training
-testing_year = 2013		#single year for testing
+training_end = 2014		#this year will be included in training
+testing_year = 2015		#single year for testing, and for now only the first month
 
 #load all training data
 training_events_raw, training_labels_raw = load_year_range(training_start, training_end)
@@ -64,7 +65,7 @@ training_events = scaler.fit_transform(training_events)
 
 #train the classifier
 print("Training classifier...")
-clf = linear_model.SGDClassifier(shuffle=True, loss='log', n_iter=1000)
+clf = linear_model.SGDClassifier(shuffle=True, n_iter=50)
 print(clf.fit(training_events, training_labels), "\n")
 #clf.fit(training_events, training_labels)
 
@@ -74,7 +75,7 @@ print("intercept:", clf.intercept_, "\n")
 '''
 
 #read testing data
-testing_events_raw, testing_labels_raw = load_year_range(testing_year)
+testing_events_raw, testing_labels_raw = load_year_range(testing_year, months=1)
 
 #convert testing data to np array
 testing_events = np.asarray(testing_events_raw, dtype=np.float32)
