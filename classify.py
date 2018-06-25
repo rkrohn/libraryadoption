@@ -26,7 +26,6 @@ def load_year_range(start, end=-1, months=12):
 			#read raw (list-format) data for this month
 			events = load_pickle("data_files/event_features/%s/%s_events.pkl" % (year, month))
 			labels = load_pickle("data_files/event_features/%s/%s_labels.pkl" % (year, month))
-			print(month)
 
 			#append to all data
 			all_events.extend(events)
@@ -37,6 +36,7 @@ def load_year_range(start, end=-1, months=12):
 
 #given an np array, replace any nan values with value
 def replace_nan(data, value = 0):
+	print("Replacing nan with", value)
 	data[np.isnan(data)] = value
 #end replace_nan
 
@@ -65,14 +65,12 @@ training_events = scaler.fit_transform(training_events)
 
 #train the classifier
 print("Training classifier...")
-clf = linear_model.SGDClassifier(shuffle=True, n_iter=50)
+clf = linear_model.SGDClassifier(shuffle=True, n_iter=50, loss='squared_hinge')
 print(clf.fit(training_events, training_labels), "\n")
 #clf.fit(training_events, training_labels)
 
-'''
 print("\ncoefficients:", clf.coef_)
 print("intercept:", clf.intercept_, "\n")
-'''
 
 #read testing data
 testing_events_raw, testing_labels_raw = load_year_range(testing_year, months=1)
@@ -112,9 +110,18 @@ for i in range(0, len(predicted_labels)):
 	else:
 		true_pos += 1
 
-recall = float(true_pos) / (true_pos + false_neg)
-precision = float(true_pos) / (true_pos + false_pos)
-f_score = 2.0 * (precision * recall) / (precision + recall)
+if true_pos + false_neg != 0:
+	recall = float(true_pos) / (true_pos + false_neg)
+else:
+	recall = 0
+if true_pos + false_pos != 0:
+	precision = float(true_pos) / (true_pos + false_pos)
+else:
+	precision = 0
+if precision + recall != 0:
+	f_score = 2.0 * (precision * recall) / (precision + recall)
+else:
+	f_score = 0
 
 print("\ntrue pos:", true_pos)
 print("true neg:", true_neg)
