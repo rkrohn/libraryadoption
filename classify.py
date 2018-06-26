@@ -96,8 +96,6 @@ for c in range(len(combos)):
 		kw[config_keys[i]] = combo[i]
 		
 	print("\nTest", c, kw)
-	if c == 1:
-		exit(0)
 
 	#train the classifier
 	print("Training classifier...")
