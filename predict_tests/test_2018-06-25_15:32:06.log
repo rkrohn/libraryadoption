@@ -1,0 +1,60 @@
+Loading events for 1993
+Loading events for 1994
+Loading events for 1995
+Loading events for 1996
+Loading events for 1997
+Loading events for 1998
+Loading events for 1999
+Loading events for 2000
+Loading events for 2001
+Loading events for 2002
+Loading events for 2003
+Loading events for 2004
+Loading events for 2005
+Loading events for 2006
+Loading events for 2007
+Loading events for 2008
+Loading events for 2009
+Loading events for 2010
+Loading events for 2011
+Loading events for 2012
+Loading events for 2013
+Loading events for 2014
+read 18981235 import training events with 33 features
+    421299 events are adoptions
+
+Replacing nan with 0
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='elasticnet', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-1.51011222e+07  1.41541560e+06  9.80346231e+06  9.69225691e+05
+  -7.61254468e+04 -1.11471966e+05  3.33437191e+06  3.58186886e+06
+   1.54966756e+06 -3.10207155e+05 -1.01343176e+06 -6.56592311e+04
+  -5.48700629e+03 -1.72907440e+08  7.37449182e+05  4.48074608e+06
+   5.04218987e+05  1.41373321e+05 -1.51349849e+07 -1.47435263e+07
+   3.02509548e+07  3.24308689e+06 -4.61502805e+06  7.65914979e+05
+  -1.38410679e+07 -2.84313897e+05  1.20088956e+06  3.90758880e+05
+   3.86698887e+05 -1.74990533e+06 -3.59118845e+06 -5.82983622e+05
+   4.18167668e+06]]
+intercept: [-216125.47071717] 
+
+Loading events for 2015
+read 313402 testing events with 33 features
+
+Replacing nan with 0
+7626 adoption events in 313402 import events
+predicted 12428 adoptions
+
+true pos: 1763
+true neg: 295111
+false pos: 10665
+false neg: 5863 
+
+recall: 0.23118279569892472
+precision: 0.14185709687801737
+F-score: 0.17582527176623114
