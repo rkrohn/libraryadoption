@@ -101,7 +101,7 @@ for c in range(len(combos)):
 
 	#train the classifier
 	print("Training classifier...")
-	clf = linear_model.SGDClassifier(shuffle=True, n_iter=40, **kw)
+	clf = linear_model.SGDClassifier(n_iter=40, **kw)
 	print(clf.fit(training_events, training_labels), "\n")
 	#clf.fit(training_events, training_labels)
 
