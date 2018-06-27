@@ -48,6 +48,15 @@ training_start = 1993
 training_end = 2014		#this year will be included in training
 testing_year = 2015		#single year for testing, and for now only the first month
 
+#set your configuration choices here - dictionary with list as value
+#loops will test all combinations of these arguments
+config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True, False], 'fit_intercept': [True, False], 'learning_rate': ['constant', 'optimal', 'invscaling']}
+
+#build list of combinations to pass as arguments to classifier configuration
+config_keys = sorted(config_choices)
+combos = list(it.product(*(config_choices[key] for key in config_keys)))
+print("Testing", len(combos), "classifier configurations\n")
+
 #load all training data
 training_events_raw, training_labels_raw = load_year_range(training_start, training_end)
 
@@ -79,14 +88,7 @@ replace_nan(testing_events)
 testing_events = scaler.transform(testing_events)
 
 #run multiple classifier tests one after the other - both repeated runs and different configurations
-
-#set your configuration choices here - dictionary with list as value
-#loops will test all combinations of these arguments
-config_choices = {'loss': ['hinge', 'log', 'modified_huber', 'squared_hinge', 'perceptron', 'squared_loss', 'huber', 'epsilon_insensitive', 'squared_epsilon_insensitive'], 'penalty': ['none', 'l2', 'l1', 'elasticnet']}
-
-#build list of combinations to pass as arguments to classifier configuration
-config_keys = sorted(config_choices)
-combos = list(it.product(*(config_choices[key] for key in config_keys)))
+#configuration combos generated above
 
 #for each configuration combo, run the classifier!
 for c in range(len(combos)):
@@ -99,7 +101,7 @@ for c in range(len(combos)):
 
 	#train the classifier
 	print("Training classifier...")
-	clf = linear_model.SGDClassifier(shuffle=True, n_iter=50, **kw)
+	clf = linear_model.SGDClassifier(shuffle=True, n_iter=40, **kw)
 	print(clf.fit(training_events, training_labels), "\n")
 	#clf.fit(training_events, training_labels)
 
