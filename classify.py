@@ -2,6 +2,7 @@ import pickle
 import numpy as np
 from sklearn import linear_model
 from sklearn import preprocessing as pp
+from sklearn import metrics
 import itertools as it
 
 #given a filepath, load pickled data
@@ -50,7 +51,7 @@ testing_year = 2015		#single year for testing, and for now only the first month
 
 #set your configuration choices here - dictionary with list as value
 #loops will test all combinations of these arguments
-config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True, False], 'fit_intercept': [True, False], 'learning_rate': ['constant', 'optimal', 'invscaling']}
+config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True, False], 'fit_intercept': [True, False]}
 
 #build list of combinations to pass as arguments to classifier configuration
 config_keys = sorted(config_choices)
@@ -101,7 +102,7 @@ for c in range(len(combos)):
 
 	#train the classifier
 	print("Training classifier...")
-	clf = linear_model.SGDClassifier(n_iter=40, **kw)
+	clf = linear_model.SGDClassifier(n_iter=50, **kw)
 	print(clf.fit(training_events, training_labels), "\n")
 	#clf.fit(training_events, training_labels)
 
@@ -116,6 +117,13 @@ for c in range(len(combos)):
 	#how many adoptions in real labels vs predicted?
 	print(int(sum(testing_labels)), "adoption events in", len(testing_labels), "import events")
 	print("predicted", int(sum(predicted_labels)), "adoptions")
+
+	#F1-score
+	f_score = metrics.f1_score(testing_labels, predicted_labels)	
+
+	#AUROC measure
+	auroc = metrics.roc_auc_score(testing_labels, predicted_labels)
+	print("AUROC score:", auroc)
 
 	#of the predicted adoptions, how many were correct vs false positives?
 	true_neg = 0
@@ -132,26 +140,11 @@ for c in range(len(combos)):
 		else:
 			true_pos += 1
 
-	if true_pos + false_neg != 0:
-		recall = float(true_pos) / (true_pos + false_neg)
-	else:
-		recall = 0
-	if true_pos + false_pos != 0:
-		precision = float(true_pos) / (true_pos + false_pos)
-	else:
-		precision = 0
-	if precision + recall != 0:
-		f_score = 2.0 * (precision * recall) / (precision + recall)
-	else:
-		f_score = 0
-
+	#print all metrics
 	print("\ntrue pos:", true_pos)
 	print("true neg:", true_neg)
 	print("false pos:", false_pos)
 	print("false neg:", false_neg, "\n")
-	print("recall:", recall)
-	print("precision:", precision)
-	print("F-score:", f_score)
-
-
+	print("F-1 score:", f_score)
+	print("AUROC score:", auroc)
 
