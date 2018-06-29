@@ -123,7 +123,6 @@ for c in range(len(combos)):
 
 	#AUROC measure
 	auroc = metrics.roc_auc_score(testing_labels, predicted_labels)
-	print("AUROC score:", auroc)
 
 	#of the predicted adoptions, how many were correct vs false positives?
 	true_neg = 0
