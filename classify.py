@@ -38,7 +38,7 @@ def load_year_range(start, end=-1, months=12):
 
 #given an np array, replace any nan values with value
 def replace_nan(data, value = 0):
-	print("Replacing nan with", value)
+	print("Replacing nan with", value, "\n")
 	data[np.isnan(data)] = value
 #end replace_nan
 
@@ -51,7 +51,7 @@ testing_year = 2015		#single year for testing, and for now only the first month
 
 #set your configuration choices here - dictionary with list as value
 #loops will test all combinations of these arguments
-config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True, False], 'fit_intercept': [True, False]}
+config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [True, False]}
 
 #build list of combinations to pass as arguments to classifier configuration
 config_keys = sorted(config_choices)
@@ -71,6 +71,7 @@ print("   ", int(sum(training_labels)), "events are adoptions\n")
 replace_nan(training_events)
 
 #normalize all training data (including training normalizer)
+print("Using MinMaxScaler for normalization\n")
 scaler = pp.MinMaxScaler()
 training_events = scaler.fit_transform(training_events)
 
@@ -147,3 +148,22 @@ for c in range(len(combos)):
 	print("F-1 score:", f_score)
 	print("AUROC score:", auroc)
 
+	#what if we force some labels for particular features:
+	#index 12 = user adopted package? (binary)
+	#index 13 = user already used this package? (binary)
+	#if either of these are 1 (true), cannot be an adoption event
+	
+	#loop all testing instances, update mis-predicted labels based on these features
+	count = 0
+	for i in range(0, len(testing_events)):
+		if predicted_labels[i] == 1 and (testing_events[i][12] == 1 or testing_events[i][13] == 1):
+			count += 1
+			predicted_labels[i] = 0		#update prediction, can't be an adoption
+	print("\nUpdated predicted label for", count, "events\n")
+
+	#F1-score - updated
+	f_score = metrics.f1_score(testing_labels, predicted_labels)	
+	#AUROC measure - updated
+	auroc = metrics.roc_auc_score(testing_labels, predicted_labels)
+	print("Updated F-1 score:", f_score)
+	print("Updated AUROC score:", auroc)
