@@ -147,23 +147,3 @@ for c in range(len(combos)):
 	print("false neg:", false_neg, "\n")
 	print("F-1 score:", f_score)
 	print("AUROC score:", auroc)
-
-	#what if we force some labels for particular features:
-	#index 12 = user adopted package? (binary)
-	#index 13 = user already used this package? (binary)
-	#if either of these are 1 (true), cannot be an adoption event
-	
-	#loop all testing instances, update mis-predicted labels based on these features
-	count = 0
-	for i in range(0, len(testing_events)):
-		if predicted_labels[i] == 1 and (testing_events[i][12] == 1 or testing_events[i][13] == 1):
-			count += 1
-			predicted_labels[i] = 0		#update prediction, can't be an adoption
-	print("\nUpdated predicted label for", count, "events\n")
-
-	#F1-score - updated
-	f_score = metrics.f1_score(testing_labels, predicted_labels)	
-	#AUROC measure - updated
-	auroc = metrics.roc_auc_score(testing_labels, predicted_labels)
-	print("Updated F-1 score:", f_score)
-	print("Updated AUROC score:", auroc)
