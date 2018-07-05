@@ -13,7 +13,7 @@ def load_pickle(filename):
 #end load_pickle
 
 #load all data for specified year range (inclusive) and return as a single events list and separate labels list
-def load_year_range(start, end=-1, months=12):
+def load_year_range(start, end=-1, month_start=1, month_end=12):
 	all_events = []
 	all_labels = []
 
@@ -24,7 +24,7 @@ def load_year_range(start, end=-1, months=12):
 		print("Loading events for", year)
 
 		#load all requested months of data
-		for month in range(1, 1+months):
+		for month in range(month_start, month_end+1):
 			#read raw (list-format) data for this month
 			events = load_pickle("data_files/complete_event_features/%s/%s_events.pkl" % (year, month))
 			labels = load_pickle("data_files/event_features/%s/%s_labels.pkl" % (year, month))
@@ -45,7 +45,7 @@ def replace_nan(data, value = 0):
 #--- MAIN EXECUTION BEGINS HERE---#
 
 #set training and testing years here
-training_start = 1993
+training_start = 2014
 training_end = 2014		#this year will be included in training
 testing_year = 2015		#single year for testing, and for now only the first month
 
@@ -76,7 +76,7 @@ scaler = pp.MinMaxScaler()
 training_events = scaler.fit_transform(training_events)
 
 #read testing data
-testing_events_raw, testing_labels_raw = load_year_range(testing_year, months=1)
+testing_events_raw, testing_labels_raw = load_year_range(testing_year, month_start=1, month_end=1)
 
 #convert testing data to np array
 testing_events = np.asarray([sublist[4:] for sublist in testing_events_raw], dtype=np.float32)		#leave out first 4 columns
