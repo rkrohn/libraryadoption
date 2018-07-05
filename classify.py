@@ -26,7 +26,7 @@ def load_year_range(start, end=-1, months=12):
 		#load all requested months of data
 		for month in range(1, 1+months):
 			#read raw (list-format) data for this month
-			events = load_pickle("data_files/event_features/%s/%s_events.pkl" % (year, month))
+			events = load_pickle("data_files/complete_event_features/%s/%s_events.pkl" % (year, month))
 			labels = load_pickle("data_files/event_features/%s/%s_labels.pkl" % (year, month))
 
 			#append to all data
@@ -62,7 +62,7 @@ print("Testing", len(combos), "classifier configurations\n")
 training_events_raw, training_labels_raw = load_year_range(training_start, training_end)
 
 #convert training data to np arrays
-training_events = np.asarray(training_events_raw, dtype=np.float32)
+training_events = np.asarray([sublist[4:] for sublist in training_events_raw], dtype=np.float32)	#leave out first 4 columns
 training_labels = np.asarray(training_labels_raw, dtype=np.float32)
 print("read", training_events.shape[0], "import training events with", training_events.shape[1], "features")
 print("   ", int(sum(training_labels)), "events are adoptions\n")
@@ -79,7 +79,7 @@ training_events = scaler.fit_transform(training_events)
 testing_events_raw, testing_labels_raw = load_year_range(testing_year, months=1)
 
 #convert testing data to np array
-testing_events = np.asarray(testing_events_raw, dtype=np.float32)
+testing_events = np.asarray([sublist[4:] for sublist in testing_events_raw], dtype=np.float32)		#leave out first 4 columns
 testing_labels = np.asarray(testing_labels_raw, dtype=np.float32)
 print("read", testing_events.shape[0], "testing events with", testing_events.shape[1], "features\n")
 
