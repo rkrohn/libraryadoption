@@ -21,7 +21,7 @@ def load_year_range(start, end=-1, month_start=1, month_end=12):
 		end = start
 
 	for year in range(start, end+1):
-		print("Loading events for", year)
+		print("Loading events for", str(year) + ", months " + str(month_start) + "-" + str(month_end) if month_start != month_end else str(year) + ", month " + str(month_start))
 
 		#load all requested months of data
 		for month in range(month_start, month_end+1):
@@ -59,7 +59,7 @@ combos = list(it.product(*(config_choices[key] for key in config_keys)))
 print("Testing", len(combos), "classifier configurations\n")
 
 #load all training data
-training_events_raw, training_labels_raw = load_year_range(training_start, training_end)
+training_events_raw, training_labels_raw = load_year_range(training_start, training_end, month_start=12, month_end=12)
 
 #convert training data to np arrays
 training_events = np.asarray([sublist[4:] for sublist in training_events_raw], dtype=np.float32)	#leave out first 4 columns
