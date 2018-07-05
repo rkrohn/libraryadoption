@@ -1,0 +1,55 @@
+Feature vector for classification:
+
+Metadata for tracking, shouldn't really be used for classification 
+(not included in event_features files, only complete_events_features):
+
+user id (integer)
+repository name (string)
+library/package name (string)
+time of commit (UTC timestamp)
+
+User-specific features:
+
+number of packages committed
+number of packages implicitly seen
+number of packages adopted
+time since last commit
+time since last adoption
+intra-commit duration for last 10% of user's commits
+number of repos commited to
+number of repos commited to in last 10% of user's commits
+percentage of commits with adoptions
+percentage of commits with library imports
+percentage of adoption commits in last 10% of user's commits
+percentage of library import commits in last 10% of user's commits
+
+User/Package features:
+
+user adopted package? (binary)
+user already used this package (binary)
+number of times user has implicitly seen package
+number of times user has implicitly seen package within last 10% of user's commits
+number of times user seen package / total number of times user seen all packages
+number of times user seen package in last 10% of user's commits / total number of times user seen all packages in last 10%
+
+Package features from GitHub history:
+
+number of commits adding this package
+number of users who have committed this package
+number of users who have adopted this package (number of package adoptions)
+number of repos containing this package
+number of repos this package was adopted in
+time since last adoption (in seconds)
+time since last commit (in seconds)
+average time between package adoptions in last 10% of adoptions
+average time between commits within last 10% of commits of this package
+time between commits of this package within last 10% of ALL commits
+time between adoptions of this package within last 10% of ALL commits
+		
+Package features from StackOverflow:
+
+total number of posts containing this package
+total views of all posts containing package
+number of recent posts containing package (last 30 days)
+total views of recent posts (last 30 days)
+
