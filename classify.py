@@ -63,7 +63,7 @@ combos = list(it.product(*(config_choices[key] for key in config_keys)))
 print("Testing", len(combos), "classifier configurations\n")
 
 #load all training data, convert events to np array for easier indexing
-print("Training Data:")
+print("TRAINING DATA:")
 training_events_raw, training_labels_raw = load_year_range(training_start, training_end)
 training_events_raw = np.array(training_events_raw)
 
@@ -83,7 +83,7 @@ print("read", training_events.shape[0], "import training events with", training_
 print("   ", int(sum(training_labels)), "events are adoptions\n")
 
 #read testing data, convert events to np array for easier indexing
-print("Testing Data:")
+print("TESTING DATA:")
 testing_events_raw, testing_labels_raw = load_year_range(testing_year, month_start=1, month_end=1)
 testing_events_raw = np.array(testing_events_raw)
 
@@ -100,7 +100,6 @@ testing_events = scaler.transform(testing_events)
 print("read", testing_events.shape[0], "testing events with", testing_events.shape[1], "features")
 print("   ", int(sum(testing_labels)), "events are adoptions\n")
 
-exit(0)
 
 #run multiple classifier tests one after the other - both repeated runs and different configurations
 #configuration combos generated above
@@ -112,7 +111,7 @@ for c in range(len(combos)):
 	for i in range(0, len(config_keys)):
 		kw[config_keys[i]] = combo[i]
 		
-	print("\nTest", c, kw)
+	print("\nTEST", c, kw)
 
 	#train the classifier
 	print("Training classifier...")
@@ -132,11 +131,11 @@ for c in range(len(combos)):
 	print(int(sum(testing_labels)), "adoption events in", len(testing_labels), "import events")
 	print("predicted", int(sum(predicted_labels)), "adoptions")
 
-	#F1-score
+	#F1-score, AUROC, precision, and recall
 	f_score = metrics.f1_score(testing_labels, predicted_labels)	
-
-	#AUROC measure
 	auroc = metrics.roc_auc_score(testing_labels, predicted_labels)
+	precision = metrics.precision_score(testing_labels, predicted_labels)
+	recall = metrics.recall_score(testing_labels, predicted_labels)
 
 	#of the predicted adoptions, how many were correct vs false positives?
 	true_neg = 0
@@ -158,5 +157,7 @@ for c in range(len(combos)):
 	print("true neg:", true_neg)
 	print("false pos:", false_pos)
 	print("false neg:", false_neg, "\n")
+	print("precision:", precision)
+	print("recall:", recall)
 	print("F-1 score:", f_score)
 	print("AUROC score:", auroc)
