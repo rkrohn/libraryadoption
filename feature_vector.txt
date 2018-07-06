@@ -3,53 +3,53 @@ Feature vector for classification:
 Metadata for tracking, shouldn't really be used for classification 
 (not included in event_features files, only complete_events_features):
 
-user id (integer)
-repository name (string)
-library/package name (string)
-time of commit (UTC timestamp)
+0	user id (integer)
+1	repository name (string)
+2	library/package name (string)
+3	time of commit (UTC timestamp)
 
 User-specific features:
 
-number of packages committed
-number of packages implicitly seen
-number of packages adopted
-time since last commit
-time since last adoption
-intra-commit duration for last 10% of user's commits
-number of repos commited to
-number of repos commited to in last 10% of user's commits
-percentage of commits with adoptions
-percentage of commits with library imports
-percentage of adoption commits in last 10% of user's commits
-percentage of library import commits in last 10% of user's commits
+4	number of packages committed
+5	number of packages implicitly seen
+6	number of packages adopted
+7	time since last commit
+8	time since last adoption
+9	intra-commit duration for last 10% of user's commits
+10	number of repos commited to
+11	number of repos commited to in last 10% of user's commits
+12	percentage of commits with adoptions
+13	percentage of commits with library imports
+14	percentage of adoption commits in last 10% of user's commits
+15	percentage of library import commits in last 10% of user's commits
 
 User/Package features:
 
-user adopted package? (binary)
-user already used this package (binary)
-number of times user has implicitly seen package
-number of times user has implicitly seen package within last 10% of user's commits
-number of times user seen package / total number of times user seen all packages
-number of times user seen package in last 10% of user's commits / total number of times user seen all packages in last 10%
+16	user adopted package? (binary)
+17	user already used this package (binary)
+18	number of times user has implicitly seen package
+19	number of times user has implicitly seen package within last 10% of user's commits
+20	number of times user seen package / total number of times user seen all packages
+21	number of times user seen package in last 10% of user's commits / total number of times user seen all packages in last 10%
 
 Package features from GitHub history:
 
-number of commits adding this package
-number of users who have committed this package
-number of users who have adopted this package (number of package adoptions)
-number of repos containing this package
-number of repos this package was adopted in
-time since last adoption (in seconds)
-time since last commit (in seconds)
-average time between package adoptions in last 10% of adoptions
-average time between commits within last 10% of commits of this package
-time between commits of this package within last 10% of ALL commits
-time between adoptions of this package within last 10% of ALL commits
+22	number of commits adding this package
+23	number of users who have committed this package
+24	number of users who have adopted this package (number of package adoptions)
+25	number of repos containing this package
+26	number of repos this package was adopted in
+27	time since last adoption (in seconds)
+28	time since last commit (in seconds)
+29	average time between package adoptions in last 10% of adoptions
+30	average time between commits within last 10% of commits of this package
+31	time between commits of this package within last 10% of ALL commits
+32	time between adoptions of this package within last 10% of ALL commits
 		
 Package features from StackOverflow:
 
-total number of posts containing this package
-total views of all posts containing package
-number of recent posts containing package (last 30 days)
-total views of recent posts (last 30 days)
+33	total number of posts containing this package
+34	total views of all posts containing package
+35	number of recent posts containing package (last 30 days)
+36	total views of recent posts (last 30 days)
 
