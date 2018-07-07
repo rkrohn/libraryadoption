@@ -54,7 +54,11 @@ results_file = sys.argv[1]
 #set training and testing years here
 training_start = 2014
 training_end = 2014		#this year will be included in training
+training_month_start = 1
+training_month_end = 12
 testing_year = 2015		#single year for testing, and for now only the first month
+testing_month_start = 1
+testing_month_end = 1
 
 #set number of iterations for training
 num_iter = 50
@@ -74,7 +78,7 @@ print("Testing", len(combos), "classifier configurations\n")
 
 #load all training data, convert events to np array for easier indexing
 print("TRAINING DATA:")
-training_events_raw, training_labels_raw = load_year_range(training_start, training_end)
+training_events_raw, training_labels_raw = load_year_range(training_start, training_end, month_start = training_month_start, month_end = training_month_end)
 training_events_raw = np.array(training_events_raw)
 
 #convert training data to np arrays
@@ -94,7 +98,7 @@ print("   ", int(sum(training_labels)), "events are adoptions\n")
 
 #read testing data, convert events to np array for easier indexing
 print("TESTING DATA:")
-testing_events_raw, testing_labels_raw = load_year_range(testing_year, month_start=1, month_end=1)
+testing_events_raw, testing_labels_raw = load_year_range(testing_year, month_start=testing_month_start, month_end=testing_month_end)
 testing_events_raw = np.array(testing_events_raw)
 
 #convert testing data to np array
@@ -112,7 +116,7 @@ print("   ", int(sum(testing_labels)), "events are adoptions\n")
 
 #build list of column headers - will dump data to csv
 results = []
-results.append(["test#", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score",	"AUROC"])
+results.append(["test#", "training_year_first", "training_year_last", "training_month_first", "training_month_last", "testing_year", "testing_month_first", "testing_month_last", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score",	"AUROC"])
 
 
 #run multiple classifier tests one after the other - both repeated runs and different configurations
@@ -177,7 +181,7 @@ for c in range(len(combos)):
 	print("AUROC score:", auroc)
 
 	#append results for this run to overall results data
-	results.append([c, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
+	results.append([c, training_start, training_end, training_month_start, training_month_end, testing_year, testing_month_start, testing_month_end, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
 
 #save results from all runs to output file, base name specified by command line arg
 np.savetxt((results_file + ".csv"), np.array(results), delimiter=", ", fmt="%s")
