@@ -52,7 +52,7 @@ if len(sys.argv) < 2:
 results_file = sys.argv[1]
 
 #set training and testing years here
-training_start = 2014
+training_start = 1993
 training_end = 2014		#this year will be included in training
 training_month_start = 1
 training_month_end = 12
@@ -68,7 +68,10 @@ num_iter = 50
 config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [True, False]}
 
 #select the features (columns) to include in training (ranges include first, exclude last, list multiple if desired)
-feature_idx = np.r_[4:37]	#example: [4:7, 9, 12:15]
+#feature_idx = np.r_[4:37]	#example: [4:7, 9, 12:15]
+#feature_idx = np.r_[4:16, 18:37]
+#feature_idx = np.r_[4:16, 18:33]
+feature_idx = np.r_[4:33]
 print("Using features", feature_idx, "\n")
 
 #build list of combinations to pass as arguments to classifier configuration
@@ -113,10 +116,11 @@ testing_events = scaler.transform(testing_events)
 
 print("read", testing_events.shape[0], "testing events with", testing_events.shape[1], "features")
 print("   ", int(sum(testing_labels)), "events are adoptions\n")
+num_features = testing_events.shape[1]
 
 #build list of column headers - will dump data to csv
 results = []
-results.append(["test#", "training_year_first", "training_year_last", "training_month_first", "training_month_last", "testing_year", "testing_month_first", "testing_month_last", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score",	"AUROC"])
+results.append(["test#", "training_year_first", "training_year_last", "training_month_first", "training_month_last", "testing_year", "testing_month_first", "testing_month_last", "num_features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score",	"AUROC"])
 
 
 #run multiple classifier tests one after the other - both repeated runs and different configurations
@@ -181,7 +185,7 @@ for c in range(len(combos)):
 	print("AUROC score:", auroc)
 
 	#append results for this run to overall results data
-	results.append([c, training_start, training_end, training_month_start, training_month_end, testing_year, testing_month_start, testing_month_end, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
+	results.append([c, training_start, training_end, training_month_start, training_month_end, testing_year, testing_month_start, testing_month_end, num_features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
 
 #save results from all runs to output file, base name specified by command line arg
 np.savetxt((results_file + ".csv"), np.array(results), delimiter=", ", fmt="%s")
