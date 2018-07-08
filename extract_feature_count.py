@@ -24,8 +24,13 @@ for file in files:
 	#read in corresponding results file
 	data = pd.read_csv(file)
 
-	#add new column containing feature count
-	data.insert(8, "num_features", feature_count)
+	#drop index column if it happens to be there
+	if "Unnamed: 0" in data.columns:
+		data = data.drop(["Unnamed: 0"],axis=1)
+
+	#add new column containing feature count if necessary
+	if "num_features" not in data.columns:
+		data.insert(8, "num_features", feature_count)
 
 	#save modified file
-	data.to_csv(file)
+	data.to_csv(file, index=False)
