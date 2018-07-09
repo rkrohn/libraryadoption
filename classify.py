@@ -67,11 +67,11 @@ num_iter = 50
 #loops will test all combinations of these arguments
 config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [True, False]}
 
-#select the features (columns) to include in training (ranges include first, exclude last, list multiple if desired)
-#feature_idx = np.r_[4:37]	#example: [4:7, 9, 12:15]
-#feature_idx = np.r_[4:16, 18:37]
-#feature_idx = np.r_[4:16, 18:33]
-feature_idx = np.r_[4:33]
+#select the features (columns) to include in training (ranges include first, exclude last, list multiple if desired); example: [4:7, 9, 12:15]
+#feature_idx = np.r_[4:37]		#all features
+feature_idx = np.r_[4:16, 18:37]	#remove binary
+#feature_idx = np.r_[4:16, 18:33]	#remove binary and stack overflow
+#feature_idx = np.r_[4:33]		#remove stack overflow
 print("Using features", feature_idx, "\n")
 
 #build list of combinations to pass as arguments to classifier configuration
