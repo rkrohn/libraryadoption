@@ -4,23 +4,23 @@ import pandas as pd
 import os
 
 def label_training_period(row):
-	#entire years?
-	if row['training_month_first'] == 1 and row['training_month_last'] == 12:
+	#single year?
+	if row['training_year_first'] == row['training_year_last']:
 		#one year?
 		if row['training_month_first'] == 1 and row['training_month_last'] == 12:
 			return "one year"
-		#two years?
-		if row['training_year_last'] - row['training_year_first'] == 1:
-			return "two years"
-		#build label from year range
-		return str(row['training_year_first']) + '-' + str(row['training_year_last'])
-	#single year?
-	if row['training_year_first'] == row['training_year_last']:
 		#build label as number of months		
 		if row['training_month_first'] == 7 and row['training_month_last'] == 12:
 			return "six months"
 		if row['training_month_first'] == 12 and row['training_month_last'] == 12:
 			return "one month"
+	#entire years?
+	if row['training_month_first'] == 1 and row['training_month_last'] == 12:
+		#two years?
+		if row['training_year_last'] - row['training_year_first'] == 1:
+			return "two years"
+		#build label from year range
+		return str(row['training_year_first']) + '-' + str(row['training_year_last'])	
 	return "UNDEFINED"
 #end label_training_period
 
