@@ -7,7 +7,7 @@ WINDOW = 0.1		#for windowed stats, take last 10% of a user/repo's commits (once 
 #User class: contains user id/name, dictionary of used lib->time used, and repo->time of last interaction
 class User:
 	'''
-	User Features (specific to a particular package)
+	User Features (specific to User only)
 	# packages commited - half-life?			len(quiver)
 	# packages implicitly seen				len(seen_libs)
 	# packages adopted					len(adopted_libs)
@@ -22,11 +22,17 @@ class User:
 	% commits with imports					import_commit_count/commit_count
 	% commits with adoptions within last 10% of commits	last_adopt_commit_count/len(last_commits)
 	% commits with imports within last 10% of commits	last_import_commit_count/len(last_commits)
-	# implicitly seen package i				seen_libs_freq[i]
-	# implicitly seen package i within last 10% of commits	lib_view_freq() - first return value
+	
+	User-Package Features (specific to USer-Package pair)
+	# user adopted this package?			adopted_libs
+	# already used this package?			quiver
+	# implicitly seen package i			seen_libs_freq[i]
+	total # implicit packages seen		sum(seen_libs_freq.values())
 	# implicitly seen package i / total # implicit packages seen	seen_libs_freq[i]/sum(seen_libs_freq.values())
+
+	# implicitly seen package i within last 10% of commits	lib_view_freq() - first return value
+	# total # implicit packages seen within last 10% 		lib_view_freq() - second return
 	# implicitly seen package i within last 10% commits / total # implicit packages seen within last 10% commits	lib_view_freq : first return / second return
-	{packages implicitly seen}				seen_libs
 	'''
 
 	def __init__(self, name):
@@ -52,8 +58,8 @@ class User:
 		self.last_import_commit_count = 0	#number of commits containing import in last 10% of user's commits
 		self.last_adopt_commit_count = 0	#number of commits producing adoption in last 10% of user's commits
 	
-	#return a vector of user features
-	def get_features(self, lib, time):
+	#return a vector of user-only features (since these can be reused for all packages in the same commit)
+	def get_user_features(self, time):
 		vector = []	#build feature vector as list
 
 		#user-only features first
@@ -82,21 +88,31 @@ class User:
 			vector.append(float(self.last_import_commit_count)/len(self.last_commits))	#percentage of lib import commits in last 10%
 		else:
 			vector.extend([None, None, None, None])
-
-		#package-specific user features
-		vector.append(1 if lib in self.adopted_libs else 0)	#1 if adopted this library, 0 if not
-		vector.append(1 if lib in self.quiver else 0)		#1 if used this library, 0 if not
-		vector.append(self.seen_libs_freq[lib] if lib in self.seen_libs_freq else 0)		#number of times implicitly seen lib
-		spec_lib, total_lib = self.lib_view_freq(lib)
-		vector.append(spec_lib)					#number of time implicitly seen lib within last 10% of commits
-		if lib in self.seen_libs_freq:
-			vector.append(float(self.seen_libs_freq[lib])/sum(self.seen_libs_freq.values()))	#times seen lib / total time seen all packages
-		else:
-			vector.append(0)
-		vector.append(float(spec_lib)/total_lib if total_lib != 0 else None)		#times seen lib in last 10% / total time seen all packages in last 10%
 		
 		return vector		
-	#end get_features	
+	#end get_user_features	
+	
+	#return a vector of user-package features (no reusing here)
+	def get_package_features(self, lib):
+		vector = []	#build feature vector as list
+	
+		#binary features - adopted or used before?
+		vector.append(1 if lib in self.adopted_libs else 0)	#1 if adopted this library, 0 if not
+		vector.append(1 if lib in self.quiver else 0)		#1 if used this library, 0 if not
+		
+		#how many times have we seen this? seen everything?
+		num_times_lib = self.seen_libs_freq[lib] if lib in self.seen_libs_freq else 0
+		vector.append(num_times_lib)		#number of times implicitly seen lib
+		num_times_all = sum(self.seen_libs_freq.values())
+		vector.append(num_times_all)	#total number of times user seen all packages
+		vector.append(float(num_times_lib)/num_times_all if num_times_all != 0 else None)	#times seen lib / total time seen all packages
+		
+		#how many times have we recently seen this? seen everything?
+		spec_lib, total_lib = self.lib_view_freq(lib)
+		vector.append(spec_lib)			#number of time implicitly seen lib within last 10% of commits
+		vector.append(total_lib)		#number of times user seen all packages (sum)		
+		vector.append(float(spec_lib)/total_lib if total_lib != 0 else None)		#times seen lib in last 10% / total time seen all packages in last 10%
+	#end get_package_features
 
 	#given a list of repository updated repos, and the repo name, update user state
 	def implicit_view(self, repo_libs, repo, time):	

@@ -1,0 +1,75 @@
+Feature vector for classification:
+
+UPDATE INDEXES!!!!
+
+Some features are metadata for tracking, shouldn't really be used for classification 
+
+Commit features:
+
+	commit id (assigned in order, use in case we have to match stuff up later)
+0	user id (integer)
+1	repository name (string)
+3	time of commit (UTC timestamp)
+	number of packages added by user in this commit
+	number of packages updated between user's last commit and this one (for this specific repo)
+	number of packages added by user and updated recently (intersection of two above sets)
+
+Event-specific metadata:
+
+2	library/package name (string)
+4	user added? (binary, 1/T if user committed this package at this time, 0/F otherwise-skipped adoption opportunity)
+
+User-specific features:
+
+4	number of packages committed
+5	number of packages implicitly seen
+6	number of packages adopted
+7	time since last commit
+8	time since last adoption
+9	intra-commit duration for last 10% of user's commits
+10	number of repos commited to
+11	number of repos commited to in last 10% of user's commits
+12	percentage of commits with adoptions
+13	percentage of commits with library imports
+14	percentage of adoption commits in last 10% of user's commits
+15	percentage of library import commits in last 10% of user's commits
+
+User/Package features:
+
+16	user adopted package? (binary)
+17	user already used this package (binary)
+18	number of times user has implicitly seen package
+	total number of times user seen all packages
+20	number of times user seen package / total number of times user seen all packages
+19	number of times user has implicitly seen package within last 10% of user's commits
+	total number of times user seen all packages in last 10%
+21	number of times user seen package in last 10% of user's commits / total number of times user seen all packages in last 10%
+
+Package features from GitHub history:
+
+22	number of commits adding this package
+23	number of users who have committed this package
+24	number of users who have adopted this package (number of package adoptions)
+25	number of repos containing this package
+26	number of repos this package was adopted in
+27	time since last adoption (in seconds)
+28	time since last commit (in seconds)
+29	average time between package adoptions in last 10% of adoptions
+30	average time between commits within last 10% of commits of this package
+31	time between commits of this package within last 10% of ALL commits
+32	time between adoptions of this package within last 10% of ALL commits
+		
+Package features from StackOverflow:
+
+33	total number of posts containing this package
+34	total views of all posts containing package
+35	number of recent posts containing package (last 30 days)
+36	total views of recent posts (last 30 days)
+
+Labels are 0/1, assigned based on intra-repo adoption criteria
+
+To extract adoption labels where any first usage is an adoption:
+	user used package must be false
+	user added package must be true
+if both of those are true, user used package for the first time in that commit - global adoption
+should be more of those than the repo-centric adoption criteria
