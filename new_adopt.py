@@ -272,7 +272,7 @@ if __name__ == "__main__":
 		os.makedirs("data_files/event_features")
 
 	#stream data from sorted json files
-	for year in range(1990, 1991):		#read and process 1990 through 2018
+	for year in range(1990, 2019):		#read and process 1990 through 2018
 		print("PROCESSING", year)
 
 		#stream from current year's output file
