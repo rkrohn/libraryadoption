@@ -103,6 +103,8 @@ def process_commit(c):
 	else:
 		user = int(c['user'])
 
+	print(user, repo, time)
+
 	#remove duplicate libraries from lists by converting them to sets
 	added_libs = set(c['add_libs'])
 	deleted_libs = set(c['del_libs'])
@@ -150,7 +152,7 @@ def process_commit(c):
 
 		#before updating any package or user metadata, create the event instance for this user-package pair 
 		#(same features for adoptions and not, classification label comes later)
-		feature_vector = commit_features
+		feature_vector = list(commit_features)
 		feature_vector.extend([lib, 1])	#user *did* commit this package
 		feature_vector.extend(user_features)
 		feature_vector.extend(get_package_features(user, package, time))
@@ -172,6 +174,7 @@ def process_commit(c):
 
 		#add new instance of feature vector and classication label to overall data
 		data.append(feature_vector)
+		print(feature_vector, len(feature_vector))
 		labels.append(1 if lib_adopt else 0)		#labels: 1 = adoption, 0 = no adoption
 
 	#create a negative instance for packages updated, but not committed
@@ -186,7 +189,7 @@ def process_commit(c):
 		package = packages[lib]
 			
 		#build feature vector
-		feature_vector = commit_features
+		feature_vector = list(commit_features)
 		feature_vector.extend([lib, 0])	#user *didn't* commit this package
 		feature_vector.extend(user_features)
 		feature_vector.extend(get_package_features(user, package, time))
@@ -198,6 +201,7 @@ def process_commit(c):
 		
 		#add new instance of feature vector and classication label to overall data
 		data.append(feature_vector)
+		print(feature_vector, len(feature_vector))
 		labels.append(0)		#not an adoption, since not committed
 		
 	#update user state based on new libraries seen
@@ -264,7 +268,7 @@ if __name__ == "__main__":
 		os.makedirs("data_files/event_features")
 
 	#stream data from sorted json files
-	for year in range(1990, 2019):		#read and process 1990 through 2018
+	for year in range(1990, 1991):		#read and process 1990 through 2018
 		print("PROCESSING", year)
 
 		#stream from current year's output file
@@ -276,5 +280,6 @@ if __name__ == "__main__":
 			process_commit(x)		#commit_count incremented here
 			if commit_count % 1000 == 0:
 				print("finished", commit_count, "commits,", len(commit_history), "commits in history")
+				break
 		f.close()
 
