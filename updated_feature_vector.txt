@@ -3,6 +3,7 @@ Feature vector for classification:
 UPDATE INDEXES!!!!
 
 Some features are metadata for tracking, shouldn't really be used for classification 
+Commit features and User-specific features are the same for all events triggered by the same commit (could be many)
 
 Commit features:
 
@@ -13,11 +14,6 @@ Commit features:
 	number of packages added by user in this commit
 	number of packages updated between user's last commit and this one (for this specific repo)
 	number of packages added by user and updated recently (intersection of two above sets)
-
-Event-specific metadata:
-
-2	library/package name (string)
-4	user added? (binary, 1/T if user committed this package at this time, 0/F otherwise-skipped adoption opportunity)
 
 User-specific features:
 
@@ -33,6 +29,11 @@ User-specific features:
 13	percentage of commits with library imports
 14	percentage of adoption commits in last 10% of user's commits
 15	percentage of library import commits in last 10% of user's commits
+
+Event-specific metadata:
+
+2	library/package name (string)
+4	user added? (binary, 1/T if user committed this package at this time, 0/F otherwise-skipped adoption opportunity)
 
 User/Package features:
 
