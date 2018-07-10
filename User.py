@@ -112,6 +112,8 @@ class User:
 		vector.append(spec_lib)			#number of time implicitly seen lib within last 10% of commits
 		vector.append(total_lib)		#number of times user seen all packages (sum)		
 		vector.append(float(spec_lib)/total_lib if total_lib != 0 else None)		#times seen lib in last 10% / total time seen all packages in last 10%
+
+		return vector
 	#end get_package_features
 
 	#given a list of repository updated repos, and the repo name, update user state

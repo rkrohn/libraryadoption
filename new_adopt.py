@@ -52,7 +52,7 @@ def get_package_features(user, package, time):
 	
 	vector = []		#build feature vector as list
 
-	vector = user.get_package_features(package.name, time)		#start with user features
+	vector = user.get_package_features(package.name)		#start with user features
 	vector.extend(package.get_features(time, commit_history[0]))	#add on package features
 	
 	return vector
@@ -151,7 +151,7 @@ def process_commit(c):
 		#before updating any package or user metadata, create the event instance for this user-package pair 
 		#(same features for adoptions and not, classification label comes later)
 		feature_vector = commit_features
-		feature_vector.extend([lib, 1]	#user *did* commit this package
+		feature_vector.extend([lib, 1])	#user *did* commit this package
 		feature_vector.extend(user_features)
 		feature_vector.extend(get_package_features(user, package, time))
 		feature_vector.extend(get_SO_features(package, time))
@@ -274,7 +274,7 @@ if __name__ == "__main__":
 		#process all commits in date order
 		for x in commits:
 			process_commit(x)		#commit_count incremented here
-			if commit_count % 100 == 0:
+			if commit_count % 1000 == 0:
 				print("finished", commit_count, "commits,", len(commit_history), "commits in history")
 		f.close()
 
