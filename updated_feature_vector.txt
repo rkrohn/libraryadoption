@@ -1,6 +1,6 @@
 Feature vector for classification:
 
-Some features are metadata for tracking, shouldn't really be used for classification: commit id, user id, repo name, time of commit, library/package name, user added flag (directly implies non-adoptions)
+Some features are metadata for tracking, shouldn't really be used for classification: commit id, user id, repo name, time of commit, library/package name, user added flag (directly implies non-adoptions), binary user/package features
 
 Commit features and User-specific features are the same for all events triggered by the same commit (could be many)
 
