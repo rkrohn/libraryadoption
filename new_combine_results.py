@@ -81,7 +81,7 @@ data = pd.read_csv(filename)
 data.columns = data.columns.map(lambda x: x.strip())
 
 #same thing for all the data
-for column in ['penalty', 'loss', 'fit_intercept', 'shuffle']:
+for column in ['penalty', 'loss', 'fit_intercept', 'shuffle', 'features']:
 	data[column] = data[column].map(lambda x: x.strip())
 
 #add some columns for easier sorting/graphing: training period, testing period, features removed
