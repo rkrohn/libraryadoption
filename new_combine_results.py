@@ -54,7 +54,7 @@ if os.path.exists(filename):
 	os.remove(filename)
 
 #get list of files to combine
-files = glob.glob('predict_tests/new_results*')
+files = glob.glob('predict_tests/newest_results*')
 print("Combining", len(files), "files")
 
 fout = open(filename, "a")	#open output file
@@ -87,7 +87,7 @@ for column in ['penalty', 'loss', 'fit_intercept', 'shuffle']:
 #add some columns for easier sorting/graphing: training period, testing period, features removed
 data.insert(5, "training_period", data.apply(label_training_period, axis=1))
 data.insert(9, "testing_period", data.apply(label_testing_period, axis=1))
-data.insert(11, "features_removed", data.apply(label_features_removed, axis=1))
+#data.insert(11, "features_removed", data.apply(label_features_removed, axis=1))
 
 #save modified file
 data.to_csv(filename, index=False)
