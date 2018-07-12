@@ -69,14 +69,26 @@ num_iter = 50
 #loops will test all combinations of these arguments
 config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [True, False]}
 
-#select the features (columns) to include in training (ranges include first, exclude last, list multiple if desired); example: [4:7, 9, 12:15]		
-#feature_idx = np.r_[4:19, 23:44]	#all features, remove none (except obvious metadata and binary)
-feature_idx = np.r_[4:19, 23:40]	#remove StackOverflow features
+#select the features (columns) to include in training (ranges include first, exclude last, list multiple if desired)
+features = "ULS"	#U = user, P = pair (user-package), L = library, S = stackoverflow
+
+feature_idx = []	#start with no features, add on what you want
+if 'U' in features:
+	feature_idx.extend(range(7, 19))	#user features	
+if 'P' in features:
+	feature_idx.extend(range(23, 29))	#match (user/package) features
+if 'L' in features:
+	feature_idx.extend(range(29, 40))	#package/library features
+if 'S' in features:
+	feature_idx.extend(range(40, 44))	#StackOverflow features
+
+feature_idx = np.array(feature_idx)	#convert to numpy array
 print("Using features", feature_idx, "\n")
 
 #build list of combinations to pass as arguments to classifier configuration
 config_keys = sorted(config_choices)
-combos = list(it.product(*(config_choices[key] for key in config_keys)))
+#combos = list(it.product(*(config_choices[key] for key in config_keys)))
+combos = [(True, 'squared_hinge', 'l2', True), (False, 'squared_hinge', 'l1', True)]	#hardcode for now
 print("Testing", len(combos), "classifier configurations\n")
 
 #load all training data, convert events to np array for easier indexing
@@ -120,7 +132,7 @@ num_features = testing_events.shape[1]
 
 #build list of column headers - will dump data to csv
 results = []
-results.append(["test#", "training_year_first", "training_year_last", "training_month_first", "training_month_last", "testing_year", "testing_month_first", "testing_month_last", "num_features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score",	"AUROC"])
+results.append(["test#", "training_year_first", "training_year_last", "training_month_first", "training_month_last", "testing_year", "testing_month_first", "testing_month_last", "features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score",	"AUROC"])
 
 
 #run multiple classifier tests one after the other - both repeated runs and different configurations
@@ -185,7 +197,7 @@ for c in range(len(combos)):
 	print("AUROC score:", auroc)
 
 	#append results for this run to overall results data
-	results.append([c, training_start, training_end, training_month_start, training_month_end, testing_year, testing_month_start, testing_month_end, num_features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
+	results.append([c, training_start, training_end, training_month_start, training_month_end, testing_year, testing_month_start, testing_month_end, features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
 
 #save results from all runs to output file, base name specified by command line arg
 np.savetxt((results_file + ".csv"), np.array(results), delimiter=", ", fmt="%s")
