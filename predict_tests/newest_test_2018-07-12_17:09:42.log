@@ -1,0 +1,80 @@
+Using features [ 4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 23 24 25 26 27 28] 
+
+Testing 2 classifier configurations
+
+TRAINING DATA:
+Loading events for 2004, months 1-12
+Loading events for 2005, months 1-12
+Replacing nan with 0
+Using MinMaxScaler for normalization
+read 5026640 import training events with 21 features
+    5642 events are adoptions
+
+TESTING DATA:
+Loading events for 2006, month 1
+Replacing nan with 0
+read 425190 testing events with 21 features
+    745 events are adoptions
+
+
+TEST 0 {'loss': 'squared_hinge', 'fit_intercept': True, 'penalty': 'l2', 'shuffle': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l2', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[ 1.37876745e+04 -1.04160396e+04  3.28804996e+04 -6.35737580e+04
+   1.23374541e+04  5.47044772e+04  2.25580801e+04 -4.00509934e+03
+   4.79945294e+04  2.58475469e+04  8.36605744e+03  1.46704043e+05
+  -3.87004586e+04 -1.17986702e+05  1.34537671e+04 -5.25258686e+04
+   1.01415418e+04 -1.91047642e+02  2.51051105e+04 -6.57786674e+05
+  -3.54342929e+04]]
+intercept: [-12506.69883002] 
+
+745 adoption events in 425190 import events
+predicted 3342 adoptions
+
+true pos: 251
+true neg: 421354
+false pos: 3091
+false neg: 494 
+
+precision: 0.07510472770795931
+recall: 0.33691275167785234
+F-1 score: 0.12282848054807927
+AUROC score: 0.6648151502384361
+
+TEST 1 {'loss': 'squared_hinge', 'fit_intercept': False, 'penalty': 'l1', 'shuffle': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=False, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l1', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[ 4.45083977e+09 -6.74999872e+08  5.83106096e+09 -4.23837994e+09
+  -1.73696866e+08  5.75286465e+09  1.41930636e+09 -9.86072831e+08
+  -1.63181504e+10  6.73751190e+07  1.24615516e+09 -1.48550311e+10
+  -1.15868048e+09  7.30115353e+09 -1.10347214e+09 -5.81879327e+10
+   7.39179377e+09 -1.24373658e+09 -2.76100913e+10 -2.40236787e+11
+  -4.52931130e+10]]
+intercept: [0.] 
+
+745 adoption events in 425190 import events
+predicted 6349 adoptions
+
+true pos: 279
+true neg: 418375
+false pos: 6070
+false neg: 466 
+
+precision: 0.04394392817766577
+recall: 0.374496644295302
+F-1 score: 0.07865802086270086
+AUROC score: 0.6800978079467533
+
+All results saved to predict_tests/newest_results_2018-07-12_17:09:42.csv
