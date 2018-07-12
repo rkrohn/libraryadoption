@@ -54,11 +54,11 @@ if len(sys.argv) < 2:
 results_file = sys.argv[1]
 
 #set training and testing years here
-training_start = 1993
-training_end = 1993		#this year will be included in training
+training_start = 2004
+training_end = 2005		#this year will be included in training
 training_month_start = 1
 training_month_end = 12
-testing_year = 2015		#single year for testing, and for now only the first month
+testing_year = 2006		#single year for testing, and for now only the first month
 testing_month_start = 1
 testing_month_end = 1
 
@@ -69,12 +69,9 @@ num_iter = 50
 #loops will test all combinations of these arguments
 config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [True, False]}
 
-#select the features (columns) to include in training (ranges include first, exclude last, list multiple if desired); example: [4:7, 9, 12:15]
-#feature_idx = np.r_[4:37]		#all features
-#feature_idx = np.r_[4:16, 18:37]	#remove binary
-#feature_idx = np.r_[4:16, 18:33]	#remove binary and stack overflow
-#feature_idx = np.r_[4:33]		#remove stack overflow			MORE WORK HERE
-feature_idx = np.r_[4:19, 23:44]
+#select the features (columns) to include in training (ranges include first, exclude last, list multiple if desired); example: [4:7, 9, 12:15]		
+#feature_idx = np.r_[4:19, 23:44]	#all features, remove none (except obvious metadata and binary)
+feature_idx = np.r_[4:19, 23:40]	#remove StackOverflow features
 print("Using features", feature_idx, "\n")
 
 #build list of combinations to pass as arguments to classifier configuration
@@ -86,10 +83,6 @@ print("Testing", len(combos), "classifier configurations\n")
 print("TRAINING DATA:")
 training_events_raw, training_labels_raw = load_year_range(training_start, training_end, month_start = training_month_start, month_end = training_month_end)
 training_events_raw = np.array(training_events_raw)
-
-for i in range(0, len(training_events_raw)):
-	if training_labels_raw[i] == 1:
-		print("\n", training_events_raw[i])
 
 #convert training data to np arrays
 training_events = training_events_raw[:,feature_idx].astype(np.float32) 	#select desired features, convert to float
@@ -105,7 +98,6 @@ training_events = scaler.fit_transform(training_events)
 
 print("read", training_events.shape[0], "import training events with", training_events.shape[1], "features")
 print("   ", int(sum(training_labels)), "events are adoptions\n")
-exit(0)
 
 #read testing data, convert events to np array for easier indexing
 print("TESTING DATA:")
