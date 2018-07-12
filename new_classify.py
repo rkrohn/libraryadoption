@@ -70,9 +70,11 @@ num_iter = 50
 config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [True, False]}
 
 #select the features (columns) to include in training (ranges include first, exclude last, list multiple if desired)
-features = "ULS"	#U = user, P = pair (user-package), L = library, S = stackoverflow
+features = "UPL"	#U = user, P = pair (user-package), L = library, S = stackoverflow
 
 feature_idx = []	#start with no features, add on what you want
+if 'C' in features:
+	feature_idx.extend(range(4, 7))		#commit features
 if 'U' in features:
 	feature_idx.extend(range(7, 19))	#user features	
 if 'P' in features:
