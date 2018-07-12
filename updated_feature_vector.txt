@@ -4,12 +4,15 @@ Some features are metadata for tracking, shouldn't really be used for classifica
 
 Commit features and User-specific features are the same for all events triggered by the same commit (could be many)
 
-Commit features:
+Commit metadata:
 
 0	commit id (assigned in order, use in case we have to match stuff up later)
 1	user id (integer)
 2	repository name (string)
 3	time of commit (UTC timestamp)
+
+Commit features: (theoretically not cheating)
+
 4	number of packages added by user in this commit
 5	number of packages updated between user's last commit and this one (for this specific repo)
 6	number of packages added by user and updated recently (intersection of two above sets, not all will be adoptions)
