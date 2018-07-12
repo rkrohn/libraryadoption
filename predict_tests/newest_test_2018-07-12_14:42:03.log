@@ -1,0 +1,83 @@
+Using features [ 7  8  9 10 11 12 13 14 15 16 17 18 29 30 31 32 33 34 35 36 37 38 39 40
+ 41 42 43] 
+
+Testing 2 classifier configurations
+
+TRAINING DATA:
+Loading events for 2004, months 1-12
+Loading events for 2005, months 1-12
+Replacing nan with 0
+Using MinMaxScaler for normalization
+read 5026640 import training events with 27 features
+    5642 events are adoptions
+
+TESTING DATA:
+Loading events for 2006, month 1
+Replacing nan with 0
+read 425190 testing events with 27 features
+    745 events are adoptions
+
+
+TEST 0 {'loss': 'squared_hinge', 'penalty': 'l2', 'fit_intercept': True, 'shuffle': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l2', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[   70239.70050911   -57355.98074927    28045.9379727    155516.37614583
+    -10407.78287416   332773.48968001  -118083.99320118   101227.12864243
+    116812.64362837  -190823.29736666    18606.1285258     65845.03439892
+  -3517052.69149011   749172.84650807  1826249.90897689 -2110421.86712495
+   2528160.8141043    -39030.20427098 -7499225.61301743  -214904.8079081
+     97225.7553021     65526.57230609   -95583.3637814         0.
+         0.                0.                0.        ]]
+intercept: [-60489.75272593] 
+
+745 adoption events in 425190 import events
+predicted 3950 adoptions
+
+true pos: 10
+true neg: 420505
+false pos: 3940
+false neg: 735 
+
+precision: 0.002531645569620253
+recall: 0.013422818791946308
+F-1 score: 0.004259850905218318
+AUROC score: 0.5020700542145009
+
+TEST 1 {'loss': 'squared_hinge', 'penalty': 'l1', 'fit_intercept': False, 'shuffle': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=False, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l1', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[ 2.16359781e+03 -6.68086143e+04  3.61118640e+04 -8.45574964e+04
+  -1.12861850e+04  8.03711296e+04  5.62101438e+04 -9.32272602e+04
+  -3.76703428e+05  6.92707624e+03  2.45887597e+05 -3.90178862e+04
+   7.05151018e+05  2.03255441e+06 -6.00532590e+05 -8.89412552e+05
+  -1.68826934e+06 -1.72264073e+05 -2.62247908e+06 -5.14381871e+04
+   2.87282319e+04 -1.09257271e+05  1.10257070e+04  0.00000000e+00
+   0.00000000e+00  0.00000000e+00  0.00000000e+00]]
+intercept: [0.] 
+
+745 adoption events in 425190 import events
+predicted 2149 adoptions
+
+true pos: 26
+true neg: 422322
+false pos: 2123
+false neg: 719 
+
+precision: 0.01209865053513262
+recall: 0.0348993288590604
+F-1 score: 0.01796821008984105
+AUROC score: 0.51494875147261
+
+All results saved to predict_tests/newest_results_2018-07-12_14:42:03.csv

@@ -1,0 +1,3 @@
+test#, training_year_first, training_year_last, training_month_first, training_month_last, testing_year, testing_month_first, testing_month_last, features, penalty, fit_intercept, loss, shuffle, num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f1-score, AUROC
+0, 2004, 2005, 1, 12, 2006, 1, 1, UL, l2, True, squared_hinge, True, 50, 13, 420869, 3576, 732, 0.003622178879910839, 0.0174496644295302, 0.005999077065066912, 0.5045122722835608
+1, 2004, 2005, 1, 12, 2006, 1, 1, UL, l1, False, squared_hinge, True, 50, 11, 419758, 4687, 734, 0.0023414218816517666, 0.01476510067114094, 0.004041888664339519, 0.5018612224839053

@@ -1,0 +1,74 @@
+Using features [29 30 31 32 33 34 35 36 37 38 39] 
+
+Testing 2 classifier configurations
+
+TRAINING DATA:
+Loading events for 2004, months 1-12
+Loading events for 2005, months 1-12
+Replacing nan with 0
+Using MinMaxScaler for normalization
+read 5026640 import training events with 11 features
+    5642 events are adoptions
+
+TESTING DATA:
+Loading events for 2006, month 1
+Replacing nan with 0
+read 425190 testing events with 11 features
+    745 events are adoptions
+
+
+TEST 0 {'loss': 'squared_hinge', 'fit_intercept': True, 'shuffle': True, 'penalty': 'l2'}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l2', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-2.31159330e+01  2.81430848e+01  5.74410646e+00 -1.97828936e+01
+   9.02798958e-01 -5.00703630e-02 -1.68696836e+02 -2.72078484e+00
+   6.21672774e-01  3.83611816e-01 -1.24190548e+00]]
+intercept: [-1.19818808] 
+
+745 adoption events in 425190 import events
+predicted 0 adoptions
+
+true pos: 0
+true neg: 424445
+false pos: 0
+false neg: 745 
+
+precision: 0.0
+recall: 0.0
+F-1 score: 0.0
+AUROC score: 0.5
+
+TEST 1 {'loss': 'squared_hinge', 'fit_intercept': False, 'shuffle': True, 'penalty': 'l1'}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=False, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l1', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-41.30945284  61.72535245 -34.96779118 -88.94247061  81.07194261
+  -66.18700532 -75.92276938  -4.19741235  -8.53840297 -30.30037166
+  -12.329388  ]]
+intercept: [0.] 
+
+745 adoption events in 425190 import events
+predicted 5829 adoptions
+
+true pos: 26
+true neg: 418642
+false pos: 5803
+false neg: 719 
+
+precision: 0.004460456338994682
+recall: 0.0348993288590604
+F-1 score: 0.007909948281107393
+AUROC score: 0.5106136786127577
+
+All results saved to predict_tests/newest_results_2018-07-12_14:38:59.csv

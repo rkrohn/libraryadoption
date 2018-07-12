@@ -1,0 +1,72 @@
+Using features [23 24 25 26 27 28] 
+
+Testing 2 classifier configurations
+
+TRAINING DATA:
+Loading events for 2004, months 1-12
+Loading events for 2005, months 1-12
+Replacing nan with 0
+Using MinMaxScaler for normalization
+read 5026640 import training events with 6 features
+    5642 events are adoptions
+
+TESTING DATA:
+Loading events for 2006, month 1
+Replacing nan with 0
+read 425190 testing events with 6 features
+    745 events are adoptions
+
+
+TEST 0 {'shuffle': True, 'loss': 'squared_hinge', 'fit_intercept': True, 'penalty': 'l2'}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l2', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[ -375718.3993155     74613.25954616    79374.6527346     -5100.72868915
+  -2320671.39700004  -251113.56680163]]
+intercept: [-6377.89405552] 
+
+745 adoption events in 425190 import events
+predicted 4069 adoptions
+
+true pos: 0
+true neg: 420376
+false pos: 4069
+false neg: 745 
+
+precision: 0.0
+recall: 0.0
+F-1 score: 0.0
+AUROC score: 0.49520668166664705
+
+TEST 1 {'shuffle': True, 'loss': 'squared_hinge', 'fit_intercept': False, 'penalty': 'l1'}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=False, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l1', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[  0.         -10.21140055 -31.63653765   0.         -37.85075389
+  -26.62893079]]
+intercept: [0.] 
+
+745 adoption events in 425190 import events
+predicted 0 adoptions
+
+true pos: 0
+true neg: 424445
+false pos: 0
+false neg: 745 
+
+precision: 0.0
+recall: 0.0
+F-1 score: 0.0
+AUROC score: 0.5
+
+All results saved to predict_tests/newest_results_2018-07-12_14:38:19.csv

@@ -1,0 +1,74 @@
+Using features [29 30 31 32 33 34 35 36 37 38 39] 
+
+Testing 2 classifier configurations
+
+TRAINING DATA:
+Loading events for 2004, months 1-12
+Loading events for 2005, months 1-12
+Replacing nan with 0
+Using MinMaxScaler for normalization
+read 5026640 import training events with 11 features
+    5642 events are adoptions
+
+TESTING DATA:
+Loading events for 2006, month 1
+Replacing nan with 0
+read 425190 testing events with 11 features
+    745 events are adoptions
+
+
+TEST 0 {'penalty': 'l2', 'shuffle': True, 'fit_intercept': True, 'loss': 'squared_hinge'}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l2', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-4.41654283e+02  8.23750458e+02 -6.82996418e+01 -5.75928849e+02
+   6.12142344e+01 -3.11182392e+01 -4.99660782e+03 -8.04562715e+01
+   7.33941376e-02 -6.78223589e+01 -4.07746984e+01]]
+intercept: [-5.77797645] 
+
+745 adoption events in 425190 import events
+predicted 2079 adoptions
+
+true pos: 4
+true neg: 422370
+false pos: 2075
+false neg: 741 
+
+precision: 0.001924001924001924
+recall: 0.005369127516778523
+F-1 score: 0.0028328611898017
+AUROC score: 0.5002401952300758
+
+TEST 1 {'penalty': 'l1', 'shuffle': True, 'fit_intercept': False, 'loss': 'squared_hinge'}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=False, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l1', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[ -23.08858777  263.16402761 -297.1785241  -323.22136535  296.63203138
+  -136.80949267 -127.19562154  -11.43654913  -17.15720589  -40.70435306
+   -33.57438636]]
+intercept: [0.] 
+
+745 adoption events in 425190 import events
+predicted 11356 adoptions
+
+true pos: 29
+true neg: 413118
+false pos: 11327
+false neg: 716 
+
+precision: 0.0025537160972173303
+recall: 0.038926174496644296
+F-1 score: 0.004792992314684738
+AUROC score: 0.5061197801060541
+
+All results saved to predict_tests/newest_results_2018-07-12_14:39:06.csv
