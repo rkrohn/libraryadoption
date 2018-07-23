@@ -1,0 +1,463 @@
+6.11 notes
+
+how to train a model off this data? regression?
+
+every commit is an instance, what are our feature vectors?
+	sometimes an adoption happens, sometimes not
+	
+StackOverflow - 16 million questions, 25 million answers
+actually, ~40 million posts - according to Tim
+	
+User Features - specific to one particular user
+*****
+# packages commited - half-life?
+# packages implicitly seen
+time since last commit
+time since last adoption
+intra-commit duration for last 10% of commits
+# repositories commited to
+# repositories commited to in last 10% of commits
+% commits with adoptions
+% commits with imports
+% commits with adoptions within last 10% of commits
+% commits with imports within last 10% of commits
+# implicitly seen package i
+# implicitly seen package i within last 10% of commits
+# implicitly seen package i / total # implicit packages seen
+# implicitly seen package i within last 10% commits / total # implicit packages seen within last 10% commits
+{packages implicitly seen}
+
+Package Features - specific to one particular package 
+*****
+# of addition commits
+# users who have committed
+# users who have adopted (# adoptions)
+# repos containing package
+|{u committed packages} ^ {U_(x in U ^ x adopted i) all committed packages}|
+ditto above, for last 10% of commits
+Jaccard - {u committed packages} ^ {U committed packages}
+	(those last three are specific to the user as well)
+time since last adoption
+time between adoptions within last 10% of adoptions of this package
+time between adoptions within last 10% of commits
+time between commits within last 10% of commits of this package
+time between commits within last 10% of all commits
+current rank
+	# of adoptions
+	# of uses
+	# of repos
+	# of users using
+	# of additions - # deletions (true additions/deletions only)
+
+start generating user features - use Tim's code as a starting point
+commit to my repo for now
+
+use Python 3.6 - python3
+
+also think about StackOverflow features
+	will highly correlate SO features with negative case (not adopted)
+	ie, lots of StackOverflow will mean negative adoption
+may need to bias towards more recent data
+	
+	
+6.14 notes	
+	
+extra user feature - user already adopted library	
+one output file per month - dump all events, one per user-library pair
+remove try/except around search call, Tim pushed new code
+
+model will run through 2017 data, but doesn't know if adoption or not
+	if predict adoption, have to treat it that way for remainder of simulation
+is it actually rolling predictions?
+
+Tim gone until July 6
+generate data, ping Tim on slack (socsim) when done
+weekly updates at least
+yes, call in to meetings (sad)
+
+
+6.25
+
+time python3 classify.py > "predict_tests/test_$(date +"%F_%T").log" 
+time python3 classify.py 2>&1 | tee "predict_tests/test_$(date +"%F_%T").log"
+
+loss types, 50 iterations, MinMax normaliztion, replace nan with 0
+
+hinge	0
+log		0.0007851347814708191
+modified_huber	0
+squared_hinge	0.16489865504830462
+perceptron		0.07186527941649684
+squared_loss	0.02398096130787537
+huber					0
+epsilon_insensitive		0
+squared_epsilon_insensitive		0.04932920401495459
+
+look at squared_hinge more closely - repeated runs F-scores
+
+0.16489865504830462
+0.1582151986985824
+0.17332562997200124
+0.19066993388506173
+0.2020573473140188
+0.1711954084835441
+
+well, that seems reasonably consistent at least - what other knobs can I twiddle?
+
+play with penalty:
+
+none		
+0.16021178546916362
+0.16785731642124704
+0.20099981135634784
+0.19352344127597876
+
+l2			
+0.1591433763937325
+0.17771563569741095
+0.1655946220438168
+0.16212630094953767
+
+l1			
+0.171350861287398
+0.16630630630630633
+0.17953303019465588
+0.14326489273547557
+
+elasticnet	
+0.1589681504935742
+0.17582527176623114
+0.14634368040721718
+0.1824235603076346
+
+6.26
+
+new attack - updated code to do a whole bunch of configurations in sequence
+
+time python3 classify.py > "predict_tests/test_$(date +"%F_%T").log" 
+
+6.27
+
+ran a bunch, squared_hinge seems overall best, so let's stick with that for now
+penalty less clear, keep them all for now
+let's play with some other features, try to dial in the discrete ones before we play with the continuous ones
+
+6.28
+
+finally finished generating feature vectors!!
+
+finished 29250000 commits
+    353 adopts pyswip.call at: 2018-05-19 18:19:32
+    147720 adopts os at: 2018-05-20 05:28:47
+    85144 adopts dotenv at: 2018-05-21 14:02:40
+    75696 adopts argparse at: 2018-05-21 16:32:55
+    154575 adopts __future__.print_function at: 2018-05-22 06:29:11
+    18648 adopts scipy.sparse at: 2018-05-22 15:01:20
+finished 29260000 commits
+    154675 adopts ast at: 2018-05-27 05:19:06
+    150787 adopts six.moves.configparser at: 2018-05-27 14:08:09
+    150787 adopts multiprocessing at: 2018-05-27 14:08:09
+    150787 adopts shlex at: 2018-05-27 14:08:09
+    141702 adopts songs at: 2018-05-29 18:24:07
+    141602 adopts tempfile at: 2018-05-30 05:07:14
+    149031 adopts lib.slackClient.SlackClient at: 2018-05-31 00:40:31
+saved events for 5-2018
+saved events for 6-2018
+EOF
+
+real    10568m57.369s
+user    10519m32.780s
+sys     32m7.914s
+
+so... 7 days and 8 hours to process ~29,260,000 commits
+
+looks like everything through May 2018 is good, but I wouldn't trust June - file too small
+
+6.29
+
+hmmm... need to check when I cloned the first of the repos, since we can really only trust the commit data up to that point - anything after may not be complete for all repos
+
+run some more tests with StandardScaler instead of MinMax
+
+7.3
+
+time python3 classify.py > "predict_tests/test_$(date +"%F_%T").log" &
+
+StandardScaler does poorly, stick with MinMax
+
+run some new tests, try -1 to replace nan instead of 0
+
+also, with value=0, see what forcing some classifications does based on implied non-adoptions
+
+7.4
+
+-1 for nan is pretty crappy, probably compresses the stuff we do care about too much to extract useful information
+
+and... no labels changed by the manual check, we we'll back that out and move on with our lives
+
+ran new utility to add user, repo, package, and time to feature vectors - at the front, in that order
+
+todo: update feature vector notes, update classify.py to use/handle new files?
+
+7.5
+
+did those couple todo items
+
+I know I was cloning over spring break in March, so probably best to only trust the January/February stuff from 2018
+
+for now, let's see if our classifier improves by only training on the last year or so, instead of allll the way back to 1993
+	train 2014, predict Jan 2015
+	
+well, that ran faster at least - results any better?
+	yep, not bad
+	
+try training on just the previous month?
+	pretty bad actually
+	
+try 6 months of training data?
+	not as good as a whole year
+	
+7.6
+
+go through, feature ablation test - try different combinations of features
+	especially those binary ones that are directly implying the labels
+	remove StackOverflow, see what happens
+see what features it likes, and which ones it doesn't - look at coefficients for clues
+
+maybe reduce data to those where binary features are false - since those are really the events/libraries we're interested in
+
+but first, update code to dump results to csv, because we've had enough copy-pasting
+
+declare var and use in next command:
+	STR="test.txt" && python3 classify.py > $STR
+	
+new test command - pipes output and generates results csv
+	STR="$(date +"%F_%T")" && time python3 classify.py "predict_tests/results_$STR" > "predict_tests/test_$STR.log" &
+
+tests running:
+	standard run, all features		4:37
+	remove binary features 16 and 17	4:16, 18:37
+	remove binary features and SO features		4:16, 18:33
+	remove SO features		4:33
+
+7.7
+
+all those runs finished - files dated 7.6
+	all using 2014 to predict Jan 2015 (no data range columns, forgot them)
+	
+do those 4 again, 5 times each, for the following training setups
+	6 months of data
+	1 month of data
+	two years of data
+	all the training data
+
+7.8
+
+uh oh, some of them died and didn't finish - let's dig out the failures (ugh)
+
+well, crap... can't tell which ones died, because output files are empty
+
+new plan - pull all the data we have, find the holes in that
+
+okay, compiled all the data, should be good now
+use num_features to determine which features we have
+	33		standard run, all features		4:37
+	31		remove binary features 16 and 17	4:16, 18:37
+	27		remove binary features and SO features		4:16, 18:33
+	29		remove SO features		4:33
+	
+have 160 entries for one month, six months, and one year of data - 20 per test number, 40 (5 runs) per feature removal
+	only 88 for two years
+	only 32 for 1993-2014
+	
+runs to fill holes:
+	two years:
+		3 binary	DONE
+		1 SO		DONE
+		5 none		DONE
+	1993-2014:
+		4 binary	RUNNING (first)
+		4 binary+SO	RUNNING (second)
+		3 none		DONE
+		5 SO		RUNNING (third)
+
+STR="$(date +"%F_%T")" && time python3 classify.py "predict_tests/results_$STR" > "predict_tests/test_$STR.log" &		
+
+loop form:
+
+for i in {1..5}; do STR="$(date +"%F_%T")" && time python3 classify.py "predict_tests/results_$STR" > "predict_tests/test_$STR.log"; done &
+
+7.9
+
+runs all done, commit those up
+
+let's tweak the results compiler to remove leading spaced (ugh) and add some more discrete labels for training/testing period and features removed
+
+oops - still some holes, made a booboo in my bash script
+	1993-2014:
+		3 binary		RUNNING
+		3 binary+SO		RUNNING (later)
+
+STR="$(date +"%F_%T")" && time python3 classify.py "predict_tests/results_$STR" > "predict_tests/test_$STR.log" &
+
+made some plots anyway, and (no surprise) removing the binary (seen/used before) features kills the classifier
+
+but is this really cheating? I suppose yes, but the real problem is the data that we don't have
+
+what we have: user-package events triggered by commits, one per committed package
+what we're currently doing: classifying these events as adoptions or not
+
+this is essentially trivial - if they've used it before, not an adoption, and if they haven't, adoption
+no prediction going on at all
+
+what we want to have: user-package events, triggered by commits, one per seen package (committed or not)
+then we do: classify *these* events as adoptions or not
+
+here's where the prediction comes in - given that a user has seen a set of packages, which ones will they adopt vs not? we're interested in the stuff that hasn't/doesn't happens
+
+Tim meeting:
+	yep, get ALL the data - negative samples
+	both top-level and sub-packages - levels of granularity
+
+	roll a dice - based on user's commit count and package commit count
+		maybe incorporate StackOverflow popularity?
+		
+	makes the slides
+	
+let's dissect this code - adopt.py
+
+looping libraries added in each commit - added_libs
+updated_libs = set of libraries committed to repo since user's last commit to this repo
+	we assume they "saw" these libraries, at the very least when pulling before they pushed
+define adoption as a library in added_libs and updated_libs that is not in the user's quiver
+	ie, user just committed this library for the first time, AND library recently added/updated in repo
+what about adoptions from a different repo? or an exogenous source? this seems wrong...
+
+hmm... get the negatives as we discussed, or redefine adoption to include any first usage?
+	maybe it's just a terminology difference - intra-repo adoption?
+
+7.10
+
+let's just get the negative samples as discussed, because it's Tuesdy and I don't care
+
+required data from User for User-Package features:
+	adopted_libs
+	quiver
+	seen_libs_freq
+	lib_view_freq -> spec_lib, total_lib - based on last_commits
+	
+crap, need to regen everything - can't match up with old, because sets are sad
+
+new features?
+	# of packages in this commit		DONE
+	# of updated packages between previous commit and this one		DONE
+	break down percentages		DONE
+	
+	repo features? nope, not this time - because screw that
+		number of contributing users (all time or last 10%)
+		number of contributing users responsible for updated packages
+		
+running... I think (hope!)
+
+7.11
+
+still running, up to 11-2002 - hooray!
+
+Tim will send me his old slides, aim for about 8 slides for 10 minutes of talk
+
+keep babysitting the data gen, try to get a time estimate
+
+write some new classifier/prediction(?) code
+
+SLIDES
+
+let's do some cursory analysis, because data gen is slow
+
+first run, just basic counts:
+
+year , commit_count , import_commit_count , num_users ,
+1993 , 6936 , 1298 , 13
+1994 , 13958 , 2136 , 18
+1995 , 30126 , 3480 , 16
+1996 , 37284 , 3939 , 27
+1997 , 53766 , 4373 , 32
+1998 , 73004 , 6281 , 59
+1999 , 62020 , 5986 , 119
+2000 , 120050 , 13277 , 252
+2001 , 181902 , 20297 , 428
+2002 , 187556 , 21872 , 620
+2003 , 208286 , 30122 , 894
+2004 , 234022 , 26965 , 1146
+2005 , 307315 , 49380 , 1586
+2006 , 521339 , 86422 , 2414
+2007 , 787204 , 114632 , 3720
+2008 , 1012142 , 150164 , 6401
+2009 , 1262158 , 207409 , 10745
+2010 , 1848185 , 286452 , 15005
+2011 , 2459750 , 360666 , 20513
+2012 , 3160030 , 458908 , 28743
+2013 , 3590287 , 549301 , 38643
+2014 , 3340657 , 516844 , 47132
+2015 , 3328950 , 501049 , 55210
+2016 , 2901661 , 465892 , 59458
+2017 , 2986646 , 412787 , 59737
+
+ALL , 28715234 , 4299932 , 160145
+
+try some harder - can we identify and count the adoptions quickly?
+
+plot: adoption events and import commits per week?
+even just adoption events per year
+
+TODO:
+	why adoption count not working?
+	classification tests, even if not all data - focus on perturbation
+	SLIDES
+	
+7.12
+
+circle back to adoption count later, focus on some classification tests - even if we don't have all the data
+
+STR="$(date +"%F_%T")" && time python3 new_classify.py "predict_tests/new_results_$STR" > "predict_tests/new_test_$STR.log" &
+
+combos
+	UPLS	all features	DONE
+	UPL 	git history		DONE
+	U		user only		RUNNING
+	P		pair only		RUNNING
+	L		library only	RUNNING
+	UP		user and pair	RUNNING
+	UL		user and library	RUNNING
+	PL		pair and library	RUNNING
+	ULS		user, lib, SO		RUNNING
+	
+STR="$(date +"%F_%T")" && time python3 new_classify.py "predict_tests/newest_results_$STR" > "predict_tests/newest_test_$STR.log" &
+
+all done, plot all the things!
+
+UPLS, 2 years = blue
+
+hmmm... SO didn't exist then - why do the 0s help? must investigate further
+
+also fixed the commit feature errors - Tim says not cheating, just need to break them out
+
+run C alone, since it seems important
+other combos running:
+	UPC
+	ULC
+	ULSC
+can do more later if we care
+
+95% confidence intervals
+note 5 tests
+
+email Tim list of features - DONE
+keep updated on data gen progress
+
+
+7.23
+
+back at it
+
+data gen up to March 2012 - slow going, but going
+
