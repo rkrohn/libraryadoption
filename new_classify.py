@@ -157,67 +157,75 @@ results.append(["test#", "filter_repeat", "training_year_first", "training_year_
 
 #run multiple classifier tests one after the other - both repeated runs and different configurations
 #configuration combos generated above
+#wrap all this in an outer loop, so we can more easily run 5 (or more) of the same test, and save I/O time
 
-#for each configuration combo, run the classifier!
-for c in range(len(combos)):
-	combo = combos[c]
-	kw = {}
-	for i in range(0, len(config_keys)):
-		kw[config_keys[i]] = combo[i]
+#repeated runs of same configuration
+for i in range(0, 5):
+	print("\nRUN", i)
+
+	#for each configuration combo, run the classifier!
+	for c in range(len(combos)):
+		combo = combos[c]
+		kw = {}
+		for i in range(0, len(config_keys)):
+			kw[config_keys[i]] = combo[i]
+			
+		print("\nTEST", c, kw)
+
+		#train the classifier
+		print("Training classifier...")
+		clf = linear_model.SGDClassifier(n_iter=num_iter, **kw)
+		print(clf.fit(training_events, training_labels), "\n")
+		#clf.fit(training_events, training_labels)
+
+		print("\ncoefficients:", clf.coef_)
+		print("intercept:", clf.intercept_, "\n")
+
+		#predict on the testing events
+		predicted_labels = clf.predict(testing_events)
+
+		#look for adoptions, correctly predicted or not
+
+		#how many adoptions in real labels vs predicted?
+		print(int(sum(testing_labels)), "adoption events in", len(testing_labels), "import events")
+		print("predicted", int(sum(predicted_labels)), "adoptions")
+
+		#F1-score, AUROC, precision, and recall
+		f_score = metrics.f1_score(testing_labels, predicted_labels)	
+		auroc = metrics.roc_auc_score(testing_labels, predicted_labels)
+		precision = metrics.precision_score(testing_labels, predicted_labels)
+		recall = metrics.recall_score(testing_labels, predicted_labels)
+
+		#of the predicted adoptions, how many were correct vs false positives?
+		true_neg = 0
+		true_pos = 0
+		false_neg = 0
+		false_pos = 0
+		for i in range(0, len(predicted_labels)):
+			if testing_labels[i] == 0 and predicted_labels[i] == 0:
+				true_neg += 1
+			elif testing_labels[i] == 0 and predicted_labels[i] == 1:
+				false_pos += 1
+			elif testing_labels[i] == 1 and predicted_labels[i] == 0:
+				false_neg += 1
+			else:
+				true_pos += 1
+
+		#print all metrics
+		print("\ntrue pos:", true_pos)
+		print("true neg:", true_neg)
+		print("false pos:", false_pos)
+		print("false neg:", false_neg, "\n")
+		print("precision:", precision)
+		print("recall:", recall)
+		print("F-1 score:", f_score)
+		print("AUROC score:", auroc)
+
+		#append results for this run to overall results data
+		results.append([c, remove_repeat_usages, training_start, training_end, training_month_start, training_month_end, testing_year, testing_month_start, testing_month_end, features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
 		
-	print("\nTEST", c, kw)
-
-	#train the classifier
-	print("Training classifier...")
-	clf = linear_model.SGDClassifier(n_iter=num_iter, **kw)
-	print(clf.fit(training_events, training_labels), "\n")
-	#clf.fit(training_events, training_labels)
-
-	print("\ncoefficients:", clf.coef_)
-	print("intercept:", clf.intercept_, "\n")
-
-	#predict on the testing events
-	predicted_labels = clf.predict(testing_events)
-
-	#look for adoptions, correctly predicted or not
-
-	#how many adoptions in real labels vs predicted?
-	print(int(sum(testing_labels)), "adoption events in", len(testing_labels), "import events")
-	print("predicted", int(sum(predicted_labels)), "adoptions")
-
-	#F1-score, AUROC, precision, and recall
-	f_score = metrics.f1_score(testing_labels, predicted_labels)	
-	auroc = metrics.roc_auc_score(testing_labels, predicted_labels)
-	precision = metrics.precision_score(testing_labels, predicted_labels)
-	recall = metrics.recall_score(testing_labels, predicted_labels)
-
-	#of the predicted adoptions, how many were correct vs false positives?
-	true_neg = 0
-	true_pos = 0
-	false_neg = 0
-	false_pos = 0
-	for i in range(0, len(predicted_labels)):
-		if testing_labels[i] == 0 and predicted_labels[i] == 0:
-			true_neg += 1
-		elif testing_labels[i] == 0 and predicted_labels[i] == 1:
-			false_pos += 1
-		elif testing_labels[i] == 1 and predicted_labels[i] == 0:
-			false_neg += 1
-		else:
-			true_pos += 1
-
-	#print all metrics
-	print("\ntrue pos:", true_pos)
-	print("true neg:", true_neg)
-	print("false pos:", false_pos)
-	print("false neg:", false_neg, "\n")
-	print("precision:", precision)
-	print("recall:", recall)
-	print("F-1 score:", f_score)
-	print("AUROC score:", auroc)
-
-	#append results for this run to overall results data
-	results.append([c, remove_repeat_usages, training_start, training_end, training_month_start, training_month_end, testing_year, testing_month_start, testing_month_end, features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
+	#end configuration for
+#end repeated runs for
 
 #save results from all runs to output file, base name specified by command line arg
 np.savetxt((results_file + ".csv"), np.array(results), delimiter=",", fmt="%s")
