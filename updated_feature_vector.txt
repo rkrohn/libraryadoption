@@ -1,6 +1,7 @@
 Feature vector for classification:
 
 Some features are metadata for tracking, shouldn't really be used for classification: commit id, user id, repo name, time of commit, library/package name, user added flag (directly implies non-adoptions), binary user/package features
+	essentially, leave out the commit metadata and event-specific metadata (cheating)
 
 Commit features and User-specific features are the same for all events triggered by the same commit (could be many)
 
@@ -32,15 +33,15 @@ User-specific features:
 17	percentage of adoption commits in last 10% of user's commits
 18	percentage of library import commits in last 10% of user's commits
 
-Event-specific metadata:
+Event-specific metadata (not used in classification)
 
 19	library/package name (string)
 20	user added? (binary, 1/T if user committed this package at this time, 0/F otherwise-skipped adoption opportunity)
+21	user already adopted package? (binary)
+22	user already used this package (binary)
 
 User/Package features:
 
-21	user adopted package? (binary)
-22	user already used this package (binary)
 23	number of times user has implicitly seen package
 24	total number of times user seen all packages
 25	number of times user seen package / total number of times user seen all packages
@@ -74,7 +75,7 @@ Labels are 0/1, assigned based on intra-repo adoption criteria:
 	package must have been updated in commit repo since the last time user committed
 
 To extract more general adoption labels, where any first usage is an adoption:
-	user used package must be false (user not used package before)
-	user added package must be true (user committed this package)
+	user used package must be false (user not used package before) - idx 22 must be 0
+	user added package must be true (user committed this package) -  idx 20 must be 1
 if both of those are true, user used package for the first time in that commit - global adoption
 should be more of those than the repo-centric adoption criteria
