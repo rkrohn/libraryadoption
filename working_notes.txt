@@ -193,7 +193,7 @@ also, with value=0, see what forcing some classifications does based on implied 
 
 -1 for nan is pretty crappy, probably compresses the stuff we do care about too much to extract useful information
 
-and... no labels changed by the manual check, we we'll back that out and move on with our lives
+and... no labels changed by the manual check, we'll back that out and move on with our lives
 
 ran new utility to add user, repo, package, and time to feature vectors - at the front, in that order
 
@@ -338,7 +338,7 @@ hmm... get the negatives as we discussed, or redefine adoption to include any fi
 
 7.10
 
-let's just get the negative samples as discussed, because it's Tuesdy and I don't care
+let's just get the negative samples as discussed, because it's Tuesday and I don't care
 
 required data from User for User-Package features:
 	adopted_libs
@@ -461,3 +461,128 @@ back at it
 
 data gen up to March 2012 - slow going, but going
 
+checking some counts - flagged adoptions vs first usages
+
+empty_events contains commit data for commits with no updated libs and no added libs (shouldn't need them, but keeping just in case...)
+
+hmm... seems okay I guess? onward
+
+TODO possibilities:
+	more classify tests/results
+	prediction (instead of classification)
+	start writing paper
+	
+bigger/harder TODO:	
+	* cost of learning/adoption - "I hypothesize that after an adoption event, users have a burst of commits (or maybe pushes), as they learn how to use the new library"
+	* adoption as it correlates to code persistence - is the code associated with a new adoption likely to stick around or be deleted? (especially in a big project) - how people make errors, "cost of innovation"
+	* library/package changeover
+	* impact of user type (influencer vs follower) on adoption types
+	
+GitHub launched April 2008
+StackOverflow launched September 2008
+
+with that in mind, let's try some new tests - with the negative samples, starting 2008 or later
+
+STR="$(date +"%F_%T")" && time python3 new_classify.py "predict_tests/results_$STR" > "predict_tests/test_$STR.log" &
+	
+running a single test, train 2011, classify Jan 2012
+
+while that's running, let's think: what has to change for prediction vs classification?
+
+classification: train on all included features, classify events using same features
+	this requires commit data for the events being classified - some features based on timestamps, commit features based on specific commit
+
+hmm... back up - for the classifier, are we really interested in instances where the user has already used a package?
+	these obviously can't be adoptions, by any definition of the terminology
+	what if we filter the classification to include only potential adoptions - actually adopted or not?
+let's see how much that might cut down the dataset
+	idx 22: user already used this package (binary)
+	
+consider Jan 2009:
+	LABELS:
+	1161454 user-package events
+	2397 adoption events
+
+	DATA:
+	1161454 user-package events with 44 features
+	32343 first-time usages
+	70223 repeat usages
+	986437 potential adoptions (including actual adoptions and all first-time uses)
+	954094 missed adoptions
+	104794 updated and not committed after previous usage
+	102566 addition events
+	1058888 non-additions
+
+so of 1,161,454 events:
+	102,566 addition events  = 8.83%
+		32,343 first usages = 2.78%
+			2,397 "true" adoptions = 0.206%
+			29,946 unflagged adoptions = 2.58%
+		70,223 repeat usages = 6.05%
+	1,058,888 non-additions = 91.17%
+		954,094 "missed" adoptions (never used, still not committed) = 82.15%
+		104,794 updated and not committed after previous usage = 9.02%
+	
+so... roughly 15% of events are for a package the user has already committed
+	or ~175K/1.2 million events
+might make a difference? 
+and are they really relevant for training? 
+	user has already used package, not an adoption or non-adoption, so probably not a useful example
+
+wrote some code to filter out the repeat uses - both actual additions and update non-additions
+	so, should only have data for packages that *could* be adopted (ie, user not used before)
+	
+STR="$(date +"%F_%T")" && time python3 new_classify.py "predict_tests/results_$STR" CUPLS > "predict_tests/test_$STR.log" &
+	
+currently running:
+	long test started 13:42 (taking forever)
+	one month training:
+		5 filtered (started first, 16:24)
+		5 not (started after, 16:29)
+
+7.24
+
+data gen up to June 2012 - it's trying
+
+some of the classify runs died - why? and which ones?
+	ValueError: Found input variables with inconsistent numbers of samples: [3024443, 5040771]
+	so, mismatch in size between labels and features somewhere - let's dig it out
+	
+found the error - stupid copy-paste fail, wasn't actually filtering the testing data, only the labels
+	should be fixed now
+	
+oh, and we should add a filter flag to the results csv as well
+
+tests running again, let's update the data we already have to include the filter column - DONE
+
+tests finished, seemed to work fine - let's look at results, see if we can cut down on the number of combos
+	for 7/8 tests, filtering results in a small improvement
+
+more command line args, to allow for script-driven multiple runs? ponder
+
+* cost of learning/adoption - "I hypothesize that after an adoption event, users have a burst of commits (or maybe pushes), as they learn how to use the new library" - YES, Tim likes this
+
+sample down the negative cases
+
+nah, no more command-line args - just another loop
+
+running:
+	1 year training, unfiltered x4
+	1 year training, filtered x5
+	6 months, filtered x5
+	6 months, unfiltered x5
+	3 months, unfiltered x5
+	3 months, filtered x5
+	2 years, filtered x5
+	2 years, unfiltered x5
+let those run for now
+	
+TODO:
+	look at results, try to narrow down the configurations to the best/most promising
+	determine for sure if filtered data is the way to go
+	try to tackle prediction vs classification
+	read meme-tracker paper?
+	
+	
+	
+	
