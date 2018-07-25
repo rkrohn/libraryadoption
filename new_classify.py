@@ -40,19 +40,43 @@ def load_year_range(start, end=-1, month_start=1, month_end=12):
 #end load_year_range
 
 #loads and processes data for specified time range and featureset
-def load_data(start, end, month_start, month_end, remove_repeat_usages, feature_idx, scaler = -1):
+def load_data(start, end, month_start, month_end, remove_repeat_usages, downsample_ratio, feature_idx, scaler = -1):
 
 	#load all data, convert events to np array for easier indexing
 	events_raw, labels_raw = load_year_range(start, end, month_start, month_end)
 	events_raw = np.array(events_raw)
 	labels_raw = np.array(labels_raw)
 
+	#print some counts (for humans)
+	print("Read", events_raw.shape[0], "events with", events_raw.shape[1], "features")
+	print("   ", int(sum(labels_raw)), "events are adoptions")
+
 	#filter out repeat usages if flag is set
 	if remove_repeat_usages:
-		rows = np.where(events_raw[:,22] == 0)		#rows where user hasn't committed package before
-		print("filtering from", len(events_raw), "events to", len(rows[0]), "events")
-		events_raw = events_raw[rows[0]]
-		labels_raw = labels_raw[rows[0]]
+		rows = np.where(events_raw[:,22] == 0)[0]		#rows where user hasn't committed package before
+		print("Filtering from", len(events_raw), "events to", len(rows), "events")
+		events_raw = events_raw[rows]
+		labels_raw = labels_raw[rows]
+
+	#downsample negative events in training data only according to specified ratio
+	if downsample_ratio is not None and scaler == -1:
+		print("Downsampling neg:pos ratio to", str(downsample_ratio) + ":1")
+
+		#grab row indexes for positive events and negative events separately
+		pos_rows = np.where(labels_raw == 1)[0]
+		neg_rows = np.where(labels_raw == 0)[0]
+		
+		#select ratio*len(pos) negative row indices
+		sampled_neg_rows = np.random.choice(neg_rows, downsample_ratio*len(pos_rows), replace=False)
+
+		rows = np.concatenate([pos_rows, sampled_neg_rows])	#merge row lists
+
+		#filter events and labels to only those included in sample
+		events_raw = events_raw[rows]
+		labels_raw = labels_raw[rows]
+
+	elif scaler == -1:
+		print("No downsampling")
 
 	#convert data to np arrays of correct type
 	events = events_raw[:,feature_idx].astype(np.float32) 	#select desired features, convert to float
@@ -71,7 +95,7 @@ def load_data(start, end, month_start, month_end, remove_repeat_usages, feature_
 		events = scaler.transform(events)
 
 	#print some counts (for humans)
-	print("read", events.shape[0], "events with", events.shape[1], "features")
+	print("Final data contains", events.shape[0], "events with", events.shape[1], "features")
 	print("   ", int(sum(labels)), "events are adoptions\n")
 
 	#return events and labels
@@ -110,6 +134,9 @@ num_iter = 50
 
 remove_repeat_usages = True	#if flag is true, remove user-package events where user has already used this library before
 
+downsample_ratio = 4		#if None, no downsampling of negative events
+				#if a whole number X, sample to have X negative events for each positive event
+
 #set your configuration choices here - dictionary with list as value
 #loops will test all combinations of these arguments
 config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [True, False]}
@@ -140,11 +167,11 @@ print("Testing", len(combos), "classifier configurations\n")
 
 #load all training data as np array
 print("TRAINING DATA:")
-training_events, training_labels, scaler = load_data(training_start, training_end, training_month_start, training_month_end, remove_repeat_usages, feature_idx)
+training_events, training_labels, scaler = load_data(training_start, training_end, training_month_start, training_month_end, remove_repeat_usages, downsample_ratio, feature_idx)
 
 #load testing data as np array
 print("TESTING DATA:")
-testing_events, testing_labels = load_data(testing_year, -1, testing_month_start, testing_month_end, remove_repeat_usages, feature_idx, scaler)
+testing_events, testing_labels = load_data(testing_year, -1, testing_month_start, testing_month_end, remove_repeat_usages, downsample_ratio, feature_idx, scaler)
 
 num_features = testing_events.shape[1]		#grab number of features for csv output
 
