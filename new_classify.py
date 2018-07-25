@@ -132,7 +132,7 @@ testing_labels_raw = np.array(testing_labels_raw)
 
 #filter out repeat usages if flag is set
 if remove_repeat_usages:
-	rows = np.where(training_events_raw[:,22] == 0)	#rows where user hasn't committed package before
+	rows = np.where(testing_events_raw[:,22] == 0)	#rows where user hasn't committed package before
 	print("filtering from", len(testing_events_raw), "events to", len(rows[0]), "events")
 	testing_events_raw = testing_events_raw[rows[0]]
 	testing_labels_raw = testing_labels_raw[rows[0]]
