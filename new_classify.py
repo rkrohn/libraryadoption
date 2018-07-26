@@ -59,7 +59,7 @@ def load_data(start, end, month_start, month_end, remove_repeat_usages, downsamp
 		labels_raw = labels_raw[rows]
 
 	#downsample negative events in training data only according to specified ratio
-	if downsample_ratio is not None and scaler == -1:
+	if downsample_ratio != -1 and scaler == -1:
 		print("Downsampling neg:pos ratio to", str(downsample_ratio) + ":1")
 
 		#grab row indexes for positive events and negative events separately
@@ -134,7 +134,7 @@ num_iter = 50
 
 remove_repeat_usages = True	#if flag is true, remove user-package events where user has already used this library before
 
-downsample_ratio = 4		#if None, no downsampling of negative events
+downsample_ratio = 4		#if -1, no downsampling of negative events
 				#if a whole number X, sample to have X negative events for each positive event
 
 #set your configuration choices here - dictionary with list as value
