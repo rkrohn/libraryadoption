@@ -81,12 +81,12 @@ data = pd.read_csv(filename)
 data.columns = data.columns.map(lambda x: x.strip())
 
 #same thing for all the data
-for column in ['filter_repeat', 'penalty', 'loss', 'fit_intercept', 'shuffle', 'features']:
+for column in ['penalty', 'loss', 'fit_intercept', 'shuffle', 'features']:
 	data[column] = data[column].map(lambda x: x.strip())
 
 #add some columns for easier sorting/graphing: training period, testing period, features removed
-data.insert(6, "training_period", data.apply(label_training_period, axis=1))
-data.insert(10, "testing_period", data.apply(label_testing_period, axis=1))
+data.insert(7, "training_period", data.apply(label_training_period, axis=1))
+data.insert(11, "testing_period", data.apply(label_testing_period, axis=1))
 
 #save modified file
 data.to_csv(filename, index=False)
