@@ -74,7 +74,7 @@ def load_data(start, end, month_start, month_end, remove_repeat_usages, downsamp
 		#filter events and labels to only those included in sample
 		events_raw = events_raw[rows]
 		labels_raw = labels_raw[rows]
-
+	#if training data but no downsampling, indicate that
 	elif scaler == -1:
 		print("No downsampling")
 
@@ -177,7 +177,7 @@ num_features = testing_events.shape[1]		#grab number of features for csv output
 
 #build list of column headers - will dump data to csv
 results = []
-results.append(["test#", "filter_repeat", "training_year_first", "training_year_last", "training_month_first", "training_month_last", "testing_year", "testing_month_first", "testing_month_last", "features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score",	"AUROC"])
+results.append(["test#", "filter_repeat", "downsample_ratio", "training_year_first", "training_year_last", "training_month_first", "training_month_last", "testing_year", "testing_month_first", "testing_month_last", "features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score",	"AUROC"])
 
 #run multiple classifier tests one after the other - both repeated runs and different configurations
 #configuration combos generated above
@@ -246,7 +246,7 @@ for i in range(0, 5):
 		print("AUROC score:", auroc)
 
 		#append results for this run to overall results data
-		results.append([c, remove_repeat_usages, training_start, training_end, training_month_start, training_month_end, testing_year, testing_month_start, testing_month_end, features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
+		results.append([c, remove_repeat_usages, downsample_ratio, training_start, training_end, training_month_start, training_month_end, testing_year, testing_month_start, testing_month_end, features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
 		
 	#end configuration for
 #end repeated runs for
