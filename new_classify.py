@@ -123,7 +123,7 @@ features = sys.argv[2]
 #set training and testing years here
 training_start = 2011
 training_end = 2011		#this year will be included in training
-training_month_start = 12
+training_month_start = 7
 training_month_end = 12
 testing_year = 2012		#single year for testing, and for now only the first month
 testing_month_start = 1
@@ -139,7 +139,7 @@ downsample_ratio = 4		#if -1, no downsampling of negative events
 
 #set your configuration choices here - dictionary with list as value
 #loops will test all combinations of these arguments
-config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [True, False]}
+config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [True]}
 
 #select the features (columns) to include in training (ranges include first, exclude last, list multiple if desired)
 #features = "CUPLS"	#U = user, P = pair (user-package), L = library, S = stackoverflow, C = commit
@@ -184,7 +184,7 @@ results.append(["test#", "filter_repeat", "downsample_ratio", "training_year_fir
 #wrap all this in an outer loop, so we can more easily run 5 (or more) of the same test, and save I/O time
 
 #repeated runs of same configuration
-for i in range(0, 5):
+for i in range(0, 2):
 	print("\nRUN", i)
 
 	#for each configuration combo, run the classifier!
