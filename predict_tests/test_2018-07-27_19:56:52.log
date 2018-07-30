@@ -1,0 +1,697 @@
+Using features [ 4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 23 24 25 26 27 28 29 30 31
+ 32 33 34 35 36 37 38 39 40 41 42 43] 
+
+Testing 4 classifier configurations
+
+TRAINING DATA:
+Loading events for 2011, month 12
+Read 3395317 events with 44 features
+    3293 events are adoptions
+Filtering from 3395317 events to 3024443 events
+Downsampling neg:pos ratio to 1:1
+Replacing nan with 0
+Using MinMaxScaler for normalization
+Final data contains 6586 events with 36 features
+    3293 events are adoptions
+
+TESTING DATA:
+Loading events for 2012, month 1
+Read 5040771 events with 44 features
+    2900 events are adoptions
+Filtering from 5040771 events to 4588261 events
+Replacing nan with 0
+Final data contains 4588261 events with 36 features
+    2900 events are adoptions
+
+
+RUN 0
+
+TEST 0 {'loss': 'squared_hinge', 'penalty': 'none', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='none', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-5.24512946e+11 -3.87402193e+11  4.37977641e+13  1.29537343e+12
+  -1.33804054e+12  1.30485016e+12  1.38925956e+11 -8.33812482e+10
+   5.43364189e+11 -3.05556358e+12  9.02953784e+10 -1.95838489e+12
+   4.24840907e+11  1.29199577e+12 -1.11069202e+11  5.96246408e+11
+   1.69575191e+12  6.72668216e+11  4.32091014e+10 -1.00109199e+13
+  -2.48464259e+11  4.04662348e+11 -3.72930284e+11 -1.48757968e+12
+   4.79157802e+11  1.24427003e+12 -5.69784779e+11 -6.50388610e+12
+  -6.01743716e+10  3.44076835e+11  2.12080440e+11 -8.13143529e+10
+  -7.74019075e+10  2.70209996e+11 -4.20899454e+10 -5.26588648e+11]]
+intercept: [-8.33714197e+10] 
+
+2900 adoption events in 4588261 import events
+predicted 180390 adoptions
+
+true pos: 2669
+true neg: 4407640
+false pos: 177721
+false neg: 231 
+
+precision: 0.014795720383613282
+recall: 0.920344827586207
+F-1 score: 0.029123247313001255
+AUROC score: 0.940793241684299
+
+TEST 1 {'loss': 'squared_hinge', 'penalty': 'l2', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l2', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-2.08168602e+10 -1.31189095e+09  6.29446214e+10  2.10329872e+10
+  -1.33550218e+10  9.69849785e+09  4.42368043e+09  2.49124321e+08
+   2.78888688e+09 -4.20439364e+10  8.15245887e+09 -1.14124143e+10
+   1.90893482e+09  1.13307215e+10 -8.51766093e+08  3.77770467e+09
+   1.01223413e+10  7.92177003e+09 -3.90666006e+09 -2.93052080e+10
+  -1.68968940e+09  8.49920109e+09 -1.26355875e+10 -3.31734025e+10
+   1.13066631e+10  2.87938742e+10 -1.01122231e+10 -5.60781637e+10
+  -7.41105823e+08  1.52680726e+09 -1.31853017e+09 -2.18024315e+09
+  -4.38255097e+08  3.16264201e+09  6.22954978e+08 -5.01418072e+09]]
+intercept: [8.54854424e+08] 
+
+2900 adoption events in 4588261 import events
+predicted 517583 adoptions
+
+true pos: 2606
+true neg: 4070384
+false pos: 514977
+false neg: 294 
+
+precision: 0.0050349412557985865
+recall: 0.8986206896551724
+F-1 score: 0.010013775666064019
+AUROC score: 0.8931558784725925
+
+TEST 2 {'loss': 'squared_hinge', 'penalty': 'l1', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l1', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-7.39731659e+11 -4.20938052e+11  4.50859123e+13  8.64686385e+11
+  -5.38787722e+11  1.17867122e+12  4.89586264e+10 -2.39478767e+09
+   4.26909910e+11 -3.09747356e+12 -1.12004554e+11 -1.36876135e+12
+   2.92801733e+11  6.33104475e+11 -7.63032739e+10  6.06523069e+11
+   1.06020339e+12  1.43241643e+12 -3.91860422e+11 -6.08155100e+12
+  -3.40395509e+11  8.34102193e+11 -2.14680710e+11 -2.57470248e+12
+   4.96334338e+11  1.82534583e+12 -5.90267036e+11 -5.78057224e+12
+  -6.43788726e+10  2.94492820e+11  1.58410042e+11 -6.13670332e+10
+  -3.86301908e+11  5.10271348e+10 -3.78730042e+11 -1.74437616e+11]]
+intercept: [-1.66694495e+11] 
+
+2900 adoption events in 4588261 import events
+predicted 166026 adoptions
+
+true pos: 2607
+true neg: 4421942
+false pos: 163419
+false neg: 293 
+
+precision: 0.015702359871345453
+recall: 0.8989655172413793
+F-1 score: 0.030865586114630073
+AUROC score: 0.9316631147584071
+
+TEST 3 {'loss': 'squared_hinge', 'penalty': 'elasticnet', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='elasticnet', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-4.63413548e+10 -2.73676279e+09  1.39318252e+11  4.26299003e+10
+  -2.38915935e+10  1.98700060e+10  9.02938296e+09 -6.05673523e+07
+   5.37379210e+09 -7.41948615e+10  1.37870633e+10 -1.53013133e+10
+   2.28240077e+09  1.48529717e+10 -1.84984995e+09  6.26960075e+09
+   1.83448571e+10  1.75257124e+10 -6.22530167e+09 -5.97886630e+10
+  -3.75543629e+09  2.13139925e+10 -1.52687479e+10 -8.25234804e+10
+   2.89120579e+09  7.94554416e+10 -2.33671497e+10 -1.19632695e+11
+  -8.16721476e+08  3.29181807e+09 -3.12985335e+09 -4.64035146e+09
+   7.54923643e+08  4.89709762e+09 -5.29773194e+09 -5.21675796e+09]]
+intercept: [1.66247286e+09] 
+
+2900 adoption events in 4588261 import events
+predicted 390183 adoptions
+
+true pos: 2568
+true neg: 4197746
+false pos: 387615
+false neg: 332 
+
+precision: 0.00658152712957766
+recall: 0.8855172413793103
+F-1 score: 0.013065942816148243
+AUROC score: 0.9004920466947178
+
+RUN 1
+
+TEST 0 {'loss': 'squared_hinge', 'penalty': 'none', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='none', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-8.17275430e+11 -3.87373412e+11  4.53403167e+13  1.03298682e+12
+  -1.33480622e+12  1.09578339e+12  1.30557733e+11 -7.79569544e+10
+   4.66873563e+11 -3.40668711e+12 -2.27653050e+11 -9.13424085e+11
+   3.38583805e+11  2.04021094e+11 -5.21508558e+10  5.41989321e+11
+   1.47410142e+12  2.49478391e+12 -3.22492918e+11 -6.78835935e+12
+  -5.60698545e+11  6.63376719e+11 -7.28624553e+11 -1.77133783e+12
+  -1.54619359e+11  2.29520180e+12 -5.94451558e+11 -9.87800516e+12
+  -1.66360190e+11  3.37603454e+11  7.59907394e+10 -1.70631908e+11
+   4.77450846e+11 -2.53755319e+11  6.20946926e+11 -1.53937943e+12]]
+intercept: [5.7031196e+10] 
+
+2900 adoption events in 4588261 import events
+predicted 398871 adoptions
+
+true pos: 2753
+true neg: 4189243
+false pos: 396118
+false neg: 147 
+
+precision: 0.0069019808409235064
+recall: 0.9493103448275862
+F-1 score: 0.013704324105025001
+AUROC score: 0.931461408607628
+
+TEST 1 {'loss': 'squared_hinge', 'penalty': 'l2', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l2', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-2.01220336e+10 -1.35866941e+09  5.86082566e+10  2.59646366e+10
+  -1.25994608e+10  8.61341007e+09  4.22476229e+09 -4.36410646e+08
+   2.79137712e+09 -4.97536965e+10  1.21101652e+10 -1.04696193e+10
+   1.46431432e+09  1.01326326e+10 -1.03804854e+09  2.05540450e+09
+   9.89786254e+09  9.18628527e+09 -2.59119332e+09 -3.04562628e+10
+  -1.61953991e+09  1.14020759e+10 -8.87699978e+09 -4.90527907e+10
+   2.99500795e+09  4.71551140e+10 -9.48891843e+09 -5.18127931e+10
+  -1.10076636e+08  1.50750422e+09 -1.53532729e+09 -2.05386658e+09
+   2.70544739e+09  4.62327625e+09  1.32904684e+09 -1.18941412e+10]]
+intercept: [1.32385602e+09] 
+
+2900 adoption events in 4588261 import events
+predicted 544857 adoptions
+
+true pos: 2594
+true neg: 4043098
+false pos: 542263
+false neg: 306 
+
+precision: 0.004760882213131152
+recall: 0.8944827586206896
+F-1 score: 0.009471353173031107
+AUROC score: 0.8881115746995409
+
+TEST 2 {'loss': 'squared_hinge', 'penalty': 'l1', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l1', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-7.91573744e+11 -4.95559613e+11  5.07748536e+13  6.86027859e+11
+  -6.87600583e+11  1.33435070e+12  4.73278727e+10  8.94962658e+09
+   4.53526082e+11 -3.39392426e+12 -1.08854851e+11 -1.52215348e+12
+   3.11849638e+11  7.07189558e+11 -1.23254316e+11  6.97582580e+11
+   1.12906656e+12  7.67918584e+11 -4.86149269e+11 -5.97581449e+12
+  -2.35573852e+11  8.21139190e+11  5.09810429e+11 -1.28083576e+12
+  -6.90193589e+11  1.06771435e+12 -6.53820956e+11 -6.92777791e+12
+  -7.69695637e+10  3.37290432e+11  1.58429911e+11 -8.65224383e+10
+  -3.58576662e+11 -9.81410264e+09 -5.00918501e+11 -1.53200623e+11]]
+intercept: [-1.17616275e+11] 
+
+2900 adoption events in 4588261 import events
+predicted 201763 adoptions
+
+true pos: 2668
+true neg: 4386266
+false pos: 199095
+false neg: 232 
+
+precision: 0.0132234354168009
+recall: 0.92
+F-1 score: 0.026072128328031935
+AUROC score: 0.938290149892233
+
+TEST 3 {'loss': 'squared_hinge', 'penalty': 'elasticnet', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='elasticnet', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-5.04535370e+10 -2.41046526e+09  1.56084110e+11  4.75406341e+10
+  -2.40453026e+10  2.19744262e+10  9.78321627e+09 -1.49127232e+09
+   6.08134723e+09 -8.86118717e+10  1.81998608e+10 -2.09868562e+10
+   3.33181598e+09  2.01268978e+10 -1.85156884e+09  6.15351899e+09
+   1.90954181e+10  1.93545441e+10 -5.81325229e+09 -6.37325882e+10
+  -3.90336749e+09  1.02845648e+10 -2.87936274e+10 -7.59469376e+10
+   1.52300089e+10  8.46783297e+10 -2.51195765e+10 -1.32987334e+11
+  -1.44637217e+09  3.41956497e+09 -2.83311160e+09 -5.28270881e+09
+  -6.12633366e+09  1.26640629e+09 -1.66059592e+09  1.20991981e+09]]
+intercept: [2.6404055e+09] 
+
+2900 adoption events in 4588261 import events
+predicted 451159 adoptions
+
+true pos: 2593
+true neg: 4136795
+false pos: 448566
+false neg: 307 
+
+precision: 0.005747419424194131
+recall: 0.8941379310344828
+F-1 score: 0.011421423207116256
+AUROC score: 0.898156131827593
+
+RUN 2
+
+TEST 0 {'loss': 'squared_hinge', 'penalty': 'none', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='none', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-8.35480186e+11 -4.52995689e+11  5.15510455e+13  9.65557431e+11
+  -7.20961641e+11  1.35484053e+12  6.34522068e+10 -1.51446287e+10
+   4.84245276e+11 -3.14311519e+12 -1.60590533e+11 -1.49037804e+12
+   3.11481048e+11  6.42776509e+11 -1.41464137e+11  6.75298334e+11
+   1.24949028e+12  1.22509785e+12 -3.81049601e+11 -7.28773438e+12
+  -3.25559790e+11 -3.37299300e+11 -3.54681003e+11 -2.90520543e+11
+  -6.34216876e+11  1.92335539e+12 -6.36642946e+11 -6.62802776e+12
+  -8.66647770e+10  3.74104685e+11  1.91278558e+11 -5.47452683e+10
+  -1.93001548e+11 -3.35112238e+11 -2.72317276e+11 -1.99427616e+11]]
+intercept: [-1.08835739e+11] 
+
+2900 adoption events in 4588261 import events
+predicted 194605 adoptions
+
+true pos: 2672
+true neg: 4393428
+false pos: 191933
+false neg: 228 
+
+precision: 0.013730376917345391
+recall: 0.9213793103448276
+F-1 score: 0.02705754284701653
+AUROC score: 0.9397607686572628
+
+TEST 1 {'loss': 'squared_hinge', 'penalty': 'l2', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l2', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-2.10663187e+10 -1.21246858e+09  6.59185693e+10  2.16203130e+10
+  -1.30195679e+10  1.01039004e+10  4.69391742e+09 -5.36290107e+08
+   2.99351465e+09 -4.37785062e+10  9.53348446e+09 -1.26679883e+10
+   2.10303990e+09  1.21028588e+10 -8.81151775e+08  1.66005492e+09
+   1.09232665e+10  1.21232847e+10 -1.88254317e+09 -3.59907100e+10
+  -2.41502980e+09  1.06645189e+10 -8.95570255e+09 -4.64356691e+10
+   4.02476553e+09  4.34059880e+10 -1.06746995e+10 -5.84094498e+10
+  -4.13893843e+08  1.62861259e+09 -1.44123341e+09 -2.26742987e+09
+  -1.27080041e+09  4.06249612e+09 -3.64016154e+09 -1.93903480e+09]]
+intercept: [9.98731501e+08] 
+
+2900 adoption events in 4588261 import events
+predicted 426736 adoptions
+
+true pos: 2545
+true neg: 4161170
+false pos: 424191
+false neg: 355 
+
+precision: 0.00596387462037419
+recall: 0.8775862068965518
+F-1 score: 0.011847238127158806
+AUROC score: 0.8925381848061014
+
+TEST 2 {'loss': 'squared_hinge', 'penalty': 'l1', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l1', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-6.15224512e+11 -4.13216121e+11  4.53518150e+13  1.70312535e+11
+  -1.30102302e+12  1.27853756e+12  1.15759994e+11  3.34637320e+10
+   4.47745926e+11 -2.42396710e+12 -5.50459893e+11 -1.12868218e+12
+   3.38906693e+11  4.20614674e+11 -1.13651168e+11  7.98595538e+11
+   1.36673660e+12  8.71337852e+11 -5.53267219e+11 -6.85257499e+12
+  -3.23906241e+11  3.02521631e+11 -2.18223838e+11 -8.63138301e+11
+  -1.06168645e+12  2.11078026e+12 -6.33773175e+11 -9.56774780e+12
+  -1.65310490e+11  3.52597685e+11  7.97250075e+10 -1.61459246e+11
+  -1.61677540e+11 -3.06433155e+10  1.37928766e+10 -7.41259825e+11]]
+intercept: [-3.30384615e+10] 
+
+2900 adoption events in 4588261 import events
+predicted 261721 adoptions
+
+true pos: 2709
+true neg: 4326349
+false pos: 259012
+false neg: 191 
+
+precision: 0.010350716984880846
+recall: 0.9341379310344827
+F-1 score: 0.020474565510673753
+AUROC score: 0.9388256058341105
+
+TEST 3 {'loss': 'squared_hinge', 'penalty': 'elasticnet', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='elasticnet', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-4.50199739e+10 -2.77565939e+09  1.41807758e+11  4.89658492e+10
+  -2.81575589e+10  2.20801499e+10  9.97967281e+09 -6.36985242e+08
+   6.13243720e+09 -1.04909915e+11  2.30024561e+10 -1.85836849e+10
+   3.54222977e+09  1.82595575e+10 -1.45563918e+09  8.74383710e+09
+   2.21173829e+10  1.50932988e+10 -9.37402960e+09 -6.38430474e+10
+  -2.69498850e+09  2.25219366e+10 -1.70505914e+10 -9.78562725e+10
+   1.06405093e+10  8.68841776e+10 -2.28273434e+10 -1.23526223e+11
+  -8.94340494e+08  3.81299387e+09 -3.08248396e+09 -4.63834789e+09
+  -1.47241499e+10  1.04255229e+10 -1.31124899e+10  1.21789495e+10]]
+intercept: [1.80340325e+09] 
+
+2900 adoption events in 4588261 import events
+predicted 393386 adoptions
+
+true pos: 2533
+true neg: 4194508
+false pos: 390853
+false neg: 367 
+
+precision: 0.006438968341527152
+recall: 0.873448275862069
+F-1 score: 0.01278369662314591
+AUROC score: 0.894104483775124
+
+RUN 3
+
+TEST 0 {'loss': 'squared_hinge', 'penalty': 'none', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='none', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-9.41175703e+11 -3.94673277e+11  4.30215774e+13  1.22882169e+12
+  -1.43907258e+12  1.40509000e+12  4.17063288e+10  1.08777358e+10
+   4.66408380e+11 -3.19534336e+12 -3.35371432e+11 -1.92698271e+12
+   3.77318263e+11  1.26221862e+12 -1.82421090e+11  9.49381688e+11
+   1.42099311e+12  6.21847786e+11 -8.60511181e+11 -5.39144699e+12
+  -1.37352205e+11  4.27033015e+11 -5.06599021e+11 -1.30924819e+12
+  -4.97777029e+10  1.77095949e+12 -5.92924576e+11 -7.47856369e+12
+  -7.97482414e+10  3.03202469e+11  7.51402698e+10 -1.31608154e+11
+  -6.84614644e+10 -9.65294371e+10 -2.86606073e+11 -2.49311654e+11]]
+intercept: [-4.55221371e+10] 
+
+2900 adoption events in 4588261 import events
+predicted 250484 adoptions
+
+true pos: 2696
+true neg: 4337573
+false pos: 247788
+false neg: 204 
+
+precision: 0.010763162517366379
+recall: 0.9296551724137931
+F-1 score: 0.021279954535408707
+AUROC score: 0.9378081214362929
+
+TEST 1 {'loss': 'squared_hinge', 'penalty': 'l2', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l2', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-2.30003268e+10 -1.63794391e+09  6.70359682e+10  2.95742319e+10
+  -1.35505222e+10  9.10357418e+09  4.76815587e+09 -3.79337679e+08
+   3.05328539e+09 -4.99185673e+10  1.09010409e+10 -1.11486600e+10
+   1.37760114e+09  1.07331429e+10 -9.57072011e+08  3.48259808e+09
+   1.06686995e+10  9.01116793e+09 -3.36829480e+09 -3.38682336e+10
+  -1.81348164e+09  1.21168268e+10 -5.05251163e+09 -4.79946060e+10
+  -3.39315744e+09  4.79456761e+10 -1.06379749e+10 -5.92656952e+10
+  -4.07721374e+08  1.77538173e+09 -1.62118380e+09 -2.27727007e+09
+  -6.10972064e+08 -7.47674675e+08 -9.10505646e+08 -2.12667291e+09]]
+intercept: [7.59534957e+08] 
+
+2900 adoption events in 4588261 import events
+predicted 301532 adoptions
+
+true pos: 2495
+true neg: 4286324
+false pos: 299037
+false neg: 405 
+
+precision: 0.00827441200270618
+recall: 0.8603448275862069
+F-1 score: 0.016391180953382038
+AUROC score: 0.8975646212986848
+
+TEST 2 {'loss': 'squared_hinge', 'penalty': 'l1', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l1', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-8.13065217e+11 -3.89325894e+11  4.31648770e+13  6.16455405e+11
+  -1.18730822e+12  1.60151596e+12  9.37512298e+10  3.89203782e+10
+   4.33173453e+11 -2.14870692e+12 -5.31591075e+11 -7.32704501e+11
+   2.68709580e+11  9.83970176e+10 -7.14070189e+10  6.08908293e+11
+   1.24195517e+12  1.16299526e+12 -3.21396759e+11 -6.24270148e+12
+  -3.48247362e+11 -1.68879794e+11 -1.07231760e+12 -1.05148684e+12
+  -9.24837183e+10  2.59996901e+12 -5.89889089e+11 -9.17417570e+12
+  -1.83682374e+11  2.90132777e+11  4.63558220e+10 -1.62674530e+11
+  -3.43728252e+11 -4.63629011e+11 -1.50408165e+10  2.30488473e+11]]
+intercept: [-3.02803965e+10] 
+
+2900 adoption events in 4588261 import events
+predicted 271879 adoptions
+
+true pos: 2707
+true neg: 4316189
+false pos: 269172
+false neg: 193 
+
+precision: 0.009956635120770637
+recall: 0.9334482758620689
+F-1 score: 0.019703106860422377
+AUROC score: 0.9373729047347824
+
+TEST 3 {'loss': 'squared_hinge', 'penalty': 'elasticnet', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='elasticnet', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-4.92620621e+10 -2.69255762e+09  1.46450234e+11  3.51582903e+10
+  -2.27208395e+10  2.09956402e+10  8.96418191e+09  6.69690438e+06
+   5.61008388e+09 -8.01364613e+10  1.54499133e+10 -1.71524987e+10
+   2.96868190e+09  1.64211195e+10 -2.16756404e+09  7.82628417e+09
+   1.83598843e+10  1.41590073e+10 -7.38516628e+09 -5.87764171e+10
+  -3.34551006e+09  1.84482716e+10 -2.14786666e+10 -7.04145610e+10
+   1.65365046e+10  6.11188778e+10 -2.38384731e+10 -1.23266864e+11
+  -1.33428867e+09  3.36393508e+09 -2.54346938e+09 -4.80216928e+09
+  -5.67096347e+08 -1.27247805e+08 -2.32778374e+09 -1.50391524e+09]]
+intercept: [2.46332527e+09] 
+
+2900 adoption events in 4588261 import events
+predicted 564119 adoptions
+
+true pos: 2640
+true neg: 4023882
+false pos: 561479
+false neg: 260 
+
+precision: 0.004679863645791048
+recall: 0.9103448275862069
+F-1 score: 0.009311857274623954
+AUROC score: 0.893947245262207
+
+RUN 4
+
+TEST 0 {'loss': 'squared_hinge', 'penalty': 'none', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='none', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-8.54682319e+11 -3.97745917e+11  4.48497517e+13  1.38044318e+12
+  -1.72093055e+12  1.57354651e+12  8.48246883e+10 -1.97985606e+10
+   5.24724297e+11 -2.48732205e+12 -5.29298975e+11 -1.74425401e+12
+   4.31834654e+11  1.04613634e+12 -7.55717962e+10  7.85870798e+11
+   1.67562298e+12  8.45967643e+11 -4.19269487e+11 -7.89799783e+12
+  -2.26373816e+11  6.20211439e+11 -6.57568675e+11 -2.28999835e+12
+   4.49222514e+11  2.18110486e+12 -5.80578872e+11 -8.03940816e+12
+  -9.09618760e+10  3.30936352e+11  1.09064932e+11 -1.18827710e+11
+  -3.07131713e+11 -2.59702944e+11 -2.45364228e+11  1.76068921e+11]]
+intercept: [5.80028304e+10] 
+
+2900 adoption events in 4588261 import events
+predicted 517639 adoptions
+
+true pos: 2784
+true neg: 4070506
+false pos: 514855
+false neg: 116 
+
+precision: 0.005378265547997736
+recall: 0.96
+F-1 score: 0.010696604865341502
+AUROC score: 0.9238588368505773
+
+TEST 1 {'loss': 'squared_hinge', 'penalty': 'l2', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l2', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-2.20570867e+10 -1.55436788e+09  6.36969048e+10  2.20781082e+10
+  -1.34355355e+10  9.90940427e+09  4.21838493e+09 -3.22794211e+08
+   2.82857632e+09 -5.57377332e+10  1.28578563e+10 -7.53976497e+09
+   1.28709955e+09  7.03194555e+09 -8.44860079e+08  3.41476151e+09
+   1.10059134e+10  9.55668620e+09 -3.59498747e+09 -3.10226427e+10
+  -2.12081805e+09  3.85012976e+09 -9.60815357e+09 -3.26890411e+10
+  -4.58323548e+08  4.12750662e+10 -1.03531572e+10 -5.65637251e+10
+  -6.78550196e+08  1.68300930e+09 -1.43773413e+09 -2.13111785e+09
+  -2.11901197e+09  4.85184054e+09 -5.74921222e+09  8.03539880e+08]]
+intercept: [4.75321905e+08] 
+
+2900 adoption events in 4588261 import events
+predicted 206104 adoptions
+
+true pos: 2428
+true neg: 4381685
+false pos: 203676
+false neg: 472 
+
+precision: 0.011780460350114505
+recall: 0.8372413793103448
+F-1 score: 0.02323400509081166
+AUROC score: 0.8964113150824833
+
+TEST 2 {'loss': 'squared_hinge', 'penalty': 'l1', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='l1', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-3.23301151e+11 -4.36484664e+11  4.81209011e+13  1.56847687e+11
+  -1.02663123e+12  1.45880578e+12  1.11007977e+11 -4.24930286e+10
+   5.25051886e+11 -3.53209094e+12  3.23042098e+10 -2.08603976e+12
+   4.53953013e+11  1.28961324e+12 -1.09475693e+11  7.29074181e+11
+   1.57235580e+12  1.45027929e+12 -2.03479459e+11 -9.17280738e+12
+  -3.57777919e+11  1.33690961e+11  1.25829721e+10 -1.49111223e+12
+  -3.45034913e+11  2.03349141e+12 -6.06290224e+11 -6.07486249e+12
+  -7.99734434e+10  3.65588581e+11  2.62680322e+11 -1.51255701e+10
+  -8.02014783e+11 -4.20361724e+11 -5.19452704e+11  7.56277036e+11]]
+intercept: [-1.18485767e+11] 
+
+2900 adoption events in 4588261 import events
+predicted 204763 adoptions
+
+true pos: 2680
+true neg: 4383278
+false pos: 202083
+false neg: 220 
+
+precision: 0.013088302085826052
+recall: 0.9241379310344827
+F-1 score: 0.025811049633300106
+AUROC score: 0.940033295915655
+
+TEST 3 {'loss': 'squared_hinge', 'penalty': 'elasticnet', 'shuffle': True, 'fit_intercept': True}
+Training classifier...
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=50, n_jobs=1,
+       penalty='elasticnet', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False) 
+
+
+coefficients: [[-4.93735698e+10 -2.96060775e+09  1.46456240e+11  5.05591229e+10
+  -2.32770839e+10  1.76928608e+10  9.44614205e+09  4.98662264e+08
+   5.52489764e+09 -7.47382132e+10  1.38340334e+10 -1.88291117e+10
+   2.73479428e+09  1.84178163e+10 -1.75149674e+09  6.26254445e+09
+   1.72352084e+10  1.48619127e+10 -6.03878384e+09 -5.81013126e+10
+  -2.87287639e+09  1.61315790e+10 -2.68291338e+10 -7.97530886e+10
+   1.51538182e+10  8.11531459e+10 -2.38887680e+10 -1.24194376e+11
+  -6.38058253e+08  2.78032561e+09 -3.07632400e+09 -4.41745143e+09
+   4.06899718e+09  8.07243749e+09 -5.45708342e+08 -1.49316627e+10]]
+intercept: [1.7731765e+09] 
+
+2900 adoption events in 4588261 import events
+predicted 472181 adoptions
+
+true pos: 2585
+true neg: 4115765
+false pos: 469596
+false neg: 315 
+
+precision: 0.005474595547046578
+recall: 0.8913793103448275
+F-1 score: 0.010882354798444897
+AUROC score: 0.8944836541618063
+
+All results saved to predict_tests/results_2018-07-27_19:56:52.csv
