@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
 
 	#stream data from sorted json files
-	for year in range(1993, 1994):		#read and process 1990 through 2018
+	for year in range(1993, 2018):		#read and process 1990 through 2018
 
 		#reset counters/sets for this year
 		year_count = 0
@@ -93,8 +93,8 @@ if __name__ == "__main__":
 				#if an added lib is in updated_lib but not in the user's quiver, then it must be an adoption
 				if lib in updated_libs and lib not in quiver[user]:
 					#found an adoption! update counts
-					year_repo_adopt = 0
-					repo_adopt = 0
+					year_repo_adopt += 1
+					repo_adopt += 1
 
 
 			#if added a library, count as import commit
@@ -123,8 +123,3 @@ if __name__ == "__main__":
 
 	#print same data for all years
 	print("\nALL ,", overall_count, ",", import_commit_count, ",", len(all_users), ",", repo_adopt)
-	'''
-	print("\ntotal commits", overall_count)
-	print("total users", len(all_users))
-	'''
-
