@@ -84,7 +84,7 @@ if __name__ == "__main__":
 	commit_count = 0
 
 	#stream data from sorted json files
-	for year in range(1990, 1995): #2018):		#read and process 1993 through 2018
+	for year in range(1990, 2012):		#read and process 1993 through 2018
 
 		print("Streaming", year)
 
@@ -146,14 +146,14 @@ if __name__ == "__main__":
 			#get user id / 1000 (integer divide)
 			mod = user // 1000
 
-			#add list of adopted libs to commit before saving
+			#add list of adopted libs and commit id to commit before saving
 			c['adopted_libs'] = adopted
+			c['id'] = commit_count
 
 			#add this commit to user's list
 			by_user[mod][user].append(c)
 
 			commit_count += 1
-
 			
 		f.close()
 
