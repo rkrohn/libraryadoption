@@ -146,6 +146,9 @@ if __name__ == "__main__":
 			#get user id / 1000 (integer divide)
 			mod = user // 1000
 
+			#add list of adopted libs to commit before saving
+			c['adopted_libs'] = adopted
+
 			#add this commit to user's list
 			by_user[mod][user].append(c)
 
@@ -153,7 +156,6 @@ if __name__ == "__main__":
 
 			
 		f.close()
-	exit(0)
 
 	#save each "chunk" (defined by /1000 key) as a separate pickle
 	for key in by_user:
