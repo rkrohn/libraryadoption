@@ -1,1 +1,17 @@
 *.pyc
+data_files/all_commits_SUB.json
+data_files/all_commits_SUB_sorted.json
+data_files/all_commits_by_year/
+data_files/complete_event_features/
+data_files/event_features/
+data_files/new_event_features/
+data_files/user_commits/
+github_files/157K_repos.json
+github_files/45K_contrib.json
+github_files/github_all_contrib.json
+github_files/github_all_repos.json
+graphs_adop/ALL_repo_adopt_graph.gexf
+graphs_adop/ALL_user_adopt_graph.gexf
+old_datafiles/
+BACKUP/
+
