@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
 
 	#stream data from sorted json files
-	for year in range(1993, 2018):		#read and process 1990 through 2018
+	for year in range(1990, 2018):		#read and process 1990 through 2018
 
 		#reset counters/sets for this year
 		year_count = 0
