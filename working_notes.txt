@@ -582,7 +582,303 @@ TODO:
 	determine for sure if filtered data is the way to go
 	try to tackle prediction vs classification
 	read meme-tracker paper?
+	downsampling?
+	
+7.25
+
+data gen on August 2012
+
+looks like some of the runs died - memory error? let's combine the data and see what holes we have to fill (hopefully not the long ones)
+
+bleh - looks like one finished, one is still running, and the rest died pretty early
+	guess we need to run them in smaller batches
+	
+6 months training, unfiltered x5 is what finished
+1 year training, unfiltered is still running (midway through repeat #4)
+
+one strange error though:
+	testing_events_raw = testing_events_raw[rows[0]]
+	IndexError: index 5040771 is out of bounds for axis 0 with size 5040771
+
+runs:
+	1 year training, unfiltered x4 - DONE
+	1 year training, filtered x5 - RUNNING
+	1 month, unfiltered x5 - DONE
+	1 month, filtered x5 - DONE
+	6 months, filtered x5 - RUNNING
+	6 months, unfiltered x5	- DONE
+	3 months, unfiltered x5
+	3 months, filtered x5
+	2 years, filtered x5
+	2 years, unfiltered x5
+
+STR="$(date +"%F_%T")" && time python3 new_classify.py "predict_tests/results_$STR" CUPLS > "predict_tests/test_$STR.log" &
+
+tried 6 months, filtered x5, died with the same IndexError - what's with that?
+	ugh, found the error - copy-paste again
+	also, don't think I can trust any of the existing filtered results, so better kill all of those
+fixed bug, try that again
+
+let's think about downsampling the negative cases
+
+Jan 2009 breakdown of 1,161,454 events:
+	102,566 addition events  = 8.83%
+		32,343 first usages = 2.78%
+			2,397 "true" adoptions = 0.206%
+			29,946 unflagged adoptions = 2.58%
+		70,223 repeat usages = 6.05%
+	1,058,888 non-additions = 91.17%
+		954,094 "missed" adoptions (never used, still not committed) = 82.15%
+		104,794 updated and not committed after previous usage = 9.02%
+
+filtering removes the 6.05% repeat usages and the 9.02% updated, but not added, previously used packages
+
+this leaves a few categories:
+	positive
+		0.2% "true" adoptions
+		2.5% unflagged first usages (kind of a negative?)
+	negative
+		82% missed/skipped adoptions (non-additions)
+		
+hella unbalanced, downsampling is probably a good idea - and might speed things up
+
+(aside idea: can we weight longer training histories toward more recent stuff? weighting could be accomplished through biased sampling)
+
+TODO:
+	look at results so far, try to narrow down the configurations to the best/most promising
+	determine for sure if filtered data is the way to go
+	try to tackle prediction vs classification
+	read meme-tracker paper?
+	downsampling - finish and test
+	
+7.26
+
+data gen update - October 2012
+	seems to be slowing down?
+
+runs:
+	1 year training, unfiltered x4 - DONE
+	1 year training, filtered x5 - DONE
+	1 month, unfiltered x5 - DONE
+	1 month, filtered x5 - DONE
+	6 months, filtered x5 - DONE
+	6 months, unfiltered x5	- DONE
+	3 months, unfiltered x5
+	3 months, filtered x5
+	2 years, filtered x5
+	2 years, unfiltered x5
+	
+one run finished, other should be getting close
+
+once those are done, need to narrow down the classifier configurations, because this is taking FOREVER
+	hopefully also narrow to filtered or not before doing ablation test
+	
+added downsample column to output files (both existing and future)
+	updated combine program accordingly
+	
+huzzah! data gen finished October 2012!
+
+still waiting on filtered 1 year data (3 tests left!) - but need to make slides
+
+filtered better than not? yes, in all cases (configurations and training periods)
+
+yay! run finished - only took a day...
+	updated plot for slides
+
+adoption chains - do collaborators adopt the same library in sequence?
+
+7.27
+
+data gen to Jan 2013 - maybe faster when I don't have other stuff running? doubt it though
+
+reduced classifier configurations by half, let's run a few tests (just 6 month training, 3x) with 4:1 downsample ratio
+	3X - DONE (and quite fast too!)
+	2X - DONE
+
+STR="$(date +"%F_%T")" && time python3 new_classify.py "predict_tests/results_$STR" CUPLS > "predict_tests/test_$STR.log" &
+
+go ahead and do 1 year also - DONE
+and 1 month - DONE
+
+try a 1:1 ratio - all DONE
+	1 year
+	1 month
+	6 months
+	
+7.30
+
+data gen up to July 2013
+
+runs finished, run same training periods with a 2:1 downsample ratio - DONE
+	all done, make a plot (plots?)
+	
+meeting notes:
+	write intro and abstract last
+	maybe start with library adoption definition
+	
+	more experiments about what happens around library adoption
+		what else does a user do with a newly adopted library?
+	given an adoption (and a commit that wasn't an adoption), pull user's commits afterwards containing same libraray
+		or include all of their commits, because refactor?
+	compare to average burstiness over all (per individual user)
+		burstiness - see paper? (skim only, very math)
+		burstiness of everyday, of all users - typical activity, baseline
+			for different strata of users - differernt burstiness
+		burstiness score for all users - has some distribution
+		burstiness of sequences immediately following an adoption - 12 hours? X hours?
+			for all users, for all their adoptions
+			
+	burstiness of every user, all time, for all commits
+	
+	maybe instead of burstiness, just # of commits in a time window
+		define a session - 1 hour, 2 hours, 3... etc
+		distribution of commits within a session - time between activity
+		
+	session - continuous activity without a gap of x hours
+		plot gap time on x-axis (discrete), # of commits meeting criteria on y-axis (see session plot layout image)
+		pick from there
+	average commits per session vs average commits per session containing adoption
+		for a particular user
+	single commit is a 0-hour session	
+	
+	for an individual, if delay between activity is more than X hours, started a new session
+	
+	see reddit paper for more details on defining session length - find delay, then using delay get avg session length
+	
+	given a session length, where do adoptions fall?
+	given an adoption happens, is there more activity within a session than normal?
 	
 	
+GitHub started April 2008, StackOverflow September 2008
+		so probably start somewhere around there
 	
+let's make this plot!
+
+first, does commit_analysis.py find all the adoptions?
+
+year , commit_count , import_commit_count , num_users , intra-repo_adopts
+1990 , 2523 , 264 , 6 , 0
+1991 , 10680 , 1032 , 4 , 0
+1992 , 15064 , 3080 , 12 , 20
+1993 , 6936 , 1298 , 13 , 8
+1994 , 13958 , 2136 , 18 , 0
+1995 , 30126 , 3480 , 16 , 3
+1996 , 37284 , 3939 , 27 , 13
+1997 , 53766 , 4373 , 32 , 14
+1998 , 73004 , 6281 , 59 , 43
+1999 , 62020 , 5986 , 119 , 59
+2000 , 120050 , 13277 , 252 , 499
+2001 , 181902 , 20297 , 428 , 637
+2002 , 187556 , 21872 , 620 , 653
+2003 , 208286 , 30122 , 894 , 709
+2004 , 234022 , 26965 , 1146 , 783
+2005 , 307315 , 49380 , 1586 , 4859
+2006 , 521339 , 86422 , 2414 , 12662
+2007 , 787204 , 114632 , 3720 , 11185
+2008 , 1012142 , 150164 , 6401 , 19368
+2009 , 1262158 , 207409 , 10745 , 30817
+2010 , 1848185 , 286452 , 15005 , 38029
+2011 , 2459750 , 360666 , 20513 , 55263
+2012 , 3160030 , 458908 , 28743 , 80796
+2013 , 3590287 , 549301 , 38643 , 82672
+2014 , 3340657 , 516844 , 47132 , 82210
+2015 , 3328950 , 501049 , 55210 , 63233
+2016 , 2901661 , 465892 , 59458 , 44994
+2017 , 2986646 , 412787 , 59737 , 27569
+
+
+2008
+386 + 1068 + 2123 + 1026 + 1177 + 2212 + 1783 + 1467 + 923 + 2964 + 2950 + 1289 = 19368 adoption events
+
+hooray! looks correct
+
+how long does commit_analysis.py take for 1993 through 2018? a while - still running
+
+to just stream with minimal processing? ~40 minutes
+
+seems like the all_commits_by_year folder is only 4.2 GB, so let's go ahead and create new files - commits by user!
+	chunk dictionary to 1000 users each (by user id) and pickle each one separately
+
+chunking code seems to work!
+	have to decide if want adoption labels on these - waiting on timed adoption count run to decide
+	also waiting on a min/max user_id run, but I don't think it matters
 	
+7.31
+
+data gen progress: August 28, 2013
+
+results of min/max user id:
+	min -5
+	max 170412
+hmm... negative 5? was that my sentinel? need to look into that
+
+adoption-identifying run of commit_analysis.py took 286 minutes ~= 5 hours
+
+instead of identifying the adoptions on the fly, could we pull the labels from the precomputed stuff?
+	might be worth a try
+
+trying - but have to keep track of empty_events too - ones where no libraries from added or updated
+	actually, don't need any info from empty_events - those are commits with no imports, where no libs were updated
+only care about commits where they added - and could have adopted
+
+something is failing, commit user mismatch - why?
+
+FAIL
+2547 {'add_libs': [], 'del_libs': [], 'user': 16996, 'repo': 'ppython__nascheme', 'time': 672262048}
+[2547, 16995, 'python-ast__banga', 662753474, 1, 0, 0, 49, 0, 0, 34, 662753475, 957341.5607223321, 2, 2, 0.0, 0.10377358490566038, 0.0, 0.09090909090909091, 'poly', 1, 0, 0, 0, 0, None, 0, 0, None, 0, 0, 0, 0, 0, None, None, None, None, None, None, 0, 0, 0, 0] 0
+
+features are first commit in 1-1991
+but date of commit says 4-1991?
+
+ugh... bad counter reset, everything is fine now
+
+fixed the code, started it up for 1990-2012 (as far as we can go for now)
+	see how long it takes! (and if we overflow the memory...)
+	
+so... theoretically we have a list of commits by user (and sorted for each user)
+
+now to create the delay/session plot:
+	plot gap time on x-axis (discrete), # of commits meeting criteria on y-axis (see session plot layout image)
+so for each user:
+	step through commits in time-order
+	compute delay between current commit and previous
+	increment counter of corresponding delay bin
+	plot!
+bins:
+	exactly 0 (simultaneous commits)
+	<= 1
+	1-2 hours
+	2-3 hours
+	....
+	etc
+do all hour-wide bins for now and save the data, can always combine later
+
+user commit files are done! for 1990-2011
+	~46 minutes to run
+	need to rerun once all data gen is done
+spot-check on the files looks good!	
+yep, commit counts match up - everything is accounted for!
+
+delay program running - plot later
+	finished, only takes ~2.5 minutes
+	
+8.1
+
+data gen up to October 2013 - just keep running, just keep running...
+
+let's get this plot made - even if Excel doesn't want to
+
+whip up a quick plot - ugh, no clear break point
+
+try again with half-hour bins?
+	maybe helpful?
+	
+made a first-pass at session analysis - identifying sessions given a maximum inactivity period, need to decide what data to dump for plotting
+
+8.2
+
+data gen up to 12-24-2013 - woohoo, almost finished 2013!
+
+
+
+
