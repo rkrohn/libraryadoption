@@ -6,6 +6,7 @@ import pickle
 from collections import defaultdict
 from math import ceil
 from datetime import timedelta
+import numpy as np
 
 #given a filepath, load pickled data
 def load_pickle(filename):
@@ -16,7 +17,6 @@ def load_pickle(filename):
 
 #dump data to file
 def dump_data(data, filename):
-
 	#save dictionary chunk to file
 	pik = (filename)
 	with open(pik, "wb") as f:
@@ -48,9 +48,27 @@ total_adopt_commits = 0
 total_adopt_libs = 0
 total_adopt_sessions = 0
 
-#session data dictionaries
-length_to_commits = defaultdict(list)	#session length (seconds) -> number of commits in session
-length_to_freq = defaultdict(int)		#session length (seconds) -> frequency (number of sessions with this length)
+#functions to set up defaultdict to allow for pickling
+def ddi(): return defaultdict(int)
+def ddl(): return defaultdict(list)
+
+#all session data balled up into a single mega-object
+#some of this is tracked as data is processed, others is constructed from lists after the fact
+
+#first key is session length binned by half-hour
+#second key is one of the following, each specific to that particular length:
+session_length_counts = defaultdict(ddi)
+	#	freq - number of sessions
+	#	adopt_freq - number of sessions with an adoption
+	#	avg_commit_count - average number of commits for all sessions
+	#	avg_adopt_commit_count - average number of adoption commits for all sessions
+	#	avg_commits_when_adopt - average number of commits when session contains adoption
+	#	avg_commits_no_adopt - average number of commits when session does not contain adoption
+session_length_lists = defaultdict(ddl)
+	#	all_commits - list of session commit counts
+	#	adopt_commits - list of session adoption commit counts
+	#	commits_when_adopt - list of session commit counts for sessions containing adoption
+	#	commits_no_adopt - list of session commit counts for sessions not containing adoption
 
 #process each file one at a time
 for file in files:
@@ -105,8 +123,17 @@ for file in files:
 						#print("      ", session_adopt_commits, "adoption commits adopting", session_adopt_libs, "libraries")
 
 					#add this session data to global tracking
-					length_to_commits[length].append(session_commit_count)
-					length_to_freq[length] += 1
+					len_bin = ceil(length / 1800) / 2		#compute half-hour bin for this session
+					#update all the counters
+					session_length_counts[len_bin]['freq'] += 1					
+					session_length_lists[len_bin]['all_commits'].append(session_commit_count) 
+					session_length_lists[len_bin]['adopt_commits'].append(session_adopt_commits)
+					#session contains adoption?
+					if session_adopt_commits != 0:
+						session_length_counts[len_bin]['adopt_freq'] += 1
+						session_length_lists[len_bin]['commits_when_adopt'].append(session_commit_count)
+					else:
+						session_length_lists[len_bin]['commits_no_adopt'].append(session_commit_count)
 
 					#reset session tracking for new session
 					session_start = c['time']
@@ -141,8 +168,17 @@ for file in files:
 			#print("      ", session_adopt_commits, "adoption commits adopting", session_adopt_libs, "libraries")
 
 		#add this session data to global tracking
-		length_to_commits[length].append(session_commit_count)
-		length_to_freq[length] += 1
+		len_bin = ceil(length / 1800) / 2		#compute half-hour bin for this session
+		#update all the counters
+		session_length_counts[len_bin]['freq'] += 1					
+		session_length_lists[len_bin]['all_commits'].append(session_commit_count) 
+		session_length_lists[len_bin]['adopt_commits'].append(session_adopt_commits)
+		#session contains adoption?
+		if session_adopt_commits != 0:
+			session_length_counts[len_bin]['adopt_freq'] += 1
+			session_length_lists[len_bin]['commits_when_adopt'].append(session_commit_count)
+		else:
+			session_length_lists[len_bin]['commits_no_adopt'].append(session_commit_count)
 
 		print("User", user, "made", len(commits), "commits across", user_sessions, "sessions")
 		if user_adopt_sessions != 0:
@@ -154,33 +190,38 @@ for file in files:
 		total_adopt_commits += user_adopt_commits
 		total_adopt_libs += user_adopt_libs
 
-	break
-
 print("Processed", total_commit_count, "commits and", total_user_count, "users in", total_sessions, "sessions")
 print("   ", total_adopt_libs, "libraries adopted in", total_adopt_commits, " commits across", total_adopt_sessions, "sessions")
 
-exit(0)
+#compute averages from lists
+for length in session_length_lists:
+	session_length_counts[length]['avg_commit_count'] = sum(session_length_lists[length]['all_commits']) / session_length_counts[length]['freq']
+	session_length_counts[length]['avg_adopt_commit_count'] = sum(session_length_lists[length]['adopt_commits']) / session_length_counts[length]['freq']
+	#average commits when adoption only defined if there is an adoption in at least one session of this length
+	if len(session_length_lists[length]['commits_when_adopt']) == 0:
+		session_length_counts[length]['avg_commits_when_adopt'] = None
+	else:
+		session_length_counts[length]['avg_commits_when_adopt'] = sum(session_length_lists[length]['commits_when_adopt']) / session_length_counts[length]['adopt_freq']
+	#average commits no adoption only defined if divisor not 0
+	if session_length_counts[length]['freq'] - session_length_counts[length]['adopt_freq'] == 0:
+		session_length_counts[length]['avg_commits_no_adopt'] = None
+	else:
+		session_length_counts[length]['avg_commits_no_adopt'] = sum(session_length_lists[length]['commits_no_adopt']) / (session_length_counts[length]['freq'] - session_length_counts[length]['adopt_freq'])
 
-#convert exact length to freq mapping to half hour bins, because not many match-ups
-length_bin_to_freq = defaultdict(int)
-for length, freq in length_to_freq.items():
-		length_bin_to_freq[ceil(length / 1800) / 2] += freq
-#print to file and pickle
-print_sorted(length_bin_to_freq, "session_length_freq.txt")
-dump_data(length_bin_to_freq, "session_length_freq.pkl")
+#convert numeric data to np array for output as csv
+columns = ['freq', 'adopt_freq', 'avg_commit_count', 'avg_adopt_commit_count', 'avg_commits_when_adopt', 'avg_commits_no_adopt']
+results = []
+results.append(['length'] + columns)	#headers for data output
+for length in session_length_counts:
+	row = [length]
+	for col in columns:
+		row.append(session_length_counts[length][col])
+	results.append(row)
 
-#convert exact length to commit count list to half hour bins also
-length_bin_to_commits = defaultdict(list)
-for length, commits in length_to_commits.items():
-	length_bin_to_commits[ceil(length / 1800) / 2].extend(commits)
-#print to file and pickle
-print_sorted(length_bin_to_commits, "session_length_commits.txt")
-dump_data(length_bin_to_commits, "session_length_commits.pkl")
+#save numeric data as csv
+np.savetxt("results/sessions_adopt_data.csv", np.array(results), delimiter=",", fmt="%s")
+print("\nNumeric results saved to results/sessions_adopt_data.csv")
 
-#also do an average commit count for each binned session length
-length_bin_to_average_commits = {}
-for length, commits in length_bin_to_commits.items():
-		length_bin_to_average_commits[length] = sum(commits)/len(commits)
-#print to file and pickle
-print_sorted(length_bin_to_average_commits, "session_length_average_commits.txt")
-dump_data(length_bin_to_average_commits, "session_length_average_commits.pkl")
+#pickle up both dictionaries, in case we need them later
+dump_data(session_length_counts, "results/session_length_numeric.pkl")
+dump_data(session_length_lists, "results/session_length_lists.pkl")
