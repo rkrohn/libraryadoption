@@ -120,21 +120,21 @@ length_bin_to_freq = defaultdict(int)
 for length, freq in length_to_freq.items():
 		length_bin_to_freq[ceil(length / 1800) / 2] += freq
 #print to file and pickle
-print_sorted(length_bin_to_freq, "session_length_freq.txt")
-dump_data(length_bin_to_freq, "session_length_freq.pkl")
+print_sorted(length_bin_to_freq, "results/session_length_freq.txt")
+dump_data(length_bin_to_freq, "results/session_length_freq.pkl")
 
 #convert exact length to commit count list to half hour bins also
 length_bin_to_commits = defaultdict(list)
 for length, commits in length_to_commits.items():
 	length_bin_to_commits[ceil(length / 1800) / 2].extend(commits)
 #print to file and pickle
-print_sorted(length_bin_to_commits, "session_length_commits.txt")
-dump_data(length_bin_to_commits, "session_length_commits.pkl")
+print_sorted(length_bin_to_commits, "results/session_length_commits.txt")
+dump_data(length_bin_to_commits, "results/session_length_commits.pkl")
 
 #also do an average commit count for each binned session length
 length_bin_to_average_commits = {}
 for length, commits in length_bin_to_commits.items():
 		length_bin_to_average_commits[length] = sum(commits)/len(commits)
 #print to file and pickle
-print_sorted(length_bin_to_average_commits, "session_length_average_commits.txt")
-dump_data(length_bin_to_average_commits, "session_length_average_commits.pkl")
+print_sorted(length_bin_to_average_commits, "results/session_length_average_commits.txt")
+dump_data(length_bin_to_average_commits, "results/session_length_average_commits.pkl")

@@ -76,6 +76,6 @@ for key in sorted(bins.keys()):
 	print("%s: %s" % (key, bins[key]))
 
 #and save a pickle too
-dump_data(bins, "delay_freq.pkl")
+dump_data(bins, "results/delay_freq.pkl")
 
 print("Processed", commit_count, "commits")
