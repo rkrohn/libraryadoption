@@ -46,6 +46,7 @@ total_user_count = 0
 total_sessions = 0
 total_adopt_commits = 0
 total_adopt_libs = 0
+total_adopt_sessions = 0
 
 #session data dictionaries
 length_to_commits = defaultdict(list)	#session length (seconds) -> number of commits in session
@@ -70,7 +71,10 @@ for file in files:
 		session_adopt_libs = 0				#number of libraries adopted by user in current session
 
 		#user variables/counters
-		session_count = 1			#number of sessions for this user
+		user_sessions = 1			#number of sessions for this user
+		user_adopt_sessions = 0		#number of sessions featuring adoptions for this user
+		user_adopt_commits = 0		#number of adoption commits for this user
+		user_adopt_libs = 0			#number of libraries adopted by this user
 
 		total_commit_count += len(commits)
 
@@ -91,53 +95,69 @@ for file in files:
 				if delay >= max_inactive:
 					length = prev_commit - session_start		#length of this session, from first commit to last
 
-					print("   ", timedelta(seconds=(prev_commit - session_start)).__str__(), "session with", session_commit_count, "commits")
+					#print("   ", timedelta(seconds=(length)).__str__(), "session with", session_commit_count, "commits")
 
-					#add this session data to tracking
+					#update user adoption counters if this session contained an adoption
+					if session_adopt_commits != 0:
+						user_adopt_sessions += 1
+						user_adopt_commits += session_adopt_commits
+						user_adopt_libs += session_adopt_libs
+						#print("      ", session_adopt_commits, "adoption commits adopting", session_adopt_libs, "libraries")
+
+					#add this session data to global tracking
 					length_to_commits[length].append(session_commit_count)
 					length_to_freq[length] += 1
 
-					#reset tracking for new session
+					#reset session tracking for new session
 					session_start = c['time']
 					session_commit_count = 1
 					session_adopt_commits = 0
 					session_adopt_libs = 0
-					session_count += 1		#add to user's session counter
-				#another commit to current session
+
+					user_sessions += 1		#add to user's session counter
+
+				#delay not too long, add commit to current session
 				else:
 					session_commit_count += 1
 
-				#check if this commit contains an adoption, if so flag the session as adopting
+				#check if current commit contains an adoption, if so flag the session as adopting
 				if c['adopted_libs']:
 					session_adopt_commits += 1
 					session_adopt_libs += len(c['adopted_libs'])
-					print(user, "adopting", len(c['adopted_libs']), "libraries")
-					#print(c['adopted_libs'])
+					#print(user, "adopting", len(c['adopted_libs']), "libraries")
 
 			prev_commit = c['time']	#update prev for next commit
 
 		#handle last session for this user
 		length = prev_commit - session_start		#length of this session, from first commit to last
 
-		print("   ", timedelta(seconds=(prev_commit - session_start)).__str__(), "session with", session_commit_count, "commits")
+		#print("   ", timedelta(seconds=(length)).__str__(), "session with", session_commit_count, "commits")
 
-		#add this session data to tracking
+		#update user adoption counters if this session contained an adoption
+		if session_adopt_commits != 0:
+			user_adopt_sessions += 1
+			user_adopt_commits += session_adopt_commits
+			user_adopt_libs += session_adopt_libs
+			#print("      ", session_adopt_commits, "adoption commits adopting", session_adopt_libs, "libraries")
+
+		#add this session data to global tracking
 		length_to_commits[length].append(session_commit_count)
 		length_to_freq[length] += 1
 
-		#print("User", user, "made", len(commits), "commits across", session_count, "sessions")
-		if session_adopt_commits != 0:
-			print(user, "   ", session_adopt_commits, "adoption commits adopting", session_adopt_libs, "libraries")
+		print("User", user, "made", len(commits), "commits across", user_sessions, "sessions")
+		if user_adopt_sessions != 0:
+			print("   ", user_adopt_libs, "libraries adopted in", user_adopt_commits, "commits across", user_adopt_sessions, "sessions")		
 
-		#update global counters
-		total_sessions += session_count 		#keep count of total number of sessions across all users
-		total_adopt_commits += session_adopt_commits
-		total_adopt_libs += session_adopt_libs
+		#update global counters based on user's entire history
+		total_sessions += user_sessions 		#keep count of total number of sessions across all users
+		total_adopt_sessions += user_adopt_sessions
+		total_adopt_commits += user_adopt_commits
+		total_adopt_libs += user_adopt_libs
 
 	break
 
 print("Processed", total_commit_count, "commits and", total_user_count, "users in", total_sessions, "sessions")
-print("   ", total_adopt_commits, "adoption commits adopting", total_adopt_libs, "libraries")
+print("   ", total_adopt_libs, "libraries adopted in", total_adopt_commits, " commits across", total_adopt_sessions, "sessions")
 
 exit(0)
 
