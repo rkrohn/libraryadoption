@@ -208,11 +208,11 @@ for length in session_length_lists:
 	else:
 		session_length_counts[length]['avg_commits_no_adopt'] = sum(session_length_lists[length]['commits_no_adopt']) / (session_length_counts[length]['freq'] - session_length_counts[length]['adopt_freq'])
 
-#convert numeric data to np array for output as csv
+#convert numeric data to sorted np array for output as csv
 columns = ['freq', 'adopt_freq', 'avg_commit_count', 'avg_adopt_commit_count', 'avg_commits_when_adopt', 'avg_commits_no_adopt']
 results = []
 results.append(['length'] + columns)	#headers for data output
-for length in session_length_counts:
+for length in sorted(session_length_counts.keys()):
 	row = [length]
 	for col in columns:
 		row.append(session_length_counts[length][col])
