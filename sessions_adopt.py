@@ -53,6 +53,9 @@ def log_session(user_adopt_sessions, user_adopt_commits, user_adopt_libs):
 	if session_adopt_commits != 0:
 		session_length_counts[len_bin]['adopt_freq'] += 1
 		session_length_lists[len_bin]['commits_when_adopt'].append(session_commit_count)
+
+		adopt_commit_positions[session_commit_count].extend(session_adopt_positions)
+		adopt_commit_times[length].extend(session_adopt_times)
 	else:
 		session_length_lists[len_bin]['commits_no_adopt'].append(session_commit_count)
 
@@ -98,6 +101,15 @@ session_length_lists = defaultdict(ddl)
 	#	commits_when_adopt - list of session commit counts for sessions containing adoption
 	#	commits_no_adopt - list of session commit counts for sessions not containing adoption
 
+#dictionary tracking adoption event positions within sessions
+#key is number of commits in that session, value is list of commit numbers of adoption events (numbers start at 1)
+#list covers all adoption events, not just a particular session or user
+adopt_commit_positions = defaultdict(list)
+
+#another adoption position dictionary
+#key is length of session in seconds, value is time of adoption events measured in seconds from session start
+#again, covers all adoption events, not a single session or user
+adopt_commit_times = defaultdict(list)
 
 #process each file one at a time
 for file in files:
@@ -116,6 +128,8 @@ for file in files:
 		session_commit_count = 1		#number of commits in current session
 		session_adopt_commits = 0			#number of adoption commits by user in current session
 		session_adopt_libs = 0				#number of libraries adopted by user in current session
+		session_adopt_positions = []		#list of commit numbers of adoption commits
+		session_adopt_times = []			#list of adoption times measured from session start
 
 		#user variables/counters
 		user_sessions = 1			#number of sessions for this user
@@ -148,6 +162,8 @@ for file in files:
 					session_commit_count = 1
 					session_adopt_commits = 0
 					session_adopt_libs = 0
+					session_adopt_positions = []
+					session_adopt_times = []
 
 					user_sessions += 1		#add to user's session counter
 
@@ -159,6 +175,8 @@ for file in files:
 				if c['adopted_libs']:
 					session_adopt_commits += 1
 					session_adopt_libs += len(c['adopted_libs'])
+					session_adopt_positions.append(session_commit_count)	#number commits starting at 1
+					session_adopt_times.append(c['time'] - session_start)			
 					#print(user, "adopting", len(c['adopted_libs']), "libraries")
 
 			prev_commit = c['time']	#update prev for next commit
@@ -204,10 +222,34 @@ for length in sorted(session_length_counts.keys()):
 		row.append(session_length_counts[length][col])
 	results.append(row)
 
-#save numeric data as csv
+#save numeric session data as csv
 np.savetxt("results/sessions_adopt_data.csv", np.array(results), delimiter=",", fmt="%s")
 print("\nNumeric results saved to results/sessions_adopt_data.csv")
 
-#pickle up both dictionaries, in case we need them later
+#compute average adoption positions, both by time and by commit number (not binned for now)
+#store as sorted numpy array for output as csv
+#commit times
+avg_adopt_commit_time = []
+avg_adopt_commit_time.append(['session_length_seconds', 'avg_adopt_time'])
+for length in sorted(adopt_commit_times.keys()):
+	row = [length, sum(adopt_commit_times[length]) / len(adopt_commit_times[length])]	#length, average adopt time
+	avg_adopt_commit_time.append(row)
+
+#commit positions
+avg_adopt_commit_position = []
+avg_adopt_commit_position.append(['session_commit_count', "avg_adopt_position"])
+for commit_count in sorted(adopt_commit_positions.keys()):
+	row = [commit_count, sum(adopt_commit_positions[commit_count]) / len(adopt_commit_positions[commit_count])]
+	#avg_adopt_commit_position[commit_count] = sum(adopt_commit_positions[commit_count]) / len(adopt_commit_positions[commit_count])
+	avg_adopt_commit_position.append(row)
+
+#save adoption position data as csv
+np.savetxt("results/sessions_avg_adopt_time.csv", np.array(avg_adopt_commit_time), delimiter=",", fmt="%s")
+np.savetxt("results/sessions_avg_adopt_position.csv", np.array(avg_adopt_commit_position), delimiter=",", fmt="%s")
+print("\nAdoption position results saved to results/sessions_avg_adopt_time.csv and results/sessions_avg_adopt_position.csv")
+
+#pickle up all the dictionaries, in case we need them later
 dump_data(session_length_counts, "results/session_length_numeric.pkl")
 dump_data(session_length_lists, "results/session_length_lists.pkl")
+dump_data(adopt_commit_positions, "results/adopt_commit_positions.pkl")
+dump_data(adopt_commit_times, "results/adopt_commit_times.pkl")
