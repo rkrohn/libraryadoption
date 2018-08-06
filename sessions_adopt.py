@@ -30,11 +30,39 @@ def print_sorted(bins, filename):
 			f.write("%s %s\n" % (key, bins[key]))
 #end print_sorted
 
+#for a completed session, log all session data
+def log_session(user_adopt_sessions, user_adopt_commits, user_adopt_libs):
+	length = prev_commit - session_start		#length of this session, from first commit to last
+
+	#print("   ", timedelta(seconds=(length)).__str__(), "session with", session_commit_count, "commits")
+
+	#update user adoption counters if this session contained an adoption
+	if session_adopt_commits != 0:
+		user_adopt_sessions += 1
+		user_adopt_commits += session_adopt_commits
+		user_adopt_libs += session_adopt_libs
+		#print("      ", session_adopt_commits, "adoption commits adopting", session_adopt_libs, "libraries")
+
+	#add this session data to global tracking
+	len_bin = ceil(length / 1800) / 2		#compute half-hour bin for this session
+	#update all the counters
+	session_length_counts[len_bin]['freq'] += 1					
+	session_length_lists[len_bin]['all_commits'].append(session_commit_count) 
+	session_length_lists[len_bin]['adopt_commits'].append(session_adopt_commits)
+	#session contains adoption?
+	if session_adopt_commits != 0:
+		session_length_counts[len_bin]['adopt_freq'] += 1
+		session_length_lists[len_bin]['commits_when_adopt'].append(session_commit_count)
+	else:
+		session_length_lists[len_bin]['commits_no_adopt'].append(session_commit_count)
+
+	return user_adopt_sessions, user_adopt_commits, user_adopt_libs
+#end log_session
+
 #--- MAIN EXECUTION BEGINS HERE---#
+global total_adopt_libs, total_adopt_commits, total_adopt_sessions
 
 max_inactive = 9 * 3600		#maximum time between commits of the same session (in seconds)
-
-bins = defaultdict(int)
 
 #get list of user commit files to process
 files = glob.glob('data_files/user_commits/*')
@@ -69,6 +97,7 @@ session_length_lists = defaultdict(ddl)
 	#	adopt_commits - list of session adoption commit counts
 	#	commits_when_adopt - list of session commit counts for sessions containing adoption
 	#	commits_no_adopt - list of session commit counts for sessions not containing adoption
+
 
 #process each file one at a time
 for file in files:
@@ -111,29 +140,8 @@ for file in files:
 
 				#delay too long, new session
 				if delay >= max_inactive:
-					length = prev_commit - session_start		#length of this session, from first commit to last
 
-					#print("   ", timedelta(seconds=(length)).__str__(), "session with", session_commit_count, "commits")
-
-					#update user adoption counters if this session contained an adoption
-					if session_adopt_commits != 0:
-						user_adopt_sessions += 1
-						user_adopt_commits += session_adopt_commits
-						user_adopt_libs += session_adopt_libs
-						#print("      ", session_adopt_commits, "adoption commits adopting", session_adopt_libs, "libraries")
-
-					#add this session data to global tracking
-					len_bin = ceil(length / 1800) / 2		#compute half-hour bin for this session
-					#update all the counters
-					session_length_counts[len_bin]['freq'] += 1					
-					session_length_lists[len_bin]['all_commits'].append(session_commit_count) 
-					session_length_lists[len_bin]['adopt_commits'].append(session_adopt_commits)
-					#session contains adoption?
-					if session_adopt_commits != 0:
-						session_length_counts[len_bin]['adopt_freq'] += 1
-						session_length_lists[len_bin]['commits_when_adopt'].append(session_commit_count)
-					else:
-						session_length_lists[len_bin]['commits_no_adopt'].append(session_commit_count)
+					user_adopt_sessions, user_adopt_commits, user_adopt_libs = log_session(user_adopt_sessions, user_adopt_commits, user_adopt_libs)		#update all global tracking		
 
 					#reset session tracking for new session
 					session_start = c['time']
@@ -156,29 +164,7 @@ for file in files:
 			prev_commit = c['time']	#update prev for next commit
 
 		#handle last session for this user
-		length = prev_commit - session_start		#length of this session, from first commit to last
-
-		#print("   ", timedelta(seconds=(length)).__str__(), "session with", session_commit_count, "commits")
-
-		#update user adoption counters if this session contained an adoption
-		if session_adopt_commits != 0:
-			user_adopt_sessions += 1
-			user_adopt_commits += session_adopt_commits
-			user_adopt_libs += session_adopt_libs
-			#print("      ", session_adopt_commits, "adoption commits adopting", session_adopt_libs, "libraries")
-
-		#add this session data to global tracking
-		len_bin = ceil(length / 1800) / 2		#compute half-hour bin for this session
-		#update all the counters
-		session_length_counts[len_bin]['freq'] += 1					
-		session_length_lists[len_bin]['all_commits'].append(session_commit_count) 
-		session_length_lists[len_bin]['adopt_commits'].append(session_adopt_commits)
-		#session contains adoption?
-		if session_adopt_commits != 0:
-			session_length_counts[len_bin]['adopt_freq'] += 1
-			session_length_lists[len_bin]['commits_when_adopt'].append(session_commit_count)
-		else:
-			session_length_lists[len_bin]['commits_no_adopt'].append(session_commit_count)
+		user_adopt_sessions, user_adopt_commits, user_adopt_libs = log_session(user_adopt_sessions, user_adopt_commits, user_adopt_libs)		#update all global tracking			
 
 		print("User", user, "made", len(commits), "commits across", user_sessions, "sessions")
 		if user_adopt_sessions != 0:
