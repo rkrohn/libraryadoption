@@ -705,6 +705,8 @@ try a 1:1 ratio - all DONE
 	1 month
 	6 months
 	
+WOW - AUROC north of 0.9, hurray downsampling!
+	
 7.30
 
 data gen up to July 2013
@@ -879,6 +881,42 @@ made a first-pass at session analysis - identifying sessions given a maximum ina
 
 data gen up to 12-24-2013 - woohoo, almost finished 2013!
 
+added more to sessions code - track session length->freq and number of commits
+	ran fine!
+Processed 9435270 commits and 36341 users in 1034580 sessions
+	~2 minutes runtime (not bad)
 
+started code to identify adoptions within sessions, need to decide what data to track and output
+mostly compare adoptive vs regular sessions:
+	average commits per session
+	session length
+but also where adoptions fall within the session window
 
+8.3
+
+data gen up to 2-20-2014
+
+clean up the repo directory - move some results files, etc
+
+hmmm... my session adopt code isn't great - only tracking on a session basis, not a user basis
+	more variables!
+
+pgf plots, need error bars
+http://pgfplots.sourceforge.net/
+
+send email to Kristina - check sessions methodology
+
+next up: look at where adoptions fall within a session, and think of some clear way to convey that
+
+8.6
+
+data gen up to 8-21-2014
+
+refactor session logging to separate function before we add more variables
+
+plot distribution of where adoptions fall
+	got the data - both time and position
+	and plotted
+	
+next - make cpm plot normalized about time of first adoption
 
