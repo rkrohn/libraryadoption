@@ -195,7 +195,7 @@ for file in files:
 		total_adopt_libs += user_adopt_libs
 
 print("Processed", total_commit_count, "commits and", total_user_count, "users in", total_sessions, "sessions")
-print("   ", total_adopt_libs, "libraries adopted in", total_adopt_commits, " commits across", total_adopt_sessions, "sessions")
+print("   ", total_adopt_libs, "libraries adopted in", total_adopt_commits, "commits across", total_adopt_sessions, "sessions")
 
 #compute averages from lists
 for length in session_length_lists:
