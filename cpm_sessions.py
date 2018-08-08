@@ -34,12 +34,90 @@ def print_sorted(bins, filename):
 			f.write("%s %s\n" % (key, bins[key]))
 #end print_sorted
 
+'''
+def cpm_rates(commit_times, backwards_start = -1):
+	#convert UTC times (seconds) to minutes from adoption event
+	relative_times = []
+	if backwards_start == -1:	#post-adopt times
+		relative_times[:] = [int((time - commit_times[0]) / 60) for time in commit_times]
+	else:	#pre-adopt times
+		relative_times[:] = [int((time - backwards_start) / 60) for time in commit_times]
+		#relative_times = list(reversed(relative_times))		#reverse for math
+
+	print("   ", relative_times)
+
+	if len(relative_times) != 0:
+
+		#build list of minute counters covering entire range
+		if backwards_start == -1:
+			x = list(range(0, relative_times[-1]+1))
+		else:
+			x = list(range(relative_times[0], 0))
+		#and list of corresponding cpm rates
+		y = [0] * len(x)
+		for time in relative_times:
+			y[time] += 1
+		print(x)
+		print(y)
+		#plot_cpm(relative_times,  [1] * len(relative_times), "test.png")
+
+#end cpm_rates
+'''
+
+def cpm_rates(commit_times, first_adopt):
+	#convert UTC times (seconds) to minutes from adoption event
+	relative_times = [int((time - commit_times[first_adopt]) / 60) for time in commit_times]
+
+	print(user, user_sessions)
+	print("   ", relative_times)
+
+	#build list of minute counters covering entire range
+	x = list(range(relative_times[0], relative_times[-1]+1))
+	#and list of corresponding cpm rates
+	y = [0] * len(x)
+	for time in relative_times:
+		y[time + abs(relative_times[0])] += 1
+
+	plot_cpm(x, y, "user%s_session%s_cpm.png" % (user, user_sessions))
+
+#end cpm_rates
+
+#given a completed session as list of commit times and index of first adoption (if any),
+#generate the pmf of the cpm rate on either side of the adoption event and plot
+def session_pmf(commit_times, first_adopt):
+	print(commit_times, first_adopt)
+
+	cpm_rates(commit_times, first_adopt)
+	return
+
+	#partition commit list if session contains an adoption event
+	if first_adopt != -1:
+		pre_adopt = commit_times[:first_adopt]
+		post_adopt = commit_times[first_adopt:]
+	else:
+		pre_adopt = commit_times
+		post_adopt = []
+
+	print(pre_adopt, post_adopt)
+
+	#for each session section, convert list of commit times to a by-minute cpm
+	#but, we're going to do the pre-adopt section backwards from the adoption event
+	cpm_rates(pre_adopt, post_adopt[0])
+	cpm_rates(post_adopt)
+
+#end session_pmf
+
 #for a completed session, log all session data
 def log_session(user_adopt_sessions):
 	length = session_commit_times[-1] - session_commit_times[0]		#length of this session, from first commit to last
 
-	commit_count = len(session_commit_times)
+	#compute (and plot) the pmf of the cpm, normalized to either side of the first adoption event
+	if session_first_adopt != -1:
+		session_pmf(session_commit_times, session_first_adopt)
 
+	commit_count = len(session_commit_times)	#grab commit count as variable
+
+	'''
 	print(timedelta(seconds=(length)).__str__(), "session with", commit_count, "commits")
 	if session_first_adopt != -1:
 		print("   first adopt at", session_commit_times[session_first_adopt])
@@ -49,6 +127,7 @@ def log_session(user_adopt_sessions):
 		print(commit_count / (length / 60), "commits per minute average")
 	else:
 		print(commit_count, "commits per minute (0-length session)")
+	'''
 
 	#update user adoption counters if this session contained an adoption
 	if session_first_adopt != -1:
@@ -61,15 +140,25 @@ def log_session(user_adopt_sessions):
 #end log_session
 
 #given x-axis values x and corresponding probability values y, plot the pmf
+#note y values must sum to exactly 1
 def plot_pmf(x, y, filename):
 	custm = stats.rv_discrete(name='custm', values=(x, y))
 	fig, ax = plt.subplots(1, 1)
-	ax.plot(x, custm.pmf(x), 'bo', ms=8, mec='b')
-	ax.vlines(x, 0, custm.pmf(x), colors='b', linestyles='-', lw=2)
+	ax.plot(x, custm.pmf(x), 'bo', ms=2, mec='b')
+	ax.vlines(x, 0, custm.pmf(x), colors='b', linestyles='-', lw=0.5)
 	plt.title('PMF')
 	plt.ylabel('Probability')
 	plt.savefig(filename, bbox_inches='tight')	
 #end plot_pmf
+
+#given x-axis values x and corresponding cpm rates y, plot the cpm rate as a step function
+def plot_cpm(x, y, filename):
+	plt.clf()
+	plt.step(x, y, where='post')
+	plt.title('CPM')
+	plt.ylabel('CPM')
+	plt.savefig(filename, bbox_inches='tight')	
+#end plot_cpm
 
 #--- MAIN EXECUTION BEGINS HERE---#
 
@@ -153,7 +242,7 @@ for file in files:
 					if session_first_adopt == -1:
 						session_first_adopt = len(session_commit_times)
 
-			print("   ", c['user'], c['time'], c['repo'], len(c['adopted_libs']))
+			#print("   ", c['user'], c['time'], c['repo'], len(c['adopted_libs']))
 
 			session_commit_times.append(c['time'])	#update prev for next commit
 
