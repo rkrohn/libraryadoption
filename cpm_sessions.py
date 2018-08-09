@@ -34,7 +34,7 @@ def print_sorted(bins, filename):
 			f.write("%s %s\n" % (key, bins[key]))
 #end print_sorted
 
-def cpm_rates(commit_times, first_adopt):
+def cpm_rates(commit_times, first_adopt, plot = True):
 	#convert UTC times (seconds) to minutes from some reference point
 	#no adoption, shift times relative to first commit
 	if first_adopt == -1:
@@ -43,7 +43,7 @@ def cpm_rates(commit_times, first_adopt):
 	else:
 		relative_times = [int((time - commit_times[first_adopt]) / 60) for time in commit_times]
 
-	print(user, user_sessions)
+	print("user", user, "session", user_sessions, ":", len(commit_times), "commits,", ("ADOPT" if first_adopt != -1 else ""))
 	print("   ", relative_times)
 
 	#build list of minute counters covering entire range
@@ -53,42 +53,77 @@ def cpm_rates(commit_times, first_adopt):
 	for time in relative_times:
 		y[time + abs(relative_times[0])] += 1
 
-	#add extra entries to beginning and end of session with rate 0 for prettier plot
-	x.insert(0, x[0]-1)
-	y.insert(0, 0)
-	x.append(x[-1]+1)
-	y.append(0)
+	#add extra entries to beginning and end of session with rate 0 for prettier plot (but not for normalization)
+	x_plot = list(x)
+	y_plot = list(y)
+	x_plot.insert(0, x[0]-1)
+	y_plot.insert(0, 0)
+	x_plot.append(x[-1]+1)
+	y_plot.append(0)
 
-	if first_adopt != -1:
-		plot_cpm(x, y, "results/cpm_session_plots/user%s_session%s_cpm.png" % (user, user_sessions), True)
-	else:
-		plot_cpm(x, y, "results/cpm_session_plots/user%s_session%s_cpm.png" % (user, user_sessions))
+	if plot:
+		if first_adopt != -1:
+			plot_cpm(x_plot, y_plot, "results/cpm_session_plots/CPM_user%s_session%s.png" % (user, user_sessions), True)
+		else:
+			plot_cpm(x_plot, y_plot, "results/cpm_session_plots/CPM_user%s_session%s.png" % (user, user_sessions))
+
+	return x, y
 
 #end cpm_rates
 
+#given discontinuous function defined by f(x) = y, conver to pmf
+def convert_pmf(x, y):
+	#get sum of y values - will use as divisor
+	total = sum(y)
+
+	#divide all y values by total, so they all sum to 1
+	y[:] = [val / total for val in y]
+
+	return y 		#return updated y (x doesn't change)
+#end convert_pmf
+
 #given a completed session as list of commit times and index of first adoption (if any),
 #generate the pmf of the cpm rate on either side of the adoption event and plot
-def session_pmf(commit_times, first_adopt):
-	print(commit_times, first_adopt)
+def session_pmf(commit_times, first_adopt, plot = True):	
 
-	if len(commit_times) >= 3 or first_adopt != -1:
-		cpm_rates(commit_times, first_adopt)
-	return
+	#REMOVE THIS IF
+	if len(commit_times) > 15 or first_adopt != -1:
+		commit_minutes, cpm = cpm_rates(commit_times, first_adopt)
 
-	#partition commit list if session contains an adoption event
-	if first_adopt != -1:
-		pre_adopt = commit_times[:first_adopt]
-		post_adopt = commit_times[first_adopt:]
-	else:
-		pre_adopt = commit_times
-		post_adopt = []
+		#convert cpm rates (all whole numbers) to pmf function
+		cpm_pmf = convert_pmf(commit_minutes, cpm)
 
-	print(pre_adopt, post_adopt)
+		#plot pmf for this session (optional)
+		if plot:
+			plot_pmf(commit_minutes, cpm_pmf, "results/cpm_session_plots/PMF_user%s_session%s.png" % (user, user_sessions), adopt=(False if first_adopt == -1 else True))
 
-	#for each session section, convert list of commit times to a by-minute cpm
-	#but, we're going to do the pre-adopt section backwards from the adoption event
-	cpm_rates(pre_adopt, post_adopt[0])
-	cpm_rates(post_adopt)
+		#normalize time scale, partition at adoption if necessary
+		#if session contains adoption, partition at 0
+		if first_adopt != -1:
+			partition = commit_minutes.index(0)		#find the 0 - partition point
+			pre_adopt = commit_minutes[:partition]
+			post_adopt = commit_minutes[partition:]
+
+			#normalize both sides separately, then combine
+			normalized_times= normalize(pre_adopt, -100, 0)
+			normalized_times  += normalize(post_adopt, 0, 100)
+		#otherwise, take all commits at once
+		else:
+			normalized_times = normalize(commit_minutes, -100, 100)
+
+		#REMOVE PRINT
+		print("   ", end=' ')
+		for i in range(0, len(normalized_times)):
+			if cpm_pmf[i] != 0:
+				print(normalized_times[i], end=' ')
+		print("")
+
+		#plot normalized pmf for this session (optional)
+		if plot:
+			plot_pmf(normalized_times, cpm_pmf, "results/cpm_session_plots/NORM_PMF_user%s_session%s.png" % (user, user_sessions), adopt=(False if first_adopt == -1 else True))
+
+		#return normalized cpm pmf function
+		return normalized_times, cpm_pmf
 
 #end session_pmf
 
@@ -96,22 +131,8 @@ def session_pmf(commit_times, first_adopt):
 def log_session(user_adopt_sessions):
 	length = session_commit_times[-1] - session_commit_times[0]		#length of this session, from first commit to last
 
-	#compute (and plot) the pmf of the cpm, normalized to either side of the first adoption event
+	#compute (and plot, if desired) the pmf of the cpm, normalized to either side of the first adoption event
 	session_pmf(session_commit_times, session_first_adopt)
-
-	commit_count = len(session_commit_times)	#grab commit count as variable
-
-	'''
-	print(timedelta(seconds=(length)).__str__(), "session with", commit_count, "commits")
-	if session_first_adopt != -1:
-		print("   first adopt at", session_commit_times[session_first_adopt])
-
-	#basic commits per minute?
-	if length != 0:
-		print(commit_count / (length / 60), "commits per minute average")
-	else:
-		print(commit_count, "commits per minute (0-length session)")
-	'''
 
 	#update user adoption counters if this session contained an adoption
 	if session_first_adopt != -1:
@@ -123,15 +144,44 @@ def log_session(user_adopt_sessions):
 	return user_adopt_sessions
 #end log_session
 
+#given data and a target range, normalize so data falls in that range only (feature scaling)
+def normalize(data, range_start, range_end):
+	#empty list? return empty
+	if len(data) == 0:
+		return []
+
+	#special case: only one element
+	if len(data) == 1:
+		#set to range_start if negative
+		if data[0] < 0:
+			return [range_start]
+		#set to 0 if 0
+		elif data[0] == 0:
+			return [0]
+
+	#X′ = a + [(X − Xmin)(b − a) / (Xmax − Xmin)] 
+
+	data_min = min(data)
+	data_max = max(data)
+
+	normalized = [range_start + (((x - data_min)*(range_end - range_start))/(data_max - data_min)) for x in data]
+
+	return normalized
+#end normalize
+
 #given x-axis values x and corresponding probability values y, plot the pmf
 #note y values must sum to exactly 1
-def plot_pmf(x, y, filename):
+def plot_pmf(x, y, filename, adopt = False):
 	custm = stats.rv_discrete(name='custm', values=(x, y))
 	fig, ax = plt.subplots(1, 1)
 	ax.plot(x, custm.pmf(x), 'bo', ms=2, mec='b')
-	ax.vlines(x, 0, custm.pmf(x), colors='b', linestyles='-', lw=0.5)
+	ax.vlines(x, 0, custm.pmf(x), colors='b', linestyles='-', lw=0.7)
 	plt.title('PMF')
 	plt.ylabel('Probability')
+
+	if adopt:
+		plt.axvline(x=0, color='r', lw=0.4)
+
 	plt.savefig(filename, bbox_inches='tight')	
 #end plot_pmf
 
