@@ -124,6 +124,7 @@ def session_pmf(commit_times, first_adopt, plot = True):
 
 		#return normalized cpm pmf function
 		return normalized_times, cpm_pmf
+	return [], []	#REMOVE
 
 #end session_pmf
 
@@ -132,7 +133,19 @@ def log_session(user_adopt_sessions):
 	length = session_commit_times[-1] - session_commit_times[0]		#length of this session, from first commit to last
 
 	#compute (and plot, if desired) the pmf of the cpm, normalized to either side of the first adoption event
-	session_pmf(session_commit_times, session_first_adopt)
+	normalized_times, pmf = session_pmf(session_commit_times, session_first_adopt)
+
+	#add this session normalized pmf data to overall session pmf
+	#REMOVE OUTER IF
+	if len(normalized_times) != 0:
+		#adopt sessions
+		if session_first_adopt != -1:
+			for i in range(len(normalized_times)):
+				total_pmf_adopt[int(normalized_times[i])] += pmf[i]
+		#non-adopt sessions
+		else:
+			for i in range(len(normalized_times)):
+				total_pmf_non_adopt[int(normalized_times[i])] += pmf[i]
 
 	#update user adoption counters if this session contained an adoption
 	if session_first_adopt != -1:
@@ -213,6 +226,10 @@ total_sessions = 0
 total_adopt_commits = 0
 total_adopt_libs = 0
 total_adopt_sessions = 0
+
+#global session pmf variables: dictionaries with integer normalized time as key, sum of session pmf as value
+total_pmf_adopt = defaultdict(float)
+total_pmf_non_adopt = defaultdict(float)
 
 #functions to set up defaultdict to allow for pickling
 def ddi(): return defaultdict(int)
@@ -305,4 +322,25 @@ for file in files:
 
 print("Processed", total_commit_count, "commits and", total_user_count, "users in", total_sessions, "sessions")
 print("   ", total_adopt_libs, "libraries adopted in", total_adopt_commits, "commits across", total_adopt_sessions, "sessions")
+
+#divide pmf totals by number of sessions to get an average, also convert to lists at the same time
+#adopt sessions
+pmf_adopt_times = []
+pmf_adopt_vals = []
+for i in range(-100, 101):
+	pmf_adopt_times.append(i)
+	pmf_adopt_vals.append(total_pmf_adopt[i] / total_adopt_sessions)
+#non-adopt sessions
+pmf_non_times = []
+pmf_non_vals = []
+#total_non_adopt_sessions = total_sessions - total_adopt_sessions
+total_non_adopt_sessions = 7 - total_adopt_sessions 		#REMOVE - switch back to above line
+for i in range(-100, 101):
+	pmf_non_times.append(i)
+	pmf_non_vals.append(total_pmf_non_adopt[i] / total_non_adopt_sessions)
+
+#plot average pmfs! (separate plots for now)
+plot_pmf(pmf_adopt_times, pmf_adopt_vals, "results/cpm_session_plots/AVG_adopt_sessions.png", adopt = True)
+plot_pmf(pmf_non_times, pmf_non_vals, "results/cpm_session_plots/AVG_non_adopt_sessions.png", adopt = False)
+
 
