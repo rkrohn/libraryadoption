@@ -68,7 +68,7 @@ def cpm_rates(commit_times, first_adopt, plot = False):
 
 #end cpm_rates
 
-#given discontinuous function defined by f(x) = y, conver to pmf
+#given discontinuous function defined by f(x) = y, convert to pmf
 def convert_pmf(x, y):
 	#get sum of y values - will use as divisor
 	total = sum(y)
@@ -81,37 +81,43 @@ def convert_pmf(x, y):
 
 #given a completed session as list of commit times and index of first adoption (if any),
 #generate the pmf of the cpm rate on either side of the adoption event and plot
-def session_pmf(commit_times, first_adopt, plot = False):	
+def session_commits(commit_times, first_adopt, plot = False):	
 
 	commit_minutes, cpm = cpm_rates(commit_times, first_adopt)
 
 	#convert cpm rates (all whole numbers) to pmf function
-	cpm_pmf = convert_pmf(commit_minutes, cpm)
+	if PMF_SESSION:
+		cpm = convert_pmf(commit_minutes, cpm)	
 
-	#plot pmf for this session (optional)
-	if plot:
-		plot_pmf(commit_minutes, cpm_pmf, "results/cpm_session_plots/PMF_user%s_session%s.png" % (user, user_sessions), adopt=(False if first_adopt == -1 else True))
+		#plot pmf for this session (optional)
+		if plot:
+			plot_pmf(commit_minutes, cpm, "results/cpm_session_plots/PMF_user%s_session%s.png" % (user, user_sessions), adopt=(False if first_adopt == -1 else True))
+	#no pmf of session, work with commit counts instead (but var has same name)
 
 	#normalize time scale, partition at adoption if necessary
-	#if session contains adoption, partition at 0
-	if first_adopt != -1:
-		partition = commit_minutes.index(0)		#find the 0 - partition point
-		pre_adopt = commit_minutes[:partition]
-		post_adopt = commit_minutes[partition:]
+	if NORM_TIME:
+		#if session contains adoption, partition at 0
+		if first_adopt != -1:
+			partition = commit_minutes.index(0)		#find the 0 - partition point
+			pre_adopt = commit_minutes[:partition]
+			post_adopt = commit_minutes[partition:]
 
-		#normalize both sides separately, then combine
-		normalized_times= normalize(pre_adopt, -100, 0)
-		normalized_times  += normalize(post_adopt, 0, 100)
-	#otherwise, take all commits at once
-	else:
-		normalized_times = normalize(commit_minutes, -100, 100)
+			#normalize both sides separately, then combine
+			normalized_times= normalize(pre_adopt, -100, 0)
+			normalized_times  += normalize(post_adopt, 0, 100)
+		#otherwise, take all commits at once
+		else:
+			normalized_times = normalize(commit_minutes, -100, 100)
 
-	#plot normalized pmf for this session (optional)
-	if plot:
-		plot_pmf(normalized_times, cpm_pmf, "results/cpm_session_plots/NORM_PMF_user%s_session%s.png" % (user, user_sessions), adopt=(False if first_adopt == -1 else True))
+		#plot normalized pmf for this session (optional)
+		if plot:
+			plot_pmf(normalized_times, cpm, "results/cpm_session_plots/NORM_%s%user%s_session%s.png" % (("PMF" if PMF_SESSION else "CPM"), user, user_sessions), adopt=(False if first_adopt == -1 else True))
 
-	#return normalized cpm pmf function
-	return normalized_times, cpm_pmf
+		#return normalized cpm pmf function
+		return normalized_times, cpm
+
+	#no normalize, return standard times
+	return commit_minutes, cpm
 #end session_pmf
 
 #for a completed session, log all session data
@@ -119,17 +125,22 @@ def log_session(user_adopt_sessions):
 	length = session_commit_times[-1] - session_commit_times[0]		#length of this session, from first commit to last
 
 	#compute (and plot, if desired) the pmf of the cpm, normalized to either side of the first adoption event
-	normalized_times, pmf = session_pmf(session_commit_times, session_first_adopt)
+	times, commits = session_commits(session_commit_times, session_first_adopt)
 
-	#add this session normalized pmf data to overall session pmf
+	#add this session commit data (pmf or commit counts) to overall session counters
+	#also increment additive counter for all times covered by this session
 	#adopt sessions
 	if session_first_adopt != -1:
-		for i in range(len(normalized_times)):
-			total_pmf_adopt[int(normalized_times[i])] += pmf[i]
+		for i in range(len(times)):
+			total_adopt[int(times[i])] += commits[i]	
+		for i in range(int(times[0]), int(times[-1])+1):
+			adopt_add[i] += 1	
 	#non-adopt sessions
 	else:
-		for i in range(len(normalized_times)):
-			total_pmf_non_adopt[int(normalized_times[i])] += pmf[i]
+		for i in range(len(times)):
+			total_non_adopt[int(times[i])] += commits[i]			
+		for i in range(int(times[0]), int(times[-1])+1):
+			non_adopt_add[i] += 1
 
 	#update user adoption counters if this session contained an adoption
 	if session_first_adopt != -1:
@@ -199,6 +210,10 @@ def plot_cpm(x, y, filename, adopt = False):
 
 max_inactive = 9 * 3600		#maximum time between commits of the same session (in seconds)
 
+#boolean flags to set operating mode
+PMF_SESSION = False		#perform PMF normalization on each session if true; skip otherwise
+NORM_TIME = False 		#normalize all session lengths to same range if true; stack by time otherwise
+
 #get list of user commit files to process
 files = glob.glob('data_files/user_commits/*')
 print("Processing", len(files), "user commit files")
@@ -211,9 +226,12 @@ total_adopt_commits = 0
 total_adopt_libs = 0
 total_adopt_sessions = 0
 
-#global session pmf variables: dictionaries with integer normalized time as key, sum of session pmf as value
-total_pmf_adopt = defaultdict(float)
-total_pmf_non_adopt = defaultdict(float)
+#global session variables: dictionaries with integer time (normalized or not) as key, sum of session function (cpm or pmf) as value
+total_adopt = defaultdict(float)
+total_non_adopt = defaultdict(float)
+#also count of how often each key (time) was added to
+adopt_add = defaultdict(int)
+non_adopt_add = defaultdict(int)
 
 #functions to set up defaultdict to allow for pickling
 def ddi(): return defaultdict(int)
@@ -297,57 +315,88 @@ for file in files:
 print("Processed", total_commit_count, "commits and", total_user_count, "users in", total_sessions, "sessions")
 print("   ", total_adopt_libs, "libraries adopted in", total_adopt_commits, "commits across", total_adopt_sessions, "sessions")
 
-#divide pmf totals by number of sessions to get an average, also convert to lists at the same time
-#adopt sessions
-pmf_adopt_times = []
-pmf_adopt_vals = []
-for i in range(-100, 101):
-	pmf_adopt_times.append(i)
-	pmf_adopt_vals.append(total_pmf_adopt[i] / total_adopt_sessions)
-#non-adopt sessions
-pmf_non_times = []
-pmf_non_vals = []
-total_non_adopt_sessions = total_sessions - total_adopt_sessions
-for i in range(-100, 101):
-	pmf_non_times.append(i)
-	pmf_non_vals.append(total_pmf_non_adopt[i] / total_non_adopt_sessions)
+#post-process totals for plotting
+#divide time totals by number of sessions contributing to that time, also convert to lists at the same time
+adopt_times = []
+adopt_vals = []
+non_times = []
+non_vals = []	
+if NORM_TIME:
+	#adopt sessions
+	for key in sorted(total_adopt.keys()):
+		adopt_times.append(key)
+		adopt_vals.append(total_adopt[key] / total_adopt_sessions)
+	#non-adopt sessions	
+	total_non_adopt_sessions = total_sessions - total_adopt_sessions
+	for key in sorted(total_non_adopt.keys()):
+		non_times.append(key)
+		non_vals.append(total_non_adopt[key] / total_non_adopt_sessions)
+else:
+	#adopt sessions
+	for key in sorted(total_adopt.keys()):
+		adopt_times.append(key)
+		adopt_vals.append(total_adopt[key] / adopt_add[key])
+	#non-adopt sessions	
+	for key in sorted(total_non_adopt.keys()):
+		non_times.append(key)
+		non_vals.append(total_non_adopt[key] / non_adopt_add[key])
 
 #save adopt and non-adopt dictionaries as pickles
-dump_data(pmf_adopt_vals, "results/avg_pmf_adopt_vals.pkl")
-dump_data(pmf_non_vals, "results/avg_pmf_non_adopt_vals.pkl")
-dump_data(pmf_adopt_times, "results/avg_pmf_times.pkl")
-print("Data saved to results/avg_pmf_adopt_vals.pkl, results/avg_pmf_non_adopt_vals.pkl, and results/avg_pmf_times.pkl")
+out_tuple = ("PMF" if PMF_SESSION else "CPM", "NORM" if NORM_TIME else "TIME")
+dump_data(adopt_vals, "results/%s_%s_avg_adopt_vals.pkl" % out_tuple)
+dump_data(non_vals, "results/%s_%s_avg_non_adopt_vals.pkl" % out_tuple)
+dump_data(adopt_times, "results/%s_%s_avg_times.pkl" % out_tuple)
+print("Data saved to results/%s_%s_avg_adopt_vals.pkl, results/%s_%s_avg_non_adopt_vals.pkl, and results/%s_%s_avg_times.pkl" % (out_tuple + out_tuple + out_tuple))
 
 #plot average pmfs! (separate plots for now)
-plot_pmf(pmf_adopt_times, pmf_adopt_vals, "results/cpm_session_plots/AVG_adopt_sessions.png", adopt = True)
-plot_pmf(pmf_non_times, pmf_non_vals, "results/cpm_session_plots/AVG_non_adopt_sessions.png", adopt = False)
+if PMF_SESSION and NORM_TIME:
+	plot_pmf(adopt_times, adopt_vals, "results/cpm_session_plots/PMF_NORM_avg_adopt_sessions.png", adopt = True)
+	plot_pmf(non_times, non_vals, "results/cpm_session_plots/PMF_NORM_avg_non_adopt_sessions.png", adopt = False)
 
-print("Average normalized cpm pmf plots saved to results/cpm_session_plots/AVG_adopt_sessions.png and results/cpm_session_plots/AVG_non_adopt_sessions.png")
+	print("Average normalized cpm pmf plots saved to results/cpm_session_plots/PMF_NORM_avg_adopt_sessions.png and results/cpm_session_plots/PMF_NORM_avg_non_adopt_sessions.png")
+#no time normalization, plot adopt and non-adopt curves independently
+elif NORM_TIME == False:
+#plot again, this time both on the same line plot
+	plt.clf()
+	fig, ax = plt.subplots()
+	ax.plot(adopt_times, adopt_vals, 'r', label='adoption sessions')
+	plt.axvline(x=0, color='r', lw=0.4)
+	plt.savefig("results/cpm_session_plots/%s_%s_avg_adopt_sessions.png" % out_tuple, bbox_inches='tight')
+
+	print("Modified average normalized cpm pmf plot saved to results/cpm_session_plots/%s_%s_combined_avg_adopt_sessions.png" % out_tuple)
+
+	plt.clf()
+	fig, ax = plt.subplots()
+	ax.plot(non_times, non_vals, 'b', label='non-adopt sessions')
+	plt.savefig("results/cpm_session_plots/%s_%s_avg_non_adopt_sessions.png" % out_tuple, bbox_inches='tight')
+
+	print("Individual plots saved to results/cpm_session_plots/%s_%s_avg_adopt_sessions.png and results/cpm_session_plots/%s_%s_avg_non_adopt_sessions.png" % (out_tuple + out_tuple))
 
 #also plot without the -100, 0, and 100 data points, because they are SUPER high and throw off the look of the plot
-#remove last elements
-pmf_adopt_times.pop(-1)
-pmf_adopt_vals.pop(-1)
-pmf_non_times.pop(-1)
-pmf_non_vals.pop(-1)
-#remove center (0) element
-pmf_adopt_times.pop(100)
-pmf_adopt_vals.pop(100)
-pmf_non_times.pop(100)
-pmf_non_vals.pop(100)
-#remove first element
-pmf_adopt_times.pop(0)
-pmf_adopt_vals.pop(0)
-pmf_non_times.pop(0)
-pmf_non_vals.pop(0)
+if NORM_TIME:
+	#remove last elements
+	adopt_times.pop(-1)
+	adopt_vals.pop(-1)
+	non_times.pop(-1)
+	non_vals.pop(-1)
+	#remove center (0) element
+	adopt_times.pop(100)
+	adopt_vals.pop(100)
+	non_times.pop(100)
+	non_vals.pop(100)
+	#remove first element
+	adopt_times.pop(0)
+	adopt_vals.pop(0)
+	non_times.pop(0)
+	non_vals.pop(0)
 
-#plot again, without those peak spots, and this time both on the same line plot
+#plot again, this time both on the same line plot
 plt.clf()
 fig, ax = plt.subplots()
-ax.plot(pmf_adopt_times, pmf_adopt_vals, 'r', label='adoption sessions')
-ax.plot(pmf_non_times, pmf_non_vals, 'b', label='non-adopt sessions')
+ax.plot(adopt_times, adopt_vals, 'r', label='adoption sessions')
+ax.plot(non_times, non_vals, 'b', label='non-adopt sessions')
 legend = ax.legend(loc='best', shadow=True, fontsize='x-large')
 plt.axvline(x=0, color='r', lw=0.4)
-plt.savefig("results/cpm_session_plots/AVG_combined_adopt_sessions.png", bbox_inches='tight')
+plt.savefig("results/cpm_session_plots/%s_%s_combined_avg_adopt_sessions.png" % out_tuple, bbox_inches='tight')
 
-print("Modified average normalized cpm pmf plot saved to results/cpm_session_plots/AVG_combined_adopt_sessions.png")
+print("Modified average normalized cpm pmf plot saved to results/cpm_session_plots/%s_%s_combined_avg_adopt_sessions.png" % out_tuple)
