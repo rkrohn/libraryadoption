@@ -111,7 +111,7 @@ def session_commits(commit_times, first_adopt, plot = False):
 
 		#plot normalized pmf for this session (optional)
 		if plot:
-			plot_pmf(normalized_times, cpm, "results/cpm_session_plots/NORM_%s%user%s_session%s.png" % (("PMF" if PMF_SESSION else "CPM"), user, user_sessions), adopt=(False if first_adopt == -1 else True))
+			plot_pmf(normalized_times, cpm, "results/cpm_session_plots/NORM_%s_user%s_session%s_maxlen_%s.png" % (("PMF" if PMF_SESSION else "CPM"), user, user_sessions, max_session_length/3600), adopt=(False if first_adopt == -1 else True))
 
 		#return normalized cpm pmf function
 		return normalized_times, cpm
@@ -123,6 +123,10 @@ def session_commits(commit_times, first_adopt, plot = False):
 #for a completed session, log all session data
 def log_session(user_adopt_sessions):
 	length = session_commit_times[-1] - session_commit_times[0]		#length of this session, from first commit to last
+
+	#if session longer than max length, skip this session entirely
+	if length > max_session_length and max_session_length != -1:
+		return user_adopt_sessions		#unchanged
 
 	#compute (and plot, if desired) the pmf of the cpm, normalized to either side of the first adoption event
 	times, commits = session_commits(session_commit_times, session_first_adopt)
@@ -213,6 +217,10 @@ max_inactive = 9 * 3600		#maximum time between commits of the same session (in s
 #boolean flags to set operating mode
 PMF_SESSION = False		#perform PMF normalization on each session if true; skip otherwise
 NORM_TIME = False 		#normalize all session lengths to same range if true; stack by time otherwise
+
+#set session length limit (in seconds) - any sessions longer than this will not be considered in averages
+#set to -1 if want no limit
+max_session_length = 16*3600
 
 #get list of user commit files to process
 files = glob.glob('data_files/user_commits/*')
@@ -343,17 +351,17 @@ else:
 
 #save adopt and non-adopt dictionaries as pickles
 out_tuple = ("PMF" if PMF_SESSION else "CPM", "NORM" if NORM_TIME else "TIME")
-dump_data(adopt_vals, "results/%s_%s_avg_adopt_vals.pkl" % out_tuple)
-dump_data(non_vals, "results/%s_%s_avg_non_adopt_vals.pkl" % out_tuple)
-dump_data(adopt_times, "results/%s_%s_avg_times.pkl" % out_tuple)
-print("Data saved to results/%s_%s_avg_adopt_vals.pkl, results/%s_%s_avg_non_adopt_vals.pkl, and results/%s_%s_avg_times.pkl" % (out_tuple + out_tuple + out_tuple))
+dump_data(adopt_vals, "results/%s_%s_avg_adopt_vals_maxlen_%s.pkl" % (out_tuple + (max_session_length//3600,)))
+dump_data(non_vals, "results/%s_%s_avg_non_adopt_vals_maxlen_%s.pkl" % (out_tuple + (max_session_length//3600,)))
+dump_data(adopt_times, "results/%s_%s_avg_times_maxlen_%s.pkl" % (out_tuple + (max_session_length//3600,)))
+print("Data saved to results/%s_%s_avg_adopt_vals_maxlen_%s.pkl, results/%s_%s_avg_non_adopt_vals_maxlen_%s.pkl, and results/%s_%s_avg_times_maxlen_%s.pkl" % (out_tuple + (max_session_length//3600,) + out_tuple + (max_session_length//3600,) + out_tuple + (max_session_length//3600,)))
 
 #plot average pmfs! (separate plots for now)
 if PMF_SESSION and NORM_TIME:
-	plot_pmf(adopt_times, adopt_vals, "results/cpm_session_plots/PMF_NORM_avg_adopt_sessions.png", adopt = True)
-	plot_pmf(non_times, non_vals, "results/cpm_session_plots/PMF_NORM_avg_non_adopt_sessions.png", adopt = False)
+	plot_pmf(adopt_times, adopt_vals, "results/cpm_session_plots/PMF_NORM_avg_adopt_sessions_maxlen_%s.png" % max_session_length//3600, adopt = True)
+	plot_pmf(non_times, non_vals, "results/cpm_session_plots/PMF_NORM_avg_non_adopt_sessions_maxlen_%s.png" % max_session_length//3600, adopt = False)
 
-	print("Average normalized cpm pmf plots saved to results/cpm_session_plots/PMF_NORM_avg_adopt_sessions.png and results/cpm_session_plots/PMF_NORM_avg_non_adopt_sessions.png")
+	print("Average normalized cpm pmf plots saved to results/cpm_session_plots/PMF_NORM_avg_adopt_sessions_maxlen_%s.png and results/cpm_session_plots/PMF_NORM_avg_non_adopt_sessions_maxlen_%s.png" % (max_session_length//3600, max_session_length//3600))
 #no time normalization, plot adopt and non-adopt curves independently
 elif NORM_TIME == False:
 #plot again, this time both on the same line plot
@@ -361,16 +369,16 @@ elif NORM_TIME == False:
 	fig, ax = plt.subplots()
 	ax.plot(adopt_times, adopt_vals, 'r', label='adoption sessions')
 	plt.axvline(x=0, color='r', lw=0.4)
-	plt.savefig("results/cpm_session_plots/%s_%s_avg_adopt_sessions.png" % out_tuple, bbox_inches='tight')
+	plt.savefig("results/cpm_session_plots/%s_%s_avg_adopt_sessions_maxlen_%s.png" % (out_tuple + (max_session_length//3600,)), bbox_inches='tight')
 
-	print("Modified average normalized cpm pmf plot saved to results/cpm_session_plots/%s_%s_combined_avg_adopt_sessions.png" % out_tuple)
+	print("Modified average normalized cpm pmf plot saved to results/cpm_session_plots/%s_%s_combined_avg_adopt_sessions_maxlen_%s.png" % (out_tuple + (max_session_length//3600,)))
 
 	plt.clf()
 	fig, ax = plt.subplots()
 	ax.plot(non_times, non_vals, 'b', label='non-adopt sessions')
-	plt.savefig("results/cpm_session_plots/%s_%s_avg_non_adopt_sessions.png" % out_tuple, bbox_inches='tight')
+	plt.savefig("results/cpm_session_plots/%s_%s_avg_non_adopt_sessions_maxlen_%s.png" % (out_tuple + (max_session_length//3600,)), bbox_inches='tight')
 
-	print("Individual plots saved to results/cpm_session_plots/%s_%s_avg_adopt_sessions.png and results/cpm_session_plots/%s_%s_avg_non_adopt_sessions.png" % (out_tuple + out_tuple))
+	print("Individual plots saved to results/cpm_session_plots/%s_%s_avg_adopt_sessions_maxlen_%s.png and results/cpm_session_plots/%s_%s_avg_non_adopt_sessions_maxlen_%s.png" % (out_tuple + (max_session_length//3600,) + out_tuple + (max_session_length//3600,)))
 
 #also plot without the -100, 0, and 100 data points, because they are SUPER high and throw off the look of the plot
 if NORM_TIME:
@@ -397,6 +405,6 @@ ax.plot(adopt_times, adopt_vals, 'r', label='adoption sessions')
 ax.plot(non_times, non_vals, 'b', label='non-adopt sessions')
 legend = ax.legend(loc='best', shadow=True, fontsize='x-large')
 plt.axvline(x=0, color='r', lw=0.4)
-plt.savefig("results/cpm_session_plots/%s_%s_combined_avg_adopt_sessions.png" % out_tuple, bbox_inches='tight')
+plt.savefig("results/cpm_session_plots/%s_%s_combined_avg_adopt_sessions_maxlen_%s.png" % (out_tuple + (max_session_length//3600,)), bbox_inches='tight')
 
-print("Modified average normalized cpm pmf plot saved to results/cpm_session_plots/%s_%s_combined_avg_adopt_sessions.png" % out_tuple)
+print("Modified average normalized cpm pmf plot saved to results/cpm_session_plots/%s_%s_combined_avg_adopt_sessions_maxlen_%s.png" % (out_tuple + (max_session_length//3600,)))
