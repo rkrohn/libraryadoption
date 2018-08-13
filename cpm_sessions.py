@@ -215,8 +215,8 @@ def plot_cpm(x, y, filename, adopt = False):
 max_inactive = 9 * 3600		#maximum time between commits of the same session (in seconds)
 
 #boolean flags to set operating mode
-PMF_SESSION = False		#perform PMF normalization on each session if true; skip otherwise
-NORM_TIME = False 		#normalize all session lengths to same range if true; stack by time otherwise
+PMF_SESSION = True		#perform PMF normalization on each session if true; skip otherwise
+NORM_TIME = True 		#normalize all session lengths to same range if true; stack by time otherwise
 
 #set session length limit (in seconds) - any sessions longer than this will not be considered in averages
 #set to -1 if want no limit
@@ -357,9 +357,9 @@ dump_data(adopt_times, "results/%s_%s_avg_times_maxlen_%s.pkl" % (out_tuple + (m
 print("Data saved to results/%s_%s_avg_adopt_vals_maxlen_%s.pkl, results/%s_%s_avg_non_adopt_vals_maxlen_%s.pkl, and results/%s_%s_avg_times_maxlen_%s.pkl" % (out_tuple + (max_session_length//3600,) + out_tuple + (max_session_length//3600,) + out_tuple + (max_session_length//3600,)))
 
 #plot average pmfs! (separate plots for now)
-if PMF_SESSION and NORM_TIME:
-	plot_pmf(adopt_times, adopt_vals, "results/cpm_session_plots/PMF_NORM_avg_adopt_sessions_maxlen_%s.png" % max_session_length//3600, adopt = True)
-	plot_pmf(non_times, non_vals, "results/cpm_session_plots/PMF_NORM_avg_non_adopt_sessions_maxlen_%s.png" % max_session_length//3600, adopt = False)
+if PMF_SESSION and NORM_TIME and max_session_length == -1:
+	plot_pmf(adopt_times, adopt_vals, "results/cpm_session_plots/PMF_NORM_avg_adopt_sessions_maxlen_%s.png" % (max_session_length//3600), adopt = True)
+	plot_pmf(non_times, non_vals, "results/cpm_session_plots/PMF_NORM_avg_non_adopt_sessions_maxlen_%s.png" % (max_session_length//3600), adopt = False)
 
 	print("Average normalized cpm pmf plots saved to results/cpm_session_plots/PMF_NORM_avg_adopt_sessions_maxlen_%s.png and results/cpm_session_plots/PMF_NORM_avg_non_adopt_sessions_maxlen_%s.png" % (max_session_length//3600, max_session_length//3600))
 #no time normalization, plot adopt and non-adopt curves independently
