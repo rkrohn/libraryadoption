@@ -216,11 +216,11 @@ max_inactive = 9 * 3600		#maximum time between commits of the same session (in s
 
 #boolean flags to set operating mode
 PMF_SESSION = True		#perform PMF normalization on each session if true; skip otherwise
-NORM_TIME = True 		#normalize all session lengths to same range if true; stack by time otherwise
+NORM_TIME = True		#normalize all session lengths to same range if true; stack by time otherwise
 
 #set session length limit (in seconds) - any sessions longer than this will not be considered in averages
 #set to -1 if want no limit
-max_session_length = 16*3600
+max_session_length = -1		#16 * 3600
 
 #get list of user commit files to process
 files = glob.glob('data_files/user_commits/*')
@@ -369,6 +369,7 @@ elif NORM_TIME == False:
 	fig, ax = plt.subplots()
 	ax.plot(adopt_times, adopt_vals, 'r', label='adoption sessions')
 	plt.axvline(x=0, color='r', lw=0.4)
+	plt.yscale('log')
 	plt.savefig("results/cpm_session_plots/%s_%s_avg_adopt_sessions_maxlen_%s.png" % (out_tuple + (max_session_length//3600,)), bbox_inches='tight')
 
 	print("Modified average normalized cpm pmf plot saved to results/cpm_session_plots/%s_%s_combined_avg_adopt_sessions_maxlen_%s.png" % (out_tuple + (max_session_length//3600,)))
@@ -376,35 +377,19 @@ elif NORM_TIME == False:
 	plt.clf()
 	fig, ax = plt.subplots()
 	ax.plot(non_times, non_vals, 'b', label='non-adopt sessions')
+	plt.yscale('log')
 	plt.savefig("results/cpm_session_plots/%s_%s_avg_non_adopt_sessions_maxlen_%s.png" % (out_tuple + (max_session_length//3600,)), bbox_inches='tight')
 
 	print("Individual plots saved to results/cpm_session_plots/%s_%s_avg_adopt_sessions_maxlen_%s.png and results/cpm_session_plots/%s_%s_avg_non_adopt_sessions_maxlen_%s.png" % (out_tuple + (max_session_length//3600,) + out_tuple + (max_session_length//3600,)))
 
-#also plot without the -100, 0, and 100 data points, because they are SUPER high and throw off the look of the plot
-if NORM_TIME:
-	#remove last elements
-	adopt_times.pop(-1)
-	adopt_vals.pop(-1)
-	non_times.pop(-1)
-	non_vals.pop(-1)
-	#remove center (0) element
-	adopt_times.pop(100)
-	adopt_vals.pop(100)
-	non_times.pop(100)
-	non_vals.pop(100)
-	#remove first element
-	adopt_times.pop(0)
-	adopt_vals.pop(0)
-	non_times.pop(0)
-	non_vals.pop(0)
-
 #plot again, this time both on the same line plot
 plt.clf()
 fig, ax = plt.subplots()
-ax.plot(adopt_times, adopt_vals, 'r', label='adoption sessions')
-ax.plot(non_times, non_vals, 'b', label='non-adopt sessions')
+ax.plot(adopt_times, adopt_vals, 'r', label='adoption')
+ax.plot(non_times, non_vals, 'b', label='non-adopt')
 legend = ax.legend(loc='best', shadow=True, fontsize='x-large')
 plt.axvline(x=0, color='r', lw=0.4)
+plt.yscale('log')
 plt.savefig("results/cpm_session_plots/%s_%s_combined_avg_adopt_sessions_maxlen_%s.png" % (out_tuple + (max_session_length//3600,)), bbox_inches='tight')
 
 print("Modified average normalized cpm pmf plot saved to results/cpm_session_plots/%s_%s_combined_avg_adopt_sessions_maxlen_%s.png" % (out_tuple + (max_session_length//3600,)))
