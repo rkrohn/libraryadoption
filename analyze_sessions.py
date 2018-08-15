@@ -38,38 +38,37 @@ def print_sorted(bins, filename):
 #generate the pmf of the cpm rate on either side of the adoption event and plot
 def session_commits(commit_times, first_adopt):	
 
-	#convert UTC times (seconds) to minutes from some reference point
-	#no adoption, shift times relative to first commit
-	if first_adopt == -1:
-		relative_times = [int((time - commit_times[0]) / 60) for time in commit_times]
-	#adoption session, shift all times relative to first adoption event
-	else:
-		relative_times = [int((time - commit_times[first_adopt]) / 60) for time in commit_times]
-
-	#build list of minute counters covering entire range
-	commit_minutes = list(range(relative_times[0], relative_times[-1]+1))
-	#and list of corresponding commit counts
-	commit_counts = [0] * len(commit_minutes)
-	for time in relative_times:
-		commit_counts[time + abs(relative_times[0])] += 1
-
 	#normalize time scale, partition at adoption if necessary
 	if NORM_TIME:
 		#if session contains adoption, partition at 0
 		if first_adopt != -1:
-			partition = commit_minutes.index(0)		#find the 0 - partition point
-			pre_adopt = commit_minutes[:partition]
-			post_adopt = commit_minutes[partition:]
-
+			#partition commit times at first adoption event
+			pre_adopt = commit_times[:first_adopt+1]	#include adoption event here for now
+			post_adopt = commit_times[first_adopt:]
 			#normalize both sides separately, then combine
-			commit_minutes = normalize(pre_adopt, -100, 0)
-			commit_minutes  += normalize(post_adopt, 0, 100)
+			relative_times = normalize(pre_adopt, -100, 0)[:-1]		#remove duplicate adoption event
+			relative_times += normalize(post_adopt, 0, 100)
 		#otherwise, take all commits at once
 		else:
-			commit_minutes = normalize(commit_minutes, 0, 100)
+			relative_times = normalize(commit_times, 0, 100)
+	#no normalization, just shift the UTC times (seconds) to minutes from some reference point
+	else:
+		#no adoption, shift times relative to first commit
+		if first_adopt == -1:
+			relative_times = [int((time - commit_times[0]) / 60) for time in commit_times]
+		#adoption session, shift all times relative to first adoption event
+		else:
+			relative_times = [int((time - commit_times[first_adopt]) / 60) for time in commit_times]
+
+	#build list of minute//percent counters covering entire range
+	commit_bins = list(range(int(relative_times[0]), int(relative_times[-1])+1))
+	#and list of corresponding commit counts
+	commit_counts = [0] * len(commit_bins)
+	for time in relative_times:
+		commit_counts[int(time) + int(abs(relative_times[0]))] += 1
 
 	#return results
-	return commit_minutes, commit_counts
+	return commit_bins, commit_counts
 #end session_pmf
 
 #for a completed session, log all session data
@@ -110,20 +109,20 @@ def normalize(data, range_start, range_end):
 	if len(data) == 0:
 		return []
 
-	#special case: only one element
-	if len(data) == 1:
-		#set to range_start if negative
-		if data[0] < 0:
-			return [range_start]
-		#set to 0 if 0
-		elif data[0] == 0:
-			return [0]
-
-	#X′ = a + [(X − Xmin)(b − a) / (Xmax − Xmin)] 
-
+	#grab min and max from data
 	data_min = min(data)
 	data_max = max(data)
 
+	#special case: only one element, or all times the same
+	if len(data) == 1 or data_min == data_max:
+		#set to range_start if range_start is negative (pre-adopt data)
+		if range_start < 0:
+			return len(data) * [range_start]
+		#otherwise, set to 0 (entire session or post-adopt data)
+		else:
+			return len(data) * [0]
+
+	#X′ = a + [(X − Xmin)(b − a) / (Xmax − Xmin)] 	
 	normalized = [range_start + (((x - data_min)*(range_end - range_start))/(data_max - data_min)) for x in data]
 
 	return normalized
@@ -249,33 +248,15 @@ non_vals = []
 for key in sorted(total_adopt.keys()):
 	adopt_times.append(key)
 	adopt_vals.append(total_adopt[key] / adopt_add[key])
-print("adopt")
-print("min", min(adopt_add.keys()), "max", max(adopt_add.keys()))
-print("min", min(adopt_add.values()), "max", max(adopt_add.values()))
 
 #non-adopt sessions	
-print("non-adopt")
-print(total_sessions - total_adopt_sessions, "sessions")
 min_val = non_adopt_add[0]
-min_val_key = [0]
+min_val_key = []
 max_val = non_adopt_add[0]
-max_val_key = [0]
+max_val_key = []
 for key in sorted(total_non_adopt.keys()):
 	non_times.append(key)
 	non_vals.append(total_non_adopt[key] / non_adopt_add[key])
-	if non_adopt_add[key] < min_val:
-		min_val = non_adopt_add[key]
-		min_val_key = [key]
-	elif non_adopt_add[key] == min_val:
-		min_val_key.append(key)
-	if non_adopt_add[key] > max_val:
-		max_val = non_adopt_add[key]
-		max_val_key = [key]
-	elif non_adopt_add[key] == max_val:
-		max_val_key.append(key)
-print("min", min_val, "at", min_val_key)
-print("max", max_val, "at", max_val_key)
-print(total_non_adopt[100])
 
 #output filename fields
 out_code = "NORM" if NORM_TIME else "TIME"
