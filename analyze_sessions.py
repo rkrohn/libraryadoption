@@ -34,6 +34,31 @@ def print_sorted(bins, filename):
 			f.write("%s %s\n" % (key, bins[key]))
 #end print_sorted
 
+#given data and a target range, normalize so data falls in that range only (feature scaling)
+def normalize(data, range_start, range_end):
+	#empty list? return empty
+	if len(data) == 0:
+		return []
+
+	#grab min and max from data
+	data_min = min(data)
+	data_max = max(data)
+
+	#special case: only one element, or all times the same
+	if len(data) == 1 or data_min == data_max:
+		#set to range_start if range_start is negative (pre-adopt data)
+		if range_start < 0:
+			return len(data) * [range_start]
+		#otherwise, set to 0 (entire session or post-adopt data)
+		else:
+			return len(data) * [0]
+
+	#X′ = a + [(X − Xmin)(b − a) / (Xmax − Xmin)] 	
+	normalized = [int((range_start + (((x - data_min)*(range_end - range_start))/(data_max - data_min))) / BIN_WIDTH) for x in data]
+
+	return normalized
+#end normalize
+
 #given a completed session as list of commit times and index of first adoption (if any),
 #generate the pmf of the cpm rate on either side of the adoption event and plot
 def session_commits(commit_times, first_adopt):	
@@ -55,17 +80,19 @@ def session_commits(commit_times, first_adopt):
 	else:
 		#no adoption, shift times relative to first commit
 		if first_adopt == -1:
-			relative_times = [int((time - commit_times[0]) / 60) for time in commit_times]
+			relative_times = [int((time - commit_times[0]) / (BIN_WIDTH * 60)) for time in commit_times]
 		#adoption session, shift all times relative to first adoption event
 		else:
-			relative_times = [int((time - commit_times[first_adopt]) / 60) for time in commit_times]
+			relative_times = [int((time - commit_times[first_adopt]) / (BIN_WIDTH * 60)) for time in commit_times]
 
-	#build list of minute//percent counters covering entire range
-	commit_bins = list(range(int(relative_times[0]), int(relative_times[-1])+1))
+	#build list of minute/percent counters covering entire range
+	commit_bins = list(range(relative_times[0], relative_times[-1]+1))
 	#and list of corresponding commit counts
 	commit_counts = [0] * len(commit_bins)
 	for time in relative_times:
-		commit_counts[int(time) + int(abs(relative_times[0]))] += 1
+		commit_counts[time + abs(relative_times[0])] += 1
+	#multiply bins (times) by bin width to get back on the right scale
+	commit_bins = [x * BIN_WIDTH for x in commit_bins]
 
 	#return results
 	return commit_bins, commit_counts
@@ -83,14 +110,14 @@ def log_session(user_adopt_sessions):
 	#adopt sessions
 	if session_first_adopt != -1:
 		for i in range(len(times)):
-			total_adopt[int(times[i])] += commits[i]	
-		for i in range(int(times[0]), int(times[-1])+1):
+			total_adopt[times[i]] += commits[i]	
+		for i in range(times[0], times[-1]+1):
 			adopt_add[i] += 1	
 	#non-adopt sessions
 	else:
 		for i in range(len(times)):
-			total_non_adopt[int(times[i])] += commits[i]			
-		for i in range(int(times[0]), int(times[-1])+1):
+			total_non_adopt[times[i]] += commits[i]			
+		for i in range(times[0], times[-1]+1):
 			non_adopt_add[i] += 1
 
 	#update user adoption counters if this session contained an adoption
@@ -103,37 +130,13 @@ def log_session(user_adopt_sessions):
 	return user_adopt_sessions
 #end log_session
 
-#given data and a target range, normalize so data falls in that range only (feature scaling)
-def normalize(data, range_start, range_end):
-	#empty list? return empty
-	if len(data) == 0:
-		return []
-
-	#grab min and max from data
-	data_min = min(data)
-	data_max = max(data)
-
-	#special case: only one element, or all times the same
-	if len(data) == 1 or data_min == data_max:
-		#set to range_start if range_start is negative (pre-adopt data)
-		if range_start < 0:
-			return len(data) * [range_start]
-		#otherwise, set to 0 (entire session or post-adopt data)
-		else:
-			return len(data) * [0]
-
-	#X′ = a + [(X − Xmin)(b − a) / (Xmax − Xmin)] 	
-	normalized = [range_start + (((x - data_min)*(range_end - range_start))/(data_max - data_min)) for x in data]
-
-	return normalized
-#end normalize
-
 #--- MAIN EXECUTION BEGINS HERE---#
 
 max_inactive = 9 * 3600		#maximum time between commits of the same session (in seconds)
 
-#boolean flags to set operating mode
-NORM_TIME = True		#normalize all session lengths to same range if true; stack by time otherwise
+#flags and values to set operating mode
+NORM_TIME = False		#normalize all session lengths to same range if true; stack by time otherwise
+BIN_WIDTH = 5			#if normalizing, sets the %-width of each bin; otherwise, the number of minutes per bin
 
 #get list of user commit files to process
 files = glob.glob('data_files/user_commits/*')
@@ -259,7 +262,7 @@ for key in sorted(total_non_adopt.keys()):
 	non_vals.append(total_non_adopt[key] / non_adopt_add[key])
 
 #output filename fields
-out_code = "NORM" if NORM_TIME else "TIME"
+out_code = ("NORM" if NORM_TIME else "TIME", BIN_WIDTH)
 
 #save adopt and non-adopt dictionaries as pickles
 '''
@@ -275,12 +278,12 @@ fig, ax = plt.subplots()
 ax.plot(adopt_times, adopt_vals, 'r', label='adoption sessions')
 plt.axvline(x=0, color='k', lw=0.4)
 plt.yscale('log')
-plt.savefig("results/session_plots/%s_avg_adopt_sessions.png" % out_code, bbox_inches='tight')
+plt.savefig("results/session_plots/%s_avg_adopt_sessions_%s.png" % out_code, bbox_inches='tight')
 
 plt.clf()
 fig, ax = plt.subplots()
 ax.plot(non_times, non_vals, 'b', label='non-adopt sessions')
 plt.yscale('log')
-plt.savefig("results/session_plots/%s_avg_non_adopt_sessions.png" % out_code, bbox_inches='tight')
+plt.savefig("results/session_plots/%s_avg_non_adopt_sessions_%s.png" % out_code, bbox_inches='tight')
 
-print("Individual plots saved to results/session_plots/%s_avg_adopt_sessions.png and results/session_plots/%s_avg_non_adopt_sessions.png" % (out_code, out_code))
+print("Individual plots saved to results/session_plots/%s_avg_adopt_sessions_%s.png and results/session_plots/%s_avg_non_adopt_sessions_%s.png" % (out_code + out_code))
