@@ -244,25 +244,38 @@ adopt_times = []
 adopt_vals = []
 non_times = []
 non_vals = []	
-if NORM_TIME:
-	#adopt sessions
-	for key in sorted(total_adopt.keys()):
-		adopt_times.append(key)
-		adopt_vals.append(total_adopt[key] / total_adopt_sessions)
-	#non-adopt sessions	
-	total_non_adopt_sessions = total_sessions - total_adopt_sessions
-	for key in sorted(total_non_adopt.keys()):
-		non_times.append(key)
-		non_vals.append(total_non_adopt[key] / total_non_adopt_sessions)
-else:
-	#adopt sessions
-	for key in sorted(total_adopt.keys()):
-		adopt_times.append(key)
-		adopt_vals.append(total_adopt[key] / adopt_add[key])
-	#non-adopt sessions	
-	for key in sorted(total_non_adopt.keys()):
-		non_times.append(key)
-		non_vals.append(total_non_adopt[key] / non_adopt_add[key])
+
+#adopt sessions
+for key in sorted(total_adopt.keys()):
+	adopt_times.append(key)
+	adopt_vals.append(total_adopt[key] / adopt_add[key])
+print("adopt")
+print("min", min(adopt_add.keys()), "max", max(adopt_add.keys()))
+print("min", min(adopt_add.values()), "max", max(adopt_add.values()))
+
+#non-adopt sessions	
+print("non-adopt")
+print(total_sessions - total_adopt_sessions, "sessions")
+min_val = non_adopt_add[0]
+min_val_key = [0]
+max_val = non_adopt_add[0]
+max_val_key = [0]
+for key in sorted(total_non_adopt.keys()):
+	non_times.append(key)
+	non_vals.append(total_non_adopt[key] / non_adopt_add[key])
+	if non_adopt_add[key] < min_val:
+		min_val = non_adopt_add[key]
+		min_val_key = [key]
+	elif non_adopt_add[key] == min_val:
+		min_val_key.append(key)
+	if non_adopt_add[key] > max_val:
+		max_val = non_adopt_add[key]
+		max_val_key = [key]
+	elif non_adopt_add[key] == max_val:
+		max_val_key.append(key)
+print("min", min_val, "at", min_val_key)
+print("max", max_val, "at", max_val_key)
+print(total_non_adopt[100])
 
 #output filename fields
 out_code = "NORM" if NORM_TIME else "TIME"
