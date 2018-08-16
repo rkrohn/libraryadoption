@@ -48,7 +48,7 @@ def normalize(data, range_start, range_end):
 	if len(data) == 1 or data_min == data_max:
 		#set to range_start if range_start is negative (pre-adopt data)
 		if range_start < 0:
-			return len(data) * [range_start]
+			return len(data) * [int(range_start / BIN_WIDTH)]
 		#otherwise, set to 0 (entire session or post-adopt data)
 		else:
 			return len(data) * [0]
@@ -130,13 +130,14 @@ def log_session(user_adopt_sessions):
 	return user_adopt_sessions
 #end log_session
 
+
 #--- MAIN EXECUTION BEGINS HERE---#
 
 max_inactive = 9 * 3600		#maximum time between commits of the same session (in seconds)
 
 #flags and values to set operating mode
 NORM_TIME = False		#normalize all session lengths to same range if true; stack by time otherwise
-BIN_WIDTH = 5			#if normalizing, sets the %-width of each bin; otherwise, the number of minutes per bin
+BIN_WIDTH = 1			#if normalizing, sets the %-width of each bin; otherwise, the number of minutes per bin
 
 #get list of user commit files to process
 files = glob.glob('data_files/user_commits/*')
@@ -234,9 +235,6 @@ for file in files:
 		total_adopt_commits += user_adopt_commits
 		total_adopt_libs += user_adopt_libs
 
-	if total_adopt_sessions >= 100:
-		break
-
 print("Processed", total_commit_count, "commits and", total_user_count, "users in", total_sessions, "sessions")
 print("   ", total_adopt_libs, "libraries adopted in", total_adopt_commits, "commits across", total_adopt_sessions, "sessions")
 
@@ -253,10 +251,6 @@ for key in sorted(total_adopt.keys()):
 	adopt_vals.append(total_adopt[key] / adopt_add[key])
 
 #non-adopt sessions	
-min_val = non_adopt_add[0]
-min_val_key = []
-max_val = non_adopt_add[0]
-max_val_key = []
 for key in sorted(total_non_adopt.keys()):
 	non_times.append(key)
 	non_vals.append(total_non_adopt[key] / non_adopt_add[key])
@@ -264,26 +258,30 @@ for key in sorted(total_non_adopt.keys()):
 #output filename fields
 out_code = ("NORM" if NORM_TIME else "TIME", BIN_WIDTH)
 
-#save adopt and non-adopt dictionaries as pickles
-'''
-dump_data(adopt_vals, "results/%s_avg_adopt_vals.pkl" % out_code)
-dump_data(non_vals, "results/%s_avg_non_adopt_vals.pkl" % out_code)
-dump_data(adopt_times, "results/%s_avg_times.pkl" % out_code)
-print("Data saved to results/%s_avg_adopt_vals.pkl, results/%s_avg_non_adopt_vals.pkl, and results/%s_avg_times.pkl" % (out_code, out_code, out_code))
-'''
-
 #plot adopt and non-adopt curves independently
+#adopt
 plt.clf()
 fig, ax = plt.subplots()
 ax.plot(adopt_times, adopt_vals, 'r', label='adoption sessions')
 plt.axvline(x=0, color='k', lw=0.4)
 plt.yscale('log')
-plt.savefig("results/session_plots/%s_avg_adopt_sessions_%s.png" % out_code, bbox_inches='tight')
+plt.xlim([-240, 480])
+plt.savefig("results/session_analysis/%s_avg_adopt_sessions_%s.png" % out_code, bbox_inches='tight')
 
+#non-adopt
 plt.clf()
 fig, ax = plt.subplots()
 ax.plot(non_times, non_vals, 'b', label='non-adopt sessions')
 plt.yscale('log')
-plt.savefig("results/session_plots/%s_avg_non_adopt_sessions_%s.png" % out_code, bbox_inches='tight')
+plt.xlim([0, 960])
+plt.savefig("results/session_analysis/%s_avg_non_adopt_sessions_%s.png" % out_code, bbox_inches='tight')
 
-print("Individual plots saved to results/session_plots/%s_avg_adopt_sessions_%s.png and results/session_plots/%s_avg_non_adopt_sessions_%s.png" % (out_code + out_code))
+print("Individual plots saved to results/session_analysis/%s_avg_adopt_sessions_%s.png and results/session_analysis/%s_avg_non_adopt_sessions_%s.png" % (out_code + out_code))
+
+#save adopt and non-adopt data to csv
+col_header = "time(%-of-session)" if NORM_TIME else "time(minutes)"
+#adopt
+np.savetxt("results/session_analysis/%s_avg_adopt_sessions_%s.csv" % out_code, np.column_stack(([col_header] + adopt_times, ['avg_commits'] + adopt_vals)), delimiter=",", fmt="%s")
+#non-adopt
+np.savetxt("results/session_analysis/%s_avg_non_adopt_sessions_%s.csv" % out_code, np.column_stack(([col_header] + non_times, ['avg_commits'] + non_vals)), delimiter=",", fmt="%s")
+print("Data files saved to results/%s_avg_adopt_sessions_%s.csv and results/%s_avg_non_adopt_sessions_%s.csv" % (out_code + out_code))
