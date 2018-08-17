@@ -265,7 +265,10 @@ fig, ax = plt.subplots()
 ax.plot(adopt_times, adopt_vals, 'r', label='adoption sessions')
 plt.axvline(x=0, color='k', lw=0.4)
 plt.yscale('log')
+<<<<<<< HEAD
 plt.xlim([-240, 480])
+=======
+>>>>>>> 5737c5faf95d74fb1e841affa99d3e244194f2fe
 plt.savefig("results/session_analysis/%s_avg_adopt_sessions_%s.png" % out_code, bbox_inches='tight')
 
 #non-adopt
@@ -273,7 +276,10 @@ plt.clf()
 fig, ax = plt.subplots()
 ax.plot(non_times, non_vals, 'b', label='non-adopt sessions')
 plt.yscale('log')
+<<<<<<< HEAD
 plt.xlim([0, 960])
+=======
+>>>>>>> 5737c5faf95d74fb1e841affa99d3e244194f2fe
 plt.savefig("results/session_analysis/%s_avg_non_adopt_sessions_%s.png" % out_code, bbox_inches='tight')
 
 print("Individual plots saved to results/session_analysis/%s_avg_adopt_sessions_%s.png and results/session_analysis/%s_avg_non_adopt_sessions_%s.png" % (out_code + out_code))
