@@ -96,14 +96,15 @@ POST_WIN = 6 * 3600		#time, in seconds, to include in post-commit activity windo
 files = glob.glob('data_files/user_commits/*')
 print("Processing", len(files), "user commit files")
 
-#global counters: total number of commits, users, and sessions
+#global counters
 total_commit_count = 0
+total_adopt_commits = 0
 total_user_count = 0
 total_adopt_libs = 0
 
 #commit activity variables
-activity_counts = defaultdict(int)		#key is minutes from commit (positive or negative, in BIN_WIDTH increments)
-										#value is number of commits made at that time (across all commits by all users)
+adopt_activity_counts = defaultdict(int)	#key is minutes from adoption commit (pos or neg, in BIN_WIDTH increments)
+											#value is # of commits made at that time (across all adopt commits by all users)
 
 #process each file one at a time
 for file in files:
@@ -119,6 +120,7 @@ for file in files:
 		#user variables
 		prev = -1				#time of user's previous commit
 		user_adopt_libs = 0		#number of libraries adopted by user
+		user_adopt_commits = 0	#number of adoption commits by user
 
 		#commit indices
 		pre_start = 0			#index of first commit included in pre-commit activity window
@@ -130,52 +132,56 @@ for file in files:
 		for i in range(0, len(commits)):
 
 			#grab current commit for easier access
-			c = commits[i]
+			c = commits[i]			
 
-			#move up pre_start index if necessary so that commit it points to falls within PRE_WIN
-			while c['time'] - commits[pre_start]['time'] > PRE_WIN:
-				pre_start += 1
-			#move up post_end index if necessary so that commit it points to falls outside POST_WIN
-			while post_end < len(commits) and commits[post_end]['time'] - c['time'] < POST_WIN:
-				post_end += 1
-
-			surrounding_commits = commits[pre_start:post_end]		#extract commits that fall within defined activity window
-
-			#for each commit within activity window, compute "minutes from commit" and add to relevant bin counter
-			for a in surrounding_commits:
-				activity_counts[int((a['time'] - c['time']) / (BIN_WIDTH * 60))] += 1
-
-			#check if current commit contains an adoption, if so flag the session as adopting
+			#check if current commit contains an adoption, if so add to adoption stack
 			if c['adopted_libs']:
-				user_adopt_libs += len(c['adopted_libs'])		
+				user_adopt_libs += len(c['adopted_libs'])	
+				user_adopt_commits += 1	
+
+				#move up pre_start index if necessary so that commit it points to falls within PRE_WIN
+				while c['time'] - commits[pre_start]['time'] > PRE_WIN:
+					pre_start += 1
+				#move up post_end index if necessary so that commit it points to falls outside POST_WIN
+				while post_end < len(commits) and commits[post_end]['time'] - c['time'] < POST_WIN:
+					post_end += 1
+
+				surrounding_commits = commits[pre_start:post_end]		#extract commits that fall within defined activity window
+
+				#for each commit within activity window, compute "minutes from commit" and add to relevant bin counter
+				for a in surrounding_commits:
+					adopt_activity_counts[int((a['time'] - c['time']) / (BIN_WIDTH * 60))] += 1
 
 			prev = c['time']	#update prev for next commit		
 
 		#wrap up current user before moving to next
-		print("User", user, "made", len(commits), "commits adopting", user_adopt_libs, "libraries")		
+		print("User", user, "made", len(commits), "commits (" + str(user_adopt_commits), "adoption commits) adopting", user_adopt_libs, "libraries")		
 
 		total_adopt_libs += user_adopt_libs
+		total_adopt_commits += user_adopt_commits
+
+
 
 print("Processed", total_commit_count, "commits and", total_user_count, "users")
-print("   ", total_adopt_libs, "libraries adopted")
+print("   ", total_adopt_libs, "libraries adopted in", total_adopt_commits, "adoption commits")
 
 #post-process totals for plotting
-#divide commits totals by total number of commits (average), also convert to lists at the same time
-activity_times = []
-activity_avg = []	
+#divide adopt commits totals by total number of adoption commits (average), also convert to lists at the same time
+adopt_activity_times = []
+adopt_activity_avg = []	
 
 #adopt sessions
-for key in sorted(activity_counts.keys()):
-	activity_times.append(key)
-	activity_avg.append(activity_counts[key] / total_commit_count)
+for key in sorted(adopt_activity_counts.keys()):
+	adopt_activity_times.append(key)
+	adopt_activity_avg.append(adopt_activity_counts[key] / total_adopt_commits)
 
 #plot
 plt.clf()
 fig, ax = plt.subplots()
-ax.plot(activity_times, activity_avg, 'r', label='adoption sessions')
+ax.plot(adopt_activity_times, adopt_activity_avg, 'r', label='adoption commits')
 plt.axvline(x=0, color='k', lw=0.4)
 plt.yscale('log')
-plt.savefig("results/activity_analysis/avg_commit_activity_%s.png" % BIN_WIDTH, bbox_inches='tight')
+plt.savefig("results/activity_analysis/avg_adopt_commit_activity_%s.png" % BIN_WIDTH, bbox_inches='tight')
 
 exit(0)
 
