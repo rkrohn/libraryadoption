@@ -111,6 +111,10 @@ adopt_commit_positions = defaultdict(list)
 #again, covers all adoption events, not a single session or user
 adopt_commit_times = defaultdict(list)
 
+#variable for storing/computing average adoption commit location within session
+#for each adoption commit, we add the adoption time as percentage through the session
+avg_adopt_time = 0
+
 #process each file one at a time
 for file in files:
 	print("\nProcessing", file)
@@ -157,6 +161,13 @@ for file in files:
 
 					user_adopt_sessions, user_adopt_commits, user_adopt_libs = log_session(user_adopt_sessions, user_adopt_commits, user_adopt_libs)		#update all global tracking		
 
+					#add adopt time % to total for average
+					length = prev_commit - session_start
+					for time in session_adopt_times:
+						if length != 0:
+							avg_adopt_time += int((time / length) * 100)
+						#session length 0, adopt time/percent 0, no change to sum
+
 					#reset session tracking for new session
 					session_start = c['time']
 					session_commit_count = 1
@@ -194,7 +205,7 @@ for file in files:
 		total_adopt_commits += user_adopt_commits
 		total_adopt_libs += user_adopt_libs
 
-print("Processed", total_commit_count, "commits and", total_user_count, "users in", total_sessions, "sessions")
+print("\nProcessed", total_commit_count, "commits and", total_user_count, "users in", total_sessions, "sessions")
 print("   ", total_adopt_libs, "libraries adopted in", total_adopt_commits, "commits across", total_adopt_sessions, "sessions")
 
 #compute averages from lists
@@ -253,3 +264,7 @@ dump_data(session_length_counts, "results/session_length_numeric.pkl")
 dump_data(session_length_lists, "results/session_length_lists.pkl")
 dump_data(adopt_commit_positions, "results/adopt_commit_positions.pkl")
 dump_data(adopt_commit_times, "results/adopt_commit_times.pkl")
+
+#compute final average adopt time
+avg_adopt_time = avg_adopt_time / total_adopt_commits
+print("\nAverage adopt time as percentage of session:", avg_adopt_time)
