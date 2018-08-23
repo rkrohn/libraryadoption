@@ -920,3 +920,276 @@ plot distribution of where adoptions fall
 	
 next - make cpm plot normalized about time of first adoption
 
+cpm - commits per minute
+	how best to average over many different user sessions?
+	
+first, how to compute cpm for one single user session?
+	step through session over time, in 1 minute windows
+	count the commits per window
+	that is the cpm of this particular session
+each discrete window will have cpm of 0 to pos whole number - because only one session is being considered
+
+what about an average cpm over all of a user's sessions?
+
+something like this?
+https://stackoverflow.com/questions/11731735/how-to-calculate-continuous-smooth-event-rate-based-on-event-times
+but considering all of a user's sessions simultaneously, then divide by # of sessions?
+for each 1 minute window: sum(# of commits across all sessions) / # of sessions
+
+how does this work for variable-length sessions?
+	compute cpm as above for each session, then normalize, then average?
+ponder...
+
+8.7
+
+data gen up to 10-27-14
+
+Tim home Wed-Fri
+	in DC on Monday
+	
+pmf discussion on Slack
+	create an x-normalized PMF (normalize either side of adoption by time)
+	and then stack/sum the weights together across sessions
+	and then we can normalize y axis if we need to
+
+	but also bin by 1%, then maybe Gaussian smoothing? ugh
+	
+	
+User 51047 made 495 commits across 137 sessions
+    21 libraries adopted in 5 commits across 5 sessions
+
+8.8
+
+data gen up to 12-28-14
+
+just keep coding, just keep coding...
+
+have discontinuous cpm for each session
+
+TODO:
+	normalize cpm - entire session for non-adopt, either side for adopt
+	convert to 1% bins
+	convert to pmf
+	combine!
+	gaussian smooth?
+	
+data gen: 1-12-15
+
+8.9
+
+data gen up to 3-12-15	(faster?)
+
+let's do normalization and pmf in the same step - yes? sure
+	nope, pmf needs to be for the entire session, not just one half - so need to do that first
+
+okay, have the pmf for the entire session - now to normalize
+	adoption sessions normalized on either side of adoption
+	non-adopt normalized all at once
+but need to be able to stack sessions of the same type together, and plot all sessions at once
+
+so let's do this:
+	normalize either side of the adoption to 0-100 (or -100 to 0)
+	normalize regular sessions to -100 to 100
+	
+normalize to range (a, b) using X′ = a + [(X − Xmin)(b − a) / (Xmax − Xmin)] 
+
+yay plot! it's so beautiful (and interesting)
+
+from meeting:
+	need to check normalization, see if magnitude is only due to that, or if actually true
+	draw same figure for only import events (not all commits)
+	learning curve? maybe worth formalizing
+	
+also - plot user's average session length vs frequency of that average
+	ie, distribution of session lengths (already done?)
+
+for other team members, from Python data:
+	correlation between # of (changed) lines of code per commit per push per user vs team size
+	keep in mind that larger code bases have more code, and are harder to change - how to measure complexity?
+		total code size?
+		number and size of edited files?
+		how many individuals have touched a file?
+
+see slack for more todo
+
+8.10
+
+data gen up to 5-9-2015
+
+todo:
+	skip pmf step for each session (stack and average commit counts)
+	skip time normalization (stack by minute around adoption or session start)
+	and all combinations thereof (boolean flags)
+	
+done - roughly
+	
+8.13
+	
+data gen up to 12-31-2015
+
+let's gather some thoughts - what is the data saying?
+
+	inter-commit delay plot led to selection of a maximum delay of 9 hours
+	~94% of all sessions are then < 9 hours
+	short sessions more common than long
+		adoption sessions follow the same pattern, but there account for only ~1 percent of all sessions
+	number of commits increases and session length increases, but not exponentially
+		adoption sessions *appear* to have the same or more commits as regular sessions
+	for normal users (short sessions), adoptions tend to appear earlier in the session (needs more investigation)
+	
+	PMF + time normalization suggests that sessions contain more commits after an adoption and fewer before (as compared to typical non-adopt sessions) - in this plot, each session has equal weight
+	
+	CPM + time normalization shows a similar different between pre- and post-adopt, but both sections have more commits than non-adopt sessions
+	
+	CPM + no time normalization: 
+		in non-adopt sessions, commits occur way more frequently at the end of the session - unless that's just the long-session bots screwing it up?
+		similar behavior in adoption sessions - but those sessions are even longer!
+		
+	perhaps, for this session analysis, we should throw out any sessions longer than ~24 hours?
+		kind of a natural drop-off at 15/16 hour long sessions - which makes sense for humans - so maybe there	
+		
+TODO:
+	average commit rate of different session types (finer grain than binning)
+	binned version of average adopt commit # by number of commits in session (smooth out that curve)
+		ditto for time - too zig-zaggy, can't tell what's actually going on
+	length-limited session analysis
+	
+let's start with that last item, and only consider sessions 16 hours or shorter
+
+made plots, look them over tomorrow
+
+8.14
+
+data gen up to 3-10-2016
+
+changed session analysis plots to log scale y-axis
+
+but some weirdness to check:
+	limiting the length should make adopt and non-adopt plots cover the same range - but adopt seems longer?
+	where is the big central peak in the normalized non-adopt plot coming from?
+	
+first - investigate the central peak
+
+welp - it's a normalization artifact - disappears if normalize 0-100 instead of -100 to 0
+	what if we normalize the adopt sessions to 0-100, with adopt at 50, for comparison?
+	better
+	
+notes from Tim:
+	for adoption sessions, stack/avg about first adoption, run 4-8 hours to either side
+	for non-adopt sessions, two plots:
+		time normalized stack (exposition on general behavior)
+		regular time stack/average from beginning of session, for comparison
+	also, accompanying session length distribution for context
+	
+	play with the bin width for nicer plot
+	
+Tim leaves Saturday, aims to have paper words by then
+
+8.15
+
+data gen working on 5-27-2016
+
+fixed/improved the normalization
+added bin width setting, for either normalization percent of session or time minutes
+
+8.16
+
+data gen update: 8-12-16
+
+have session length distribution data - generated by sessions_adopt.py, dumped to sessions_adopt_data.csv
+
+analyze_sessions.py should give us the rest of the plots/data, just need to dump to csv instead of only plotting
+
+ran all the results, committed them up
+
+new plots: like the adoption session plot, but slightly different
+	instead of aligning on the first adoption event of each session, line up on ALL commits meeting criteria
+	then stack/average activity surrounding each commit
+	two versions:
+		all non-adopt commits
+		all adopt commits
+this will give us a sense of activity surrounding both regular and non-adopt commits
+go ahead and bin by 5 minute increments to make plots less squirrelly
+
+Tim leaving Friday/Saturday, returning late Thursday
+
+Tim will write up the basic crawl process, go ahead and edit that to be correct (see procedure_notes.txt)
+
+95% confidence intervals for ALL averages (or standard error)
+
+8.17
+
+data gen: 10-28-2016
+
+hmm - symmetric plots?
+
+1 3 5 7 11 13 17
+
+1 at center: 	0, 2, 4, 6, 10, 12, 16
+3:				-2, 0, 2, 4, 8, 10, 14
+5:				-4, -2, 0, 2, 6, 8, 12
+7:				-6, -4, -2, 0, 4, 6, 10
+11:				-10, -8, -6, -4, 0, 2, 6
+13:				-12, -10, -8, -6, -2, 0, 4
+17 at center: 	-16, -14, -12, -10, -6, -4, 0
+
+stack at 0
+						0	2	4	6	10	12	16
+					-2	0	2	4	8	10	14
+				-4	-2	0	2	6	8	12
+			-6	-4	-2	0	4	6	10
+		-10	-8	-6	-4	0	2	6
+	-12	-10	-8	-6	-2	0	4
+-16	-14	-12	-10	-6	-4	0
+
+hmm - looks right to me?
+
+try different - see Slack for notes
+
+8.18
+
+data gen: 1-23-17 (woohoo!)
+
+altered sessions_adopt.py to compute average adoption time as % of session:
+	Average adopt time as percentage of session: 13.94559333795975
+
+okay, so what do we do with that?
+	find regular non-adopt commits at approximately the same location, and stack them up
+	probably also should stack ALL adoption commits, as opposed to just the first ones in each session
+so... need new code I guess
+
+stacking the adoptions done, not too hard
+
+stacking the non-adopt ones at approx the same time is a bit more difficult, because have to step through the entire session to know it's length
+
+8.19
+
+data gen: 4-19-2017
+
+back to code - stack the non-adopt commits that occur around the average adoption point
+
+hmm, seems to be working - but maybe still kind of symmetric?
+	do we have to pick a max of one non-adopt commit per session - whichever is closest to the avg adopt time?
+	or rather, max of one from each session, but still must fall within the window
+	
+Processing data_files/user_commits/-1_commits.pkl
+User -5 made 43 commits (1 adoption commits) adopting 1 libraries
+Processed 9435270 commits and 36341 users
+    175641 libraries adopted in 18440 adoption commits
+
+Stacked 3283582 non-adoption commits for comparison
+[-360, -355, -350, -345, -340, -335, -330, -325, -320, -315, -310, -305, -300, -295, -290, -285, -280, -275, -270, -265, -260, -255, -250, -245, -240, -235, -230, -225, -220, -215, -210, -205, -200, -195, -190, -185, -180, -175, -170, -165, -160, -155, -150, -145, -140, -135, -130, -125, -120, -115, -110, -105, -100, -95, -90, -85, -80, -75, -70, -65, -60, -55, -50, -45, -40, -35, -30, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200, 205, 210, 215, 220, 225, 230, 235, 240, 245, 250, 255, 260, 265, 270, 275, 280, 285, 290, 295, 300, 305, 310, 315, 320, 325, 330, 335, 340, 345, 350, 355]
+
+8.20
+
+data gen: 7-18-2017
+
+tried something different, results pretty much the same - so stick with the old methodology
+
+8.23
+
+data gen finished?!?!!!!!!!
+	need to go back and regen some stuff for all the data, instead of just up to a certain point
+	
+
+
