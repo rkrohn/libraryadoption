@@ -1,6 +1,16 @@
 import pickle
 import numpy as np
 
+pik = "data_files/user_commits/49_commits.pkl"
+
+with open(pik, "rb") as f:
+	data = pickle.load(f)
+	print(len(data))
+	print(list(data.keys()))
+
+
+exit(0)
+
 pik = "data_files/user_commits/16_commits.pkl"
 
 with open(pik, "rb") as f:
