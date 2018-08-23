@@ -1,4 +1,4 @@
-#given adoptioin events and user/repo list, build adoption graph and plot components over time
+#given adoption events and user/repo list, build adoption graph and plot components over time
 
 import json
 import os.path
