@@ -2,6 +2,7 @@
 data_files/all_commits_SUB.json
 data_files/all_commits_SUB_sorted.json
 data_files/all_commits_by_year/
+data_files/OLD
 data_files/complete_event_features/
 data_files/event_features/
 data_files/new_event_features/
