@@ -5,6 +5,8 @@ import os
 import pickle
 from collections import defaultdict
 from math import ceil
+import numpy as np
+import file_utils
 
 #given a filepath, load pickled data
 def load_pickle(filename):
@@ -23,6 +25,8 @@ def dump_data(data, filename):
 #end dump_data
 
 #--- MAIN EXECUTION BEGINS HERE---#
+
+BIN_SIZE = 0.25			#bin size in hours (0.5 for half hours, 0.25 for quarter hours)
 
 bins = defaultdict(int)
 
@@ -67,15 +71,11 @@ for file in files:
 					bins[0] += 1
 				#valid delay, convert to hours add to correct bin counter
 				else:
-					bins[ceil(delay / 3600)] += 1		#3600 seconds per hour, round up to nearest hours
+					bins[ceil(delay / (BIN_SIZE * 3600)) * BIN_SIZE] += 1		
 
 			prev = c['time']	#update prev for next commit
 
-#print counts (sorted by key)
-for key in sorted(bins.keys()):
-	print("%s: %s" % (key, bins[key]))
-
-#and save a pickle too
-dump_data(bins, "results/delay_freq.pkl")
+#save frequency counts as csv file
+file_utils.dump_dict_csv(bins, ['delay(hours)', 'freq'], "results/commit_delay_analysis/delay_freq_%s.csv" % BIN_SIZE)
 
 print("Processed", commit_count, "commits")
