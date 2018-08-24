@@ -84,19 +84,25 @@ if __name__ == "__main__":
 	commit_count = 0
 
 	#stream data from sorted json files
-	for year in range(1990, 2012):		#read and process 1993 through 2018
+	for year in range(1990, 2019):		#read and process 1993 through 2018
 
 		print("Streaming", year)
 
-		#stream from current year's output file
+		#stream from current year's commit output file (commits only, no features/labels)
 		f = open('data_files/all_commits_by_year/%s_commits_SUB_sorted.json' % year)
 		commits = stream(f)
 
 		#process all commits in date order		
 		for c in commits:
 
+			date = datetime.fromtimestamp(c['time'])		#grab date of current commit
+
+			#short circuit the processing: if hit March 2018, quit
+			if date.month == 3 and date.year == 2018:
+				print("  Reached March 2018, all done")
+				break
+
 			#is this commit from a different month than the current feature data? if so, new feature file stream
-			date = datetime.fromtimestamp(c['time'])
 			if date.month != data_month or date.year != data_year:
 				print("  moving to", str(date.month)+"-"+str(date.year))
 				data_month = date.month
@@ -107,7 +113,7 @@ if __name__ == "__main__":
 
 			#build list of adopted libraries from this commit
 			#first, skip any event features/labels that are not part of this commit
-			while commit_count > event[0]:
+			while commit_count > event[0]:			#event[0] = commit id
 				try:
 					event = next(events)
 					event_label = next(event_labels)
@@ -119,16 +125,19 @@ if __name__ == "__main__":
 
 			#match up event features/labels to build list of adopted libraries
 			adopted = []
-			while commit_count == event[0]:			
-				if event_label == 1:
+			while commit_count == event[0]:			#loop as long as commits match	
+				#if event is adoption, add library/package name to list of adopted libraries
+				if event_label == 1:	
 					adopted.append(event[19])
+				#if event flagged as added library but package not in commit added libs, or user ids 
+				#don't match, or repo names don't match, something has gone wrong - quit
 				if (event[20] == 1 and event[19] not in c['add_libs']) or event[1] != c['user'] or event[2] != c['repo']:
 					print("FAIL")
 					print(commit_count, c)
 					print(event, event_label)
 					exit(0)
 					
-				#get next event/label pair
+				#get next event/label pair to continue loop
 				try:
 					event = next(events)
 					event_label = next(event_labels)
@@ -157,6 +166,6 @@ if __name__ == "__main__":
 			
 		f.close()
 
-	#save each "chunk" (defined by /1000 key) as a separate pickle
+	#finished processing, save each "chunk" (defined by /1000 key) as a separate pickle
 	for key in by_user:
 		dump_dict(by_user[key], key)
