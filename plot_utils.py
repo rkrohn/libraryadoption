@@ -74,11 +74,13 @@ def plot_dict_data(data, xlabel, ylabel, title, filename = "", x_min = 0, x_max 
 	x = []
 	y = []
 	for key in sorted(data.keys()):
-		x.append(key)
-		y.append(data[key])
+		#only include data within x-axis range so plot method will set y-axis range correctly
+		if key >= x_min and key <= x_max:
+			x.append(key)
+			y.append(data[key])
 
 	#call plotting method on list data
-	plot_data(x, y, xlabel, ylabel, title, filename, x_max, x_min, log_scale_x, log_scale_y)
+	plot_data(x, y, xlabel, ylabel, title, filename, 0, 0, log_scale_x, log_scale_y)
 		
 		
 #plot data given as x and 2 y lists	- will have 2 y axes on plot
