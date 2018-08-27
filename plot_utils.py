@@ -44,7 +44,7 @@ def plot_freq(freq, xlabel, ylabel, title, filename = "", x_max = 0, x_min = 0, 
 		plt.savefig(filename, bbox_inches='tight')
 		
 #plot data given as x and y lists	
-def plot_data(x, y, xlabel, ylabel, title, filename = "", x_max = 0, x_min = 0, log_scale = False):
+def plot_data(x, y, xlabel, ylabel, title, filename = "", x_min = 0, x_max = 0, log_scale_x = False, log_scale_y = False):
 	plt.clf()	
 	fig, ax = plt.subplots()
 
@@ -52,9 +52,10 @@ def plot_data(x, y, xlabel, ylabel, title, filename = "", x_max = 0, x_min = 0, 
 	plt.title(title)
 	plt.xlabel(xlabel)
 	plt.ylabel(ylabel)
-	if log_scale:
-		ax.set_yscale('log')
+	if log_scale_x:
 		ax.set_xscale('log')
+	if log_scale_y:
+		ax.set_yscale('log')
 	if x_max != 0 and x_min != 0:
 		plt.xlim(xmin=x_min, xmax=x_max)
 	elif x_max != 0:
@@ -65,6 +66,19 @@ def plot_data(x, y, xlabel, ylabel, title, filename = "", x_max = 0, x_min = 0, 
 		plt.show()
 	else:
 		plt.savefig(filename, bbox_inches='tight')
+
+
+#plot dictionary data with keys on x-axis and values on y-axis
+def plot_dict_data(data, xlabel, ylabel, title, filename = "", x_min = 0, x_max = 0, log_scale_x = False, log_scale_y = False):
+	#break dictionary data into lists
+	x = []
+	y = []
+	for key in sorted(data.keys()):
+		x.append(key)
+		y.append(data[key])
+
+	#call plotting method on list data
+	plot_data(x, y, xlabel, ylabel, title, filename, x_max, x_min, log_scale_x, log_scale_y)
 		
 		
 #plot data given as x and 2 y lists	- will have 2 y axes on plot
