@@ -27,7 +27,7 @@ def dump_data(data, filename):
 
 #--- MAIN EXECUTION BEGINS HERE---#
 
-BIN_SIZE = 0.5			#bin size in hours (0.5 for half hours, 0.25 for quarter hours)
+BIN_SIZE = 0.25			#bin size in hours (0.5 for half hours, 0.25 for quarter hours)
 
 bins = defaultdict(int)
 
@@ -85,6 +85,6 @@ file_utils.dump_dict_csv(bins, ['delay(hours)', 'freq'], "results/commit_delay_a
 #all data
 plot_utils.plot_dict_data(bins, "delay (hours)", "frequency", "Commit Delay Distribution", filename = "results/commit_delay_analysis/delay_freq_%s.png" % BIN_SIZE, log_scale_y = True)
 #narrowed range, not log-scale
-plot_utils.plot_dict_data(bins, "delay (hours)", "frequency", "Commit Delay Distribution", filename = "results/commit_delay_analysis/delay_freq_narrow_%s.png" % BIN_SIZE, x_min = 4, x_max = 16)
+plot_utils.plot_dict_data(bins, "delay (hours)", "frequency", "Commit Delay Distribution", filename = "results/commit_delay_analysis/delay_freq_%s_narrow.png" % BIN_SIZE, x_min = 4, x_max = 16)
 
 print("Results saved and plotted as results/commit_delay_analysis/delay_freq_%s" % BIN_SIZE)
