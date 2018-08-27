@@ -25,7 +25,8 @@ def run_bash(command, shell=False):
 	output, error = process.communicate()
 
 #dump dictionary(ies) data of key->value to csv file, sorted by key
-#if data is a list, each item is a dictionary, and all dictionaries have the same keys
+#if data is a list, each item is a dictionary, and all dictionaries have the same keys, 
+#write key column once and all value columns following
 #also pass in a list of data headers, one per column
 def dump_dict_csv(data, headers, filename):
 	data_keys = []
