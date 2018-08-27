@@ -75,7 +75,7 @@ def plot_dict_data(data, xlabel, ylabel, title, filename = "", x_min = 0, x_max 
 	y = []
 	for key in sorted(data.keys()):
 		#only include data within x-axis range so plot method will set y-axis range correctly
-		if key >= x_min and key <= x_max:
+		if (x_min == 0 and x_max == 0) or (key >= x_min and key <= x_max):
 			x.append(key)
 			y.append(data[key])
 
