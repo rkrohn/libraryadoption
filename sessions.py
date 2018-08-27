@@ -6,6 +6,8 @@ import pickle
 from collections import defaultdict
 from math import ceil
 from datetime import timedelta
+import file_utils
+import plot_utils
 
 #given a filepath, load pickled data
 def load_pickle(filename):
@@ -30,9 +32,12 @@ def print_sorted(bins, filename):
 			f.write("%s %s\n" % (key, bins[key]))
 #end print_sorted
 
+
+
 #--- MAIN EXECUTION BEGINS HERE---#
 
-max_inactive = 9 * 3600		#maximum time between commits of the same session (in seconds)
+MAX_DELAY = 9 * 3600		#maximum time between commits of the same session (in seconds)
+BIN_SIZE = 0.5			#bin size in hours (0.5 for half hours)
 
 bins = defaultdict(int)
 
@@ -46,7 +51,7 @@ user_count = 0
 session_total = 0
 
 #session data dictionaries
-length_to_commits = defaultdict(list)	#session length (seconds) -> number of commits in session
+length_to_commits = defaultdict(int)	#session length (seconds) -> average number of commits per session (sum during processing)
 length_to_freq = defaultdict(int)		#session length (seconds) -> frequency (number of sessions with this length)
 
 #process each file one at a time
@@ -62,8 +67,8 @@ for file in files:
 
 		prev = -1	#time of this user's previous commit
 		session_start = -1			#UTC time of start of current session
-		per_session_count = 1		#number of commits in previous session
-		session_count = 1			#number of sessions for this user
+		session_commit_count = 1		#number of commits in current session
+		user_session_count = 1			#number of sessions for this user
 
 		commit_count += len(commits)
 
@@ -81,60 +86,52 @@ for file in files:
 			if delay != None:
 
 				#delay too long, new session
-				if delay >= max_inactive:
+				if delay >= MAX_DELAY:
 					length = prev - session_start		#length of this session, from first commit to last
 
-					#print("   ", timedelta(seconds=(prev - session_start)).__str__(), "session with", per_session_count, "commits")
-
 					#add this session data to tracking
-					length_to_commits[length].append(per_session_count)
-					length_to_freq[length] += 1
+					length_key = ceil(length / (BIN_SIZE * 3600)) * BIN_SIZE	#compute length of session according to BIN_SIZE
+					length_to_commits[length_key] += session_commit_count
+					length_to_freq[length_key] += 1
 
 					#reset tracking for new session
 					session_start = c['time']
-					per_session_count = 1
-					session_count += 1
+					session_commit_count = 1
+					user_session_count += 1
 				#another commit to current session
 				else:
-					per_session_count += 1
+					session_commit_count += 1
 
 			prev = c['time']	#update prev for next commit
 
 		#handle last session for this user
 		length = prev - session_start		#length of this session, from first commit to last
 
-		#print("   ", timedelta(seconds=(prev - session_start)).__str__(), "session with", per_session_count, "commits")
-
 		#add this session data to tracking
-		length_to_commits[length].append(per_session_count)
-		length_to_freq[length] += 1
+		length_key = ceil(length / (BIN_SIZE * 3600)) * BIN_SIZE	#compute length of session according to BIN_SIZE
+		length_to_commits[length_key] += session_commit_count
+		length_to_freq[length_key] += 1
 
-		print("User", user, "made", len(commits), "commits across", session_count, "sessions")
+		print("User", user, "made", len(commits), "commits across", user_session_count, "sessions")
 
-		session_total += session_count 		#keep count of total number of sessions across all users
+		session_total += user_session_count 		#keep count of total number of sessions across all users
+
+	break
 
 print("Processed", commit_count, "commits and", user_count, "users in", session_total, "sessions")
 
-#convert exact length to freq mapping to half hour bins, because not many match-ups
-length_bin_to_freq = defaultdict(int)
-for length, freq in length_to_freq.items():
-		length_bin_to_freq[ceil(length / 1800) / 2] += freq
-#print to file and pickle
-print_sorted(length_bin_to_freq, "results/session_length_freq.txt")
-dump_data(length_bin_to_freq, "results/session_length_freq.pkl")
-
-#convert exact length to commit count list to half hour bins also
-length_bin_to_commits = defaultdict(list)
-for length, commits in length_to_commits.items():
-	length_bin_to_commits[ceil(length / 1800) / 2].extend(commits)
-#print to file and pickle
-print_sorted(length_bin_to_commits, "results/session_length_commits.txt")
-dump_data(length_bin_to_commits, "results/session_length_commits.pkl")
-
 #also do an average commit count for each binned session length
-length_bin_to_average_commits = {}
-for length, commits in length_bin_to_commits.items():
-		length_bin_to_average_commits[length] = sum(commits)/len(commits)
-#print to file and pickle
-print_sorted(length_bin_to_average_commits, "results/session_length_average_commits.txt")
-dump_data(length_bin_to_average_commits, "results/session_length_average_commits.pkl")
+length_to_avg_commits = {}
+for length, commits in length_to_commits.items():
+		length_to_avg_commits[length] = commits / length_to_freq[length]
+
+#dump all distribution data to csv
+file_utils.dump_dict_csv([length_to_freq, length_to_commits, length_to_avg_commits], ["session length", "frequency", "total number of commits", "average commits per session"], "results/session_analysis/session_length_data_%s.csv" % BIN_SIZE)
+
+#rough plot of frequency distribution - all and short
+plot_utils.plot_dict_data(length_to_freq, "session length (hours)", "frequency", "Session Length Distribution", filename = "results/session_analysis/session_length_distribution_%s.png" % BIN_SIZE, log_scale_y = True)
+plot_utils.plot_dict_data(length_to_freq, "session length (hours)", "frequency", "Session Length Distribution", filename = "results/session_analysis/session_length_distribution_%s_narrow.png" % BIN_SIZE, x_min = 0, x_max = 24, log_scale_y = True)
+
+#also plot average commits per session
+plot_utils.plot_dict_data(length_to_avg_commits, "session length (hours)", "average commits per session", "Session Length vs Average Commits", filename = "results/session_analysis/session_length_avg_commits_%s.png" % BIN_SIZE, log_scale_y = True)
+plot_utils.plot_dict_data(length_to_avg_commits, "session length (hours)", "frequency", "Session Length vs Average Commits", filename = "results/session_analysis/session_length_avg_commits_%s_narrow.png" % BIN_SIZE, x_min = 0, x_max = 24, log_scale_y = True)
