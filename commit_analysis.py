@@ -104,7 +104,6 @@ if __name__ == "__main__":
 				if data_month != -1:
 					row = [data_month, year, month_count, month_import_commit_count, len(month_users), month_repo_adopt, month_addition_commit_count, month_additions_count, month_deletion_commit_count, month_deletions_count]
 					output.append(row)
-				print(data_month, year)
 				data_month = date.month
 				#reset counters
 				month_count = 0
@@ -172,7 +171,6 @@ if __name__ == "__main__":
 		#add last month from this year
 		row = [data_month, year, month_count, month_import_commit_count, len(month_users), month_repo_adopt, month_addition_commit_count, month_additions_count, month_deletion_commit_count, month_deletions_count]
 		output.append(row)
-		print(data_month, year)
 		data_month = -1		#reset to prevent duplicate
 
 		f.close()
@@ -181,4 +179,4 @@ if __name__ == "__main__":
 	row = ["total", "", overall_count, import_commit_count, len(all_users), repo_adopt, addition_commit_count, additions_count, deletion_commit_count, deletions_count]
 
 	#save data to csv
-	np.savetxt("results/commit_analysis_by_year.csv", np.array(output), delimiter=",", fmt="%s")
+	np.savetxt("results/commit_analysis_by_month.csv", np.array(output), delimiter=",", fmt="%s")
