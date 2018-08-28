@@ -97,8 +97,11 @@ if __name__ == "__main__":
 			if date.month != data_month or date.year != data_year:
 				print("  moving to", str(date.month)+"-"+str(date.year))
 
-				#dump this month's data
-				dump_list(new_commits, date.strftime('%Y-%m'))
+				#dump this month's data (if actually data)
+				if data_month != -1:
+					#gen correct filename (date) for this month of data
+					filename = "%s-%s" % (data_year, str(data_month) if len(str(data_month)) == 2 else "0" + str(data_month))
+					dump_list(new_commits, filename)
 
 				#reset commit list and date tracking
 				new_commits = []
