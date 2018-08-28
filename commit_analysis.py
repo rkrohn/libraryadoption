@@ -2,6 +2,7 @@ import json
 import os.path
 from collections import defaultdict
 import numpy as np
+from datetime import datetime, timedelta
 
 #stream json data one object at a time (generator function)
 def stream(f):
@@ -35,28 +36,31 @@ if __name__ == "__main__":
 	output = []		#list of lists for all output
 	
 	overall_count = 0
-	year_count = 0
+	month_count = 0
 
 	import_commit_count = 0
-	year_import_commit_count = 0
+	month_import_commit_count = 0
 
 	addition_commit_count = 0
-	year_addition_commit_count = 0
+	month_addition_commit_count = 0
 
 	deletion_commit_count = 0
-	year_deletion_commit_count = 0
+	month_deletion_commit_count = 0
 
 	additions_count = 0
-	year_additions_count = 0
+	month_additions_count = 0
 
 	deletions_count = 0
-	year_deletions_count = 0
+	month_deletions_count = 0
 
 	all_users = set([])
-	year_users = set([])
+	month_users = set([])
 
 	repo_adopt = 0
-	year_repo_adopt = 0
+	month_repo_adopt = 0
+
+	#time-tracking so we can move to next month when appropriate
+	data_month = -1
 
 	#tracking library usage
 	quiver = defaultdict(set)		#dictionary of user -> list of packages used
@@ -64,17 +68,21 @@ if __name__ == "__main__":
 	last_interaction = defaultdict(lambda:-1)	#dictionary of "<userid>--<reponame>" to time of last interaction
 
 	#add headers to output data
-	headers = ["year", "commit_count", "import_commit_count", "num_users", "intra-repo_adopts", "addition_commits", "libraries_added", "deletion_commits", "libraries_deleted"]
+	headers = ["month", "year", "commit_count", "import_commit_count", "num_users", "intra-repo_adopts", "addition_commits", "libraries_added", "deletion_commits", "libraries_deleted"]
 	output.append(headers)
 
 	#stream data from sorted json files
 	for year in range(1990, 2018):		#read and process 1990 through 2018
 
-		#reset counters/sets for this year
-		year_count = 0
-		year_import_commit_count = 0
-		year_repo_adopt = 0
-		year_users = set([])
+		#reset counters/sets for this month-year
+		month_count = 0
+		month_import_commit_count = 0
+		month_repo_adopt = 0
+		month_users = set([])
+		month_addition_commit_count = 0
+		month_deletion_commit_count = 0
+		month_additions_count = 0
+		month_deletions_count = 0
 
 		#stream from current year's output file
 		f = open('data_files/all_commits_by_year/%s_commits_SUB_sorted.json' % year)
@@ -89,6 +97,24 @@ if __name__ == "__main__":
 				user = 0
 			else:
 				user = int(c['user'])
+
+			#is this new commit from a different month than the previous? if so, dump and move to new month
+			date = datetime.fromtimestamp(time)
+			if date.month != data_month:
+				if data_month != -1:
+					row = [data_month, year, month_count, month_import_commit_count, len(month_users), month_repo_adopt, month_addition_commit_count, month_additions_count, month_deletion_commit_count, month_deletions_count]
+					output.append(row)
+				print(data_month, year)
+				data_month = date.month
+				#reset counters
+				month_count = 0
+				month_import_commit_count = 0
+				month_repo_adopt = 0
+				month_users = set([])
+				month_addition_commit_count = 0
+				month_deletion_commit_count = 0
+				month_additions_count = 0
+				month_deletions_count = 0
 
 			#remove duplicate libraries from lists by converting them to sets
 			added_libs = set(c['add_libs'])
@@ -108,34 +134,33 @@ if __name__ == "__main__":
 				#if an added lib is in updated_lib but not in the user's quiver, then it must be an adoption
 				if lib in updated_libs and lib not in quiver[user]:
 					#found an adoption! update counts
-					year_repo_adopt += 1
+					month_repo_adopt += 1
 					repo_adopt += 1
-
 
 			#if added a library, count as import commit
 			if len(added_libs) != 0:
 				import_commit_count += 1
-				year_import_commit_count += 1
+				month_import_commit_count += 1
 
 			#add user to sets
 			all_users.add(user)
-			year_users.add(user)
+			month_users.add(user)
 
 			#update counts
-			year_count += 1
+			month_count += 1
 			overall_count += 1
 
 			#commit contains addition?
 			if len(added_libs) != 0:
-				year_addition_commit_count += 1
+				month_addition_commit_count += 1
 				addition_commit_count += 1
-				year_additions_count += len(added_libs)
+				month_additions_count += len(added_libs)
 				additions_count += len(added_libs)
 			#commit contains deletion?
 			if len(deleted_libs) != 0:
-				year_deletion_commit_count += 1
+				month_deletion_commit_count += 1
 				deletion_commit_count += 1
-				year_deletions_count += len(deleted_libs)
+				month_deletions_count += len(deleted_libs)
 				deletions_count += len(deleted_libs)
 
 			#update tracking data
@@ -144,14 +169,16 @@ if __name__ == "__main__":
 				contents[repo][lib] = time
 			last_interaction[inter_key] = time
 
-
-		row = [year, year_count, year_import_commit_count, len(year_users), year_repo_adopt, year_addition_commit_count, year_additions_count, year_deletion_commit_count, year_deletions_count]
+		#add last month from this year
+		row = [data_month, year, month_count, month_import_commit_count, len(month_users), month_repo_adopt, month_addition_commit_count, month_additions_count, month_deletion_commit_count, month_deletions_count]
 		output.append(row)
+		print(data_month, year)
+		data_month = -1		#reset to prevent duplicate
 
 		f.close()
 
 	#add total to bottom
-	row = ["total", overall_count, import_commit_count, len(all_users), repo_adopt, addition_commit_count, additions_count, deletion_commit_count, deletions_count]
+	row = ["total", "", overall_count, import_commit_count, len(all_users), repo_adopt, addition_commit_count, additions_count, deletion_commit_count, deletions_count]
 
 	#save data to csv
 	np.savetxt("results/commit_analysis_by_year.csv", np.array(output), delimiter=",", fmt="%s")
