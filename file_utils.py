@@ -90,4 +90,22 @@ def dump_list(data, headers, filename):
 		writer.writerows(data)
 #end dump_list
 
+#read data from csv file into list of lists
+def read_csv_list(filename):
+	with open(filename, 'r') as f:
+		reader = csv.reader(f)
+		data = list(reader)
+	return data
+#end read_csv_list
 
+#stream the csv file using a generator
+def stream_csv(filename, yield_headers=False):
+	with open(filename, "r") as csvfile:
+		datareader = csv.reader(csvfile)		
+		if yield_headers:
+			yield(next(datareader))
+		else:
+			headers = next(datareader)  #skip the header row
+		for row in datareader:
+			yield row
+#end stream_csv
