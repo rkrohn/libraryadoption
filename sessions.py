@@ -63,7 +63,7 @@ def log_session(user_adopt_sessions, user_adopt_commits, user_adopt_libs):
 		session_commits_when_adopt[length_key].append(curr_commit_count)		
 		#adoption commit position for sessions with this many commits
 		adopt_commit_positions[curr_commit_count].extend(curr_adopt_positions)
-		adopt_commit_times[length].extend(curr_adopt_times)
+		adopt_commit_times[length_key].extend(curr_adopt_times)
 	#no adoption, update no-adopt session counters and lists
 	else:
 		session_avg_commits_no_adopt[length_key] += curr_commit_count
@@ -113,13 +113,18 @@ session_commits_no_adopt = defaultdict(list)	#list of session commit counts for 
 adopt_commit_positions = defaultdict(list)
 
 #another adoption position dictionary
-#key is length of session in seconds, value is time of adoption events measured in seconds from session start
+#key is length of session in seconds - binned, value is time of adoption events measured in seconds from session start
 #again, covers all adoption events, not a single session or user
 adopt_commit_times = defaultdict(list)
 
 #variable for storing/computing average adoption commit location within session
 #for each adoption commit, we add the adoption time as percentage through the session
-avg_adopt_time = 0
+adopt_times_list = []	#list of adoption times (all adoptions) as percentage of session
+avg_adopt_time = 0		#overall average adoption time
+
+#same as above, but exclude single-commit sessions
+adopt_times_list_non_zero = []
+avg_adopt_time_nonzero = 0
 
 #process each file one at a time
 for file in files:
@@ -168,6 +173,19 @@ for file in files:
 					#update all global tracking based on this session
 					user_adopt_sessions, user_adopt_commits, user_adopt_libs = log_session(user_adopt_sessions, user_adopt_commits, user_adopt_libs)
 
+					#add adopt time % to total for overall average
+					length = prev_commit - curr_start
+					for time in curr_adopt_times:	#for all adopt times in session
+						if length != 0:
+							percent = (time / length) * 100
+							avg_adopt_time += percent
+							adopt_times_list.append(percent)
+							avg_adopt_time_nonzero += percent
+							adopt_times_list_non_zero.append(percent)
+						else:
+							#session length 0, adopt time/percent 0, no change to sum
+							adopt_times_list.append(0)
+
 					#reset tracking for new session
 					curr_start = c['time']
 					curr_commit_count = 1
@@ -204,40 +222,72 @@ for file in files:
 		total_adopt_commits += user_adopt_commits
 		total_adopt_libs += user_adopt_libs
 
-	break		#REMOVE
-
-print("Processed", total_commit_count, "commits and", total_user_count, "users in", total_sessions, "sessions")
+print("\nProcessed", total_commit_count, "commits and", total_user_count, "users in", total_sessions, "sessions")
 print("   ", total_adopt_libs, "libraries adopted in", total_adopt_commits, "commits across", total_adopt_sessions, "sessions")
-
-exit(0)
 
 #POST-PROCESSING
 
 #compute average commit counts for each binned session length
-for length in session_length_counts.keys():
+for length in session_freq.keys():		#loop keys (same for all dicts)
 		#overall average commits per session and average adoption commits per session
-		session_length_counts[length]['avg_commit_count'] /= session_length_counts[length]['freq']
-		session_length_counts[length]['avg_adopt_commit_count'] /= session_length_counts[length]['freq']
+		session_avg_commits[length] /= session_freq[length]
+		session_avg_adopt_commits[length] /= session_freq[length]
 
 		#average commits per session if session contains adoption
-		if session_length_counts[length]['adopt_freq'] != 0:
-			session_length_counts[length]['avg_commits_when_adopt'] /= session_length_counts[length]['adopt_freq']
+		if session_adopt_freq[length] != 0:
+			session_avg_commits_when_adopt[length] /= session_adopt_freq[length]
 		else:
-			session_length_counts[length]['avg_commits_when_adopt'] = None
+			session_avg_commits_when_adopt[length] = None
 		#average commits per session if session does not contain adoption
-		if session_length_counts[length]['freq'] - session_length_counts[length]['adopt_freq'] != 0:
-			session_length_counts[length]['avg_commits_no_adopt'] /= (session_length_counts[length]['freq'] - session_length_counts[length]['adopt_freq'])
+		if session_freq[length] - session_adopt_freq[length] != 0:
+			session_avg_commits_no_adopt[length] /= (session_freq[length] - session_adopt_freq[length])
 		else:
-			session_length_counts[length]['avg_commits_no_adopt'] = None
+			session_avg_commits_no_adopt[length] = None
 
-exit(0)		#REMOVE
+#compute overall average adoption time as percentage of session
+avg_adopt_time = avg_adopt_time / total_adopt_commits
+print("\nAverage adopt time as percentage of session (all sessions):", avg_adopt_time)
+
+#compute average adoption time excluding single-commit sessions
+avg_adopt_time_nonzero = avg_adopt_time_nonzero / len(adopt_times_list_non_zero)
+print("Average adopt time (no single commit sessions):", avg_adopt_time_nonzero, "\n")
+
+#compute average adoption positions, both by time (binned) and by commit number (exact)
+#commit times
+avg_adopt_commit_time = {}
+for length in session_freq.keys():	#make sure all lengths represented
+	if len(adopt_commit_times[length]) != 0:
+		avg_adopt_commit_time[length] = sum(adopt_commit_times[length]) / len(adopt_commit_times[length])
+	else:
+		avg_adopt_commit_time[length] = None
+#commit positions
+avg_adopt_commit_position = {}
+for commit_count in adopt_commit_positions.keys():
+	avg_adopt_commit_position[commit_count] = sum(adopt_commit_positions[commit_count]) / len(adopt_commit_positions[commit_count])
 
 #DUMP DATA
 
-#dump all distribution data to csv
-file_utils.dump_dict_csv([length_to_freq, length_to_commits, length_to_avg_commits], ["session length", "frequency", "total number of commits", "average commits per session"], "results/session_analysis/session_length_data_%s.csv" % BIN_SIZE)
+#dump all session length data (counts and averages) to single csv
+file_utils.dump_dict_csv([session_freq, session_adopt_freq, session_avg_commits, session_avg_adopt_commits, session_commits_when_adopt, session_avg_commits_no_adopt, avg_adopt_commit_time], ["session length (hours)", "number of sessions", "number of sessions containing adoption", "average commits per session", "average adoption commits per session", "average commits for sessions containing adoption", "average commits for sessions without adoption", "average adoption time (seconds from session start)"], "results/session_analysis/session_length_data_%s.csv" % BIN_SIZE)
 
-#GENERATE AND SAVE PLOTS
+#average commit positions in separate file
+file_utils.dump_dict_csv(avg_adopt_commit_position, ["number of commits in session", "average adoption commit position (first commit = 1)"], "results/session_analysis/session_avg_adopt_commit_pos.csv")
+
+#dump dictionaries of key-> list each to separate csv file
+file_utils.dump_dict_of_lists(session_commit_counts, ["session length (hours)", "commit counts ->"], "results/session_analysis/commit_counts_by_session_length_%s.csv" % BIN_SIZE)
+file_utils.dump_dict_of_lists(session_adopt_commit_counts, ["session length (hours)", "adopt commit counts ->"], "results/session_analysis/adopt_commit_counts_by_session_length_%s.csv" % BIN_SIZE)
+file_utils.dump_dict_of_lists(session_commits_when_adopt, ["session length (hours)", "commit counts (only sessions containing adoption) ->"], "results/session_analysis/commit_counts_when_adopt_by_session_length_%s.csv" % BIN_SIZE)
+file_utils.dump_dict_of_lists(session_commits_no_adopt, ["session length (hours)", "commit counts (only sessions without adoption) ->"], "results/session_analysis/commit_counts_when_no_adopt_by_session_length_%s.csv" % BIN_SIZE)
+#adoption position lists by session length
+file_utils.dump_dict_of_lists(adopt_commit_positions, ["session length (number of commits)", "adoption position (commits numbered from 1) ->"], "results/session_analysis/adopt_commit_pos_by_session_length_%s.csv" % BIN_SIZE)
+file_utils.dump_dict_of_lists(adopt_commit_times, ["session length (hours)", "adoption time (seconds from session start) ->"], "results/session_analysis/adopt_time_by_session_length_%s.csv" % BIN_SIZE)
+
+#save adoption time lists to same file
+file_utils.dump_lists([adopt_times_list, adopt_times_list_non_zero], ["all adoption times (percentage of session)", "adoption times excluding single-commit sessions (percentage of session)"], "results/session_analysis/adopt_times_lists.csv")
+
+exit(0)		#REMOVE
+
+#GENERATE AND SAVE PLOTS - maybe later, if I still care
 
 #rough plot of frequency distribution - all and short
 plot_utils.plot_dict_data(length_to_freq, "session length (hours)", "frequency", "Session Length Distribution", filename = "results/session_analysis/session_length_distribution_%s.png" % BIN_SIZE, log_scale_y = True)
