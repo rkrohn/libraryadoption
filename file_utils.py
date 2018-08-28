@@ -82,4 +82,12 @@ def dump_lists(data, headers, filename):
 			writer.writerow([headers[i]] + data[i])
 #end dump_lists
 
+#given a list and associated headers, dump to csv
+def dump_list(data, headers, filename):
+	with open(filename, "w") as f:
+		writer = csv.writer(f)
+		writer.writerow(headers)
+		writer.writerows(data)
+#end dump_list
+
 
