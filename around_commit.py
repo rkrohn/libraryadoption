@@ -19,70 +19,6 @@ def load_pickle(filename):
 	return data
 #end load_pickle
 
-#given a completed session as list of commit times and index of first adoption (if any),
-#generate the pmf of the cpm rate on either side of the adoption event and plot
-def session_commits(commit_times, first_adopt):	
-
-	#normalize time scale, partition at adoption if necessary
-	if NORM_TIME:
-		#if session contains adoption, partition at 0
-		if first_adopt != -1:
-			#partition commit times at first adoption event
-			pre_adopt = commit_times[:first_adopt+1]	#include adoption event here for now
-			post_adopt = commit_times[first_adopt:]
-			#normalize both sides separately, then combine
-			relative_times = normalize(pre_adopt, -100, 0)[:-1]		#remove duplicate adoption event
-			relative_times += normalize(post_adopt, 0, 100)
-		#otherwise, take all commits at once
-		else:
-			relative_times = normalize(commit_times, 0, 100)
-	#no normalization, just shift the UTC times (seconds) to minutes from some reference point
-	else:
-		#no adoption, shift times relative to first commit
-		if first_adopt == -1:
-			relative_times = [int((time - commit_times[0]) / (BIN_WIDTH * 60)) for time in commit_times]
-		#adoption session, shift all times relative to first adoption event
-		else:
-			relative_times = [int((time - commit_times[first_adopt]) / (BIN_WIDTH * 60)) for time in commit_times]
-
-	#build list of minute/percent counters covering entire range
-	commit_bins = list(range(relative_times[0], relative_times[-1]+1))
-	#and list of corresponding commit counts
-	commit_counts = [0] * len(commit_bins)
-	for time in relative_times:
-		commit_counts[time + abs(relative_times[0])] += 1
-	#multiply bins (times) by bin width to get back on the right scale
-	commit_bins = [x * BIN_WIDTH for x in commit_bins]
-
-	#return results
-	return commit_bins, commit_counts
-#end session_pmf
-
-#for a completed session, log all session data
-def log_session():
-	#compute commit counts, shifted to either session start or first adoption, perhaps normalized
-	times, commits = session_commits(session_commit_times, session_first_adopt)
-
-	#add this session commit counts to overall session counters
-	#also increment additive counter for all times covered by this session
-	#adopt sessions
-	if session_first_adopt != -1:
-		for i in range(len(times)):
-			total_adopt[times[i]] += commits[i]	
-		for i in range(times[0], times[-1]+1):
-			adopt_add[i] += 1	
-	#non-adopt sessions
-	else:
-		for i in range(len(times)):
-			total_non_adopt[times[i]] += commits[i]			
-		for i in range(times[0], times[-1]+1):
-			non_adopt_add[i] += 1
-
-	#add this session data to global tracking
-	len_bin = ceil(length / 1800) / 2		#compute half-hour bin for this session
-#end log_session
-
-
 #--- MAIN EXECUTION BEGINS HERE---#
 
 max_inactive = 9 * 3600		#maximum time between commits of the same session (in seconds)
@@ -243,13 +179,20 @@ for file in files:
 			prev = c['time']	#update prev for next commit		
 
 		#wrap up current user before moving to next
-		print("User", user, "made", len(commits), "commits (" + str(user_adopt_commits), "adoption commits) adopting", user_adopt_libs, "libraries")		
+		print("User", user, "made", len(commits), "commits (" + str(user_adopt_commits), "adoption commits) adopting", user_adopt_libs, "libraries")	
 
 		total_adopt_libs += user_adopt_libs
 		total_adopt_commits += user_adopt_commits		
 
+		break
+
+	if total_adopt_commits > 10:
+		break
+
 print("Processed", total_commit_count, "commits and", total_user_count, "users")
 print("   ", total_adopt_libs, "libraries adopted in", total_adopt_commits, "adoption commits")
+
+exit(0)
 
 print("\nStacked", total_regular_commits_all, "non-adoption commits for comparison (all matching)")
 print("Stacked", total_regular_commits_closest, "nearest non-adoption commits for finer comparison")
