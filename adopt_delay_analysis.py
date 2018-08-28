@@ -15,6 +15,7 @@ import random
 if __name__ == "__main__":
 
 	BIN_SIZE = 3		#bin size in hours
+	SAMPLE_SIZE = 1000	#number of users to sample for indegree vs outdegree plot
 
 	adoption_count = 0	#number of adoption edges processed
 
@@ -68,7 +69,7 @@ if __name__ == "__main__":
 	#first, build list of users in either promoter or adopter sets
 	users = sorted(list(user_adopt_source_count.keys()) + list(set(user_adopt_sink_count.keys()) - set(user_adopt_source_count.keys())))
 	#sample 1000 of these
-	sampled_users = random.sample(users, 1000)
+	sampled_users = random.sample(users, SAMPLE_SIZE)
 	print("Sampled", len(sampled_users), "users from", len(users), "for scatter plot")
 	#build dictionaries for just the sampled users
 	sampled_user_adopt_source_count = {}
@@ -85,7 +86,7 @@ if __name__ == "__main__":
 	ax.scatter(source_count, sink_count)
 	plt.xlabel("outdegree (times adopted from)")
 	plt.ylabel("indegree (lib-source pairs when adopting)")
-	plt.savefig("results/adopt_graph_analysis/sampled_user_edge_counts.png", bbox_inches='tight')
+	plt.savefig("results/adopt_graph_analysis/sampled_%s_user_edge_counts.png" % SAMPLE_SIZE, bbox_inches='tight')
 
 	#convert repo sets to counts
 	for user in user_adopt_repos.keys():
@@ -103,7 +104,7 @@ if __name__ == "__main__":
 		file_utils.dump_dict_csv(adopter_dist, ["number of incoming adoption edges (lib-source adoption pairs)", "number of users"], "results/adopt_graph_analysis/user_adopting_edge_dist.csv")	
 		file_utils.dump_dict_csv(user_adopt_repos, ["number of unique repos user made adoption commit in (adopter)", "number of users"], "results/adopt_graph_analysis/user_repos_adopted_from.csv")
 		file_utils.dump_dict_csv(user_promote_repos, ["number of unique repos user adopted from in (promoter)", "number of users"], "results/adopt_graph_analysis/user_repos_promoted_in.csv")
-		file_utils.dump_dict_csv([sampled_user_adopt_source_count, sampled_user_adopt_sink_count], ["user id", "number of times user adopted from", "number of incoming adoption edges (lib-source pairs)"], "results/adopt_graph_analysis/sampled_user_edge_counts.csv")
+		file_utils.dump_dict_csv([sampled_user_adopt_source_count, sampled_user_adopt_sink_count], ["user id", "number of times user adopted from", "number of incoming adoption edges (lib-source pairs)"], "results/adopt_graph_analysis/sampled_%s_user_edge_counts.csv" % SAMPLE_SIZE)
 
 	print("Processed", adoption_count, "adoption edges")
 	print("Results saved to results/adopt_graph_analysis/")
