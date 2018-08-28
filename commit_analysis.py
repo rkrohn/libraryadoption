@@ -1,6 +1,7 @@
 import json
 import os.path
 from collections import defaultdict
+import numpy as np
 
 #stream json data one object at a time (generator function)
 def stream(f):
@@ -30,6 +31,8 @@ def stream(f):
 #--- MAIN EXECUTION BEGINS HERE---#
 
 if __name__ == "__main__":
+
+	output = []		#list of lists for all output
 	
 	overall_count = 0
 	year_count = 0
@@ -60,9 +63,9 @@ if __name__ == "__main__":
 	contents = defaultdict(dict)		#nested dictionary of repo -> package -> time
 	last_interaction = defaultdict(lambda:-1)	#dictionary of "<userid>--<reponame>" to time of last interaction
 
-	#print output/csv headers
-	print("year , commit_count , import_commit_count , num_users , intra-repo_adopts", "addition_commits", "libraries_added", "deletion_commits", "libraries_deleted")
-
+	#add headers to output data
+	headers = ["year", "commit_count", "import_commit_count", "num_users", "intra-repo_adopts", "addition_commits", "libraries_added", "deletion_commits", "libraries_deleted"]
+	output.append(headers)
 
 	#stream data from sorted json files
 	for year in range(1990, 2018):		#read and process 1990 through 2018
@@ -142,9 +145,13 @@ if __name__ == "__main__":
 			last_interaction[inter_key] = time
 
 
-		print(year, ",", year_count, ",", year_import_commit_count, ",", len(year_users), ",", year_repo_adopt, ",", year_addition_commit_count, ",", year_additions_count, ",", year_deletion_commit_count, ",", year_deletions_count)
+		row = [year, year_count, year_import_commit_count, len(year_users), year_repo_adopt, year_addition_commit_count, year_additions_count, year_deletion_commit_count, year_deletions_count]
+		output.append(row)
 
 		f.close()
 
-	#print same data for all years
-	print("\nALL ,", overall_count, ",", import_commit_count, ",", len(all_users), ",", repo_adopt, ",", addition_commit_count, ",", additions_count, ",", deletion_commit_count, ",", deletions_count)
+	#add total to bottom
+	row = ["total", overall_count, import_commit_count, len(all_users), repo_adopt, addition_commit_count, additions_count, deletion_commit_count, deletions_count]
+
+	#save data to csv
+	np.savetxt("results/commit_analysis_by_year.csv", np.array(output), delimiter=",", fmt="%s")
