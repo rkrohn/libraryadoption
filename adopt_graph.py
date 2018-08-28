@@ -105,9 +105,6 @@ if __name__ == "__main__":
 			if commit_count % 1000 == 0:
 				print("finished", commit_count, "commits")
 
-		if len(adopt_events) > 10:
-			break
-
 	print("Processed", commit_count, "commits, created", len(adopt_events), "adoption edges")
 
 	file_utils.dump_list(adopt_events, ["repo", "promoter", "adopter", "adoption delay (seconds)", "library", "promoter commit id", "adoption commit id"], "data_files/adopt_graph_edges.csv")
