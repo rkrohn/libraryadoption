@@ -2,6 +2,7 @@ import json
 import os.path
 import subprocess
 import numpy as np
+import csv
 
 #save some data structure to json file
 def save_json(data, filename):
@@ -61,5 +62,24 @@ def dump_dict_csv(data, headers, filename):
 	#save data with headers to csv
 	np.savetxt(filename, data_array, delimiter=",", fmt="%s")
 #end dump_dict_csv
+
+#given a dictionary of key->list of values, output the data to csv
+#first column is keys, rest of row is values associated with that key
+def dump_dict_of_lists(data, headers, filename):
+    with open(filename, 'w') as file:
+        writer = csv.writer(file, delimiter=',')
+        writer.writerow(headers)
+        for key in sorted(data.keys()):
+        	writer.writerow([key] + data[key])
+#end dump_dict_of_lists
+
+#given a list of lists, output data to csv, one list per row
+#headers in this case refer to the labels placed at the start of each row
+def dump_lists(data, headers, filename):
+	with open(filename, 'w') as file:
+		writer = csv.writer(file, delimiter=',')
+		for i in range(len(headers)):
+			writer.writerow([headers[i]] + data[i])
+#end dump_lists
 
 
