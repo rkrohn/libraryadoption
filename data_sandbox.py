@@ -1,12 +1,42 @@
 import pickle
 import numpy as np
+from datetime import datetime
+import os
 
-pik = "data_files/user_commits/49_commits.pkl"
+for filename in sorted(os.listdir("data_files/augmented_commits")):
+	print(filename)
+
+	#get date of this filename
+	year = filename[:4]
+	month = filename[5:7]
+
+	#build new (correct) filename
+	#decrement month
+	month_int = int(month) - 1
+	year_int = int(year)
+	#if month 0, roll back year as well
+	if month_int == 0:
+		month_int = 12
+		year_int -= 1
+	#new filename
+	new_filename = "data_files/augmented_commits/%s_commits.pkl" % ("%s-%s" % (year_int, str(month_int) if len(str(month_int)) == 2 else "0" + str(month_int)))
+	print(new_filename)
+
+	#rename file
+	os.rename("data_files/augmented_commits/" + filename, new_filename)
+
+
+exit(0)
+
+
+pik = "data_files/augmented_commits/1990-09_commits.pkl"
 
 with open(pik, "rb") as f:
 	data = pickle.load(f)
 	print(len(data))
-	print(list(data.keys()))
+
+	for c in data:
+		print(datetime.fromtimestamp(c['time']).month)
 
 
 exit(0)
