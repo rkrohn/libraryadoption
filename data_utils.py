@@ -16,12 +16,22 @@ def unfold_dict(d):
 #if given a second parallel dict using same keys, values in new dict will be tuples
 def flip_dict(dict, parallel = None):
 	flip = defaultdict(list)
-	for k, v in dict.iteritems():
+	for k, v in dict.items():
 		if parallel == None:
 			flip[v].append(k)
 		else:
 			flip[v].append((k, parallel[k]))
 	return flip
+
+#convert dictionary of unique id->value to distribution of value->frequency
+def dict_to_dist(dict):
+	flip = flip_dict(dict)	#flip dictionary first to be value->list of keys
+
+	#convert to new value->frequency dictionary
+	res = {}
+	for key in flip.keys():
+		res[key] = len(flip[key])
+	return res
 
 #given a dictionary of key->value, return a new dict of value->set of keys
 #if given a second parallel dict using same keys, values in new dict will be tuples
