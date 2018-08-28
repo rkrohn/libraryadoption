@@ -37,6 +37,18 @@ if __name__ == "__main__":
 	import_commit_count = 0
 	year_import_commit_count = 0
 
+	addition_commit_count = 0
+	year_addition_commit_count = 0
+
+	deletion_commit_count = 0
+	year_deletion_commit_count = 0
+
+	additions_count = 0
+	year_additions_count = 0
+
+	deletions_count = 0
+	year_deletions_count = 0
+
 	all_users = set([])
 	year_users = set([])
 
@@ -49,7 +61,7 @@ if __name__ == "__main__":
 	last_interaction = defaultdict(lambda:-1)	#dictionary of "<userid>--<reponame>" to time of last interaction
 
 	#print output/csv headers
-	print("year , commit_count , import_commit_count , num_users , intra-repo_adopts")
+	print("year , commit_count , import_commit_count , num_users , intra-repo_adopts", "addition_commits", "libraries_added", "deletion_commits", "libraries_deleted")
 
 
 	#stream data from sorted json files
@@ -110,6 +122,19 @@ if __name__ == "__main__":
 			year_count += 1
 			overall_count += 1
 
+			#commit contains addition?
+			if len(added_libs) != 0:
+				year_addition_commit_count += 1
+				addition_commit_count += 1
+				year_additions_count += len(added_libs)
+				additions_count += len(added_libs)
+			#commit contains deletion?
+			if len(deleted_libs) != 0:
+				year_deletion_commit_count += 1
+				deletion_commit_count += 1
+				year_deletions_count += len(deleted_libs)
+				deletions_count += len(deleted_libs)
+
 			#update tracking data
 			quiver[user].update(added_libs)
 			for lib in added_libs:
@@ -117,9 +142,9 @@ if __name__ == "__main__":
 			last_interaction[inter_key] = time
 
 
-		print(year, ",", year_count, ",", year_import_commit_count, ",", len(year_users), ",", year_repo_adopt)
+		print(year, ",", year_count, ",", year_import_commit_count, ",", len(year_users), ",", year_repo_adopt, ",", year_addition_commit_count, ",", year_additions_count, ",", year_deletion_commit_count, ",", year_deletions_count)
 
 		f.close()
 
 	#print same data for all years
-	print("\nALL ,", overall_count, ",", import_commit_count, ",", len(all_users), ",", repo_adopt)
+	print("\nALL ,", overall_count, ",", import_commit_count, ",", len(all_users), ",", repo_adopt, ",", addition_commit_count, ",", additions_count, ",", deletion_commit_count, ",", deletions_count)
