@@ -15,19 +15,25 @@ def load_pickle(filename):
 	return data
 #end load_pickle
 
-#load all data for specified year range (inclusive) and return as a single events list and separate labels list
-def load_year_range(start, end=-1, month_start=1, month_end=12):
+#load all data for specified date range (inclusive) and return as a single events list and separate labels list
+#load data in month-size chunks, starting with month_start-year_start and ending with (inclusive) month_end-year_end
+def load_date_range(year_start, year_end, month_start=1, month_end=12):
 	all_events = []
 	all_labels = []
 
-	if end == -1:
-		end = start
+	print("Loading events from", str(month_start) + "-" + str(year_start), ("through "+ str(month_end) + "-" + str(year_end) if month_start != month_end or year_start != year_end else ""))
 
-	for year in range(start, end+1):
-		print("Loading events for", str(year) + ", months " + str(month_start) + "-" + str(month_end) if month_start != month_end else str(year) + ", month " + str(month_start))
+	for year in range(year_start, year_end+1):
+		print("   Loading events for", str(year), ": ", end = "")
+
+		#set start and end month range for this year
+		load_month_start = month_start if year == year_start else 1
+		load_month_end = month_end if year == year_end else 12
 
 		#load all requested months of data
-		for month in range(month_start, month_end+1):
+		for month in range(load_month_start, load_month_end+1):
+			print(month, end=" ")
+
 			#read raw (list-format) data for this month
 			events = load_pickle("data_files/new_event_features/%s/%s_events.pkl" % (year, month))
 			labels = load_pickle("data_files/new_event_features/%s/%s_labels.pkl" % (year, month))
@@ -36,14 +42,16 @@ def load_year_range(start, end=-1, month_start=1, month_end=12):
 			all_events.extend(events)
 			all_labels.extend(labels)
 
+		print("")
+
 	return all_events, all_labels
 #end load_year_range
 
 #loads and processes data for specified time range and featureset
-def load_data(start, end, month_start, month_end, remove_repeat_usages, downsample_ratio, feature_idx, scaler = -1):
+def load_data(year_start, year_end, month_start, month_end, remove_repeat_usages, downsample_ratio, feature_idx, scaler = -1):
 
 	#load all data, convert events to np array for easier indexing
-	events_raw, labels_raw = load_year_range(start, end, month_start, month_end)
+	events_raw, labels_raw = load_date_range(year_start, year_end, month_start, month_end)
 	events_raw = np.array(events_raw)
 	labels_raw = np.array(labels_raw)
 
@@ -54,7 +62,7 @@ def load_data(start, end, month_start, month_end, remove_repeat_usages, downsamp
 	#filter out repeat usages if flag is set
 	if remove_repeat_usages:
 		rows = np.where(events_raw[:,22] == 0)[0]		#rows where user hasn't committed package before
-		print("Filtering from", len(events_raw), "events to", len(rows), "events")
+		print("Filtering from", len(events_raw), "events to", len(rows), "events by removing repeat usages (only consider libraries the user hasn't used before)")
 		events_raw = events_raw[rows]
 		labels_raw = labels_raw[rows]
 
@@ -117,15 +125,15 @@ if len(sys.argv) < 3:
 	print("Requires command line argument for results filename (without extension) and feature classes to include (CUPLS). Exiting")
 	exit(0)
 
-results_file = sys.argv[1]
-features = sys.argv[2]
+results_file = sys.argv[1]		#filename without extension
+features = sys.argv[2]			#feature categories to include (character codes)
 
 #set training and testing years here
-training_start = 2011
-training_end = 2011		#this year will be included in training
+training_start = 2017			#start training data with month-year
 training_month_start = 12
+training_end = 2017		#end (inclusive) with month-year
 training_month_end = 12
-testing_year = 2012		#single year for testing, and for now only the first month
+testing_year = 2018		#single year for testing, and for now only the first month
 testing_month_start = 1
 testing_month_end = 1
 
@@ -135,14 +143,15 @@ num_iter = 50
 remove_repeat_usages = True	#if flag is true, remove user-package events where user has already used this library before
 
 downsample_ratio = 2		#if -1, no downsampling of negative events
-				#if a whole number X, sample to have X negative events for each positive event
+				#if a whole number X, sample to have X negative events (non-adopt) for each positive event (adoption)
 
-#set your configuration choices here - dictionary with list as value
+
+#set your configuration choices here - dictionary with setting as key, list of choices as value
 #loops will test all combinations of these arguments
 config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [True]}
 
 #select the features (columns) to include in training (ranges include first, exclude last, list multiple if desired)
-#features = "CUPLS"	#U = user, P = pair (user-package), L = library, S = stackoverflow, C = commit
+#features = "CUPLS":	U = user, P = pair (user-package), L = library, S = stackoverflow, C = commit
 #features selected via command line arg
 
 feature_idx = []	#start with no features, add on what you want
@@ -171,7 +180,9 @@ training_events, training_labels, scaler = load_data(training_start, training_en
 
 #load testing data as np array
 print("TESTING DATA:")
-testing_events, testing_labels = load_data(testing_year, -1, testing_month_start, testing_month_end, remove_repeat_usages, downsample_ratio, feature_idx, scaler)
+testing_events, testing_labels = load_data(testing_year, testing_year, testing_month_start, testing_month_end, remove_repeat_usages, downsample_ratio, feature_idx, scaler)
+
+exit(0)
 
 num_features = testing_events.shape[1]		#grab number of features for csv output
 
