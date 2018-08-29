@@ -16,16 +16,18 @@ def load_pickle(filename):
 #--- MAIN EXECUTION BEGINS HERE---#
 
 #flags and values to set operating mode
-BIN_WIDTH = 5			#sets number of minutes per bin
-PRE_WIN = 6 * 3600		#amount of time, in seconds, to include in the pre-commit activity window
-POST_WIN = 6 * 3600		#time, in seconds, to include in post-commit activity window
+BIN_WIDTH = 5				#sets number of minutes per bin
+PRE_WIN = 6 * 3600			#amount of time, in seconds, to include in the pre-commit activity window
+POST_WIN = 6 * 3600			#time, in seconds, to include in post-commit activity window
+MAX_USER_COMMITS = 10000	#maximum number of user commits for consideration
 
 #get list of user commit files to process
 files = glob.glob('data_files/user_commits/*')
 print("Processing", len(files), "user commit files")
 
 #global counters
-total_user_count = 0	#used for final print statement only
+total_user_count = 0	#used for final print statement only - number of users actually considered for activity analysis
+total_all_user_count = 0	#number of users available
 total_commit_count = 0		#total number of commits processed (for print only)
 total_adopt_commits = 0			#number of adoption commits stacked
 total_reg_commits = 0			#number of non-adopt commits stacked for comparison against adopt commits
@@ -42,11 +44,16 @@ for file in files:
 	print("\nProcessing", file)
 
 	user_commits = load_pickle(file)
-
-	total_user_count += len(user_commits)
+	total_all_user_count += len(user_commits)
 
 	#for each user in this chunk, step through their commits
 	for user, commits in user_commits.items():
+
+		#if user has too many commits, skip
+		if len(commits) > MAX_USER_COMMITS:
+			continue
+
+		total_user_count += 1	#count users considered, not all of them
 
 		#user variables
 		user_adopt_commits = 0	#number of adoption commits by user
@@ -116,7 +123,7 @@ for key in times:
 	import_activity_counts[key] /= total_import_commits
 
 #save all data to csv
-file_utils.dump_dict_csv([adopt_activity_counts, reg_activity_counts, import_activity_counts], ["time from commit (minutes)", "adoption commits", "non-adopt commits (all)", "non-adopt import commits (added lib)"], "results/activity_analysis/commit_activity_data_%s.csv" % BIN_WIDTH)
+file_utils.dump_dict_csv([adopt_activity_counts, reg_activity_counts, import_activity_counts], ["time from commit (minutes)", "adoption commits", "non-adopt commits (all)", "non-adopt import commits (added lib)"], "results/activity_analysis/commit_activity_data_%smin_%sK_max_commits.csv" % (BIN_WIDTH, int(MAX_USER_COMMITS / 1000)))
 
 #plot all three lines on the same plot (since this is just for verification)
 plt.clf()
@@ -133,7 +140,7 @@ ax.plot(x, y, 'g', label='non-adopt import commits')
 plt.legend(loc='best')
 plt.axvline(x=0, color='k', lw=0.4)
 plt.yscale('log')
-plt.savefig("results/activity_analysis/commit_activity_%s.png" % BIN_WIDTH, bbox_inches='tight')
+plt.savefig("results/activity_analysis/commit_activity_%smin_%sK_max_commits.png" % (BIN_WIDTH, int(MAX_USER_COMMITS / 1000)), bbox_inches='tight')
 
-print("Comarison plots and raw data saved to results/activity_analysis/commit_activity_%s.png and results/activity_analysis/commit_activity_%s.csv" % (BIN_WIDTH, BIN_WIDTH))
+print("Comarison plots and raw data saved to results/activity_analysis/commit_activity_%smin_%sK_max_commits.png and results/activity_analysis/commit_activity_%smin_%sK_max_commits.csv" % (BIN_WIDTH, int(MAX_USER_COMMITS / 1000), BIN_WIDTH, int(MAX_USER_COMMITS / 1000)))
 
