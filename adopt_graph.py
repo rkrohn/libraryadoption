@@ -15,6 +15,7 @@ history = defaultdict(lambda: defaultdict(list))
 last_interaction = defaultdict(lambda: defaultdict(int))
 
 unique_libs = set()
+unique_users = set()
 
 prev_time = -1
 
@@ -40,6 +41,8 @@ def process_commit(c):
 	if time < prev_time:
 		print("ORDER FAIL")
 		exit(0)
+
+	unique_users.add(user)
 
 	#get time of user's last interaction with this repository
 	prev_interaction = last_interaction[user][repo]
@@ -112,6 +115,7 @@ if __name__ == "__main__":
 	print("Processed", commit_count, "commits, created", len(adopt_events), "adoption edges")
 
 	print("   found", len(unique_libs), "unique libraries adopted")
+	print("   found", len(unique_users), "users")
 
 	file_utils.dump_list(adopt_events, ["repo", "promoter", "adopter", "adoption delay (seconds)", "library", "promoter commit id", "adoption commit id", "promoter commit time (UTC)", "adoption commit time (UTC)"], "data_files/adopt_graph_edges_with_times.csv")
 
