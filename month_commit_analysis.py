@@ -56,6 +56,9 @@ if __name__ == "__main__":
 	adoptions = set([])
 	month_adoptions = defaultdict(set)
 
+	all_libs = set([])
+	month_libs = defaultdict(set)
+
 	all_users = set([])
 	month_users = defaultdict(set)
 
@@ -118,6 +121,8 @@ if __name__ == "__main__":
 					for lib in added_libs:
 						additions.add(lib)
 						month_additions[key].add(lib)
+						all_libs.add(lib)
+						month_libs[key].add(lib)
 
 				if deleted != 0:
 					deletion_commit_count += 1
@@ -127,6 +132,8 @@ if __name__ == "__main__":
 					for lib in deleted_libs:
 						deletions.add(lib)
 						month_deletions[key].add(lib)
+						all_libs.add(lib)
+						month_libs[key].add(lib)
 
 				#adoption counts
 				adopted = len(adopted_libs)
@@ -138,6 +145,8 @@ if __name__ == "__main__":
 					for lib in adopted_libs:
 						adoptions.add(lib)
 						month_adoptions[key].add(lib)
+						all_libs.add(lib)
+						month_libs[key].add(lib)
 
 				#user sets
 				all_users.add(user)
@@ -162,6 +171,7 @@ if __name__ == "__main__":
 		month_repos[key] = len(month_repos[key])
 		month_user_adopt[key] = len(month_user_adopt[key])
 		month_repo_adopt[key] = len(month_repo_adopt[key])
+		month_libs[key] = len(month_libs[key])
 
 	#add total dictionaries so appears in final csv
 	month_count['total'] = overall_count
@@ -179,6 +189,7 @@ if __name__ == "__main__":
 	month_repos['total'] = len(all_repos)
 	month_user_adopt['total'] = len(user_adopt)
 	month_repo_adopt['total'] = len(repo_adopt)
+	month_libs['total'] = len(all_libs)
 
 	#save data to csv
-	file_utils.dump_dict_csv([month_count, month_import_commit_count, month_addition_commit_count, month_additions_count, month_additions, month_deletion_commit_count, month_deletions_count, month_deletions, month_adoption_commit_count, month_adoption_libs_count, month_adoptions, month_users, month_repos, month_user_adopt, month_repo_adopt], ["year-month", "number of commits", "number of import commits", "number of addition commits", "number of libraries added", "unique libraries added", "number of deletion commits", "number of libraries deleted", "unique libraries deleted", "number of adoption commits", "number of libraries adopted", "unique libraries adopted", "unique active users", "unique active repos", "unique adopting users", "unique repos with adoption"], "results/commit_analysis_by_month.csv")
+	file_utils.dump_dict_csv([month_count, month_import_commit_count, month_libs, month_addition_commit_count, month_additions_count, month_additions, month_deletion_commit_count, month_deletions_count, month_deletions, month_adoption_commit_count, month_adoption_libs_count, month_adoptions, month_users, month_repos, month_user_adopt, month_repo_adopt], ["year-month", "number of commits", "number of import commits", "unique libraries committed (add, del, or adopt)", "number of addition commits", "number of libraries added", "unique libraries added", "number of deletion commits", "number of libraries deleted", "unique libraries deleted", "number of adoption commits", "number of libraries adopted", "unique libraries adopted", "unique active users", "unique active repos", "unique adopting users", "unique repos with adoption"], "results/commit_analysis_by_month.csv")
