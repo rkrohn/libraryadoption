@@ -4,7 +4,7 @@ import os.path
 import glob
 import file_utils
 
-#list of adoption events: repo, promoter, adopter, time delay, library, promoter commit id, adopter commit id (last two just in case)
+#list of adoption events: repo, promoter, adopter, time delay, library, promoter commit id, adopter commit id, promoter commit time, adoption commit time
 adopt_events = []	
 
 #history nested dictionary: repo->lib->list of tuples, each is (commit id, user, time)
@@ -59,7 +59,7 @@ def process_commit(c):
 				continue
 
 			#build adoption edge list and add to all
-			adopt_events.append([repo, source_user, user, time - source_time, lib, source_id, c_id])
+			adopt_events.append([repo, source_user, user, time - source_time, lib, source_id, c_id, source_time, time])
 
 	#for each library added, update repo history
 	for lib in added_libs:
@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
 	print("Processed", commit_count, "commits, created", len(adopt_events), "adoption edges")
 
-	file_utils.dump_list(adopt_events, ["repo", "promoter", "adopter", "adoption delay (seconds)", "library", "promoter commit id", "adoption commit id"], "data_files/adopt_graph_edges.csv")
+	file_utils.dump_list(adopt_events, ["repo", "promoter", "adopter", "adoption delay (seconds)", "library", "promoter commit id", "adoption commit id", "promoter commit time (UTC)", "adoption commit time (UTC)"], "data_files/adopt_graph_edges_with_times.csv")
 
 
 
