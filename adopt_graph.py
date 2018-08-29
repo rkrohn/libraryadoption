@@ -14,6 +14,8 @@ history = defaultdict(lambda: defaultdict(list))
 #time of last interaction of specific user on specific repo: user->repo->time
 last_interaction = defaultdict(lambda: defaultdict(int))
 
+unique_libs = set()
+
 prev_time = -1
 
 #given a single commit, process and update user/repo library listings and identify any adoption events
@@ -46,6 +48,8 @@ def process_commit(c):
 	for lib in adopted_libs:
 		#pull list of promoters/sources
 		source_commits = history[repo][lib]
+
+		unique_libs.add(lib)
 
 		#each source generates an adoption "edge" if source commit occurred after user's last interaction with repo
 		for source in source_commits:
@@ -106,6 +110,8 @@ if __name__ == "__main__":
 				print("finished", commit_count, "commits")
 
 	print("Processed", commit_count, "commits, created", len(adopt_events), "adoption edges")
+
+	print("   found", len(unique_libs), "unique libraries adopted")
 
 	file_utils.dump_list(adopt_events, ["repo", "promoter", "adopter", "adoption delay (seconds)", "library", "promoter commit id", "adoption commit id", "promoter commit time (UTC)", "adoption commit time (UTC)"], "data_files/adopt_graph_edges_with_times.csv")
 
