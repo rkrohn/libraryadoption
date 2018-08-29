@@ -16,6 +16,8 @@ last_interaction = defaultdict(lambda: defaultdict(int))
 
 unique_libs = set()
 unique_users = set()
+adopt_users = set()
+graph_users = set()
 
 prev_time = -1
 
@@ -42,7 +44,10 @@ def process_commit(c):
 		print("ORDER FAIL")
 		exit(0)
 
+	#keep track of unique users (any commit) and unique adoption users (adoption commits only)
 	unique_users.add(user)
+	if len(adopted_libs) != 0:
+		adopt_users.add(user)
 
 	#get time of user's last interaction with this repository
 	prev_interaction = last_interaction[user][repo]
@@ -67,6 +72,8 @@ def process_commit(c):
 
 			#build adoption edge list and add to all
 			adopt_events.append([repo, source_user, user, time - source_time, lib, source_id, c_id, source_time, time])
+			graph_users.add(source_user)
+			graph_users.add(user)
 
 	#for each library added, update repo history
 	for lib in added_libs:
@@ -115,7 +122,9 @@ if __name__ == "__main__":
 	print("Processed", commit_count, "commits, created", len(adopt_events), "adoption edges")
 
 	print("   found", len(unique_libs), "unique libraries adopted")
-	print("   found", len(unique_users), "users")
+	print("   found", len(unique_users), "unique users in all commits")
+	print("   found", len(adopt_users), "unique users adopting")
+	print("   found", len(graph_users), "users in adoption graph")
 
 	file_utils.dump_list(adopt_events, ["repo", "promoter", "adopter", "adoption delay (seconds)", "library", "promoter commit id", "adoption commit id", "promoter commit time (UTC)", "adoption commit time (UTC)"], "data_files/adopt_graph_edges_with_times.csv")
 
