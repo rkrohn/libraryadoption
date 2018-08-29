@@ -3,6 +3,36 @@ import numpy as np
 from datetime import datetime
 import os
 
+pik = "data_files/new_event_features/2007/3_updated_labels.pkl"
+
+with open(pik, "rb") as f:
+	data = pickle.load(f)
+	print(len(data), "labels")
+	print(sum(data), "adoptions")
+
+pik = "data_files/new_event_features/2007/3_labels.pkl"
+
+with open(pik, "rb") as f:
+	data = pickle.load(f)
+	print(len(data), "labels")
+	print(sum(data), "adoptions")
+
+exit(0)
+
+pik = "data_files/user_commits/119_commits.pkl"
+
+with open(pik, "rb") as f:
+	data = pickle.load(f)
+	print(len(data), "users")
+
+	print(len(data[119161]))
+	print(len(data[119162]))
+	print(len(data[119163]))
+	print(len(data[119164]))
+	#119163
+
+exit(0)
+
 for filename in sorted(os.listdir("data_files/augmented_commits")):
 	print(filename)
 
