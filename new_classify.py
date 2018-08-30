@@ -7,6 +7,9 @@ from sklearn import preprocessing as pp
 from sklearn import metrics
 import itertools as it
 import sys
+from calendar import monthrange
+import datetime
+from datetime import timezone
 
 #given a filepath, load pickled data
 def load_pickle(filename):
@@ -69,6 +72,23 @@ def load_data(year_start, year_end, month_start, month_end, remove_repeat_usages
 		events_raw = events_raw[rows]
 		labels_raw = labels_raw[rows]
 
+	#if training data and only want some number of days, filter data to just those days
+	if scaler == -1 and TRAINING_DAYS != -1 and month_start == month_end and year_start == year_end:
+		#get number of days in training data month
+		days_in_month = monthrange(year_start, month_start)[1]
+		#get valid day numbers to include in reduced training data
+		valid_start_day = days_in_month - TRAINING_DAYS + 1
+		#get valid start datetime
+		d = datetime.datetime(year_start, month_start, valid_start_day, 0, 00)
+		#convert datetime to integer UTC timestamp
+		timestamp = int(d.replace(tzinfo=timezone.utc).timestamp())
+
+		#filter training data
+		rows = np.where(events_raw[:,3] >= timestamp)[0]
+		print("Using", TRAINING_DAYS, "of training data: reducing training data from", len(events_raw), "events to", len(rows), "events")
+		events_raw = events_raw[rows]
+		labels_raw = labels_raw[rows]
+
 	#downsample negative events in training data only according to specified ratio
 	if downsample_ratio != -1 and scaler == -1:
 		print("Downsampling neg:pos ratio to", str(downsample_ratio) + ":1")
@@ -89,7 +109,7 @@ def load_data(year_start, year_end, month_start, month_end, remove_repeat_usages
 	elif scaler == -1:
 		print("No downsampling")
 
-	#convert data to np arrays of correct type
+	#convert data to np arrays of correct type, selecting desired features along the way
 	events = events_raw[:,feature_idx].astype(np.float32) 	#select desired features, convert to float
 	labels = np.asarray(labels_raw, dtype=np.float32)
 
@@ -130,6 +150,10 @@ if len(sys.argv) < 3:
 
 results_file = sys.argv[1]		#filename without extension
 features = sys.argv[2]			#feature categories to include (character codes)
+
+TRAINING_DAYS = 14			#if -1, use month-size chunks for training
+							#otherwise, use TRAINING_DAYS days at end of specified month for training
+							#has no effect if training_month_start and training_month_end are different
 
 #set training and testing years here
 training_start = 2017			#start training data with month-year
@@ -190,7 +214,7 @@ num_features = testing_events.shape[1]		#grab number of features for csv output
 
 #build list of column headers - will dump data to csv
 results = []
-results.append(["test#", "filter_repeat", "downsample_ratio", "training_start_year", "training_start_month", "training_end_year", "training_end_month", "training month count", "testing_year", "testing_month_first", "testing_month_last", "testing month count", "features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"])
+results.append(["test#", "filter_repeat", "downsample_ratio", "training_start_year", "training_start_month", "training_end_year", "training_end_month", "training month count", "training days", "testing_year", "testing_month_first", "testing_month_last", "testing month count", "features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"])
 
 #run multiple classifier tests one after the other - both repeated runs and different configurations
 #configuration combos generated above
@@ -259,8 +283,8 @@ for i in range(0, 5):
 		print("AUROC score:", auroc)
 
 		#append results for this run to overall results data
-		#["test#", "filter_repeat", "downsample_ratio", "training_start_year", "training_start_month", "training_end_year", "training_end_month", "training month count", "testing_year", "testing_month_first", "testing_month_last", "testing month count", "features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"]
-		results.append([c, remove_repeat_usages, downsample_ratio, training_start, training_month_start, training_end, training_month_end, training_months, testing_year, testing_month_start, testing_month_end, testing_months, features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
+		#["test#", "filter_repeat", "downsample_ratio", "training_start_year", "training_start_month", "training_end_year", "training_end_month", "training month count", "training days", "testing_year", "testing_month_first", "testing_month_last", "testing month count", "features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"]
+		results.append([c, remove_repeat_usages, downsample_ratio, training_start, training_month_start, training_end, training_month_end, training_months, TRAINING_DAYS if TRAINING_DAYS != -1 else "all", testing_year, testing_month_start, testing_month_end, testing_months, features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
 		
 	#end configuration for
 #end repeated runs for
