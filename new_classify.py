@@ -151,7 +151,7 @@ if len(sys.argv) < 3:
 results_file = sys.argv[1]		#filename without extension
 features = sys.argv[2]			#feature categories to include (character codes)
 
-TRAINING_DAYS = 14			#if -1, use month-size chunks for training
+TRAINING_DAYS = -1			#if -1, use month-size chunks for training
 							#otherwise, use TRAINING_DAYS days at end of specified month for training
 							#has no effect if training_month_start and training_month_end are different
 
@@ -176,7 +176,7 @@ downsample_ratio = 2		#if -1, no downsampling of negative events
 
 #set your configuration choices here - dictionary with setting as key, list of choices as value
 #loops will test all combinations of these arguments
-config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [True, False]}
+config_choices = {'loss': ['squared_hinge'], 'penalty': ['l1', 'l2', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [False], 'alpha':[1, 0.1, 0.01, 0.001, 0.0001, 0.00001]}
 
 #select the features (columns) to include in training (ranges include first, exclude last, list multiple if desired)
 #features = "CUPLS":	U = user, P = pair (user-package), L = library, S = stackoverflow, C = commit
@@ -186,7 +186,7 @@ feature_idx = []	#start with no features, add on what you want
 if 'C' in features:
 	feature_idx.extend(range(4, 7))		#commit features 4-6
 if 'U' in features:
-	feature_idx.extend([7, 8, 10, 12, 14, 16, 18])	#user features 7-8, 10, 12-14, 16, 18
+	feature_idx.extend([7, 8, 10, 12, 13, 14, 16, 18])	#user features 7-8, 10, 12-14, 16, 18
 if 'P' in features:
 	feature_idx.extend(range(23, 29))	#pair (user/library) features 23-28
 if 'L' in features:
@@ -214,14 +214,14 @@ num_features = testing_events.shape[1]		#grab number of features for csv output
 
 #build list of column headers - will dump data to csv
 results = []
-results.append(["test#", "filter_repeat", "downsample_ratio", "training_start_year", "training_start_month", "training_end_year", "training_end_month", "training month count", "training days", "testing_year", "testing_month_first", "testing_month_last", "testing month count", "features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"])
+results.append(["test#", "filter_repeat", "downsample_ratio", "training_start_year", "training_start_month", "training_end_year", "training_end_month", "training month count", "training days", "testing_year", "testing_month_first", "testing_month_last", "testing month count", "features", "penalty", "fit_intercept", "loss", "shuffle", "alpha", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"])
 
 #run multiple classifier tests one after the other - both repeated runs and different configurations
 #configuration combos generated above
 #wrap all this in an outer loop, so we can more easily run 5 (or more) of the same test, and save I/O time
 
 #repeated runs of same configuration
-for i in range(0, 5):
+for i in range(0, 1):
 	print("\nRUN", i)
 
 	#for each configuration combo, run the classifier!
@@ -283,8 +283,8 @@ for i in range(0, 5):
 		print("AUROC score:", auroc)
 
 		#append results for this run to overall results data
-		#["test#", "filter_repeat", "downsample_ratio", "training_start_year", "training_start_month", "training_end_year", "training_end_month", "training month count", "training days", "testing_year", "testing_month_first", "testing_month_last", "testing month count", "features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"]
-		results.append([c, remove_repeat_usages, downsample_ratio, training_start, training_month_start, training_end, training_month_end, training_months, TRAINING_DAYS if TRAINING_DAYS != -1 else "all", testing_year, testing_month_start, testing_month_end, testing_months, features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
+		#["test#", "filter_repeat", "downsample_ratio", "training_start_year", "training_start_month", "training_end_year", "training_end_month", "training month count", "training days", "testing_year", "testing_month_first", "testing_month_last", "testing month count", "features", "penalty", "fit_intercept", "loss", "shuffle", "alpha", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"]
+		results.append([c, remove_repeat_usages, downsample_ratio, training_start, training_month_start, training_end, training_month_end, training_months, TRAINING_DAYS if TRAINING_DAYS != -1 else "all", testing_year, testing_month_start, testing_month_end, testing_months, features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], kw['alpha'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
 		
 	#end configuration for
 #end repeated runs for
