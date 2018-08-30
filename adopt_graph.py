@@ -4,6 +4,8 @@ import os.path
 import glob
 import file_utils
 
+HISTORY_LIMIT = 30 		#number of days of history to consider for adoption sources
+
 #list of adoption events: library, promote commit id, promoter, promote repo, promote commit time, adopt commit id, adopter, adopt repo, adopt commit time, time delay
 adopt_events = []	
 
@@ -66,6 +68,9 @@ def process_commit(c):
 
 		#loop repos user is active in
 		for watched_repo in user_repos:
+
+			#update this repo's history to only contain commits from the last HISTORY_LIMIT days
+			lib_history[watched_repo][:] = [tup for tup in lib_history[watched_repo] if time - tup[3] <= HISTORY_LIMIT * 86400]
 
 			#for each repo, loop potential library sources/promoters: each of these sources generates an adoption edge
 			for source in lib_history[watched_repo]:
