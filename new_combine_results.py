@@ -3,24 +3,25 @@ import sys
 import pandas as pd
 import os
 
+'''
 def label_training_period(row):
 	#single year?
-	if row['training_year_first'] == row['training_year_last']:
+	if row['training_start_year'] == row['training_end_year']:
 		#one year?
-		if row['training_month_first'] == 1 and row['training_month_last'] == 12:
+		if row['training_start_month'] == 1 and row['training_end_month'] == 12:
 			return "one year"
 		#build label as number of months		
-		if row['training_month_first'] == 7 and row['training_month_last'] == 12:
+		if row['training_start_month'] == 7 and row['training_end_month'] == 12:
 			return "six months"
-		if row['training_month_first'] == 12 and row['training_month_last'] == 12:
+		if row['training_start_month'] == 12 and row['training_end_month'] == 12:
 			return "one month"
 	#entire years?
-	if row['training_month_first'] == 1 and row['training_month_last'] == 12:
+	if row['training_start_month'] == 1 and row['training_end_month'] == 12:
 		#two years?
 		if row['training_year_last'] - row['training_year_first'] == 1:
 			return "two years"
 		#build label from year range
-		return str(row['training_year_first']) + '-' + str(row['training_year_last'])	
+		return str(row['training_start_year']) + '-' + str(row['training_end_year'])	
 	return "UNDEFINED"
 #end label_training_period
 
@@ -32,7 +33,9 @@ def label_testing_period(row):
 		return "one month"
 	return "UNDEFINED"
 #end label_testing_period
+'''
 
+'''
 def label_features_removed(row):
 	if row['num_features'] == 36:
 		return "none"
@@ -40,6 +43,7 @@ def label_features_removed(row):
 		return "StackOverflow"
 	return "UNDEFINED"
 #end label_features_removed
+'''
 
 #--- MAIN EXECUTION BEGINS HERE---#
 
@@ -74,6 +78,8 @@ for idx in range(1, len(files)):
 #close output file
 fout.close()
 
+#skip all this - post-process later
+'''
 #all compiled, let's improve the format and add a few columns
 data = pd.read_csv(filename)
 
@@ -90,5 +96,6 @@ data.insert(11, "testing_period", data.apply(label_testing_period, axis=1))
 
 #save modified file
 data.to_csv(filename, index=False)
+'''
 
 print("All data written to", filename)
