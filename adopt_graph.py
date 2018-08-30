@@ -4,17 +4,17 @@ import os.path
 import glob
 import file_utils
 
-#list of adoption events: repo, promoter, adopter, time delay, library, promoter commit id, adopter commit id, promoter commit time, adoption commit time
+#list of adoption events: library, promote commit id, promoter, promote repo, promote commit time, adopt commit id, adopter, adopt repo, adopt commit time, time delay
 adopt_events = []	
 
-#history nested dictionary: repo->lib->list of tuples, each is (commit id, user, time)
+#history nested dictionary: lib->repo->list of tuples, each is (commit id, user, repo, time)
 #use these to get promoters for each adoption event
 history = defaultdict(lambda: defaultdict(list))
 
-#time of last interaction of specific user on specific repo: user->repo->time
-last_interaction = defaultdict(lambda: defaultdict(int))
+#set of repos each user is active in: user->set of repos
+active_repos = defaultdict(set)
 
-unique_libs = set()
+unique_adopted_libs = set()
 unique_users = set()
 adopt_users = set()
 graph_users = set()
@@ -23,7 +23,7 @@ prev_time = -1
 
 #given a single commit, process and update user/repo library listings and identify any adoption events
 def process_commit(c):
-	global prev_time, adopt_events
+	global prev_time
 
 	#grab commit fields: id, user, repo, time, added_libs, and adopted_libs
 	c_id = c['id']
@@ -44,43 +44,46 @@ def process_commit(c):
 		print("ORDER FAIL")
 		exit(0)
 
+	#add repo to user's active list
+	active_repos[user].add(repo)
+
 	#keep track of unique users (any commit) and unique adoption users (adoption commits only)
 	unique_users.add(user)
 	if len(adopted_libs) != 0:
 		adopt_users.add(user)
 
-	#get time of user's last interaction with this repository
-	prev_interaction = last_interaction[user][repo]
+	#grab set of repos committed to by this user 
+	user_repos = active_repos[user]
 
 	#for each library adopted, find and create necessary adoption edges
 	for lib in adopted_libs:
-		#pull list of promoters/sources
-		source_commits = history[repo][lib]
 
-		unique_libs.add(lib)
+		unique_adopted_libs.add(lib)	#add lib to set of adopted
+		graph_users.add(user)			#add user to set of graph nodes
 
-		#each source generates an adoption "edge" if source commit occurred after user's last interaction with repo
-		for source in source_commits:
-			#pull source data
-			source_id = source[0]		#commit id of source commit
-			source_user = source[1]		#promoter
-			source_time = source[2]		#time of source commit
+		#pull history for this library (across all repos)
+		lib_history = history[lib]
 
-			#source commit was before user's last interaction, no adoption edge (assume they saw then and chose not to adopt)
-			if source_time < prev_interaction:
-				continue
+		#loop repos user is active in
+		for watched_repo in user_repos:
 
-			#build adoption edge list and add to all
-			adopt_events.append([repo, source_user, user, time - source_time, lib, source_id, c_id, source_time, time])
-			graph_users.add(source_user)
-			graph_users.add(user)
+			#for each repo, loop potential library sources/promoters: each of these sources generates an adoption edge
+			for source in lib_history[watched_repo]:
+
+				#pull source data
+				source_id = source[0]		#commit id of source commit
+				source_user = source[1]		#promoter
+				source_repo = source[2]		#repo of promotion commit
+				source_time = source[3]		#time of source commit
+
+				#build adoption edge list and add to all
+				#library, promote commit id, promoter, promote repo, promote commit time, adopt commit id, adopter, adopt repo, adopt commit time, time delay
+				adopt_events.append([lib, source_id, source_user, source_repo, source_time, c_id, user, repo, time, time - source_time])
+				graph_users.add(source_user)	#add source user to node set
 
 	#for each library added, update repo history
 	for lib in added_libs:
-		history[repo][lib].append((c_id, user, time))
-
-	#update last interaction time between user and repo
-	last_interaction[user][repo] = time
+		history[lib][repo].append((c_id, user, repo, time))
 
 	return
 #end process_commit
@@ -117,16 +120,17 @@ if __name__ == "__main__":
 			#update commit counter
 			commit_count += 1
 			if commit_count % 1000 == 0:
-				print("finished", commit_count, "commits")
+				print("finished", commit_count, "commits, found", len(adopt_events), "adoption edges")
 
 	print("Processed", commit_count, "commits, created", len(adopt_events), "adoption edges")
 
-	print("   found", len(unique_libs), "unique libraries adopted")
+	print("   found", len(unique_adopted_libs), "unique libraries adopted")
 	print("   found", len(unique_users), "unique users in all commits")
 	print("   found", len(adopt_users), "unique users adopting")
 	print("   found", len(graph_users), "users in adoption graph")
 
-	file_utils.dump_list(adopt_events, ["repo", "promoter", "adopter", "adoption delay (seconds)", "library", "promoter commit id", "adoption commit id", "promoter commit time (UTC)", "adoption commit time (UTC)"], "data_files/adopt_graph_edges_with_times.csv")
-
+	#library, promote commit id, promoter, promote repo, promote commit time, adopt commit id, adopter, adopt repo, adopt commit time, time delay
+	file_utils.dump_list(adopt_events, ["library", "promoter commit id", "promoter", "promote repo", "promote commit time (UTC)", "adopt commit id", "adopter", "adopt repo", "adopt commit time (UTC)", "time delay (seconds)"], "data_files/adopt_graph_edges.csv")
+	print("Output saved to data_files/adopt_graph_edges.csv")
 
 
