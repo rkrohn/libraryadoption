@@ -9,6 +9,7 @@ data_files/new_event_features/
 data_files/user_commits/
 data_files/augmented_commits*
 data_files/adopt_graph_edges*
+data_files/BACKUP*
 github_files/157K_repos.json
 github_files/45K_contrib.json
 github_files/github_all_contrib.json
