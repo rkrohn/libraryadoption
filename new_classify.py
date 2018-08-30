@@ -20,6 +20,7 @@ def load_pickle(filename):
 def load_date_range(year_start, year_end, month_start=1, month_end=12):
 	all_events = []
 	all_labels = []
+	month_count = 0
 
 	print("Loading events from", str(month_start) + "-" + str(year_start), ("through "+ str(month_end) + "-" + str(year_end) if month_start != month_end or year_start != year_end else ""))
 
@@ -42,16 +43,18 @@ def load_date_range(year_start, year_end, month_start=1, month_end=12):
 			all_events.extend(events)
 			all_labels.extend(labels)
 
+			month_count += 1
+
 		print("")
 
-	return all_events, all_labels
+	return all_events, all_labels, month_count
 #end load_year_range
 
 #loads and processes data for specified time range and featureset
 def load_data(year_start, year_end, month_start, month_end, remove_repeat_usages, downsample_ratio, feature_idx, scaler = -1):
 
 	#load all data, convert events to np array for easier indexing
-	events_raw, labels_raw = load_date_range(year_start, year_end, month_start, month_end)
+	events_raw, labels_raw, months = load_date_range(year_start, year_end, month_start, month_end)
 	events_raw = np.array(events_raw)
 	labels_raw = np.array(labels_raw)
 
@@ -108,9 +111,9 @@ def load_data(year_start, year_end, month_start, month_end, remove_repeat_usages
 
 	#return events and labels
 	if scaler == -1:
-		return events, labels, training_scaler
+		return events, labels, months, training_scaler
 	else:
-		return events, labels
+		return events, labels, months
 #end load_data
 
 #given an np array, replace any nan values with value
@@ -140,7 +143,8 @@ testing_month_end = 1
 #set number of iterations for training
 num_iter = 50
 
-remove_repeat_usages = True	#if flag is true, remove user-package events where user has already used this library before
+remove_repeat_usages = False	#if flag is true, remove user-package events where user has already used this library before
+								#leave them for now
 
 downsample_ratio = 2		#if -1, no downsampling of negative events
 				#if a whole number X, sample to have X negative events (non-adopt) for each positive event (adoption)
@@ -148,7 +152,7 @@ downsample_ratio = 2		#if -1, no downsampling of negative events
 
 #set your configuration choices here - dictionary with setting as key, list of choices as value
 #loops will test all combinations of these arguments
-config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [True]}
+config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [True, False]}
 
 #select the features (columns) to include in training (ranges include first, exclude last, list multiple if desired)
 #features = "CUPLS":	U = user, P = pair (user-package), L = library, S = stackoverflow, C = commit
@@ -156,13 +160,13 @@ config_choices = {'loss': ['squared_hinge'], 'penalty': ['none', 'l2', 'l1', 'el
 
 feature_idx = []	#start with no features, add on what you want
 if 'C' in features:
-	feature_idx.extend(range(4, 7))		#commit features
+	feature_idx.extend(range(4, 7))		#commit features 4-6
 if 'U' in features:
-	feature_idx.extend(range(7, 19))	#user features	
+	feature_idx.extend([7, 8, 10, 12, 14, 16, 18])	#user features 7-8, 10, 12-14, 16, 18
 if 'P' in features:
-	feature_idx.extend(range(23, 29))	#pair (user/library) features
+	feature_idx.extend(range(23, 29))	#pair (user/library) features 23-28
 if 'L' in features:
-	feature_idx.extend(range(29, 40))	#library features
+	feature_idx.extend([29, 30, 32, 35, 37, 38])	#library features 29, 30, 32, 35, 37, 38
 if 'S' in features:
 	feature_idx.extend(range(40, 44))	#StackOverflow features
 
@@ -176,19 +180,17 @@ print("Testing", len(combos), "classifier configurations\n")
 
 #load all training data as np array
 print("TRAINING DATA:")
-training_events, training_labels, scaler = load_data(training_start, training_end, training_month_start, training_month_end, remove_repeat_usages, downsample_ratio, feature_idx)
+training_events, training_labels, training_months, scaler = load_data(training_start, training_end, training_month_start, training_month_end, remove_repeat_usages, downsample_ratio, feature_idx)
 
 #load testing data as np array
 print("TESTING DATA:")
-testing_events, testing_labels = load_data(testing_year, testing_year, testing_month_start, testing_month_end, remove_repeat_usages, downsample_ratio, feature_idx, scaler)
-
-exit(0)
+testing_events, testing_labels, testing_months = load_data(testing_year, testing_year, testing_month_start, testing_month_end, remove_repeat_usages, downsample_ratio, feature_idx, scaler)
 
 num_features = testing_events.shape[1]		#grab number of features for csv output
 
 #build list of column headers - will dump data to csv
 results = []
-results.append(["test#", "filter_repeat", "downsample_ratio", "training_year_first", "training_year_last", "training_month_first", "training_month_last", "testing_year", "testing_month_first", "testing_month_last", "features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score",	"AUROC"])
+results.append(["test#", "filter_repeat", "downsample_ratio", "training_start_year", "training_start_month", "training_end_year", "training_end_month", "training month count", "testing_year", "testing_month_first", "testing_month_last", "testing month count", "features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"])
 
 #run multiple classifier tests one after the other - both repeated runs and different configurations
 #configuration combos generated above
@@ -257,7 +259,8 @@ for i in range(0, 5):
 		print("AUROC score:", auroc)
 
 		#append results for this run to overall results data
-		results.append([c, remove_repeat_usages, downsample_ratio, training_start, training_end, training_month_start, training_month_end, testing_year, testing_month_start, testing_month_end, features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
+		#["test#", "filter_repeat", "downsample_ratio", "training_start_year", "training_start_month", "training_end_year", "training_end_month", "training month count", "testing_year", "testing_month_first", "testing_month_last", "testing month count", "features", "penalty", "fit_intercept", "loss", "shuffle", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"]
+		results.append([c, remove_repeat_usages, downsample_ratio, training_start, training_month_start, training_end, training_month_end, training_months, testing_year, testing_month_start, testing_month_end, testing_months, features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
 		
 	#end configuration for
 #end repeated runs for
