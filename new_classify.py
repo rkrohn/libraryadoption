@@ -98,7 +98,7 @@ def load_data(year_start, year_end, month_start, month_end, remove_repeat_usages
 		neg_rows = np.where(labels_raw == 0)[0]
 		
 		#select ratio*len(pos) negative row indices
-		sampled_neg_rows = np.random.choice(neg_rows, downsample_ratio*len(pos_rows), replace=False)
+		sampled_neg_rows = np.random.choice(neg_rows, int(downsample_ratio*len(pos_rows)), replace=False)
 
 		rows = np.concatenate([pos_rows, sampled_neg_rows])	#merge row lists
 
@@ -221,7 +221,7 @@ results.append(["test#", "filter_repeat", "downsample_ratio", "training_start_ye
 #wrap all this in an outer loop, so we can more easily run 5 (or more) of the same test, and save I/O time
 
 #repeated runs of same configuration
-for i in range(0, 1):
+for i in range(0, 5):
 	print("\nRUN", i)
 
 	#for each configuration combo, run the classifier!
