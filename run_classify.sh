@@ -3,7 +3,7 @@
 #STR="$(date +"%F_%T")" && time python3 classify_by_day.py "predict_tests/results_by_day_$STR" CUPLS > "predict_tests/test_by_day_$STR.log" &
 
 #loop featuresets
-for features in UPLS CPLS CULS CUPS C U P L S; do
+for features in UPLS CPLS CULS CUPS C U P L S CUP CUL CUS CPL CPS CLS UPL UPS ULS PLS CU CP CL CS UP UL US PL PS LS; do
 	STR=""$features"_$(date +"%F_%T")"
 	echo $(date +"%F_%T") running $features
 
