@@ -251,6 +251,9 @@ for i in range(len(testing_labels_all)):
 	day = event_relative_days[i]
 	testing_labels_by_day[day].append(testing_labels_all[i])
 	predicted_labels_by_day[day].append(predicted_labels_all[i])
+#include an overall accuracy
+testing_labels_by_day["all"] = testing_labels_all
+predicted_labels_by_day["all"] = predicted_labels_all
 
 #compute stats for each day of testing data
 for day in testing_labels_by_day.keys():
