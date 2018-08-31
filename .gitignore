@@ -18,4 +18,5 @@ graphs_adop/ALL_repo_adopt_graph.gexf
 graphs_adop/ALL_user_adopt_graph.gexf
 old_datafiles/
 BACKUP/
+predict_tests/*test*
 
