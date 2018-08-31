@@ -12,6 +12,7 @@ import datetime
 from datetime import timezone
 import random
 from datetime import timedelta
+from collections import defaultdict
 
 #given a filepath, load pickled data
 def load_pickle(filename):
@@ -94,6 +95,18 @@ def load_data(all_events_raw, all_labels_raw, date_start, date_end, downsample_r
 	elif scaler == -1:
 		print("No downsampling")
 
+	#if testing data, build list of relative dates before killing the time feature
+	#1 = first testing day, 30 is last
+	relative_days = []
+	for event in events_raw:
+		'''
+		date = datetime.datetime.utcfromtimestamp(event[3])
+		print(date)
+		print(event[3]-timestamp_start)
+		'''
+		relative_day = (event[3] - timestamp_start) // 86400 + 1
+		relative_days.append(relative_day)
+
 	#convert data to np arrays of correct type, selecting desired features along the way
 	events = events_raw[:,feature_idx].astype(np.float32) 	#select desired features, convert to float
 	labels = np.asarray(labels_raw, dtype=np.float32)
@@ -118,7 +131,7 @@ def load_data(all_events_raw, all_labels_raw, date_start, date_end, downsample_r
 	if scaler == -1:
 		return events, labels, training_scaler
 	else:
-		return events, labels
+		return events, labels, relative_days
 #end load_data
 
 #given an np array, replace any nan values with value
@@ -199,13 +212,13 @@ training_events, training_labels, scaler = load_data(all_events_raw, all_labels_
 
 #load testing data as np array
 print("TESTING DATA:")
-testing_events, testing_labels = load_data(all_events_raw, all_labels_raw, testing_start, testing_end, downsample_ratio, feature_idx, scaler)
+testing_events, testing_labels_all, event_relative_days = load_data(all_events_raw, all_labels_raw, testing_start, testing_end, downsample_ratio, feature_idx, scaler)
 
 num_features = testing_events.shape[1]		#grab number of features for csv output
 
 #build list of column headers - will dump data to csv
 results = []
-results.append(["downsample_ratio", "training days", "training start", "training end", "testing days", "testing start", "testing end", "features", "penalty", "fit_intercept", "loss", "shuffle", "alpha", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"])
+results.append(["day", "downsample_ratio", "training days", "training start", "training end", "testing days", "testing start", "testing end", "features", "penalty", "fit_intercept", "loss", "shuffle", "alpha", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"])
 
 #for each configuration combo (just one), run the classifier!
 combo = combos[0]
@@ -222,52 +235,65 @@ print(clf.fit(training_events, training_labels), "\n")
 print("\ncoefficients:", clf.coef_)
 print("intercept:", clf.intercept_, "\n")
 
-#predict on the testing events
-predicted_labels = clf.predict(testing_events)
+#predict all the testing events
+predicted_labels_all = clf.predict(testing_events)
 
 #look for adoptions, correctly predicted or not
 
 #how many adoptions in real labels vs predicted?
-print(int(sum(testing_labels)), "adoption events in", len(testing_labels), "import events")
-print("predicted", int(sum(predicted_labels)), "adoptions")
+print(int(sum(testing_labels_all)), "adoption events in", len(testing_labels_all), "import events")
+print("predicted", int(sum(predicted_labels_all)), "adoptions")
 
-#F1-score, AUROC, precision, and recall
-f_score = metrics.f1_score(testing_labels, predicted_labels)	
-auroc = metrics.roc_auc_score(testing_labels, predicted_labels)
-precision = metrics.precision_score(testing_labels, predicted_labels)
-recall = metrics.recall_score(testing_labels, predicted_labels)
+#divide testing events/labels by day, and build separate lists for each day
+testing_labels_by_day = defaultdict(list)
+predicted_labels_by_day = defaultdict(list)
+for i in range(len(testing_labels_all)):
+	day = event_relative_days[i]
+	testing_labels_by_day[day].append(testing_labels_all[i])
+	predicted_labels_by_day[day].append(predicted_labels_all[i])
 
-#of the predicted adoptions, how many were correct vs false positives?
-true_neg = 0
-true_pos = 0
-false_neg = 0
-false_pos = 0
-for i in range(0, len(predicted_labels)):
-	if testing_labels[i] == 0 and predicted_labels[i] == 0:
-		true_neg += 1
-	elif testing_labels[i] == 0 and predicted_labels[i] == 1:
-		false_pos += 1
-	elif testing_labels[i] == 1 and predicted_labels[i] == 0:
-		false_neg += 1
-	else:
-		true_pos += 1
+#compute stats for each day of testing data
+for day in testing_labels_by_day.keys():
+	#grab this day's testing and predicted labels
+	testing_labels = testing_labels_by_day[day]
+	predicted_labels = predicted_labels_by_day[day]
 
-#print all metrics
-print("\ntrue pos:", true_pos)
-print("true neg:", true_neg)
-print("false pos:", false_pos)
-print("false neg:", false_neg, "\n")
-print("precision:", precision)
-print("recall:", recall)
-print("F-1 score:", f_score)
-print("AUROC score:", auroc)
+	#F1-score, AUROC, precision, and recall
+	f_score = metrics.f1_score(testing_labels, predicted_labels)	
+	auroc = metrics.roc_auc_score(testing_labels, predicted_labels)
+	precision = metrics.precision_score(testing_labels, predicted_labels)
+	recall = metrics.recall_score(testing_labels, predicted_labels)
 
-#append results for this run to overall results data
-["downsample_ratio", "training days", "training start", "training end", "testing days", "testing start", "testing end", "features", "penalty", "fit_intercept", "loss", "shuffle", "alpha", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"]
-results.append([downsample_ratio, TRAIN_DAYS, training_start, training_end, TEST_DAYS, testing_start, testing_end, features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], kw['alpha'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
-		
-	#end configuration for
-#end repeated runs for
+	#of the predicted adoptions, how many were correct vs false positives?
+	true_neg = 0
+	true_pos = 0
+	false_neg = 0
+	false_pos = 0
+	for i in range(0, len(predicted_labels)):
+		if testing_labels[i] == 0 and predicted_labels[i] == 0:
+			true_neg += 1
+		elif testing_labels[i] == 0 and predicted_labels[i] == 1:
+			false_pos += 1
+		elif testing_labels[i] == 1 and predicted_labels[i] == 0:
+			false_neg += 1
+		else:
+			true_pos += 1
+
+	#print all metrics
+	'''
+	print("\ntrue pos:", true_pos)
+	print("true neg:", true_neg)
+	print("false pos:", false_pos)
+	print("false neg:", false_neg, "\n")
+	print("precision:", precision)
+	print("recall:", recall)
+	print("F-1 score:", f_score)
+	print("AUROC score:", auroc)
+	'''
+
+	#append results for this day overall results data
+	#["day", "downsample_ratio", "training days", "training start", "training end", "testing days", "testing start", "testing end", "features", "penalty", "fit_intercept", "loss", "shuffle", "alpha", "num_iter", "true_pos", "true_neg", "false_pos", "false_neg", "precision", "recall", "f1-score", "AUROC"]
+	results.append([day, downsample_ratio, TRAIN_DAYS, training_start, training_end, TEST_DAYS, testing_start, testing_end, features, kw['penalty'], kw['fit_intercept'], kw['loss'], kw['shuffle'], kw['alpha'], num_iter, true_pos, true_neg, false_pos, false_neg, precision, recall, f_score, auroc])
 
 #save results from all runs to output file, base name specified by command line arg
 np.savetxt((results_file + ".csv"), np.array(results), delimiter=",", fmt="%s")
