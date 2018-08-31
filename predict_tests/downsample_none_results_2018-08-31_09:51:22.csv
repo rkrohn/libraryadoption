@@ -1,0 +1,6 @@
+test#,filter_repeat,downsample_ratio,training_start_year,training_start_month,training_end_year,training_end_month,training month count,training days,testing_year,testing_month_first,testing_month_last,testing month count,features,penalty,fit_intercept,loss,shuffle,alpha,num_iter,true_pos,true_neg,false_pos,false_neg,precision,recall,f1-score,AUROC
+0,False,-1,2017,12,2017,12,1,all,2018,1,1,1,CUPLS,l1,False,squared_hinge,True,1e-05,50,572,2898664,14182,1374,0.03876914734987122,0.29393627954779034,0.06850299401197604,0.6445337508635305
+0,False,-1,2017,12,2017,12,1,all,2018,1,1,1,CUPLS,l1,False,squared_hinge,True,1e-05,50,545,2901961,10885,1401,0.047681539807524057,0.2800616649537513,0.08148923444976076,0.638162384917341
+0,False,-1,2017,12,2017,12,1,all,2018,1,1,1,CUPLS,l1,False,squared_hinge,True,1e-05,50,516,2901787,11059,1430,0.04457883369330454,0.26515930113052416,0.0763257155535833,0.6306813353093235
+0,False,-1,2017,12,2017,12,1,all,2018,1,1,1,CUPLS,l1,False,squared_hinge,True,1e-05,50,576,2901732,11114,1370,0.04927288280581694,0.2959917780061665,0.08448225286007627,0.646088132808626
+0,False,-1,2017,12,2017,12,1,all,2018,1,1,1,CUPLS,l1,False,squared_hinge,True,1e-05,50,486,2903353,9493,1460,0.04870227477703177,0.249743062692703,0.08150943396226415,0.6232420253580501
