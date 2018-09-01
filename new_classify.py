@@ -176,7 +176,7 @@ downsample_ratio = 2		#if -1, no downsampling of negative events
 
 #set your configuration choices here - dictionary with setting as key, list of choices as value
 #loops will test all combinations of these arguments
-config_choices = {'loss': ['squared_hinge'], 'penalty': ['l1', 'l2', 'elasticnet'], 'shuffle': [True], 'fit_intercept': [False], 'alpha':[1, 0.1, 0.01, 0.001, 0.0001, 0.00001]}
+config_choices = {'loss': ['squared_hinge'], 'penalty': ['l1'], 'shuffle': [True], 'fit_intercept': [False], 'alpha': [0.00001]}
 
 #select the features (columns) to include in training (ranges include first, exclude last, list multiple if desired)
 #features = "CUPLS":	U = user, P = pair (user-package), L = library, S = stackoverflow, C = commit
@@ -221,7 +221,7 @@ results.append(["test#", "filter_repeat", "downsample_ratio", "training_start_ye
 #wrap all this in an outer loop, so we can more easily run 5 (or more) of the same test, and save I/O time
 
 #repeated runs of same configuration
-for i in range(0, 5):
+for i in range(0, 10):
 	print("\nRUN", i)
 
 	#for each configuration combo, run the classifier!
