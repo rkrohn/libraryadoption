@@ -1189,7 +1189,306 @@ tried something different, results pretty much the same - so stick with the old 
 8.23
 
 data gen finished?!?!!!!!!!
+	finished 29267000 commits, 2926700 commits in history
+		161082 does not adopt xml.etree.ElementTree at: 2018-06-03 18:25:52
+		170335 does not adopt shutil at: 2018-06-07 13:15:05
+		170335 does not adopt collections.defaultdict at: 2018-06-07 13:15:05
+	saved events for 6-2018
+
 	need to go back and regen some stuff for all the data, instead of just up to a certain point
 	
+housekeeping time - clear out all the old code, flag things that need updating
+
+TODO:
+	update divide_commits_by_user.py - include empty_events?
+	rerun above
+	
+	consider combining the various different session analysis stuff into one program
+
+notes from meeting: 
+	from YY - instead of any non-adopt commit, look at just non-adopt import commits and see if that looks different
+	andplusalso, error lines/bars for context
+	
+8.24
+
+decision - only consider/process data up through Feb 2018
+	since cloned first repos in March, anything that month or after is not complete
+	
+short-circuit divide_commits_by_user.py to only process Jan and Feb of 2018
+
+added new dump method to file_utils
+
+next task: combine and clean up the session analysis programs
+
+8.27
+
+have commit delay results to look at - verify 9 hour max delay
+	eh, let's have it plot for us so we don't have to do that separately - since plot is easiest way to choose max delay
+
+also keep combining session analysis
+
+sessions.py all fixed, now working on incorporating sessions_adopt.py analysis
+	resume at post-processing - computing averages and dumping data
+	remember to remove exits and breaks!
+
+run both ways - submodule and not
+
+activity plots/data tonight - be available
+
+adoption criteria: if an added lib is in updated_lib but not in the user's quiver, then it must be an adoption
+
+user-sorted commits have the following fields: ['adopted_libs', 'time', 'del_libs', 'add_libs', 'id', 'user', 'repo']
+
+next: for each user: - DONE
+	number of commits
+	number of adoptions
+	number of active repos
+	number of repos adopted from
+
+for each repo: - DONE
+	number of commits
+	number of adoptions
+	number of active users
+	number of users adopting
+
+andplusalso:
+	user/repo distributions of above - DONE
+	distribution of # of times seen library before adopted by user
+	distribution of time delay between see library and adopt
+	
+	user source of adoption - number of times adopted from?
+	
+rename commit_analysis_user.py before committing - DONE
+	something about overall instead?
+	
+sessions.py running
+
+todo:
+	unaddressed items above
+	roll in sessions_adopt.py?
+	ACTIVITY PLOTS - around_commits.py
+	
+sessions.py finished:
+	Processed 29060288 commits and 162926 users in 4569625 sessions
+		380519 libraries adopted in 54579 commits across 52646 sessions
+
+	Average adopt time as percentage of session (all sessions): 8.919659683301305
+	Average adopt time (no single commit sessions): 19.63483527687755
+
+8.28
+
+want time from user seen to user adopted
+	and also user source
+	
+promoter, adopter, delay, library
+x, u, delta_t, lib
+v, u, delta_t, lib
+...
+
+do that FIRST
+
+
+for activity plot:
+	stack ALL commits (symmetric okay)
+	stack import commits (see if different)
+	
+time to make Tim's graph - what's the best way?
+	need to stream commits in order, but also need to know what is adoption and what isn't - unless determine on the fly?
+	certainly don't need all the features, but do need to know when user "saw" the library - and who they got it from
+	
+	but determining them on the fly takes sooooo long
+	what I really want is a list of commits formatted like the user-divided commits, but all of them together
+	
+	let's try making that, and see where that gets us
+	
+augmented commits - same commit data as all_commits_by_year, but add commit id and adopted libs list to each commit
+	save each month as separate file
+	
+need to turn this into list of adoption graph edges: source (promoter), adopter, delay (between promoter commit and adoption), and library
+	let's throw in repo too, just for good measure
+	
+code is ready - waiting on augmented_commits to finish, then run adopt_graph.py
+
+crap - labelled augmented_commit files with wrong month - off by one error
+	ie, 2018-01 is actually 2017-12
+fixed now
+
+adopt_graph.py finished
+	Processed 29060288 commits, created 32363610 adoption edges
+surprise... that's a big file! almost 3 GB
+
+next: distribution of adoption delays
+
+takes about 5 minutes to read entire csv - is streaming faster?
+	much faster, more like 1.5 minutes
+	
+generate ALL the distributions
+	number of times adopted from - DONE
+	number of adoption edges (adopter) - DONE
+	number of unique repos user adopts from - DONE
+	number of unique repos user adopted from in (ie, how wide is their source reach?) - DONE
+
+sample 1000 users, plot indegree vs outdegree - DONE
+	probably just count for all, then sample
+
+adoption graph edges:
+	u -> v
+	u commits first, v adopts lib from u
+	
+adopt_delay_analysis.py sample output:
+	Sampled 1000 users from 50570 for scatter plot
+	Processed 32363610 adoption edges
+along with ALL the output files
+
+around_commit.py STILL running - hopefully finish soon-ish
+
+filtering adopt edges: ~2 minutes
+
+hmmm... around_commit.py is bogging down on a user with 262,468 commits - ouch
+	must be recent commits, since it didn't take this long before
+let's just skip this user for now, because really?
+
+nope - skip ALL users with more than 10K commits
+	finished - YAY
+	
+# adoptions vs StackOverflow - top-level only
+	# adoptions all-time
+	maybe get a few SO stats - total # posts, total # views? something like that - yes, exactly these
+	maybe get total commits as well? just in case
+start there, can add more later
+	
+8.29
+
+StackOverflow v adoption run finished - way faster than I thought
+
+also want: time on x-axis, commits on y-axis
+	plot additions, deletions, and adoptions on same plot
+	see if some pattern
+	for all libraries, or for a particular one
+	also some SO data for comparison
+Tim suggested 3 libs from different regions of stackoverflow v adoption plot: middle, top left, bottom right
+	
+hmmm... Tim has a 324,464 number for unique libraries adopted - where did that come from?
+	let's check against adopt graph edges, since that's where he first mentions it
+my quick set count says:
+	found 93194 unique libraries adopted
+which agrees with the by-month analysis total
+
+count of top-level libs says: 279212
+	these are just ANY libraries - added, deleted, or adopted
+	
+counting in adopt_graph.py (sets):
+Processed 29060288 commits, created 32363610 adoption edges
+   found 93194 unique libraries adopted
+   found 162926 unique users in all commits
+   found 38433 unique users adopting
+   found 50570 users in adoption graph
+
+counting in month_commit_analysis.py (again, sets):
+	says 2,169,838 unique libraries seen (added, deleted, or adopted) across all user commits
+	
+******
+
+prediction stuff	
+	
+send Tim list of features
+yay downsampling - get adoption ratio
+	downsampling rate as parameter
+	
+list of things:
+	
+first, predict/classify one month with many different training data periods
+	1, 2, 3, 4, 5, 6, ... 12 months, 18 months, 24 months, etc
+	
+parameter sensitivity - pick classifier configuration		
+	
+for a few different test months:
+	days after training (1-31) on x, AUC on y 
+		
+feature oblation - all the different feature sets
+
+******
+
+technically, user maybe didn't "see" libs in repo before they committed for the first time - but if they looked through the code they did
+	need to let it ride, because otherwise features are junk
+seems okay to me! and makes adopt_graph job easier
+(letting it go)
+
+
+adopt_graph update notes:
+
+currently tracking last_interaction[user][repo] - probably don't need?
+tracking sources as history[repo][lib] - but need global history now, not just repo-specific
+
+keep active_repos[user] - set of repos user has committed to
+then do history[lib][repo] - list of tuples of user, time, repo, commit id - in time-sorted order, because append
+
+adopted libs = user's adopted libraries from this commit
+user_repos = active_repos[user]
+for lib in adopted libs:
+	lib_history = history[lib]
+	for repo in user_repos:
+		for potential source in lib_history[repo]:
+			generate adoption edge
+			
+sure?
+
+could me multiple promotion edges between the same set of users (ie, user a commits lib l more than once before user b adopts) but I don't think that's a problem
+	
+oh, and there's probably a few features we need to throw out from prediction - anything adoption-related no longer valid
+
+TODO:
+	prediction stuff!!!!
+	maybe time x, other stuff y plots - if time
+	start combing through and verifying paper
+	abstract update?
+	
+8.30
+
+magic testing command
+
+cd ../../data/rkrohn/libraryadoption
+
+STR="$(date +"%F_%T")" && time python3 new_classify.py "predict_tests/results_$STR" CUPLS > "predict_tests/test_$STR.log" &
+
+8.31
+
+run ALL the things
+
+consider doing:
+
+also want: time on x-axis, commits on y-axis
+	plot additions, deletions, and adoptions on same plot
+	see if some pattern
+	for all libraries, or for a particular one
+	also some SO data for comparison
+Tim suggested 3 libs from different regions of stackoverflow v adoption plot: middle, top left, bottom right
+
+9.1
+
+another thought - what if we train 7 separate classifiers, one for each day of the week, and then test each instance on the right one based on commit date?
+	might matter if day of week has any impact
+compare separate day-of-week classifiers against one trained on same period
+
+9.3
+
+predict 25 weeks (175 days) from random date, train 1 month, compute accuracy by week
+
+classify_by_week.py
+
+added_v_adopted.py
+	Processed 29060288 commits, found 512097 commits with adoption
+each row is # libs added, # libs deleted, # libs adopted
+results/commit_scatter.csv - all commits
+results/commit_scatter_adopt_only.csv - commits with at least one adopted library
+results/commit_scatter_50K.csv - 50K random commits
+results/commit_scatter_adopt_only_50K.csv - 50K random adoption commits
+
+9.4
+
+cleaning up the paper - weee!
+
+let's go with Python and StackOverflow - capitalization
+
 
 
